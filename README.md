@@ -23,6 +23,7 @@ You can make a quick assessment of the `dual-adc-usb-8` run using these files:
 * An executive summary describing the design phases: `executive_summary.md`.
 * A more detailed description: `README.md`.
 * An even more detailed sequence of Claude's operations: `claude_transcript.txt`.
+* An executable Jupyter design doc: `dual_adc_usb.ipynb`.
 
 Note that I have not validated any of these designs for correctness.
 That will be my next task now that I have been able to generate a design
