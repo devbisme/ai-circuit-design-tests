@@ -1,0 +1,132 @@
+refdes,mpn,lcsc,value,package,footprint,symbol,tier,stock,notes
+J1,TYPE-C-31-M-12,C165948,TYPE-C-31-M-12,USB-C SMD 16P,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,Connector:USB_C_Receptacle_USB2.0_16P,Extended,89676,"USB 2.0 only; symbol corrected to Connector:USB_C_Receptacle_USB2.0_16P to match usb_power_in.py pin-by-number map; footprint unchanged, exact vendor match"
+U1,USBLC6-2SC6,C2827654,USBLC6-2SC6,SOT-23-6,Package_TO_SOT_SMD:SOT-23-6,Power_Protection:USBLC6-2SC6,Extended,106827,manufacturer TECH PUBLIC
+U2,TPS22919DCKR,C2149796,TPS22919DCKR,SC-70-6,Package_TO_SOT_SMD:SOT-363_SC-70-6,dual_adc_usb:TPS22919DCKR,Extended,68311,generated symbol confirmed in usb_power_in.py
+R1,5.1kΩ,C23186,5.1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,26214390,USB-C CC Rd
+R2,5.1kΩ,C23186,5.1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,26214390,USB-C CC Rd
+C1,4.7uF X7R 10V,C18185770,4.7uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,222530,VBUS pre-switch cap
+C2,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,V5 bulk
+C3,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,V5 HF
+U3,TLV62569DBVR,C141836,TLV62569DBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,Regulator_Switching:TLV62569DBV,Extended,241177,V3V3D buck
+U4,TLV62569DBVR,C141836,TLV62569DBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,Regulator_Switching:TLV62569DBV,Extended,241177,V1V2 buck
+U5,TLV75518PDBVR,C2877863,TLV75518PDBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,Regulator_Linear:TLV75518PDBV,Extended,9868,V1V8 LDO
+L1,2.2uH,C167747,2.2uH,SMD 3x3mm,Inductor_SMD:L_Changjiang_FNR3015S,Device:L,Extended,62192,TLV62569 V3V3D buck inductor
+L2,2.2uH,C167747,2.2uH,SMD 3x3mm,Inductor_SMD:L_Changjiang_FNR3015S,Device:L,Extended,62192,TLV62569 V1V2 buck inductor
+D1,green LED 0603,C22371297,green,0603,LED_SMD:LED_0603_1608Metric,Device:LED,Extended,394695,power/status LED
+R3,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,buck 3V3 FB top
+R4,22.1kΩ,C2960862,22.1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,492491,buck 3V3 FB bottom; exact 22.1k
+R5,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,buck 1V2 FB top
+R6,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,buck 1V2 FB bottom
+R7,1kΩ,C21190,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23928390,power LED resistor
+C4,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,buck 3V3 input cap
+C5,22uF X5R 10V,C45783,22uF,0805,Capacitor_SMD:C_0805_2012Metric,Device:C,Basic,4268141,buck 3V3 output cap
+C6,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,buck 1V2 input cap
+C7,22uF X5R 10V,C45783,22uF,0805,Capacitor_SMD:C_0805_2012Metric,Device:C,Basic,4268141,buck 1V2 output cap
+C8,1uF X7R 16V,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,1V8 LDO input cap
+C9,1uF X7R 16V,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,1V8 LDO output cap
+U6,TPS7A2033PDBVR,C2862740,TPS7A2033PDBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,dual_adc_usb:TPS7A2033PDBVR,Extended,230939,V3V3A analog LDO; generated symbol confirmed in power_analog.py
+U7,LM27762DSSR,C473398,LM27762DSSR,WSON-12-EP(2x3),Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65,Regulator_SwitchedCapacitor:LM27762,Extended,40112,"bipolar AFE rails; custom-fp flag retired, footprint resolves in standard KiCad library and matches power_analog.py"
+R8,174kΩ,C22890,174k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,36603,LM27762 FB+ top
+R9,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,LM27762 FB+ bottom
+R10,64.9kΩ,C2960807,64.9k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,163367,LM27762 FB- top
+R11,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,LM27762 FB- bottom
+C10,1uF X7R 16V,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,3V3A LDO input cap
+C11,1uF X7R 16V,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,3V3A LDO output cap
+C12,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,3V3A LDO bulk cap
+C13,2.2uF X7R 10V,C99228,2.2uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,496374,LM27762 CIN
+C14,1uF X7R 16V,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,LM27762 C1 (flying cap)
+C15,4.7uF X7R 10V,C18185770,4.7uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,222530,LM27762 CP
+C16,2.2uF X7R 10V,C99228,2.2uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,496374,LM27762 COUT+
+C17,2.2uF X7R 10V,C99228,2.2uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,496374,LM27762 COUT-
+J2,KH-BNC50-3511,C2837587,KH-BNC50-3511,THT right-angle BNC,ProjectLocal:BNC_Kinghelm_KH-BNC50-3511_Horizontal,Connector:Conn_Coaxial,Extended,5979,"ch A input BNC; custom-fp flag retired, project-local footprint generated and wired in afe_ch_a.py"
+U101,OPA356AIDBVR,C183100,OPA356AIDBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,Amplifier_Operational:OPA356xxDBV,Extended,1382,ch A input buffer
+U102,THS4551IRGTR,C2869590,THS4551IRGTR,QFN-16-EP(3x3),Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm,Amplifier_Difference:THS4551xRGT,Extended,469,ch A ADC driver FDA
+D101,BAV199,C5184419,BAV199,SOT-23,Package_TO_SOT_SMD:SOT-23,dual_adc_usb:BAV199,Extended,77581,ch A clamp pair; generated symbol confirmed in afe_ch_a.py; PREFIX match to BAV19 rejected (wrong topology)
+R101,909kΩ,C2933765,909k,1206,Resistor_SMD:R_1206_3216Metric,Device:R,Extended,36497,ch A divider top R_T; exact 909k not 910k
+R102,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,ch A divider bottom R_B
+R103,1kΩ,C21190,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23928390,ch A buffer series R_S
+"R104,R105",1kΩ 0.1%,C49196685,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,421261,ch A MFB R1a/R1b matched pair
+"R106,R107",909Ω,C2933265,909,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,35730,ch A MFB R2a/R2b; exact 909 not 910
+"R108,R109",499Ω,C137714,499,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,768935,ch A MFB R3a/R3b
+"R110,R111",49.9Ω,C25120,49.9,0402,Resistor_SMD:R_0402_1005Metric,Device:R,Basic,1503446,ch A ADC series R
+C101,22pF C0G 1%,C2360437,22pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,5645,"ch A divider top C_T; [dev] 0603/250V Murata substituted for the 0805/100V spec (37 stock, FAIL)"
+C102,150pF C0G 1%,C597138,150pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,4009,ch A divider bottom C_B1
+C103,15pF C0G 2%,C2836768,15pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,8727,ch A divider bottom C_B2
+C104,JZ300,C3273397,24pF,SMD 4.5x3.2mm,Capacitor_SMD:C_Trimmer_Voltronics_JZ,Device:C_Variable,Extended,123,"ch A hand trimmer 5.5-30pF; replaces LXRW19V330-050 varactor (voltage-tuned, not hand-adjustable, escalated in phase 4); covers 23.8pF calc target with margin; stock WARN (123)"
+C105,8.2pF C0G,C1685,8.2pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Preferred,95293,ch A buffer input C_S
+"C106,C107",0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch A decoupling
+C108,27pF C0G 5%,C5137568,27pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,94323,ch A MFB C1 differential
+"C109,C110",12pF C0G 5%,C38523,12pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,634511,ch A MFB C2a/C2b
+C111,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch A decoupling
+C112,1uF X7R,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,ch A decoupling
+C113,56pF C0G,C5137588,56pF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,31532,ch A ADC diff C
+C114,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch A decoupling
+J3,KH-BNC50-3511,C2837587,KH-BNC50-3511,THT right-angle BNC,ProjectLocal:BNC_Kinghelm_KH-BNC50-3511_Horizontal,Connector:Conn_Coaxial,Extended,5979,"ch B input BNC; custom-fp flag retired, project-local footprint generated and wired in afe_ch_b.py"
+U201,OPA356AIDBVR,C183100,OPA356AIDBVR,SOT-23-5,Package_TO_SOT_SMD:SOT-23-5,Amplifier_Operational:OPA356xxDBV,Extended,1382,ch B input buffer
+U202,THS4551IRGTR,C2869590,THS4551IRGTR,QFN-16-EP(3x3),Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm,Amplifier_Difference:THS4551xRGT,Extended,469,ch B ADC driver FDA
+D201,BAV199,C5184419,BAV199,SOT-23,Package_TO_SOT_SMD:SOT-23,dual_adc_usb:BAV199,Extended,77581,ch B clamp pair; generated symbol confirmed in afe_ch_b.py; PREFIX match to BAV19 rejected (wrong topology)
+R201,909kΩ,C2933765,909k,1206,Resistor_SMD:R_1206_3216Metric,Device:R,Extended,36497,ch B divider top R_T; exact 909k not 910k
+R202,100kΩ,C25803,100k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,22878552,ch B divider bottom R_B
+R203,1kΩ,C21190,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23928390,ch B buffer series R_S
+"R204,R205",1kΩ 0.1%,C49196685,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,421261,ch B MFB R1a/R1b matched pair
+"R206,R207",909Ω,C2933265,909,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,35730,ch B MFB R2a/R2b; exact 909 not 910
+"R208,R209",499Ω,C137714,499,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,768935,ch B MFB R3a/R3b
+"R210,R211",49.9Ω,C25120,49.9,0402,Resistor_SMD:R_0402_1005Metric,Device:R,Basic,1503446,ch B ADC series R
+C201,22pF C0G 1%,C2360437,22pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,5645,"ch B divider top C_T; [dev] 0603/250V Murata substituted for the 0805/100V spec (37 stock, FAIL)"
+C202,150pF C0G 1%,C597138,150pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,4009,ch B divider bottom C_B1
+C203,15pF C0G 2%,C2836768,15pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,8727,ch B divider bottom C_B2
+C204,JZ300,C3273397,24pF,SMD 4.5x3.2mm,Capacitor_SMD:C_Trimmer_Voltronics_JZ,Device:C_Variable,Extended,123,"ch B hand trimmer 5.5-30pF; replaces LXRW19V330-050 varactor (voltage-tuned, not hand-adjustable, escalated in phase 4); covers 23.8pF calc target with margin; stock WARN (123)"
+C205,8.2pF C0G,C1685,8.2pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Preferred,95293,ch B buffer input C_S
+"C206,C207",0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch B decoupling
+C208,27pF C0G 5%,C5137568,27pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,94323,ch B MFB C1 differential
+"C209,C210",12pF C0G 5%,C38523,12pF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,634511,ch B MFB C2a/C2b
+C211,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch B decoupling
+C212,1uF X7R,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,ch B decoupling
+C213,56pF C0G,C5137588,56pF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,31532,ch B ADC diff C
+C214,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ch B decoupling
+U8,ADS5231IPAGT,C2670079,ADS5231IPAGT,TQFP-64-208mil,Package_QFP:TQFP-64_10x10mm_P0.5mm,dual_adc_usb:ADS5231IPAGT,Extended,154,"critical single-source; generated symbol confirmed in adc.py; stock WARN, was 235 in architecture phase"
+FB1,600ohm ferrite bead,C108301,600R,0603,Inductor_SMD:L_0603_1608Metric,Device:FerriteBead,Extended,709763,feeds ADC VDRV from V3V3A
+R12,56.2kΩ,C2930117,56.2k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,195526,ADC ISET; exact 56.2k not 56k
+R13,2.0Ω,C22977,2,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,1140181,ADC REFT series
+R14,2.0Ω,C22977,2,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,1140181,ADC REFB series
+R15,10kΩ,C25804,10k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23143849,ADC STPD pull-down
+C18,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ADC REFT cap
+C19,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ADC REFB cap
+C20,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ADC CM cap
+C21,1uF X7R,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,ADC CM cap
+"C22,C23,C24",0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ADC AVDD decoupling
+C25,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,ADC AVDD bulk
+"C26,C27,C28,C29",0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,ADC VDRV decoupling
+C30,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,ADC VDRV bulk
+X1,SX3M40.000B10F20TNN,C5452689,SX3M40.000B10F20TNN,SMD3225-4P,Oscillator:Oscillator_SMD_SeikoEpson_SG8002CE-4Pin_3.2x2.5mm,dual_adc_usb:SX3M40.000B10F20TNN,Extended,2334,"critical clock; generated symbol confirmed in clock.py; footprint is generic vendor pad-match, confirm against datasheet"
+FB2,600ohm ferrite bead,C108301,600R,0603,Inductor_SMD:L_0603_1608Metric,Device:FerriteBead,Extended,709763,feeds X1 XO_VDD supply from V3V3A (clock.py)
+R16,33Ω,C23140,33,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,5840434,ADC clock series R
+R17,33Ω,C23140,33,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,5840434,FPGA clock series R
+C31,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,XO decoupling
+C32,1uF X7R,C49210445,1uF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Extended,34184,XO decoupling
+U9,GW1NR-LV9QN88PC6/I5,C5799578,GW1NR-LV9QN88PC6/I5,QFN-88-1EP_10x10mm_P0.4mm,Package_DFN_QFN:ArtInChip_QFN-88-1EP_10x10mm_P0.4mm_EP6.74x6.74mm,dual_adc_usb:GW1NR-LV9QN88PC6,Extended,173,"critical single-source; generated symbol confirmed in fpga.py; stock WARN, confirm EP dims vs Gowin drawing"
+J4,2.54mm header 2x5 THT,C492422,Conn_02x05,THT,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,Connector_Generic:Conn_02x05_Odd_Even,Extended,109374,JTAG header VREF=1.8V
+J5,2.54mm header 1x6 THT,C37208,Conn_01x06,THT,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,Connector_Generic:Conn_01x06,Extended,306850,aux header TRIG/GPIO/3V3/GND
+D2,green LED 0603,C22371297,green,0603,LED_SMD:LED_0603_1608Metric,Device:LED,Extended,394695,status LED
+D3,green LED 0603,C22371297,green,0603,LED_SMD:LED_0603_1608Metric,Device:LED,Extended,394695,status LED
+"R18,R19",1kΩ,C21190,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23928390,FPGA MODE0/MODE1 pull-down; changed 10k->1k per Gowin UG284 MODE guidance
+R20,10kΩ,C25804,10k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23143849,FPGA RECONFIG_N pull-up to V1V8
+"R21,R22",1kΩ,C21190,1k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23928390,status LED resistors
+"R23,R24",100Ω,C22775,100,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,4213808,trigger series R
+C33-C43,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,FPGA decoupling one per supply pin
+C44,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,FPGA V1V2 bulk
+C45,10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,FPGA V3V3D bulk
+C46,4.7uF X7R 10V,C18185770,4.7uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,222530,FPGA V1V8 bulk
+U10,FT232HL-REEL,C51997,FT232HL-REEL,LQFP-48-208mil,Package_QFP:LQFP-48_7x7mm_P0.5mm,Interface_USB:FT232H,Extended,3224,critical USB bridge
+U11,93LC56BT-I/OT,C190271,93LC56BT-I/OT,SOT-23-6,Package_TO_SOT_SMD:SOT-23-6,dual_adc_usb:93LC56BT-I_OT,Extended,11173,FT232H config EEPROM; Memory_EEPROM:93LCxxB is the wrong 8-pin pinout for this SOT-23-6 part
+Y1,X322512MSB4SI,C9002,X322512MSB4SI,SMD3225-4P,Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm,Device:Crystal_GND24,Basic,71028,FT232H 12MHz crystal; CL=20pF confirmed; symbol corrected to Device:Crystal_GND24 (4-pin) to match usb_bridge.py
+R25,12.0kΩ,C22790,12k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,1300191,FT232H REF resistor
+R26,10kΩ,C25804,10k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Basic,23143849,FT232H RESET# pull-up
+R27,2.2kΩ,C2907117,2.2k,0603,Resistor_SMD:R_0603_1608Metric,Device:R,Extended,2692340,EEPROM DO series
+"C47,C48",33pF C0G,C1562,33pF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,1107023,FT232H crystal load caps
+C49-C54,0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,"FT232H decoupling; C49 is on VREGIN/V5 (not VCCD), C50-C52 on VCCIOx3, C53 on VCCA (own cap, not shared with VCCCORE), C54 on VCCCORE; 5V-in config per usb_bridge.py"
+C55,4.7uF X7R 10V,C18185770,4.7uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,222530,"FT232H decoupling; VCCCORE bulk cap, pairs with C54"
+C56,4.7uF X7R 10V,C18185770,4.7uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Extended,222530,"FT232H decoupling; VCCD (FT_3V3) regulator output bulk cap, not paired with VCCCORE"
+"FB3,FB4",600ohm ferrite bead,C108301,600R,0603,Inductor_SMD:L_0603_1608Metric,Device:FerriteBead,Extended,709763,"rev 3: FT232H VPHY(FB3)/VPLL(FB4) ferrites, closes phase-4 BOM gap; same MPN as FB1/FB2"
+"C57,C59",10uF X5R 10V,C19702,10uF,0603,Capacitor_SMD:C_0603_1608Metric,Device:C,Basic,11253816,"rev 3: FT232H VPHY(C57)/VPLL(C59) bulk cap, downstream of FB3/FB4"
+"C58,C60",0.1uF X7R,C307331,100nF,0402,Capacitor_SMD:C_0402_1005Metric,Device:C,Basic,11685202,"rev 3: FT232H VPHY(C58)/VPLL(C60) local decoupling, downstream of FB3/FB4"

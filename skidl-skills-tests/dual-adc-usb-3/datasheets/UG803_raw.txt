@@ -1,0 +1,880 @@
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Version History
+Date Version
+04/16/2020 1.0E
+05/14/2020 1.1E
+06/11/2020 1.2E
+07/28/2020 1.3E
+09/21/2020 1.4E
+08/12/2021 1.5E
+10/29/2021 1.6E
+10/20/2022 1.6.1E
+05/04/2023 1.6.2E
+06/30/2023 1.6.3E
+11/01/2024 1.6.4E
+03/14/2025 1.6.5E The power information of MG100P package in Power sheet updated.
+Recommended operating conditions updated.
+Description
+MG100PF package added.
+The pin description of GCLKC_[x] modified.
+GW1NR-9C corrected to GW1NR-9.
+MG100PD package added.
+MG100PA, MG100PT, MG100PS packages added.
+MG100PD package removed.
+Initial version published.QN88, QN88P, MG100P, LQ144P packages supported.
+The description of EPAD pin in Pin Definitions sheet added.
+The Min. value of VCCIO1/VCCIO3 voltage for QN88 package updated.
+The I/O descriptions of Ready and Done pins in Pin Definitions sheet optimized.
+The descriptions of pin definitions and info. for MODE0, MODE1, MODE2 pins optimized.
+The note of QN88/QN88P in Power sheet added.
+The description of VCCIO1/VCCIO3 for MG100P pacakge in Power sheet updated.
+The description of CLKHOLD_N pin in Pin Definitions sheet updated.
+The note in Power sheet updated.
+The note in Pin Definitions sheet updated.
+The pin location of A6,A7 in MG100PA package modified.
+Pin definitions updated.
+© 2025 GOWINSEMI UG803-1.6.5E 1(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin Definitions
+Pin Name I/O Description
+[End] indicates the pin location, including L(left), R(right), B(bottom), and T(top).
+[Row/Column Number] indicates the pin row/column number. If [End] is T(top) or B(bottom), the pin
+indicates the column number of the corresponding CFU. If [End] is L(left) or R(right), the pin indicates
+the row number of the corresponding CFU.
+[A/B] indicates differential signal pair information.
+/MMM represents one or more of the other functions in addition to being general purpose user I/O.
+When these functions are not in use, these pins can be used as user I/O.
+D0 I/O Data port D0 in CPU mode
+D1 I/O Data port D1 in CPU mode
+D2 I/O Data port D2 in CPU mode
+D3 I/O Data port D3 in CPU mode
+D4 I/O Data port D4 in CPU mode
+D5 I/O Data port D5 in CPU mode
+D6 I/O Data port D6 in CPU mode
+D7 I/O Data port D7 in CPU mode
+WE_N I Select data input/output of D[7:0] in CPU mode.0: Write;1: Read.
+DOUT O Data output in SERIAL mode
+DIN I, internal weak pull-up Data input in SERIAL mode
+TMS I, internal weak pull-up Serial mode input in JTAG mode
+TCK I Serial clock input in JTAG mode
+TDO O Serial data output in JTAG mode
+TDI I, internal weak pull-up Serial data input in JTAG mode
+JTAGSEL_N I, internal weak pull-up Reconfigure JTAG download function signal
+RECONFIG_N I, internal weak pull-up Global reset GowinCONFIG logic signal, active low
+FASTRD_N I Access SPI FLASH to select signal. Low, Fast Read mode; High, Read mode.
+O, internal weak pull-
+up
+High, the programming configuration has been completed successfully;
+Low, the programming configuration has not been completed or failed.
+I, internal weak pull-up When the DONE signal is low, delay the chip to activate. Activate the chip until the DONE signal is high.
+READY[1] I/O, internal weak pull-
+up
+High, the device can be programmed and configured currently;
+Low, the device cannot be programmed and configured currently.
+MI I MI in MSPI mode
+User I/O
+IO [End][Row/Column Number][A/B]/MMM
+DONE
+[1]
+IO[End][Row/Column
+Number][A/B]
+I/O
+Multi-Function Pins
+© 2025 GOWINSEMI UG803-1.6.5E 2(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin Definitions
+Pin Name I/O Description
+MO O MO in MSPI mode
+MCS_N O Enable signal MCS_N in MSPI mode, active-low
+MCLK O Clock output MCLK in MSPI mode, with default frequency of 2.5Mhz
+SCLK I Clock input in SSPI, SERIAL, and CPU modes
+SO O SO in SSPI mode
+SI I/O SI in SSPI mode
+SSPI_CS_N I/O Enable signal SSPI_CS_N in SSPI mode, active-low, and internal weak pull-up
+CLKHOLD_N I, internal weak pull-up
+Active-high in SSPI mode;
+Active-low in CPU mode.
+GCLKC_[x] I Differential input pin of GCLKT_[x], C(Comp), [x] is global clock number[2]
+GCLKT_[x] I Global clock input pin, T(True), [x] is global clock number
+LPLL_C_fb/RPLL_C_fb I Left/Right PLL feedback input pin, C(Comp)
+LPLL_T_fb/RPLL_T_fb I Left/Right PLL feedback input pin, T(True)
+LPLL_C_in/RPLL_C_in I Left/Right PLL clock input pin, C(Comp)
+LPLL_T_in/RPLL_T_in I Left/Right PLL clock input pin, T(True)
+MODE2 I, internal weak pull-up
+GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin
+is marked as "GND", it's internally grounded.
+MODE1 I, internal weak pull-up
+GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin
+is marked as "GND", it's internally grounded.
+MODE0 I, internal weak pull-up
+GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin
+is marked as "GND", it's internally grounded.
+NC NA Reserved
+VSS NA Ground
+VCC NA Power supply pin of core voltage
+VCCIO# NA Power supply pin of I/O voltage for I/O BANK#
+VCCX NA Power supply pin of auxiliary voltage
+EPAD NA Exposed pad. Connect to ground.
+Other Pins
+Note!
+[1]
+The default state of READY/DONE is open-drain output, internal weak pull-up. DONE outputs 0 during configuration.
+[2]
+When the input is single-ended, GCLKC_[x] pin is not a global clock pin.
+© 2025 GOWINSEMI UG803-1.6.5E 3(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Bank
+Note!
+IO Bank0
+GW1NR
+[1] Each Bank has independent reference voltage (VREF).
+[2] You can select to use IOB internal VREF (equals to 0.5 * VCCIO).
+[3] You can also select to use external VREF input (use any IO pins as external VREF input).
+IO Bank3 IO Bank1
+IO Bank2
+© 2025 GOWINSEMI UG803-1.6.5E 4(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Power
+Name Min. Max.
+1.14V 1.26V
+3.135V 3.6V
+VCCIO1, VCCIO3 3.135V 3.6V
+VCCIO2 3.135V 3.6V
+VCCX/VCCIO0 3.135V 3.6V
+Name Min. Max.
+1.14V 1.26V
+1.71V 3.6V
+VCCIO0, VCCIO2 1.14V 3.6V
+VCCIO1, VCCIO3 1.71V 1.89V
+VCCX 2.375V 3.6V
+Name Min. Max.
+1.14V 1.26V
+1.71V 3.6V
+VCCIO1, VCCIO2 1.14V 3.6V
+VCCIO3 1.71V 1.89V
+VCCX/VCCIO0 2.375V 3.6V
+Name Min. Max.
+1.14V 1.26V
+1.71V 3.6V
+VCCIO0, VCCIO1, VCCIO2 1.14V 3.6V
+VCCIO3 1.71V 1.89V
+VCCX 2.375V 3.6V
+Recommended Operating Conditions of QN88 Package Embedded with SDR SDRMA in GW1NR-9
+Recommended Operating Conditions of MG100P Package Embedded with PSRAM in GW1NR-9
+Recommended Operating Conditions of LQ144P Package Embedded with PSRAM in GW1NR-9
+I/O Bank power supply voltage, connected to PSRAM and provides power for PSRAM
+Auxiliary voltage and VCCX/VCCIO0 voltage are internally short-circuited.
+Description
+VCC
+LV: Core voltage
+UV: Core voltage
+I/O Bank power supply voltage
+Description
+VCC
+Recommended Operating Conditions of QN88P Package Embedded with PSRAM in GW1NR-9
+LV: Core voltage
+Auxiliary voltage
+UV: Core voltage
+I/O Bank power supply voltage
+Note！
+It is highly recommended that the epad connect to GND, but not a requirement.
+Note！
+It is highly recommended that the epad connect to GND, but not a requirement.
+Note!
+VCCX should be greater than or equal to VCCIO.
+I/O Bank power supply voltage, connected to PSRAM and provides power for PSRAM
+Auxiliary voltage
+Description
+VCC
+LV: Core voltage
+UV: Core voltage
+I/O Bank power supply voltage
+Description
+VCC
+LV: Core voltage
+UV: Core voltage
+I/O Bank power supply voltage, connected to PSRAM and powers for PSRAM
+I/O Bank power supply voltage
+I/O Bank power supply voltage, VCCIO2 provides SDR SDRAM voltage.
+VCCX and VCCIO0 are internally short-circuited; VCCIO0 provides SDR SDRAM voltage.
+© 2025 GOWINSEMI UG803-1.6.5E 5(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Power
+Note!
+VCCX should be greater than or equal to VCCIO.
+Name Min. Max.
+VCC 1.14V 1.26V
+VCCIO0, VCCIO2 1.14V 3.6V
+VCCIO1, VCCIO3 1.71V 1.89V
+VCCX 2.375V 3.6V
+Auxiliary voltage
+I/O Bank power supply voltage
+Recommended Operating Conditions of GW1NR-9 MG100PF/MG100PA/MG100PT/MG100PS Packages Embedded with PSRAM in GW1NR-9
+Description
+Core voltage
+I/O Bank power supply voltage, connected to PSRAM and provides power for PSRAM
+© 2025 GOWINSEMI UG803-1.6.5E 6(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+IOB10A I/O 2 True_of_IOB10B NONE NONE
+IOB10B I/O 2 Comp_of_IOB10A NONE NONE
+IOB11A I/O 2 True_of_IOB11B TRUE x16 27 27 J3 J3 42 J3 J3 J3
+IOB11B I/O 2 Comp_of_IOB11A TRUE NONE 28 28 H3 H3 43 H3 H3 H3
+IOB12A I/O 2 True_of_IOB12B NONE NONE 44
+IOB12B I/O 2 Comp_of_IOB12A NONE NONE 45
+IOB13A I/O 2 True_of_IOB13B TRUE x16 29 29 E4 E4 46 E4 E4 E4
+IOB13B I/O 2 Comp_of_IOB13A TRUE NONE 30 30 F4 F4 47 F4 F4 F4
+IOB14A I/O 2 True_of_IOB14B NONE NONE
+IOB14B I/O 2 Comp_of_IOB14A NONE NONE
+IOB15A I/O 2 True_of_IOB15B TRUE x16 31 31 K3 K3 48 K3 K3 K3
+IOB15B I/O 2 Comp_of_IOB15A TRUE NONE 32 32 K4 K4 49 K4 K4 K4
+IOB16A I/O 2 True_of_IOB16B NONE NONE
+IOB16B I/O 2 Comp_of_IOB16A NONE NONE
+IOB17A I/O 2 True_of_IOB17B TRUE x16 J4 J4 50 J4 J4 J4
+IOB17B I/O 2 Comp_of_IOB17A TRUE NONE H4 H4 51 H4 H4 H4
+IOB18A I/O 2 True_of_IOB18B NONE NONE
+IOB18B I/O 2 Comp_of_IOB18A NONE NONE
+IOB19A I/O 2 True_of_IOB19B NONE NONE
+IOB19B I/O 2 Comp_of_IOB19A NONE NONE
+IOB20A I/O 2 True_of_IOB20B NONE NONE
+IOB20B I/O 2 Comp_of_IOB20A NONE NONE
+IOB21A I/O 2 True_of_IOB21B TRUE x16 K5 K5 K5 K5 K5
+IOB21B I/O 2 Comp_of_IOB21A TRUE NONE K6 K6 K6 K6 K6
+IOB22A I/O 2 True_of_IOB22B NONE NONE
+IOB22B I/O 2 Comp_of_IOB22A NONE NONE
+IOB23A I/O 2 True_of_IOB23B TRUE x16 33 33 H5 H5 52 H5 H5 H5
+IOB23B I/O 2 Comp_of_IOB23A TRUE NONE 34 34 G5 G5 54 G5 G5 G5
+IOB24A I/O 2 True_of_IOB24B NONE NONE
+IOB24B I/O 2 Comp_of_IOB24A NONE NONE
+IOB25A I/O 2 True_of_IOB25B TRUE x16
+IOB25B I/O 2 Comp_of_IOB25A TRUE NONE
+IOB26A I/O 2 True_of_IOB26B NONE NONE
+IOB26B I/O 2 Comp_of_IOB26A NONE NONE
+IOB27A I/O 2 True_of_IOB27B TRUE x16
+IOB27B I/O 2 Comp_of_IOB27A TRUE NONE
+IOB28A/GCLKT_5 I/O 2 GCLKT_5 True_of_IOB28B NONE NONE F5 F5 56 F5 F5 F5
+IOB28B/GCLKC_5 I/O 2 GCLKC_5 Comp_of_IOB28A NONE NONE E5 E5 57 E5 E5 E5
+IOB29A/GCLKT_4 I/O 2 GCLKT_4 True_of_IOB29B TRUE x16 35 35 J6 J6 58 J6 J6 J6
+IOB29B/GCLKC_4 I/O 2 GCLKC_4 Comp_of_IOB29A TRUE NONE 36 36 H6 H6 59 H6 H6 H6
+IOB2A I/O 2 True_of_IOB2B TRUE x16 17 17
+IOB2B I/O 2 Comp_of_IOB2A TRUE NONE 18 18
+IOB30A I/O 2 True_of_IOB30B NONE NONE 60
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+© 2025 GOWINSEMI UG803-1.6.5E 7(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOB30B I/O 2 Comp_of_IOB30A NONE NONE 61
+IOB31A I/O 2 True_of_IOB31B TRUE x16 37 37 K7 K7 62 K7 K7 K7
+IOB31B I/O 2 Comp_of_IOB31A TRUE NONE 38 38 K8 K8 63 K8 K8 K8
+IOB32A I/O 2 True_of_IOB32B NONE NONE
+IOB32B I/O 2 Comp_of_IOB32A NONE NONE
+IOB33A I/O 2 True_of_IOB33B TRUE x16 39 39 J7 J7 64 J7 J7 J7
+IOB33B I/O 2 Comp_of_IOB33A TRUE NONE 40 40 H7 H7 65 H7 H7 H7
+IOB34A I/O 2 True_of_IOB34B NONE NONE
+IOB34B I/O 2 Comp_of_IOB34A NONE NONE
+IOB35A I/O 2 True_of_IOB35B TRUE x16 F6 F6 66 F6 F6 F6
+IOB35B I/O 2 Comp_of_IOB35A TRUE NONE G6 G6 67 G6 G6 G6
+IOB36A I/O 2 True_of_IOB36B NONE NONE
+IOB36B I/O 2 Comp_of_IOB36A NONE NONE
+IOB37A I/O 2 True_of_IOB37B NONE NONE 68
+IOB37B I/O 2 Comp_of_IOB37A NONE NONE 69
+IOB38A I/O 2 True_of_IOB38B NONE NONE
+IOB38B I/O 2 Comp_of_IOB38A NONE NONE
+IOB39A I/O 2 True_of_IOB39B TRUE x16 F7 F7 70 F7 F7 F7
+IOB39B I/O 2 Comp_of_IOB39A TRUE NONE G7 G7 71 G7 G7 G7
+IOB3A I/O 2 True_of_IOB3B NONE NONE
+IOB3B I/O 2 Comp_of_IOB3A NONE NONE H1 H1 H1 H1 H1
+IOB40A I/O 2 True_of_IOB40B NONE NONE
+IOB40B I/O 2 Comp_of_IOB40A NONE NONE
+IOB41A I/O 2 True_of_IOB41B TRUE x16 41 41 K10 K10 72 K10 K10 K10
+IOB41B I/O 2 Comp_of_IOB41A TRUE NONE 42 42 K9 K9 K9 K9 K9
+IOB42A I/O 2 True_of_IOB42B NONE NONE
+IOB42B I/O 2 Comp_of_IOB42A NONE NONE 75
+IOB43A I/O 2 True_of_IOB43B TRUE x16 J10 J10 78 J10 J10 J10
+IOB43B I/O 2 Comp_of_IOB43A TRUE NONE 47 47 76
+IOB44A I/O 2 True_of_IOB44B NONE NONE
+IOB44B I/O 2 Comp_of_IOB44A NONE NONE
+IOB45A I/O 2 True_of_IOB45B TRUE x16
+IOB45B I/O 2 Comp_of_IOB45A TRUE NONE
+IOB46A I/O 2 True_of_IOB46B NONE NONE
+IOB46B I/O 2 Comp_of_IOB46A NONE NONE
+IOB4A I/O 2 True_of_IOB4B TRUE x16 19 19 K1 K1 29 K1 K1 K1
+IOB4B I/O 2 Comp_of_IOB4A TRUE NONE 20 20 K2 K2 30 K2 K2 K2
+IOB5A I/O 2 True_of_IOB5B NONE NONE
+IOB5B I/O 2 Comp_of_IOB5A NONE NONE
+IOB6A I/O 2 True_of_IOB6B TRUE x16 32
+IOB6B I/O 2 Comp_of_IOB6A TRUE NONE 34
+IOB7A I/O 2 True_of_IOB7B NONE NONE
+IOB7B I/O 2 Comp_of_IOB7A NONE NONE
+© 2025 GOWINSEMI UG803-1.6.5E 8(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOB8A I/O 2 True_of_IOB8B TRUE x16 25 25 G4 G4 38 G4 G4 G4
+IOB8B I/O 2 Comp_of_IOB8A TRUE NONE 26 26 G3 G3 39 G3 G3 G3
+IOB9A I/O 2 True_of_IOB9B NONE NONE 40
+IOB9B I/O 2 Comp_of_IOB9A NONE NONE 41
+IOL11A/TMS I/O 3 TMS True_of_IOL11B TRUE NONE 5 5 E2 E2 13 E2 E2 E2
+IOL11B/TCK I/O 3 TCK Comp_of_IOL11A TRUE NONE 6 6 E3 E3 14 E3 E3 E3
+IOL12A/SCLK I/O 3 SCLK True_of_IOL12B NONE NONE 15
+IOL12B/TDI I/O 3 TDI Comp_of_IOL12A NONE NONE 7 7 F3 F3 16 F3 F3 F3
+IOL13A/TDO I/O 3 TDO True_of_IOL13B TRUE NONE 8 8 F2 F2 18 F2 F2 F2
+IOL13B/RECONFIG_N I/O 3 RECONFIG_N Comp_of_IOL13A TRUE NONE 9 9 D3 D3 20 D3 D3 D3
+IOL14A/DONE I/O 3 DONE True_of_IOL14B NONE NONE 10 21
+IOL14B/READY I/O 3 READY Comp_of_IOL14A NONE NONE D1 D1 22 D1 D1 D1
+IOL15A/GCLKT_6 I/O 3 GCLKT_6 True_of_IOL15B TRUE NONE 11 10
+IOL15B/GCLKC_6 I/O 3 GCLKC_6 Comp_of_IOL15A TRUE NONE F1 23 F1
+IOL16A I/O 3 True_of_IOL16B NONE NONE
+IOL16B I/O 3 Comp_of_IOL16A NONE NONE 11 D2 24 D2
+IOL17A I/O 3 True_of_IOL17B TRUE NONE
+IOL17B I/O 3 Comp_of_IOL17A TRUE NONE
+IOL18A I/O 3 True_of_IOL18B NONE NONE F1 F1 F1
+IOL18B I/O 3 Comp_of_IOL18A NONE NONE D2 D2 D2
+IOL20A I/O 3 True_of_IOL20B TRUE NONE
+IOL20B I/O 3 Comp_of_IOL20A TRUE NONE
+IOL21A I/O 3 True_of_IOL21B NONE NONE
+IOL21B I/O 3 Comp_of_IOL21A NONE NONE 13 G2 G2 25 G2 G2 G2
+IOL22A I/O 3 True_of_IOL22B TRUE NONE 13
+IOL22B I/O 3 Comp_of_IOL22A TRUE NONE 14 14 G1 G1 26 G1 G1 G1
+IOL23A I/O 3 True_of_IOL23B NONE NONE
+IOL23B I/O 3 Comp_of_IOL23A NONE NONE
+IOL24A I/O 3 True_of_IOL24B TRUE NONE
+IOL24B I/O 3 Comp_of_IOL24A TRUE NONE 27
+IOL25A I/O 3 True_of_IOL25B NONE NONE
+IOL25B I/O 3 Comp_of_IOL25A NONE NONE 15 H2 H2 28 H2 H2 H2
+IOL26A I/O 3 True_of_IOL26B TRUE NONE 15
+IOL26B I/O 3 Comp_of_IOL26A TRUE NONE 16 16
+IOL27A I/O 3 True_of_IOL27B NONE NONE
+IOL27B I/O 3 Comp_of_IOL27A NONE NONE
+IOL2A I/O 3 True_of_IOL2B TRUE NONE 3
+IOL2B I/O 3 Comp_of_IOL2A TRUE NONE
+IOL3A I/O 3 True_of_IOL3B NONE NONE
+IOL3B I/O 3 Comp_of_IOL3A NONE NONE 5
+IOL4A I/O 3 True_of_IOL4B TRUE NONE
+IOL4B I/O 3 Comp_of_IOL4A TRUE NONE B2 B2 6 B2 B2 B2
+© 2025 GOWINSEMI UG803-1.6.5E 9(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOL5A/JTAGSEL_N/LPLL_T
+_in
+I/O 3
+JTAGSEL_N/LPL
+L_T_in
+True_of_IOL5B NONE NONE 4 4 B1 B1 7 B1 B1 B1
+IOL5B/LPLL_C_in I/O 3 LPLL_C_in Comp_of_IOL5A NONE NONE B3 B3 8 B3 B3 B3
+IOL6A/LPLL_T_fb I/O 3 LPLL_T_fb True_of_IOL6B TRUE NONE
+IOL6B/LPLL_C_fb I/O 3 LPLL_C_fb Comp_of_IOL6A TRUE NONE
+IOL7A I/O 3 True_of_IOL7B NONE NONE
+IOL7B I/O 3 Comp_of_IOL7A NONE NONE C1 10 C1
+IOL8A I/O 3 True_of_IOL8B TRUE NONE
+IOL8B I/O 3 Comp_of_IOL8A TRUE NONE C2 C1 11 C1 C2 C1
+IOL9A/GCLKT_7 I/O 3 GCLKT_7 True_of_IOL9B NONE NONE C2 C2 C2
+IOL9B/GCLKC_7 I/O 3 GCLKC_7 Comp_of_IOL9A NONE NONE C3 C3 12 C3 C3 C3
+IOR11A/MI/D7 I/O 1 MI/D7 True_of_IOR11B TRUE NONE 62 62 96
+IOR11B/MO/D6 I/O 1 MO/D6 Comp_of_IOR11A TRUE NONE 61 61 F9 95 F9
+IOR12A/MCS_N/D5 I/O 1 MCS_N/D5 True_of_IOR12B NONE NONE 60 60 94
+IOR12B/MCLK/D4 I/O 1 MCLK/D4 Comp_of_IOR12A NONE NONE 59 59 E10 E10 93 E10 E10 E10
+IOR13A/FASTRD_N/D3 I/O 1 FASTRD_N /D3 True_of_IOR13B TRUE NONE 57 57 92
+IOR13B/SI/D2 I/O 1 SI/D2 Comp_of_IOR13A TRUE NONE 90
+IOR14A/SO/D1 I/O 1 SO/D1 True_of_IOR14B NONE NONE 56 56 88
+IOR14B/SSPI_CS_N/D0 I/O 1 SSPI_CS_N/D0 Comp_of_IOR14A NONE NONE 55 55 G9 G9 87 G9 G9 G9
+IOR15A/DIN/CLKHOLD_N I/O 1 DIN/CLKHOLD_N True_of_IOR15B TRUE NONE 54 54 86
+IOR15B/DOUT/WE_N I/O 1 DOUT/WE_N Comp_of_IOR15A TRUE NONE 53 53 85
+IOR16A I/O 1 True_of_IOR16B NONE NONE
+IOR16B I/O 1 Comp_of_IOR16A NONE NONE F10 F10 84 F10 F10 F10
+IOR17A/GCLKT_3 I/O 1 GCLKT_3 True_of_IOR17B TRUE NONE 52 52 F8 F8 F8 F8 F8
+IOR17B/GCLKC_3 I/O 1 GCLKC_3 Comp_of_IOR17A TRUE NONE 51 51 G8 G8 83 G8 G8 G8
+IOR18A I/O 1 True_of_IOR18B NONE NONE
+IOR18B I/O 1 Comp_of_IOR18A NONE NONE H8 H8 H8 H8 H8
+IOR20A I/O 1 True_of_IOR20B TRUE NONE
+IOR20B I/O 1 Comp_of_IOR20A TRUE NONE
+IOR21A I/O 1 True_of_IOR21B NONE NONE
+IOR21B I/O 1 Comp_of_IOR21A NONE NONE G10 G10 82 G10 G10 G10
+IOR22A I/O 1 True_of_IOR22B TRUE NONE
+IOR22B I/O 1 Comp_of_IOR22A TRUE NONE 50 50 81
+IOR23A I/O 1 True_of_IOR23B NONE NONE
+IOR23B I/O 1 Comp_of_IOR23A NONE NONE 80
+IOR24A I/O 1 True_of_IOR24B TRUE NONE 49 49
+IOR24B I/O 1 Comp_of_IOR24A TRUE NONE 48 48 H9 H9 79 H9 H9 H9
+IOR25A I/O 1 True_of_IOR25B NONE NONE
+IOR25B I/O 1 Comp_of_IOR25A NONE NONE H10 H10 H10 H10 H10
+IOR26A I/O 1 True_of_IOR26B TRUE NONE
+IOR26B I/O 1 Comp_of_IOR26A TRUE NONE
+IOR27A I/O 1 True_of_IOR27B NONE NONE
+IOR27B I/O 1 Comp_of_IOR27A NONE NONE
+© 2025 GOWINSEMI UG803-1.6.5E 10(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOR2A I/O 1 True_of_IOR2B TRUE NONE
+IOR2B I/O 1 Comp_of_IOR2A TRUE NONE C10 C10 C10 C10 C10
+IOR3A I/O 1 True_of_IOR3B NONE NONE
+IOR3B I/O 1 Comp_of_IOR3A NONE NONE B10 B10 B10 B10 B10
+IOR4A I/O 1 True_of_IOR4B TRUE NONE
+IOR4B I/O 1 Comp_of_IOR4A TRUE NONE
+IOR5A/RPLL_T_in I/O 1 RPLL_T_in True_of_IOR5B NONE NONE 63 63 C9 C9 106 C9 C9 C9
+IOR5B/RPLL_C_in I/O 1 RPLL_C_in Comp_of_IOR5A NONE NONE D9 D9 104 D9 D9 D9
+IOR6A/RPLL_T_fb I/O 1 RPLL_T_fb True_of_IOR6B TRUE NONE 102
+IOR6B/RPLL_C_fb I/O 1 RPLL_C_fb Comp_of_IOR6A TRUE NONE 101
+IOR7A I/O 1 True_of_IOR7B NONE NONE
+IOR7B I/O 1 Comp_of_IOR7A NONE NONE D10 D10 100 D10 D10 D10
+IOR8A I/O 1 True_of_IOR8B TRUE NONE
+IOR8B I/O 1 Comp_of_IOR8A TRUE NONE 99
+IOR9A/GCLKT_2 I/O 1 GCLKT_2 True_of_IOR9B NONE NONE E8 E8 98 E8 E8 E8
+IOR9B/GCLKC_2 I/O 1 GCLKC_2 Comp_of_IOR9A NONE NONE F9 97 F9 F9
+IOT10A I/O 3 True_of_IOT10B NONE NONE 84 84 140
+IOT10B I/O 3 Comp_of_IOT10A NONE NONE 83 83 139
+IOT11A I/O 3 True_of_IOT11B NONE x16 82 82 C4 C4 C4 C4 C4
+IOT11B I/O 3 Comp_of_IOT11A NONE NONE 81 81 B4 B4 B4 B4 B4
+IOT12A I/O 3 True_of_IOT12B NONE NONE 80 80 138
+IOT12B I/O 3 Comp_of_IOT12A NONE NONE 79 79 137
+IOT13A I/O 0 True_of_IOT13B NONE x16 D5 D5 D5 D5 D5
+IOT13B I/O 0 Comp_of_IOT13A NONE NONE D6 D6 D6 D6 D6
+IOT14A I/O 0 True_of_IOT14B NONE NONE
+IOT14B I/O 0 Comp_of_IOT14A NONE NONE
+IOT15A I/O 0 True_of_IOT15B NONE x16 136
+IOT15B I/O 0 Comp_of_IOT15A NONE NONE 135
+IOT16A I/O 0 True_of_IOT16B NONE NONE
+IOT16B I/O 0 Comp_of_IOT16A NONE NONE
+IOT17A I/O 0 True_of_IOT17B NONE x16 C5 C5 134 C5 C5 C5
+IOT17B I/O 0 Comp_of_IOT17A NONE NONE B5 B5 133 B5 B5 B5
+IOT18A I/O 0 True_of_IOT18B NONE NONE
+IOT18B I/O 0 Comp_of_IOT18A NONE NONE
+IOT19A I/O 0 True_of_IOT19B NONE NONE
+IOT19B I/O 0 Comp_of_IOT19A NONE NONE
+IOT20A I/O 0 True_of_IOT20B NONE NONE 132
+IOT20B I/O 0 Comp_of_IOT20A NONE NONE 131
+IOT21A I/O 0 True_of_IOT21B NONE x16 C6 C6 C6 C6 C6
+IOT21B I/O 0 Comp_of_IOT21A NONE NONE B6 B6 B6 B6 B6
+IOT22A I/O 0 True_of_IOT22B NONE NONE 130
+IOT22B I/O 0 Comp_of_IOT22A NONE NONE 129
+IOT23A I/O 0 True_of_IOT23B NONE x16
+© 2025 GOWINSEMI UG803-1.6.5E 11(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOT23B I/O 0 Comp_of_IOT23A NONE NONE
+IOT24A I/O 0 True_of_IOT24B NONE NONE 128
+IOT24B I/O 0 Comp_of_IOT24A NONE NONE 126
+IOT25A I/O 0 True_of_IOT25B NONE x16
+IOT25B I/O 0 Comp_of_IOT25A NONE NONE
+IOT26A I/O 0 True_of_IOT26B NONE NONE
+IOT26B I/O 0 Comp_of_IOT26A NONE NONE
+IOT27A I/O 0 True_of_IOT27B NONE x16 A6 125 A6
+IOT27B I/O 0 Comp_of_IOT27A NONE NONE A7 124 A7
+IOT28A/GCLKT_0 I/O 0 GCLKT_0 True_of_IOT28B NONE NONE A6 A6 A6
+IOT28B/GCLKC_0 I/O 0 GCLKC_0 Comp_of_IOT28A NONE NONE A7 A7 A7
+IOT29A/GCLKT_1 I/O 0 GCLKT_1 True_of_IOT29B NONE x16 E6 E6 123 E6 E6 E6
+IOT29B/GCLKC_1 I/O 0 GCLKC_1 Comp_of_IOT29A NONE NONE E7 E7 122 E7 E7 E7
+IOT2A I/O 3 True_of_IOT2B NONE x16 3 3
+IOT2B I/O 3 Comp_of_IOT2A NONE NONE 4
+IOT30A I/O 0 True_of_IOT30B NONE NONE
+IOT30B I/O 0 Comp_of_IOT30A NONE NONE
+IOT31A I/O 0 True_of_IOT31B NONE x16
+IOT31B I/O 0 Comp_of_IOT31A NONE NONE
+IOT32A I/O 0 True_of_IOT32B NONE NONE 121
+IOT32B I/O 0 Comp_of_IOT32A NONE NONE 120
+IOT33A I/O 0 True_of_IOT33B NONE x16 C7 C7 C7 C7 C7
+IOT33B I/O 0 Comp_of_IOT33A NONE NONE B7 B7 B7 B7 B7
+IOT34A I/O 0 True_of_IOT34B NONE NONE 119
+IOT34B I/O 0 Comp_of_IOT34A NONE NONE 118
+IOT35A I/O 0 True_of_IOT35B NONE x16
+IOT35B I/O 0 Comp_of_IOT35A NONE NONE
+IOT36A I/O 1 True_of_IOT36B NONE NONE
+IOT36B I/O 1 Comp_of_IOT36A NONE NONE
+IOT37A I/O 1 True_of_IOT37B NONE NONE 77 77 117
+IOT37B I/O 1 Comp_of_IOT37A NONE NONE 76 76 116
+IOT38A I/O 1 True_of_IOT38B NONE NONE 75 75
+IOT38B I/O 1 Comp_of_IOT38A NONE NONE 74 74
+IOT39A I/O 1 True_of_IOT39B NONE x16 73 73 B8 B8 115 B8 B8 B8
+IOT39B I/O 1 Comp_of_IOT39A NONE NONE 72 72 C8 C8 114 C8 C8 C8
+IOT3A I/O 3 True_of_IOT3B NONE NONE
+IOT3B I/O 3 Comp_of_IOT3A NONE NONE
+IOT40A I/O 1 True_of_IOT40B NONE NONE
+IOT40B I/O 1 Comp_of_IOT40A NONE NONE
+IOT41A I/O 1 True_of_IOT41B NONE x16 71 71 D7 D7 113 D7 D7 D7
+IOT41B I/O 1 Comp_of_IOT41A NONE NONE 70 70 D8 D8 112 D8 D8 D8
+IOT42A I/O 1 True_of_IOT42B NONE NONE 69 69 111
+IOT42B I/O 1 Comp_of_IOT42A NONE NONE 68 68 110
+© 2025 GOWINSEMI UG803-1.6.5E 12(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+IOT43A I/O 1 True_of_IOT43B NONE x16
+IOT43B I/O 1 Comp_of_IOT43A NONE NONE
+IOT44A I/O 1 True_of_IOT44B NONE NONE
+IOT44B I/O 1 Comp_of_IOT44A NONE NONE
+IOT45A I/O 1 True_of_IOT45B NONE x16 B9 B9 B9 B9 B9
+IOT45B I/O 1 Comp_of_IOT45A NONE NONE A10 A10 A10 A10 A10
+IOT46A I/O 1 True_of_IOT46B NONE NONE
+IOT46B I/O 1 Comp_of_IOT46A NONE NONE
+IOT4A I/O 3 True_of_IOT4B NONE x16
+IOT4B I/O 3 Comp_of_IOT4A NONE NONE
+IOT5A/MODE0 I/O 3 MODE0 True_of_IOT5B NONE NONE 88 88 GND[3]
+GND[3]
+144 GND[3]
+GND[3]
+GND[3]
+IOT5B/MODE2 I/O 3 MODE2 Comp_of_IOT5A NONE NONE GND[3]
+GND[3]
+GND[3]
+GND[3]
+GND[3]
+GND[3]
+GND[3]
+GND[3]
+IOT6A I/O 3 True_of_IOT6B NONE x16
+IOT6B/MODE1 I/O 3 MODE1 Comp_of_IOT6A NONE NONE 87 87 D4 D4 143 D4 D4 D4
+IOT7A I/O 3 True_of_IOT7B NONE NONE
+IOT7B I/O 3 Comp_of_IOT7A NONE NONE
+IOT8A I/O 3 True_of_IOT8B NONE x16 86 86 A3 A3 142 A3 A3 A3
+IOT8B I/O 3 Comp_of_IOT8A NONE NONE 85 85 A4 A4 141 A4 A4 A4
+IOT9A I/O 3 True_of_IOT9B NONE NONE
+IOT9B I/O 3 Comp_of_IOT9A NONE NONE
+VCC Power N/A NONE 1 1 A2 J2 1 A2 A2 A2
+VCC Power N/A NONE 22 22 J2 A8 36 J2 J2 J2
+VCC Power N/A NONE 45 45 A2 73
+VCC Power N/A NONE 66 66 A8 108 A8 A8 A8
+VCCIO0 Power N/A NONE A5 A5 109 A5 A5 A5
+VCCIO0 Power N/A NONE 127
+VCCIO1 Power N/A NONE 58 58 E9 91
+VCCIO1 Power N/A NONE E9 E9 E9 E9
+VCCIO1 Power N/A NONE 103
+VCCIO2 Power N/A NONE 23 23 J5 J5 37 J5 J5 J5
+VCCIO2 Power N/A NONE 44 44
+VCCIO2 Power N/A NONE 55
+VCCIO3 Power N/A NONE 12 12
+VCCIO3 Power N/A NONE E1 E1 19 E1 E1 E1
+VCCIO3 Power N/A NONE 9
+VCCX Power N/A NONE J8 J8 J8 J8 J8
+VCCX Power N/A NONE 31
+VCCX Power N/A NONE 77
+VCCX/VCCIO0 Power N/A NONE 64 64
+VCCX/VCCIO0 Power N/A NONE 67 67
+VCCX/VCCIO0 Power N/A NONE 78 78
+VSS Ground N/A NONE 2 2
+VSS Ground N/A NONE 21 21 33
+© 2025 GOWINSEMI UG803-1.6.5E 13(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+Pin List
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+[3]
+The pin is internally grounded.
+VSS Ground N/A NONE 24 24
+VSS Ground N/A NONE 43 43
+VSS Ground N/A NONE 46 46 74
+VSS Ground N/A NONE 65 65
+VSS Ground N/A NONE A1 A1 2 A1 A1 A1
+VSS Ground N/A NONE A9 A9 17 A9 A9 A9
+VSS Ground N/A NONE J1 J1 107 J1 J1 J1
+VSS Ground N/A NONE J9 J9 J9 J9 J9
+VSS Ground N/A NONE 35
+VSS Ground N/A NONE 53
+VSS Ground N/A NONE 89
+VSS Ground N/A NONE 105
+© 2025 GOWINSEMI UG803-1.6.5E 14(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+True LVDS
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+IOL11A/TMS I/O 3 TMS True_of_IOL11B TRUE NONE 5 5 E2 E2 13 E2 E2 E2
+IOL11B/TCK I/O 3 TCK Comp_of_IOL11A TRUE NONE 6 6 E3 E3 14 E3 E3 E3
+IOL13A/TDO I/O 3 TDO True_of_IOL13B TRUE NONE 8 8 F2 F2 18 F2 F2 F2
+IOL13B/RECONFIG_N I/O 3 RECONFIG_N Comp_of_IOL13A TRUE NONE 9 9 D3 D3 20 D3 D3 D3
+IOL15A/GCLKT_6 I/O 3 GCLKT_6 True_of_IOL15B TRUE NONE
+IOL15B/GCLKC_6 I/O 3 GCLKC_6 Comp_of_IOL15A TRUE NONE
+IOL17A I/O 3 True_of_IOL17B TRUE NONE
+IOL17B I/O 3 Comp_of_IOL17A TRUE NONE
+IOL20A I/O 3 True_of_IOL20B TRUE NONE
+IOL20B I/O 3 Comp_of_IOL20A TRUE NONE
+IOL22A I/O 3 True_of_IOL22B TRUE NONE 13
+IOL22B I/O 3 Comp_of_IOL22A TRUE NONE 14
+IOL24A I/O 3 True_of_IOL24B TRUE NONE
+IOL24B I/O 3 Comp_of_IOL24A TRUE NONE
+IOL26A I/O 3 True_of_IOL26B TRUE NONE 15
+IOL26B I/O 3 Comp_of_IOL26A TRUE NONE 16
+IOL2A I/O 3 True_of_IOL2B TRUE NONE
+IOL2B I/O 3 Comp_of_IOL2A TRUE NONE
+IOL4A I/O 3 True_of_IOL4B TRUE NONE
+IOL4B I/O 3 Comp_of_IOL4A TRUE NONE
+IOL6A/LPLL_T_fb I/O 3 LPLL_T_fb True_of_IOL6B TRUE NONE
+IOL6B/LPLL_C_fb I/O 3 LPLL_C_fb Comp_of_IOL6A TRUE NONE
+IOL8A I/O 3 True_of_IOL8B TRUE NONE
+IOL8B I/O 3 Comp_of_IOL8A TRUE NONE
+IOB11A I/O 2 True_of_IOB11B TRUE x16 27 27 J3 J3 42 J3 J3 J3
+IOB11B I/O 2 Comp_of_IOB11A TRUE NONE 28 28 H3 H3 43 H3 H3 H3
+IOB13A I/O 2 True_of_IOB13B TRUE x16 29 29 E4 E4 46 E4 E4 E4
+IOB13B I/O 2 Comp_of_IOB13A TRUE NONE 30 30 F4 F4 47 F4 F4 F4
+IOB15A I/O 2 True_of_IOB15B TRUE x16 31 31 K3 K3 48 K3 K3 K3
+IOB15B I/O 2 Comp_of_IOB15A TRUE NONE 32 32 K4 K4 49 K4 K4 K4
+IOB17A I/O 2 True_of_IOB17B TRUE x16 J4 J4 50 J4 J4 J4
+IOB17B I/O 2 Comp_of_IOB17A TRUE NONE H4 H4 51 H4 H4 H4
+IOB21A I/O 2 True_of_IOB21B TRUE x16 K5 K5 K5 K5 K5
+IOB21B I/O 2 Comp_of_IOB21A TRUE NONE K6 K6 K6 K6 K6
+IOB23A I/O 2 True_of_IOB23B TRUE x16 33 33 H5 H5 52 H5 H5 H5
+IOB23B I/O 2 Comp_of_IOB23A TRUE NONE 34 34 G5 G5 54 G5 G5 G5
+IOB25A I/O 2 True_of_IOB25B TRUE x16
+IOB25B I/O 2 Comp_of_IOB25A TRUE NONE
+IOB27A I/O 2 True_of_IOB27B TRUE x16
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+BANK3 True LVDS Pair
+BANK2 True LVDS Pair
+© 2025 GOWINSEMI UG803-1.6.5E 15(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+True LVDS
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+IOB27B I/O 2 Comp_of_IOB27A TRUE NONE
+IOB29A/GCLKT_4 I/O 2 GCLKT_4 True_of_IOB29B TRUE x16 35 35 J6 J6 58 J6 J6 J6
+IOB29B/GCLKC_4 I/O 2 GCLKC_4 Comp_of_IOB29A TRUE NONE 36 36 H6 H6 59 H6 H6 H6
+IOB2A I/O 2 True_of_IOB2B TRUE x16 17 17
+IOB2B I/O 2 Comp_of_IOB2A TRUE NONE 18 18
+IOB31A I/O 2 True_of_IOB31B TRUE x16 37 37 K7 K7 62 K7 K7 K7
+IOB31B I/O 2 Comp_of_IOB31A TRUE NONE 38 38 K8 K8 63 K8 K8 K8
+IOB33A I/O 2 True_of_IOB33B TRUE x16 39 39 J7 J7 64 J7 J7 J7
+IOB33B I/O 2 Comp_of_IOB33A TRUE NONE 40 40 H7 H7 65 H7 H7 H7
+IOB35A I/O 2 True_of_IOB35B TRUE x16 F6 F6 66 F6 F6 F6
+IOB35B I/O 2 Comp_of_IOB35A TRUE NONE G6 G6 67 G6 G6 G6
+IOB39A I/O 2 True_of_IOB39B TRUE x16 F7 F7 70 F7 F7 F7
+IOB39B I/O 2 Comp_of_IOB39A TRUE NONE G7 G7 71 G7 G7 G7
+IOB41A I/O 2 True_of_IOB41B TRUE x16 41 41 K10 K10 K10 K10 K10
+IOB41B I/O 2 Comp_of_IOB41A TRUE NONE 42 42 K9 K9 K9 K9 K9
+IOB43A I/O 2 True_of_IOB43B TRUE x16 78
+IOB43B I/O 2 Comp_of_IOB43A TRUE NONE 76
+IOB45A I/O 2 True_of_IOB45B TRUE x16
+IOB45B I/O 2 Comp_of_IOB45A TRUE NONE
+IOB4A I/O 2 True_of_IOB4B TRUE x16 19 19 K1 K1 29 K1 K1 K1
+IOB4B I/O 2 Comp_of_IOB4A TRUE NONE 20 20 K2 K2 30 K2 K2 K2
+IOB6A I/O 2 True_of_IOB6B TRUE x16 32
+IOB6B I/O 2 Comp_of_IOB6A TRUE NONE 34
+IOB8A I/O 2 True_of_IOB8B TRUE x16 25 25 G4 G4 38 G4 G4 G4
+IOB8B I/O 2 Comp_of_IOB8A TRUE NONE 26 26 G3 G3 39 G3 G3 G3
+IOR11A/MI/D7 I/O 1 MI/D7 True_of_IOR11B TRUE NONE 62 62 96
+IOR11B/MO/D6 I/O 1 MO/D6 Comp_of_IOR11A TRUE NONE 61 61 95
+IOR13A/FASTRD_N/D3 I/O 1 FASTRD_N /D3 True_of_IOR13B TRUE NONE 92
+IOR13B/SI/D2 I/O 1 SI/D2 Comp_of_IOR13A TRUE NONE 90
+IOR15A/DIN/CLKHOLD_N I/O 1
+DIN/CLKHOLD
+_N
+True_of_IOR15B TRUE NONE 54 54 86
+IOR15B/DOUT/WE_N I/O 1 DOUT/WE_N Comp_of_IOR15A TRUE NONE 53 53 85
+IOR17A/GCLKT_3 I/O 1 GCLKT_3 True_of_IOR17B TRUE NONE 52 52 F8 F8 F8 F8 F8
+IOR17B/GCLKC_3 I/O 1 GCLKC_3 Comp_of_IOR17A TRUE NONE 51 51 G8 G8 G8 G8 G8
+IOR20A I/O 1 True_of_IOR20B TRUE NONE
+IOR20B I/O 1 Comp_of_IOR20A TRUE NONE
+IOR22A I/O 1 True_of_IOR22B TRUE NONE
+IOR22B I/O 1 Comp_of_IOR22A TRUE NONE
+IOR24A I/O 1 True_of_IOR24B TRUE NONE 49 49
+IOR24B I/O 1 Comp_of_IOR24A TRUE NONE 48 48
+BANK1 True LVDS Pair
+© 2025 GOWINSEMI UG803-1.6.5E 16(17)
+GW1NR Series of FPGA Products
+GW1NR-9 Pinout
+True LVDS
+Pin Name Function BANK
+Configuration
+Function
+Differential Pair LVDS X16 QN88[1]
+QN88P[2]
+MG100P[2]
+MG100PF[2]
+LQ144P[2]
+MG100PA[2]
+MG100PT[2]
+MG100PS[2]
+Note!
+[1]
+SDRAM embedded
+[2]
+PSRAM embedded
+IOR26A I/O 1 True_of_IOR26B TRUE NONE
+IOR26B I/O 1 Comp_of_IOR26A TRUE NONE
+IOR2A I/O 1 True_of_IOR2B TRUE NONE
+IOR2B I/O 1 Comp_of_IOR2A TRUE NONE
+IOR4A I/O 1 True_of_IOR4B TRUE NONE
+IOR4B I/O 1 Comp_of_IOR4A TRUE NONE
+IOR6A/RPLL_T_fb I/O 1 RPLL_T_fb True_of_IOR6B TRUE NONE 102
+IOR6B/RPLL_C_fb I/O 1 RPLL_C_fb Comp_of_IOR6A TRUE NONE 101
+IOR8A I/O 1 True_of_IOR8B TRUE NONE
+IOR8B I/O 1 Comp_of_IOR8A TRUE NONE
+© 2025 GOWINSEMI UG803-1.6.5E 17(17)
+

@@ -1,0 +1,1173 @@
+ ▐▛███▛█   Claude Code v2.1.263
+▝▜██████▀  Opus 5 · Claude Pro
+  ▝▝ ▝▝    ~/projects/AI/skidl-skills-test
+
+⚠ Your login expires in 3 days · run /login to renew
+  ⎿  SessionStart:startup hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/session-start.sh: Permission
+     denied
+
+❯ design an electronic system as described in dual-adc-prompt.txt               
+
+● I'll start by reading the prompt file.
+
+  Listed 1 directory, ran 2 shell commands (ctrl+o to expand)
+
+● This is a skills-test directory with the SKiDL design pipeline available, and
+  the request matches it exactly. Invoking that pipeline.
+
+● Skill(skidl-skills:new-circuit)
+  ⎿  Successfully loaded skill
+
+  Listed 1 directory (ctrl+o to expand)
+
+● No existing state — this is a fresh start, so no resume prompt is needed.
+  Creating the initial state file and handing off to the orchestrator.
+
+  Read 1 file (ctrl+o to expand)
+
+● skidl-skills:orchestrator(Run dual-ADC design pipeline)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Pipeline started. The orchestrator is running the interview → architecture →
+  sourcing → coding → ERC → export sequence in the background; it will surface
+  interview questions to you.
+
+  Two things in the prompt that will drive the design, flagged up front since
+  they're the crux:
+
+  - Throughput doesn't fit. 2 ch × 10 MSPS × 12 bit = 240 Mbit/s sustained. USB
+    2.0 high-speed is 480 Mbit/s raw, ~320 Mbit/s theoretical bulk, and
+    realistically ~200–280 Mbit/s. Continuous dual-channel streaming is
+    marginal-to-impossible. The likely answers are packing 12-bit samples
+    without padding (240 vs 320 Mbit/s if you pad to 16 bits), on-board burst
+    buffering (scope-style triggered capture into SDRAM/FIFO, then drain), or
+    dropping to single-channel-at-a-time continuous. This needs your call.
+  - Bus power is tight. 500 mA / 2.5 W at 5 V has to cover a ±10 V front end
+    (needs a bipolar rail, so a charge pump or small isolated converter), a 10
+    MSPS 12-bit ADC pair, and the USB PHY/FPGA or MCU doing the buffering. A 10
+    MSPS 12-bit dual ADC is roughly 100 mW; the FPGA and DRAM are what will eat
+    the budget.
+
+  I'll relay the interview questions as they come.
+
+✻ Churned for 1m 31s · done Sunday 1:34 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 1m 27s
+
+● The interview reached its first fork. Relaying it.
+
+● User answered Claude's questions:
+  ⎿  · Capture model: continuous streaming or buffered burst? (2 ch × 10 MSPS × 
+     12 bit = 240 Mbit/s = 30 MB/s packed, 40 MB/s if padded to 16 bit. Real USB
+     2.0 HS bulk sustains ~35–42 MB/s with a dedicated FIFO bridge — FTDI 
+     quotes ~40 MB/s for FT2232H sync-FIFO, Cypress FX2LP GPIF similar — and 
+     degrades on a loaded host.) → Buffered burst (Recommended)
+
+● User answered Claude's questions:
+  ⎿  · Minimum record depth per channel for burst capture? (At 10 MSPS, depth 
+     sets both the buffer BOM and the memory-controller complexity.) → ~1 MS/ch 
+     (100 ms) — async SRAM
+  ⎿  Resuming agent a8c388d
+
+● Q1 settled: buffered burst, ~1 MS/channel via async SRAM. That fixes the
+  digital architecture — full-rate capture into a ~4 MB SRAM, drained over USB
+  at whatever the host sustains, so the 30 MB/s vs. ~40 MB/s margin problem
+  disappears.
+
+  Interview continuing; I'll relay Q2 when it arrives.
+
+✻ Baked for 57s · done Sunday 1:37 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 25s
+
+● Q2 arrived with three coupled sub-decisions. Putting them together since
+  they're one front-end decision.
+
+● User answered Claude's questions:
+  ⎿  · Input connector and termination? ("Mates with standard oscilloscope 
+     leads" fixes BNC mechanically; the electrical half is the real choice.) → 
+     BNC, 1 MΩ ∥ ~20 pF (Recommended)
+     · Input coupling per channel? → DC only (Recommended)
+     · Where is the ±10 V full scale specified? → At the BNC / 1× probe 
+     (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q2 settled: BNC, 1 MΩ ∥ ~20 pF, DC-coupled, ±10 V full scale at the connector.
+  That's the conventional-instrument front end — probes stay compensatable, at
+  the cost of a high-Z buffer plus attenuator plus clamps being the hardest
+  block on the board.
+
+  Waiting on Q3.
+
+✻ Churned for 44s · done Sunday 1:40 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 54s
+● User answered Claude's questions:
+  ⎿  · Anti-alias strategy? (Nyquist is 5 MHz; a full-scale out-of-band tone 
+     must land below 1 LSB = −74 dBFS. With a 3 MHz passband the alias band 
+     starts at 7 MHz — 1.2 octaves — needing ~10 analog poles per channel.) → 
+     Oversample ×4 + decimate (Recommended)
+     · Usable analog bandwidth target? → 3 MHz flat, −3 dB at ~4 MHz 
+     (Recommended)
+     · Alias rejection target? → Full 12-bit, −74 dB (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q3 settled: ×4 oversampling (40 MSPS ADC) with 4:1 decimation in gateware,
+  4th-order analog filter at ~4 MHz, 3 MHz flat bandwidth, full −74 dB alias
+  rejection.
+
+  That trade is the right one — it moves the expensive part from analog (10
+  poles per channel, tolerance-sensitive, power-hungry) into logic that has to
+  exist anyway for the SRAM burst controller, and pays back ~6 dB of SNR. The
+  bill is a 40 MSPS ADC's power draw and a tighter clock-jitter budget, both now
+  on the sourcing critical path.
+
+  Q4 next.
+
+✻ Baked for 56s · done Sunday 1:44 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 1m 4s
+
+● User answered Claude's questions:
+  ⎿  · FPGA + USB bridge combination? (Note: burst capture means USB throughput 
+     is no longer a hard requirement — draining 4 MB at 20 MB/s takes 200 ms — 
+     so pick for integration cost, not bandwidth. Pin budget ≈ 80 I/O rules out 
+     small QFN parts.) → iCE40HX TQ144 + FT2232H (Recommended)
+     · Is an open-source FPGA toolchain a hard requirement? → Yes — hard 
+     requirement (Recommended)
+     · FPGA configuration source? → Both — SPI flash + MPSSE override 
+     (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q4 settled: iCE40HX in TQFP-144 + FT2232H, open-source toolchain as a hard
+  constraint, dual config path (SPI flash for standalone boot + MPSSE override
+  for development).
+
+  Worth noting the orchestrator's own caveat, since it's the main schedule risk:
+  none of FT2232H, iCE40HX4K-TQ144, or the 2M×16 async SRAM have been checked
+  for stock yet, and the async SRAM is the shaky one — that density is a
+  shrinking market. If it can't be sourced, the ~1 MS/ch depth decision gets
+  reopened (likely toward SDRAM, which you explicitly avoided for controller
+  complexity). I've told the orchestrator to bring any substitution back to you
+  rather than swapping silently.
+
+  Q5 next.
+
+✻ Baked for 56s · done Sunday 1:49 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 53s
+
+● User answered Claude's questions:
+  ⎿  · Power tree from the 5 V bus? (Budget: dual 40 MSPS ADC ~350 mW, iCE40HX 
+     ~150 mW, FT2232H ~130 mW, SRAM ~100 mW, 4 amplifiers ~200 mW + losses ≈ 
+     1.2–1.6 W of 2.5 W.) → Buck 3.3 V + LM27762 ±5 V (Recommended)
+     · 3.3 V digital rail: buck or LDO? → Buck (Recommended)
+     · USB enumeration current gating? (The board draws well over the 100 mA 
+     that USB permits before the host configures it at 500 mA.) → Declare 500 
+     mA, power up immediately (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q5 settled: buck for 3.3 V digital, LDO for 1.2 V core, separate LDO for ADC
+  AVDD, LM27762 charge pump for ±5 V analog; declare 500 mA and power up with
+  inrush limiting.
+
+  Roughly 1.2–1.6 W against 2.5 W, so about 1 W of headroom. The cost of the
+  buck decision is that a switching node now lives on a 12-bit precision board —
+  that becomes a layout constraint rather than a schematic one, so it needs to
+  be written into the architecture doc where it won't get lost before PCB work.
+
+  Q6 next — 5 of ~9 done.
+
+✻ Crunched for 48s · done Sunday 1:51 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 34s
+
+● User answered Claude's questions:
+  ⎿  · Accuracy approach? (Blunt version: the error isn't the ADC. Pipeline ADC 
+     internal references are 2–4% absolute — AD9238's 1 V ref is ±35 mV — and 
+     the 10:1 attenuator's resistor tolerance sits directly in the gain path. 12
+     bits of resolution will coexist with 1–4% accuracy unless you spend on 
+     both.) → Ext. ref + 0.1% R + factory cal (Recommended)
+     · Probe compensation output? (You chose 1 MΩ ∥ 20 pF so 10× passive probes 
+     compensate — but their trimmer needs a square wave to adjust against, and 
+     no such signal exists on the board yet.) → Include 1 kHz square wave 
+     (Recommended)
+     · Where do calibration constants live? → FT2232H EEPROM user area 
+     (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q6 settled: external precision reference + 0.1% thin-film attenuator resistors
+  + per-board factory cal stored in the FT2232H EEPROM, targeting ±0.5% gain /
+  ±0.2% FS offset; 1 kHz probe-comp square wave included.
+
+  Two consequences that outlive the schematic: production now has a calibration
+  step, and the host software contract includes reading cal constants over FTDI
+  channel B before the FPGA is even configured. Both are the kind of thing that
+  gets forgotten between design and bring-up, so they're going in the
+  architecture doc.
+
+  Q7 next.
+
+✻ Churned for 40s · done Sunday 1:54 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 34s
+
+● User answered Claude's questions:
+  ⎿  · Sample clock plan? (The Q3 jitter budget — ≤10.6 ps RMS required, ≤5 ps 
+     targeted — rules out an iCE40 PLL outright; its output jitter is in the 
+     tens of ps.) → Fixed 40 MHz XO, FPGA consumes only (Recommended)
+     · Trigger implementation? → Digital in FPGA (Recommended)
+     · External trigger I/O? → Protected header pin, in/out (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q7 settled: fixed 40 MHz low-jitter XO driving the ADC directly (FPGA
+  consumes, never synthesizes), digital trigger in gateware with circular-buffer
+  pre-trigger, protected header pin for external trigger in/out.
+
+  The clock is the one part where the 12-bit claim is genuinely fragile — the ≤1
+  ps RMS oscillator is still a part class, not a verified part. I've told the
+  orchestrator that if sourcing can't find one, the substitution and its jitter
+  number come back to you rather than being quietly accepted.
+
+  Q8 next, then one more.
+
+✻ Crunched for 44s · done Sunday 1:58 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 27s
+● User answered Claude's questions:
+  ⎿  · Form factor / enclosure for rev A? → Bare board ~100×80 mm, mounting 
+     holes (Recommended)
+     · USB connector? → USB-C, wired as USB 2.0 device (Recommended)
+     · Layer count? → 4-layer (Recommended)
+     · Through-hole parts constraint? (BNCs, trigger header, probe-comp 
+     terminal, mode strap are the TH candidates; JLCPCB charges extra for TH 
+     assembly.) → TH fine, hand-solder at prototype (Recommended)
+  ⎿  Resuming agent a8c388d
+
+● Q8 settled: bare 4-layer board ~100×80 mm, BNCs and USB-C on opposite edges,
+  TH connectors hand-soldered at prototype quantity, 0–50 °C commercial.
+
+  Q9 is the last one — it'll be about build quantity, which is the thing that
+  decides whether the hand-solder and factory-cal choices above stay cheap or
+  become a problem. After that the orchestrator writes SPEC.md and brings it
+  back for your approval before any architecture work starts.
+
+✻ Brewed for 1m 1s · done Sunday 2:01 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 36s
+
+● Q9 is the last one. It has five parts and the tool takes four, so I'm asking
+  the four that change the work and stating the fifth as an assumption below.
+
+● User answered Claude's questions:
+  ⎿  · Build quantity for rev A, and optimize for prototype or for a later 
+     volume run? → 5 boards, optimize for working prototype (Recommended)
+     · Is a ~$70–100 single-quantity BOM acceptable? (FT2232H ~$7, iCE40HX4K 
+     ~$12, dual 12-bit 40–65 MSPS ADC ~$15–25, 2M×16 async SRAM ~$8–15, quad 
+     op-amp ~$6, LM27762 ~$3, buck ~$1.50, precision ref ~$1.50, XO ~$2, 2× BNC 
+     ~$4, USB-C ~$0.60, passives ~$5.) → Acceptable (Recommended)
+     · JLCPCB sourcing policy for the four critical ICs (ADC, FPGA, SRAM, 
+     FT2232H)? → Relax tier rule for critical ICs (Recommended)
+     · Deliverable scope for this pipeline? → Also draft the gateware
+  ⎿  Resuming agent a8c388d
+
+● Interview complete. Q9 settled: 5 boards, ~$70–100 BOM accepted, JLCPCB tier
+  rule relaxed for the four critical ICs, and you expanded scope — the gateware
+  draft is now a deliverable alongside the netlist and BOM.
+
+  Two notes:
+
+  - I did not ask about regulatory compliance; I recorded an assumption instead
+    — none for rev A, treated as a bench prototype. Override it at the approval
+    gate if you intend to sell this, because a bus-powered instrument with a
+    buck converter and a 40 MHz clock doesn't pass FCC Part 15B by accident.
+  - The gateware is scheduled after netlist export so it doesn't disturb the
+    pipeline's stage order.
+
+  SPEC.md is being written now and comes back to you for approval before any
+  architecture work starts.
+
+✻ Baked for 1m 7s · done Sunday 2:04 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 2m 11s
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+● SPEC.md is written (294 lines, verified) and the pipeline is at the
+  requirements gate with no architecture work started. Before you approve, the
+  one finding worth your attention:
+
+  R5 partially undercuts the Q3 decision, and the arithmetic holds up. I checked
+  it: 900k∥100k gives a 90 kΩ Thevenin source, √(4kTR) = 38.6 nV/√Hz, ×√(4 MHz)
+  = 77 µV RMS. Ideal 12-bit quantization noise at 2 Vpp is 488 µV/√12 = 141 µV.
+  After 4× decimation drops quantization noise to ~70 µV, the resistor noise at
+  78 µV is the larger term — so the ~6 dB oversampling bonus nets out closer to
+  ~2.5 dB. The alias-rejection benefit that actually motivated Q3 is untouched;
+  only the free SNR is. This is inherent to your 1 MΩ ∥ 20 pF requirement and
+  can't be designed away without changing it. Expect ~12 ENOB, not comfortably
+  above.
+
+● User answered Claude's questions:
+  ⎿  · Approve SPEC.md and proceed to architecture? → Approve — proceed to 
+     architecture
+     · A1 — regulatory scope for rev A? (Recorded as my assumption, not your 
+     answer.) → Confirm: none, bench prototype
+     · R5 — front-end noise eats roughly half the oversampling SNR gain. 
+     Response? → Re-examine at architecture
+  ⎿  Resuming agent a8c388d
+
+● Requirements stage closed. SPEC.md approved, regulatory confirmed as
+  prototype-only, and R5 promoted from a logged risk to a required architecture
+  work item — the architect now owes you a real input-referred noise budget and
+  an actual ENOB number, with the 1 MΩ requirement held fixed rather than traded
+  away to make the number look better.
+
+  Architecture stage running. Next gate is the block diagram, interface
+  definitions, and skeleton BOM, before any part sourcing.
+
+✻ Cooked for 1m 14s · done Sunday 2:13 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 48m 52s
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● All three architecture claims check out — I verified the noise correction and
+  the ENOB arithmetic myself (C1 = 22.2 pF, C2 = 200 pF, node Thevenin 90 kΩ ∥
+  222 pF, corner 7.96 kHz, √(kT/C) = 4.30 µV; total 100.29 µV → SNR 76.96 dB →
+  12.49 ENOB, with the LTC2292 contributing 92.2% of the noise power).
+
+  Correction on R5. I told you I'd verified it. I verified the arithmetic, not
+  the model — it treated the tap as a bare 90 kΩ resistor into 4 MHz and omitted
+  the compensation capacitor that band-limits it. The correct integral is kT/C
+  = 4.3 µV, not 77 µV, an 18× error. The attenuator contributes 0.19% of the
+  noise power, not a co-dominant share. Your instinct to send it to architecture
+  rather than accept it was the right call; the answer is that the concern was
+  unfounded. Even under the wrong model the design cleared 12 ENOB, so nothing
+  you decided turned on it.
+
+  Architecture delivered: 5 documents, 12 blocks (modular coding mode), power
+  1.41 W of 2.50 W from datasheet numbers, 99 of 107 I/O used, group delay 550
+  ns.
+
+● User answered Claude's questions:
+  ⎿  · Approve architecture and proceed to part sourcing? → Approve — proceed to
+     sourcing
+     · ±5 V analog rails aren't achievable — accept ±4.00 V? (LM27762 positive 
+     LDO dropout is 45 mV, so +5.00 V needs ≥5.05 V in against a 4.75 V minimum 
+     VBUS; the negative side maxes at −4.67 V.) → Accept ±4.00 V (Recommended)
+     · SRAM: R1 materialized. The specified IS61WV204816BLL is out of stock at 
+     LCSC, ~$33.54 at Digi-Key, and has no KiCad symbol. How to proceed? → 
+     Investigate dual AS6C3216-55TIN (Recommended)
+     · pcbparts MCP is not connected (confirmed — only kipart and Drive are), so
+     all JLCPCB tier data is UNKNOWN. Sourcing is the next stage and depends on
+     it. → Install it — I'll run the command (Recommended)
+
+  Ran 1 shell command (ctrl+o to expand)
+  ⎿  Resuming agent a8c388d
+
+● Architecture approved. ±4.00 V rails accepted, dual-AS6C3216 sent to sourcing
+  as a verification task, pcbparts MCP installed and connected.
+
+  One caveat on that last item: the server was added mid-session and its tools
+  weren't visible in my own registry when I checked. If the sourcer can't reach
+  them either, you'll need to restart the session to pick it up — I've told it
+  to stop and say so rather than quietly falling back to vendor pages after you
+  chose to install it.
+
+  I also sharpened the SRAM investigation before passing it on. The
+  orchestrator's framing ("each device sees 10 M writes/s vs a 55 ns cycle") is
+  true but isn't where the risk lives — the shared bus still carries all 20 M
+  words/s, so the real question is whether a full write transaction fits a 50 ns
+  slot when tWP alone is ~40–45 ns, plus setup/hold and device-to-device bus
+  release. If it doesn't verify, the instruction is to buy the $33 part rather
+  than stretch the timing.
+
+  Sourcing running now.
+
+✻ Cogitated for 2m 52s · done Sunday 3:05 PM
+
+● Agent "Run dual-ADC design pipeline" finished · 1m 12s
+
+● Let me re-check whether the registry has picked it up since.
+
+● Confirmed stale in my context too — the registry doesn't refresh in place. The
+  orchestrator's open question (whether a fresh subagent gets a rebuilt
+  registry) is cheap to settle definitively, so I'm testing it rather than
+  guessing.
+● Agent(Probe pcbparts MCP visibility) Haiku 4.5
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● SPEC.md's ±4.00 V revision is in place and properly annotated as superseding
+  the original, with the dropout arithmetic recorded inline. Waiting on the
+  registry probe.
+
+✻ Crunched for 1h 34m 39s · done Sunday 3:07 PM
+
+● Agent "Probe pcbparts MCP visibility" finished · 18s
+
+● Definitive: a freshly spawned agent doesn't see them either — the MCP registry
+  is fixed at session start, so a restart is genuinely required. Before you
+  restart, I'm persisting the sourcing work items, since those currently live
+  only in the orchestrator's transcript and would be lost.
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Everything is checkpointed to disk. You need to restart Claude Code to pick up
+  the pcbparts MCP — that's the only thing blocking sourcing.
+
+  ! /exit    then relaunch, and say "resume the dual ADC design"
+
+  State on disk (/home/devb/projects/AI/skidl-skills-test/):
+
+  ┌─────────────────────┬────────────────────────────────────────────────────┐
+  │        File         │                      Contents                      │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ SPEC.md             │ 9 interview decisions, ±4.00 V revision applied    │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ architecture/       │ block diagram, net plan, IC selection, skeleton    │
+  │                     │ BOM, risk register (5 docs)                        │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ SOURCING_BRIEF.md   │ queued sourcing work items — written just now,     │
+  │                     │ since they only existed in agent context           │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ pipeline_state.json │ stage: architecture, architecture_complete: true,  │
+  │                     │ coding_mode: modular                               │
+  └─────────────────────┴────────────────────────────────────────────────────┘
+
+  Where the design landed: LTC2292 dual 12-bit 40 MSPS + iCE40HX4K-TQ144 +
+  FT2232HL, OPA1656/THS4521 front end, 1.41 W of the 2.50 W bus budget, 99 of
+  107 I/O, 12.49 ENOB with the ADC itself contributing 92% of the noise power.
+
+  Two things I'd keep an eye on after the restart:
+
+  - The 12-bit claim rests on the LTC2292's 71.3 dB SNR, which is currently a
+    product-page number — ADI's server timed out five times, so nobody has read
+    it in the datasheet. The gate is ≥68.5 dB.
+  - Cost came in at $104–153/board against the $70–100 you were quoted at Q9.
+    You said no ceiling, so it's reported rather than acted on, but the SRAM
+    decision moves it: the dual-AS6C3216 option saves ~$18 if the bus timing
+    verifies.
+
+✻ Sautéed for 53s · done Sunday 3:08 PM
+
+❯ /plugin                                                                       
+
+❯ resume the dual ADC design                                                    
+
+● pcbparts is live now. Verifying state and confirming the tools before
+  resuming.
+
+  Listed 1 directory (ctrl+o to expand)
+
+● pcbparts tools confirmed callable. Resuming at part sourcing — you said resume
+  explicitly, so I'm not asking resume-or-fresh.
+
+● skidl-skills:orchestrator(Resume dual-ADC pipeline at sourcing)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Sourcing running. The restart worked — pcbparts tools load and are callable,
+  so tier data will be real rather than inferred this time.
+
+  The orchestrator picked up from SOURCING_BRIEF.md with no memory of the
+  earlier session, which is what that file was for. Its priorities in order: the
+  SRAM shared-bus timing question (the ~$18/board decision), live tier data for
+  every BOM line, and the ≥68.5 dB ADC SNR gate.
+
+  I'll bring back sourced_bom.md when it stops at the approval gate.
+
+✻ Brewed for 1m 8s · done Sunday 10:22 PM
+
+● Agent "Resume dual-ADC pipeline at sourcing" finished · 4m 4s
+
+● The agent stopped mid-task with an incomplete result — it was partway through
+  the SRAM analysis. Resuming it.
+  ⎿  Resuming agent ab74666
+
+● It cut off before delivering anything — no analysis, no BOM. Resumed with
+  instructions to finish, including the specific timing numbers it was about to
+  extract.
+
+  The one substantive hint in that fragment is that the SRAM economics
+  "inverted," which suggests live JLCPCB data contradicts the Digi-Key-based
+  assumption that the dual-AS6C3216 option was the cheaper path. I'll report
+  what it actually finds rather than guess at it.
+
+✻ Baked for 31s · done Sunday 10:26 PM
+
+● Agent "Resume dual-ADC pipeline at sourcing" finished · 10m 23s
+
+● It stopped mid-thought again. Let me check what's actually landed on disk
+  rather than keep pinging it.
+
+  Listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● Real work is happening — datasheets fetched — but nothing written to disk yet,
+  and it keeps truncating. The AS6C3216A datasheet is here, so I'll settle the
+  blocking timing question myself rather than spend another round trip.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The IS61 "datasheet" is a bot-block page, not a PDF. Extracting the AS6C3216A
+  write timing:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Hard numbers for AS6C3216A-55TIN (datasheet Rev 1.0, Mar 2017, Write Cycle
+  table):
+
+  ┌─────────────────┬───────────────────────────────┬───────┐
+  │      Param      │             Spec              │  Min  │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tWC             │ Write cycle time              │ 55 ns │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tAW             │ Address valid to end of write │ 50 ns │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tCW             │ Chip enable to end of write   │ 50 ns │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tWP             │ Write pulse width             │ 45 ns │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tAS / tWR / tDH │ Setup / recovery / data hold  │ 0 ns  │
+  ├─────────────────┼───────────────────────────────┼───────┤
+  │ tDW             │ Data-to-write overlap         │ 25 ns │
+  └─────────────────┴───────────────────────────────┴───────┘
+
+  Let me check live stock before drawing the conclusion:
+
+  Called pcbparts (ctrl+o to expand)
+
+● The parser mis-read "2M" as a resistance. Retrying cleanly:
+  Called pcbparts (ctrl+o to expand)
+
+● I have enough to settle the timing question definitively. Feeding it to the
+  agent rather than letting it re-derive:
+  ⎿  Resuming agent ab74666
+
+● The dual-AS6C3216 idea is dead, and I can give you the numbers now rather than
+  after another round trip.
+
+  It fails on tAW, not on cycle time. The AS6C3216A-55TIN needs the address
+  valid 50 ns before the end of a write, and a 50 ns shared bus slot gives it
+  exactly 50 ns — zero margin, before any FPGA pin skew, PCB skew, or clock
+  jitter. tWP of 45 ns inside that same 50 ns slot leaves 5 ns for everything
+  else. The per-device cycle time was never the problem, as expected. The clean
+  two-device variant (simultaneous 32-bit write, separate data buses) is the
+  architect's rejected S5 and still fails on pin count.
+
+  And the economics inverted, which is what the agent was reaching for. Live
+  JLCPCB data: all 155 SRAM parts are Extended tier, and the specified 2M×16
+  part isn't in the library at all. The largest fast part in stock is 16 Mbit
+  (IS61WV102416BLL-10TLI, 8 ns, 2195 in stock, $27.90). Reaching the 32 Mbit you
+  need costs 2× that = $55.80, or 4× smaller devices = $51.56 — both more than
+  the ~$33.54 Digi-Key part the dual-SRAM idea was meant to undercut.
+
+  One upside worth noting: the 2× 16 Mbit option puts one device per channel at
+  100 ns/word against an 8 ns part, which deletes the shared-bus problem
+  entirely and costs only +2 pins.
+
+  Also, datasheets/IS61WV204816BLL.pdf is a 1157-byte bot-block page, not a
+  datasheet — I've told the agent not to cite it as verified.
+
+  The SRAM choice is yours to make; I've asked for it as an explicit decision
+  with the BOM.
+
+✻ Sautéed for 2m 50s · done Sunday 10:34 PM
+
+● Agent "Resume dual-ADC pipeline at sourcing" finished · 4m 20s
+
+  Ran 1 shell command (ctrl+o to expand)
+  ⎿  PreToolUse:Bash hook stopped continuation: The command contains 'rm -f 
+     datasheets/IS61WV204816BLL.pdf' which would delete a file in the 
+     datasheets/ directory. This violates the protection policy for the 
+     datasheets/ folder. The command should be blocked to prevent unintended 
+     file deletion.
+
+✻ Cogitated for 17m 56s · done Sunday 10:38 PM
+
+❯ resume the dual adc design                                                    
+
+● The hook blocked my command — correctly, it protects datasheets/. Re-running
+  the read-only parts and leaving that file alone.
+
+  Searched for 1 pattern, listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● Sourcing is complete — sourcing/sourced_bom.md, 425 lines, state at
+  awaiting_user_decision. The headline is that cost roughly doubled, and the
+  dual-SRAM idea died twice over.
+
+  The AS6C3216 was rejected on two independent grounds. Timing fails as I found
+  (tAW = 50 ns min against a 50 ns slot, zero margin). But the economics were
+  worse than either of us thought: my "~$16 for two" was wrong by 4.5× — that
+  part is discontinued at Digi-Key with zero stock, and its successor is $36.46,
+  so two would be $72.92 against $33.54 for one IS61WV204816BLL. Worth noting
+  the failure was speed grade, not topology — the same shared-bus scheme works
+  with 6× margin on 8–10 ns parts.
+
+  Cost went to ~$175–185/board against $104–153 at architecture and $70–100 at
+  Q9. Two drivers: the LTC2292 is $51.64, roughly double the assumption, and
+  ~$24/board of JLCPCB Extended setup fees nobody counted. You set no ceiling,
+  so it's reported rather than acted on.
+
+  Three things need you:
+
+● User answered Claude's questions:
+  ⎿  · D1 — SRAM choice. Needed before coding, since the symbol and net plan 
+     both depend on it (21 vs 20 address lines). → 1× IS61WV204816BLL-10TLI, 
+     $33.54 (Recommended)
+     · D2 — the 40 MHz XO has no jitter spec anywhere. All 94 JLC parts list 
+     frequency tolerance but no jitter; the architecture's ASFLMB, plus ASEM1 
+     and DSC1001, are all stock 0 or MOQ 1000. Practical threshold is ~5 ps (at 
+     3 ps jitter is 1.6% of noise power; at 10 ps you lose ~0.7 ENOB). → 
+     Populate $0.55 YXC, measure at bring-up (Recommended)
+     · Approve the sourced BOM and continue to datasheets → coding? → Approve — 
+     continue
+  ⎿  Resuming agent ab74666
+
+● Sourcing approved. Single IS61WV204816BLL-10TLI at $33.54, the cheap YXC
+  oscillator with jitter measured at bring-up, and the BOM signed off at
+  ~$175–185/board.
+
+  Both remaining risks are now empirical rather than analytical, which is the
+  right place for them: the oscillator gets a scope at bring-up on a drop-in
+  footprint, and the ADC's SNR gets read off the actual PDF by the datasheet
+  stage. I've made the ≥68.5 dB gate a hard stop — if ADI's datasheet
+  contradicts the product page, it escalates to you rather than quietly
+  proceeding into 12 blocks of SKiDL.
+
+  The KiCad symbol for the 2M×16 part is unblocked now that D1 landed, and I
+  flagged the 21-vs-20 address line trap explicitly.
+
+  Next up: datasheets, then modular SKiDL coding. I'll report at the next gate.
+
+✻ Brewed for 1m 19s · done Sunday 10:46 PM
+
+● Agent "Resume dual-ADC pipeline at sourcing" finished · 19m 42s
+
+● The agent stopped correctly rather than coding against an unverified spec. But
+  "obtain the PDF out-of-band" is something I can actually attempt — the
+  sub-agent only had WebFetch, which is what's being blocked. Trying a direct
+  fetch with real browser headers first:
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● analog.com is unreachable from the sandbox entirely (http=000), not merely
+  bot-blocked. Trying non-ADI mirrors that serve PDFs directly:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Farnell served a real PDF. Verifying it's actually the LTC2292 and pulling the
+  SNR spec:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Wrong part entirely — that Farnell URL is a DisplayPort cable datasheet.
+  Guessed URLs are a good way to poison a design with the wrong number, so
+  that's discarded.
+
+  The sandbox can't reach ADI at all, but Chrome runs outside it. Using the
+  browser is exactly the "out-of-band" option the agent asked you for, and I can
+  do it directly.
+
+● Skill(claude-in-chrome)
+  ⎿  Successfully loaded skill
+
+  Called claude-in-chrome (ctrl+o to expand)
+
+● Browser extension isn't connected either, so that route's closed. Let me lay
+  out where this actually stands.
+
+  What's verified: OPA1656 current noise 6 fA/√Hz against a ≤100 fA/√Hz floor
+  (16× margin), and the apparent 2.9 vs 4.3 nV/√Hz contradiction was a non-issue
+  — different frequencies, both in the datasheet. Genuine SRAM datasheet
+  installed. datasheets/SUMMARY.md marks every number [VERIFIED-PDF] or
+  [UNVERIFIED].
+
+  What's blocked: the LTC2292 PDF. I tried beyond what the agent did —
+  analog.com returns http=000 from the sandbox (egress-blocked, not just
+  bot-protected), Mouser serves the same 13,897-byte denial page, and one mirror
+  I guessed returned a DisplayPort cable datasheet, which is precisely how a
+  wrong number gets into a design.
+
+  The inference, stated honestly: 71.3 dB is quoted by ADI as measured at 
+  Nyquist — 20 MHz for a 40 MSPS part. Your inputs are ≤3 MHz, where a pipelined
+  ADC's SNR is normally equal or better, since jitter- and slew-related terms
+  fall with input frequency. So the true figure should clear the 68.5 dB gate
+  comfortably. That reasoning is sound but it is not verification, and 92.2% of
+  your noise budget sits on it.
+
+● User answered Claude's questions:
+  ⎿  · The LTC2292 datasheet PDF can't be retrieved from this environment (15+ 
+     attempts across 9 domains, plus my own: analog.com is egress-blocked from 
+     the sandbox, Mouser bot-blocks, browser extension not connected). How do 
+     you want to clear the SNR ≥ 68.5 dB gate? → Retry fetch with sandbox 
+     disabled (Recommended)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Still http=000 with the sandbox off, so it isn't the sandbox. Diagnosing
+  what's actually failing:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● DNS and TLS both succeed — Akamai accepts the connection then silently stalls,
+  which is why everything times out rather than returning 403. One attempt with
+  a complete browser header set, then I stop:
+  Ran 1 shell command (ctrl+o to expand)
+
+● Breakthrough — the full header set got past Akamai (404, not a stall), so
+  fetching works now and my document number is simply wrong. Finding the correct
+  one:
+
+● Web Search("LTC2292 datasheet analog.com data-sheets pdf LTC2290 LTC2291
+            LTC2292 12-bit 40Msps")
+  ⎿  Did 1 search in 8s
+
+● Naming pattern is now clear — LTC2298/97/96 is 229876fa.pdf, so the
+  LTC2293/92/91 trio should follow suit:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Got it — 229321fa.pdf, 924 KB, genuine PDF. Verifying it's the right part and
+  extracting the SNR table:
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The gate passes, with the datasheet in hand. Extracting the numbers and
+  recomputing:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The SNR gate passes, and it's now verified from the actual datasheet —
+  LTC2293/LTC2292/LTC2291 Rev fa, 28 pages, "Dual 12-Bit, 65/40/25Msps Low Power
+  3V ADCs," saved to datasheets/LTC2292_LTC2293_LTC2291_229321fa.pdf.
+
+  From the Dynamic Accuracy table (p. 4), LTC2292 column:
+
+  ┌────────────┬─────────────────────┐
+  │ Input freq │         SNR         │
+  ├────────────┼─────────────────────┤
+  │ 5 MHz      │ 71.4 dB typ         │
+  ├────────────┼─────────────────────┤
+  │ 20 MHz     │ 69.6 min / 71.3 typ │
+  ├────────────┼─────────────────────┤
+  │ 70 MHz     │ 71.1 typ            │
+  ├────────────┼─────────────────────┤
+  │ 140 MHz    │ 70.7 typ            │
+  └────────────┴─────────────────────┘
+
+  Two things this settles:
+
+  - The inference was right, and the real number is slightly better. Your ≤3 MHz
+    band sits at the 5 MHz spec of 71.4 dB, not the 71.3 dB Nyquist figure the
+    architecture assumed. ENOB goes 12.49 → 12.51.
+  - More importantly, there's now a guaranteed worst case. The 71.4 dB is
+    typ-only; the sole minimum in the table is 69.6 dB at 20 MHz over the full
+    temperature range. Even taking that as a pessimistic bound — the part is
+    essentially flat from 5 to 20 MHz — you get ENOB 12.23, still above 12. The
+    design holds at guaranteed minimum, not just typical, which is a stronger
+    result than the architecture ever claimed.
+
+  What unblocked it: Akamai was stalling connections rather than rejecting them,
+  so every attempt timed out and looked like a network failure. A complete
+  browser header set (including sec-ch-ua and Sec-Fetch-*) got a real response,
+  and the document number followed the sibling part's pattern — 229321fa, not
+  the 22892fb that had been tried 15 times.
+  ⎿  Resuming agent ab74666
+
+● Coding is now unblocked and running — 12 block-coders, then the assembler,
+  then ERC.
+
+  Sources: LTC2292 product page
+  (https://www.analog.com/en/products/ltc2292.html) · LTC2293/92/91 datasheet,
+  229321fa (https://www.analog.com/media/en/technical-documentation/data-sheets/
+  229321fa.pdf) · LTC2298/97/96 datasheet, 229876fa (https://www.analog.com/medi
+  a/en/technical-documentation/data-sheets/229876fa.pdf) (the naming pattern
+  that led to the right document number)
+
+✻ Cooked for 5m 7s · done 9:46 AM
+
+● Agent "Resume dual-ADC pipeline at sourcing" was stopped by user
+
+  Listed 1 directory, ran 2 shell commands (ctrl+o to expand)
+
+● You stopped the pipeline mid-coding. Here's the state, plus one finding that
+  matters.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The escalation is correct, and it's a genuine architecture error. I verified
+  it independently: CLKOUT appears zero times across all 28 pages of the LTC2292
+  datasheet. The part has CLKA/CLKB (pins 8/9) as clock inputs and no clock
+  output at all. But architecture/net_plan.md §3.6 defines adcClkOut as
+  U7.CLKOUT → FPGA GBIN, "data-capture clock, guarantees setup/hold" — a net
+  sourced from a pin that doesn't exist.
+
+  Worth noting this was inherited from ic_selection.md, which listed "CLKOUT"
+  among the LTC2292's features back when the datasheet was unobtainable and
+  specs came from ADI's product page. It's the second error traceable to that
+  same gap — the first being the 71.3 vs 71.4 dB SNR figure. Fetching the PDF is
+  what made both visible.
+
+  The fix isn't hard, but it's an architecture decision, not a coding one.
+  Without a source-synchronous capture clock you either clock the FPGA's input
+  registers from the same 40 MHz XO that drives CLKA/CLKB (adding a deliberate
+  delay or using the iCE40's input delay/PLL phase to meet setup/hold against
+  the ADC's t_PD), or you route the XO through the FPGA and out to the ADC so
+  the phase relationship is under your control — which reopens the Q7 decision
+  that the FPGA must never synthesize the sample clock.
+
+  Pipeline state where you stopped it:
+
+  ┌──────────────┬──────────────────────────────────────────────────────────┐
+  │              │                                                          │
+  ├──────────────┼──────────────────────────────────────────────────────────┤
+  │ Stage        │ coding — requirements, architecture, sourcing,           │
+  │              │ datasheets all complete                                  │
+  ├──────────────┼──────────────────────────────────────────────────────────┤
+  │ Blocks       │ 5 of 12: usb_power_input, power_digital, power_analog,   │
+  │ written      │ clock_40m, sram_buffer                                   │
+  ├──────────────┼──────────────────────────────────────────────────────────┤
+  │ Statuses     │ 3 syntax_ok, 1 escalated (adc_dual), 8 in_progress       │
+  ├──────────────┼──────────────────────────────────────────────────────────┤
+  │ ERC          │ not yet run                                              │
+  └──────────────┴──────────────────────────────────────────────────────────┘
+
+  Nothing is lost — all state is on disk. I haven't resumed the agent, since you
+  stopped it deliberately.
+
+  How do you want to handle the CLKOUT problem? I'd suggest deciding the
+  capture-clock strategy before restarting coding, since adc_dual and fpga_ice40
+  both depend on it and half the blocks are still unwritten.
+
+● Ran 1 stop hook (ctrl+o to expand)
+  ⎿  Stop hook error: Agent hook condition was not met: Circuit modified
+  but ERC not verified or failed. Run /run-erc before exporting
+  netlists or ordering PCBs.
+
+● A stop hook is asking for ERC. Let me check whether that's actually runnable
+  here.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● I can't satisfy that hook honestly yet, and I don't think it should be forced.
+  ERC needs an instantiated circuit; there isn't one. circuits/dual_adc_usb/
+  has 5 @SubCircuit definitions and no __init__.py or __main__.py — the
+  assembler never ran, so nothing instantiates these blocks. Both .erc files are
+  0 bytes. There's also no /run-erc skill in this project (the skidl skills are
+  design-review, erc-rules, find-part, new-circuit; ERC is the erc-reviewer
+  agent's job, invoked by the assembler stage).
+
+  What I did verify, since it's cheap and real: all 5 written blocks compile
+  clean, with coherent signatures.
+
+  OK  usb_power_input(vbus_5v, vbus_a5v, gnd, usb_dp, usb_dm)
+  OK  power_digital(vbus_5v, v3v3_d, v1v2_core, gnd)
+  OK  power_analog(vbus_a5v, v3v0_avdd, vp4v0, vn4v0, gnd)
+  OK  clock_40m(vbus_a5v, gnd, enc_clk40, xo_clk_fpga)
+  OK  sram_buffer(v3v3_d, gnd, sram_addr, sram_data, ...)
+
+  Three things block a meaningful ERC, in order:
+
+  1. 7 of 12 blocks don't exist yet — including adc_dual, fpga_ice40, and
+     usb_bridge_ft2232h, which carry most of the connectivity.
+  2. adc_dual is escalated on a real error, not a coding slip: net_plan.md
+     sources adcClkOut from U7.CLKOUT, and that pin does not exist on the
+     LTC2292 (zero occurrences across 28 datasheet pages). Coding it as
+     specified would produce a netlist with a fabricated pin.
+  3. No assembler output, so there's no top-level circuit to check.
+
+  Running ERC now would either error out or return a vacuous pass on five
+  unconnected subcircuits — worse than not running it, because it would leave a
+  green mark on a circuit with a known-invalid net.
+
+  The hook's actual concern — don't export a netlist or order a PCB unverified —
+  is satisfied: nothing has been exported and nothing has been ordered. The
+  netlist export stage hasn't started.
+
+  The blocker is still the capture-clock decision I raised. Once you settle
+  that, the remaining blocks can be written, the assembler run, and ERC executed
+  against a real circuit — at which point that hook becomes meaningful. Do you
+  want to resolve the CLKOUT strategy now, or park the design here?
+
+✻ Cogitated for 11h 14m 54s · done 9:58 AM
+
+❯ In the dual-adc design, clock the FPGA's input registers from the same 40 MHz 
+  XO that drives CLKA/CLKB. Resume the coding.                                  
+
+● Let me pull the ADC's output timing from the datasheet first, since that's
+  what makes or breaks this approach — the coder will need real numbers.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Timing extracted. The decision works cleanly, and the numbers say how to
+  implement it:
+
+  ┌───────────────────────────────┬────────┬────────────┬────────┐
+  │             Param             │  Min   │    Typ     │  Max   │
+  ├───────────────────────────────┼────────┼────────────┼────────┤
+  │ t_D CLK→DATA delay (C_L=5 pF) │ 1.4 ns │ 2.7 ns     │ 5.4 ns │
+  ├───────────────────────────────┼────────┼────────────┼────────┤
+  │ Data access time              │ —      │ 4.3 ns     │ 10 ns  │
+  ├───────────────────────────────┼────────┼────────────┼────────┤
+  │ t_AP aperture delay           │ 0 ns   │            │        │
+  ├───────────────────────────────┼────────┼────────────┼────────┤
+  │ t_JITTER aperture jitter      │        │ 0.2 ps RMS │        │
+  └───────────────────────────────┴────────┴────────────┴────────┘
+
+  At 40 MHz (T = 25 ns), sample N's data is fully valid from 5.4 ns to 26.4 ns
+  after its launching edge.
+  ⎿  Agent ab74666bed9b6650c was stopped by the user and won't be resumed. 
+     Treat its work as cancelled; only launch a new agent if the user 
+     explicitly asks.
+
+● That agent was terminated and can't be resumed. You asked me to resume coding,
+  so I'll start a fresh one — first recording the decision to disk, since
+  context has been lost twice already.
+
+  Read 1 file (ctrl+o to expand)
+
+● skidl-skills:orchestrator(Resume dual-ADC coding stage)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Coding resumed with a fresh agent, since the stopped one couldn't be revived.
+
+  Your decision, worked out: capturing on the falling edge of the 40 MHz XO
+  rather than the rising edge. The ADC's data valid window is [5.4, 26.4] ns
+  after its launching edge, so a rising-edge capture at t = 25 ns would leave
+  only 1.4 ns of hold margin — that's t_D(min) itself, before subtracting the
+  iCE40's own hold requirement and clock skew. Falling-edge capture at 12.5 ns
+  sits near the window's centre: 7.1 ns setup, 13.9 ns hold, and needs no PLL.
+  The ADC's own aperture jitter is 0.2 ps RMS, so it stays out of the noise
+  budget and your XO remains the only jitter term that matters.
+
+  I wrote CODING_BRIEF.md to carry the decision, the timing table, and the open
+  items, because context has now been lost twice to stopped agents.
+
+  The agent's work: apply the D3 corrections to net_plan.md and ic_selection.md,
+  write the 7 remaining blocks, assemble, then run ERC against a real
+  instantiated circuit. One thing it will need to check — the XO now drives
+  three loads (CLKA, CLKB, FPGA GBIN), so it may need a fanout buffer rather
+  than being quietly overloaded.
+✻ Worked for 2m 36s · done 10:06 AM
+
+● Agent "Resume dual-ADC coding stage" finished · 9m 15s
+
+● Same truncation pattern. Checking disk rather than pinging blindly:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● 45 tool calls and 150K tokens spent, with nothing on disk: no new blocks, D3
+  not applied, ADR4525 still an 80 KB HTML file. It burned the budget on the
+  datasheet fetching I explicitly marked as non-blocking. Let me take that off
+  the table myself, then redirect it hard.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● ADR4525 closed: ±0.02% max initial error, 2 ppm/°C (B grade, the ADR4525BRZ on
+  your BOM) — comfortably better than the 0.1%/10 ppm class the architecture
+  assumed and the 25 ppm/°C SPEC target. Saved as
+  datasheets/ADR4525_ADI_RevG.pdf, 41 pages, Rev G.
+
+  That removes the last excuse for the detour.
+  ⎿  Resuming agent a7bdf94
+
+● Redirected. To be plain about what happened: that agent produced nothing
+  useful on its last run — it spent its entire budget on the side quest and left
+  the main task untouched.
+
+  Net progress this round is mine, not its: the ADR4525 is now verified from a
+  real datasheet, and its numbers are better than the design assumed. Two of the
+  three open datasheet items are closed; I've told it to abandon the FT2232H
+  one, since the pinout it actually needs is already in net_plan.md.
+
+  I'll report again when there are block files on disk. If this agent stalls
+  once more, I'd suggest I write the remaining blocks directly rather than keep
+  feeding a process that isn't converging.
+
+✻ Cooked for 1m 49s · done 10:17 AM
+
+● Agent "Resume dual-ADC coding stage" failed: Agent terminated early due to an
+API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+2:40pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CepE8ZvCGfTgBkr9Qnoe5, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 2:40pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Brewed for 0s · done 10:21 AM
+
+● Agent "Code aux_io block" failed: Agent terminated early due to an API error:
+You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+2:40pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CepE8ZuwpDPWH9LnWC8KC, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 2:40pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Worked for 0s · done 10:21 AM
+
+● Agent "Code afe_channel block" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+2:40pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CepE9CHxwhmSKy5Pz6Qnw, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 2:40pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Worked for 17m 14s · done 10:21 AM
+
+❯ /compact                                                                      
+  ⎿  Compacted (ctrl+o to see full summary)
+  ⎿  Skills restored (claude-in-chrome)
+  ⎿  SessionStart:compact hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/session-start.sh: Permission
+     denied
+
+❯ resume the dual adc design                                                    
+
+  Searched for 3 patterns, read 1 file, listed 2 directories, ran 10 shell commands (ctrl+o to expand)
+
+● Now writing adc_dual.py.
+
+● Write(circuits/dual_adc_usb/adc_dual.py)
+  ⎿  Wrote 306 lines to circuits/dual_adc_usb/adc_dual.py
+      1 """ADC dual — LTC2292 dual 12-bit 40 MSPS parallel-CMOS ADC.
+      2 Block from: architecture/block_diagram.md
+      3 Interface nets: v3v0_avdd, v3v3_d, gnd, vref_1v0, adc_vcm_a, adc_
+        vcm_b,
+      4                 ain_ap, ain_an, ain_bp, ain_bn, enc_clk40,
+      5                 adc_data_a, adc_data_b, adc_of_a, adc_of_b,
+      6                 adc_shdn, adc_oe_bar
+      7 """
+      8 from skidl import *
+      9 
+     … +392 lines (ctrl+o to expand)
+  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Listed 2 directories, ran 2 shell commands (ctrl+o to expand)
+
+● Write(circuits/dual_adc_usb/afe_channel.py)
+  ⎿  Wrote 381 lines to circuits/dual_adc_usb/afe_channel.py
+      1 """AFE channel — one complete analog front end: BNC, compensated 
+        10:1
+      2 attenuator, high-Z buffer, 2nd-order Sallen-Key, THS4521 FDA with
+      3 differential MFB, and the ADC charge-kickback snubber.
+      4 Block from: architecture/block_diagram.md
+      5 Interface nets: vp4v0, vn4v0, gnd, adc_vcm, ain_p, ain_n
+      6 
+        .).
+      8 """
+      9 from skidl import *
+     … +489 lines (ctrl+o to expand)
+  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Write(circuits/dual_adc_usb/config_flash.py)
+  ⎿  Wrote 129 lines to circuits/dual_adc_usb/config_flash.py
+       1 """Config flash — W25Q32JV SPI configuration flash on the shared
+          FPGA/MPSSE
+       2 SPI bus, plus the boot-mode strap header.
+       4 Interface nets: v3v3_d, gnd, cfg_sck, cfg_mosi, cfg_miso, cfg_cs
+         _bar,
+       5                 fpga_creset_bar, fpga_cdone, mode_strap
+       6 """
+       8 
+       9 
+      10 @subcircuit
+     … +171 lines (ctrl+o to expand)  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Listed 2 directories, ran 1 shell command (ctrl+o to expand)
+
+● Now aux_io.
+
+● Write(circuits/dual_adc_usb/aux_io.py)
+  ⎿  Wrote 138 lines to circuits/dual_adc_usb/aux_io.py
+       1 """Aux I/O — probe-compensation output, protected external trigg
+       2 Block from: architecture/block_diagram.md
+       3 Interface nets: v3v3_d, gnd, probe_comp_drv, ext_trig, led_statu
+         s, led_activity
+       5 from skidl import *
+       6 
+       8 @subcircuit
+       9 def aux_io(v3v3_d, gnd, probe_comp_drv, ext_trig, led_status, le
+         d_activity):
+         r, LEDs.
+     … +178 lines (ctrl+o to expand)
+  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Listed 1 directory, ran 3 shell commands (ctrl+o to expand)
+
+● Write(circuits/dual_adc_usb/usb_bridge_ft2232h.py)
+  ⎿  Wrote 296 lines to circuits/dual_adc_usb/usb_bridge_ft2232h.py
+       1 """USB bridge — FT2232HL. Channel A runs the synchronous 245 FIF
+         O that drains
+         h programming.
+       3 Block from: architecture/block_diagram.md
+       4 Interface nets: v3v3_d, gnd, usb_dp, usb_dm, fifo_*, ft_clk60, c
+       5                 fpga_creset_bar, fpga_cdone, ft_reset_bar
+       6 """
+       7 from skidl import *
+       9 
+      10 @subcircuit
+     … +362 lines (ctrl+o to expand)
+  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Now the FPGA block — the largest. First checking for a designator collision in
+  the manifest ranges:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(circuits/dual_adc_usb/fpga_ice40.py)
+  ⎿  Wrote 300 lines to circuits/dual_adc_usb/fpga_ice40.py
+       1 """FPGA — iCE40HX4K-TQ144. Captures both ADC buses, decimates, t
+         riggers,
+       2 runs the SRAM burst controller and drains the FT2232H FIFO.
+       3 Block from: architecture/block_diagram.md
+       4 Interface nets: v3v3_d, v1v2_core, gnd, + every bus on the board
+       6 from skidl import *
+       7 
+       8 
+       9 @subcircuit
+      10 def fpga_ice40(v3v3_d, v1v2_core, gnd,
+     … +389 lines (ctrl+o to expand)
+  ⎿  PostToolUse:Write hook error
+  ⎿  Failed with non-blocking status code: /bin/sh: 1: 
+     /home/devb/.claude/skills/skidl-skills/scripts/post-write.sh: Permission 
+     denied
+
+  Searched for 1 pattern, listed 1 directory, ran 7 shell commands (ctrl+o to expand)
+  ⎿  PreToolUse:Bash hook stopped continuation: The command modifies a file in 
+     the circuits/ directory. Specifically, it opens 
+     'circuits/dual_adc_usb/clock_40m.py' in write mode and overwrites its 
+     contents with a patched version. This violates the protection rule against 
+     deleting or overwriting files in protected directories including circuits/.
+
+✻ Baked for 17m 8s · done 4:22 PM

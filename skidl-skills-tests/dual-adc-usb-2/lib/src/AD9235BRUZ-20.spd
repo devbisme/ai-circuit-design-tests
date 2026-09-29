@@ -1,0 +1,49 @@
+;
+; AD9235BRUZ-20 -- Analog Devices 12-bit, 20 MSPS pipelined ADC, TSSOP-28 (RU-28)
+;
+; Pin table transcribed from datasheets/AD9235BRUZ-20_SUMMARY.md (ADI Rev. D).
+; NOTE (low confidence, carried over from the summary, names NOT altered):
+;   * D0..D11 LSB->MSB ascending order across pins 15-22 / 25-28 follows the
+;     standard ADI convention but was not pin-by-pin quoted from the datasheet
+;     figure. Bit order is not ERC-visible; verify before layout.
+;   * MODE (pin 2) is a multi-level strap; only its name/function is confirmed.
+; Electrical-type choices:
+;   VREF  = bidirectional (output in internal-ref mode used here, input in ext-ref mode)
+;   REFT/REFB = output (internally generated; decouple only, never drive)
+;   SENSE/MODE/PDWN = input (strap pins)
+;
+device AD9235BRUZ-20
+Reference: U
+Value: AD9235BRUZ-20
+Footprint: Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm
+Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/AD9235.pdf
+Description: 12-bit 20 MSPS pipelined ADC, single 3.0V analog supply, parallel CMOS output, TSSOP-28
+keywords: ADC 12-bit 20MSPS pipelined analog-to-digital converter
+fp_filters: TSSOP*4.4x9.7mm*P0.65mm*
+
+    left
+        i       VIN+    9
+        i       VIN-    10
+        *
+        i       SENSE   3
+        b       VREF    4
+        o       REFT    6
+        o       REFB    5
+        *
+        i>      CLK     13
+        i       PDWN    14
+        i       MODE    2
+
+    right
+        o       D0      15 16 17 18 19 20 21 22
+        o       D8      25 26 27 28
+        *
+        o       OTR     1
+
+    top
+        p       AVDD    7 12
+        p       DRVDD   24
+
+    bottom
+        p       AGND    8 11
+        p       DGND    23

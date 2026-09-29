@@ -1,0 +1,59 @@
+(footprint "C_Trimmer_SEHWA_STC3M"
+  (version 20241229)
+  (generator "pcbnew")
+  (generator_version "9.0")
+  (layer "F.Cu")
+  (descr "SMD trimmer capacitor SEHWA STC3M series 4.5x3.2mm, land pattern per SEHWA STC3M-SP-15 rev4.1 p.3 (pads 1.25x1.40, outer 5.10, gap 2.60)")
+  (tags "trimmer capacitor SEHWA STC3M STC3MA06")
+  (property "Reference" "REF**"
+    (at 0 -3.1)
+    (layer "F.SilkS")
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (property "Value" "C_Trimmer_SEHWA_STC3M"
+    (at 0 3.1)
+    (layer "F.Fab")
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_rect
+    (start -2.25 -1.6) (end 2.25 1.6)
+    (layer "F.Fab")
+    (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start -2.325 0.4)
+    (end -1.525 0.4)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start -2.325 0.4)
+    (end -1.925 -0.4)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start -1.525 0.4)
+    (end -1.925 -0.4)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_rect
+    (start -2.25 -1.6) (end 2.25 1.6)
+    (layer "F.SilkS")
+    (stroke (width 0.12) (type solid))
+  )
+  (fp_rect
+    (start -2.5 -1.85) (end 2.5 1.85)
+    (layer "F.CrtYd")
+    (stroke (width 0.05) (type solid))
+  )
+  (pad "1" smd rect
+    (at -1.925 0)
+    (size 1.25 1.4)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "2" smd rect
+    (at 1.925 0)
+    (size 1.25 1.4)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (embedded_fonts no)
+)

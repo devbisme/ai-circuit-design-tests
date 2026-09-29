@@ -1,0 +1,1810 @@
+                                                         Product             Order                    Technical                              Tools &              Support &
+                                                         Folder              Now                      Documents                              Software             Community
+
+
+
+                                                                                                                                                                              TLV62568, TLV62568P
+                                                                                                                                              SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+                 TLV62568 1-A High Efficiency Synchronous Buck Converter in SOT Package
+1 Features                                                                                                    At medium to heavy loads, the device operates in
+                                                                                                              pulse width modulation (PWM) mode with 1.5-MHz
+•
+1   Up to 95% Efficiency                                                                                      switching frequency. At light load, the device
+•   Low RDS(ON) Switches 150 mΩ / 100 mΩ                                                                      automatically enters Power Save Mode (PSM) to
+•   2.5-V to 5.5-V Input Voltage Range                                                                        maintain high efficiency over the entire load current
+•   Adjustable Output Voltage from 0.6 V to VIN                                                               range. In shutdown, the current consumption is
+                                                                                                              reduced to less than 2 μA.
+•   Power Save Mode for Light Load Efficiency
+                                                                                                              The TLV62568 provides an adjustable output voltage
+•   100% Duty Cycle for Lowest Dropout
+                                                                                                              via an external resistor divider. An internal soft start
+•   35-µA Operating Quiescent Current                                                                         circuit limits the inrush current during startup. Other
+•   1.5-MHz Switching Frequency                                                                               features like over current protection, thermal
+•   Power Good Output                                                                                         shutdown protection and power good are built-in. The
+                                                                                                              device is available in a SOT23 and SOT563 package.
+•   Over Current Protection
+•   Internal Soft Startup                                                                                                                                  Device Information(1)
+•   Thermal Shutdown Protection                                                                                              PART NUMBER                          PACKAGE             BODY SIZE (NOM)
+•   Available in SOT Package                                                                                      TLV62568                                  SOT-23 (5)
+                                                                                                                                                                                     2.90 mm × 2.80 mm
+•   Pin-to-Pin Compatible with TLV62569                                                                           TLV62568P                                 SOT-23 (6)
+
+•   Create a Custom Design Using the TLV62568                                                                     TLV62568                                  SOT563 (6)
+                                                                                                                                                                                     1.60 mm x 1.60 mm
+    With the WEBENCH® Power Designer                                                                              TLV62568P                                 SOT563 (6)
+                                                                                                                  (1) For all available packages, see the orderable addendum at
+2 Applications                                                                                                        the end of the datasheet.
+
+•   General Purpose POL Supply                                                                                                                             Device Comparison
+•   Network Video Camera                                                                                                                                                                   PACKAGE
+                                                                                                                             PART NUMBER                          FUNCTION
+•   Set Top Box                                                                                                                                                                            MARKING
+
+•   Wireless Router                                                                                                                TLV62568DBV                            -                      14VF
+                                                                                                                            TLV62568PDDC                          Power Good                     9X
+3 Description                                                                                                                      TLV62568DRL                            -                      18L
+The TLV62568 device is a synchronous step-down                                                                                TLV62568PDRL                        Power Good                     18N
+buck DC-DC converter optimized for high efficiency
+and compact solution size. The device integrates
+switches capable of delivering an output current up to
+1 A.
+SPACER
+                              Simplified Schematic
+    VIN                                     TLV62568P                                 VOUT
+                                                                                                                                               Efficiency at 5-V Input Voltage
+                                                            L1
+    2.5 V to 5.5 V                                          2.2 µH                    1.8 V / 1.0 A
+                                           VIN       SW                                                                            100
+                            C1                                       C2                   C3*
+                 R3         4.7 µF
+                                           EN
+                                                                     10 µF    R1                                                    95
+                 499 k                                                        200 k
+    VPG
+                                           PG GND FB                                                                                90
+                                                                                                                  Efficiency (%)
+
+
+
+
+      C3: Optional                                                            R2
+                                                                              100 k
+                                                                                                                                    85
+
+      Copyright Ú 2016, Texas Instruments Incorporated
+                                                                                                                                    80
+
+                                                                                                                                    75
+
+                                                                                                                                    70                                                     VOUT = 1.2 V
+                                                                                                                                                                                           VOUT = 1.8 V
+                                                                                                                                    65                                                     VOUT = 2.5 V
+                                                                                                                                                                                           VOUT = 3.3 V
+                                                                                                                                    60
+                                                                                                                                         0     0.1   0.2    0.3    0.4     0.5 0.6   0.7   0.8    0.9     1
+                                                                                                                                                                         Load (A)                         D008
+
+
+
+1
+
+
+
+
+          An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+          intellectual property matters and other important disclaimers. PRODUCTION DATA.
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                                                        www.ti.com
+
+
+                                                                             Table of Contents
+    1   Features .................................................................. 1           8    Application and Implementation .......................... 9
+    2   Applications ........................................................... 1                    8.1 Application Information.............................................. 9
+    3   Description ............................................................. 1                   8.2 Typical Application .................................................... 9
+    4   Revision History..................................................... 2                 9 Power Supply Recommendations...................... 14
+    5   Pin Configuration and Functions ......................... 3                             10 Layout................................................................... 15
+    6   Specifications......................................................... 4                     10.1 Layout Guidelines ................................................. 15
+         6.1   Absolute Maximum Ratings ...................................... 4                      10.2 Layout Example .................................................... 15
+         6.2   ESD Ratings.............................................................. 4            10.3 Thermal Considerations ........................................ 15
+         6.3   Recommended Operating Conditions ...................... 4                        11 Device and Documentation Support ................. 16
+         6.4   Thermal Information .................................................. 4               11.1    Device Support .................................................... 16
+         6.5   Electrical Characteristics.......................................... 5                 11.2    Documentation Support ....................................... 16
+         6.6   Typical Characteristics .............................................. 6               11.3    Receiving Notification of Documentation Updates 16
+    7   Detailed Description .............................................. 7                         11.4    Community Resources.......................................... 16
+         7.1   Overview ................................................................... 7         11.5    Trademarks ........................................................... 16
+         7.2   Functional Block Diagram ......................................... 7                   11.6    Electrostatic Discharge Caution ............................ 17
+         7.3   Feature Description................................................... 7               11.7    Glossary ................................................................ 17
+         7.4   Device Functional Modes.......................................... 8              12 Mechanical, Packaging, and Orderable
+                                                                                                   Information ........................................................... 17
+
+
+
+4 Revision History
+Changes from Revision A (April 2017) to Revision B                                                                                                                               Page
+
+•   Added WEBENCH links to data sheet.................................................................................................................................... 1
+•   Changed TLV62568PDDC to production status..................................................................................................................... 1
+•   Added DDC package thermal information. ............................................................................................................................. 4
+•   Changed 1.2 V From: MIN value To: MAX value for High-level threshold at EN pin............................................................. 5
+
+
+Changes from Original (November 2016) to Revision A                                                                                                                              Page
+
+•   Changed TLV62568DRL and TLV62568PDRL to production status. .................................................................................... 1
+•   Moved Device Comparison table to page 1 .......................................................................................................................... 1
+•   Added DRL package thermal information............................................................................................................................... 4
+•   Added startup time of TLV62568DRL, TLV62568PDRL ....................................................................................................... 5
+•   Added TLV62568PDRL layout. ............................................................................................................................................ 15
+
+
+
+
+2        Submit Documentation Feedback                                                                            Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                                          Product Folder Links: TLV62568
+                                                                                                                     TLV62568, TLV62568P
+www.ti.com                                                                                  SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+5 Pin Configuration and Functions
+                                 SOT23-5                                    SOT23-6                         SOT563-6
+                               DBV Package                                DDC Package                      DRL Package
+                                (Top View)                                 (Top View)                       (Top View)
+
+
+                          FB               VIN                       FB       PG    VIN
+
+
+                                                                                                         NC/PG EN    SW
+                           5                 4                        6        5        4
+                                                                                                            6    5    4
+
+
+
+                                                                                                            1    2    3
+                           1        2        3                        1        2        3
+                                                                                                           FB GND VIN
+
+
+                          EN       GND     SW                        EN      GND    SW
+
+
+                                                                  Pin Functions
+                     PIN NUMBER
+                                                        I/O/PWR                                   DESCRIPTION
+NAME         SOT23-5      SOT23-6        SOT563-6
+                                                                  Device enable logic input. Logic high enables the device, logic low disables
+EN              1              1             5             I
+                                                                  the device and turns it into shutdown. Do not leave floating.
+GND             2              2             2           PWR      Ground pin.
+                                                                  Switch pin connected to the internal FET switches and inductor terminal.
+SW              3              3             4           PWR
+                                                                  Connect the inductor of the output filter to this pin.
+VIN             4              4             3           PWR      Power supply voltage input.
+                                                                  Power good open drain output pin for TLV62568P. The pull-up resistor should
+PG               -             5             6            O       not be connected to any voltage higher than 5.5V. If it's not used, leave the
+                                                                  pin floating.
+                                                                  Feedback pin for the internal control loop. Connect this pin to an external
+FB              5              6             1             I
+                                                                  feedback divider.
+                                                                  No connection pin for TLV62568DRL. The pin can be connected to the output.
+NC               -             -             6            O
+                                                                  Or leave it floating.
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                   Submit Documentation Feedback             3
+                                                           Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                              www.ti.com
+
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+Over operating temperature range (unless otherwise noted) (1)
+                                                                                                                     MIN          MAX            UNIT
+                VIN, EN, PG                                                                                          –0.3           6             V
+                SW (DC)                                                                                              –0.3        VIN+0.3          V
+Voltage (2)
+                SW (AC, less than 10 ns) (3)                                                                         –3.0           9             V
+                FB                                                                                                   –0.3          5.5            V
+Operating junction temperature, TJ                                                                                   –40           150            °C
+Storage temperature, Tstg                                                                                            –65           150            °C
+
+(1)    Stresses beyond those listed under absolute maximum ratings may cause permanent damage to the device. Functional operation of the
+       device at these or any other conditions beyond those indicated under recommended operating conditions is not implied. Exposure to
+       absolute–maximum–rated conditions for extended periods may affect device reliability.
+(2)    All voltage values are with respect to network ground terminal.
+(3)    While switching.
+
+6.2 ESD Ratings
+                                                                                                                                   VALUE         UNIT
+                                          Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001 (1)                                   ±2000           V
+V(ESD)         Electrostatic discharge                                                                              (2)
+                                          Charged-device model (CDM), per JEDEC specification JESD22-C101                           ±500           V
+
+(1)    JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)    JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions (1)
+                                                                                                             MIN          TYP       MAX          UNIT
+VIN            Input voltage                                                                                 2.5                        5.5        V
+VOUT           Output voltage                                                                                0.6                        VIN        V
+IOUT           Output current                                                                                                            1         A
+TJ             Operating junction temperature                                                                –40                     125          °C
+ISINK_PG       Sink current at PG pin                                                                                                    1        mA
+
+(1)    Refer to the Application and Implementation section for further information.
+
+6.4 Thermal Information
+                                                                                              DBV            DDC                  DRL
+                                 THERMAL METRIC (1)                                                                                              UNIT
+                                                                                            (5 Pins)       (6 pins)             (6 pins)
+RθJA          Junction-to-ambient thermal resistance                                         191.6           121.6               149.8           °C/W
+RθJC(top) Junction-to-case (top) thermal resistance                                          141.4           69.1                45.7            °C/W
+RθJB          Junction-to-board thermal resistance                                           44.5            45.5                31.1            °C/W
+ψJT           Junction-to-top characterization parameter                                     34.5            22.3                 1.3            °C/W
+ψJB           Junction-to-board characterization parameter                                   43.9            46.0                31.7            °C/W
+RθJC(bot) Junction-to-case (bottom) thermal resistance                                        N/A             N/A                 N/A            °C/W
+
+(1)    For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       report.
+
+
+
+
+4         Submit Documentation Feedback                                                        Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                           Product Folder Links: TLV62568
+                                                                                                                 TLV62568, TLV62568P
+www.ti.com                                                                                SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+6.5          Electrical Characteristics
+VIN = 5 V, TJ = 25°C, unless otherwise noted
+                     PARAMETER                                          TEST CONDITIONS                   MIN     TYP     MAX        UNIT
+SUPPLY
+IQ             Quiescent current into VIN pin           Not switching                                              35                uA
+ISD            Shutdown current into VIN pin            EN = 0 V                                                   0.1      2        µA
+               Under voltage lock out                   VIN falling                                                2.3     2.45       V
+VUVLO
+               Under voltage lock out hysteresis                                                                   100               mV
+                                                        Junction temperature rising                                150
+TJSD           Thermal shutdown threshold                                                                                             °C
+                                                        Junction temperature falling                               130
+LOGIC INTERFACE
+VIH            High-level threshold at EN pin           2.5 V ≤ VIN ≤ 5.5 V                                       0.95     1.2        V
+VIL            Low-level threshold at EN pin            2.5 V ≤ VIN ≤ 5.5 V                               0.4     0.85                V
+                                                        TLV62568DBV                                                700
+tSS            Soft startup time                        TLV62568DRL, TLV62568PDRL,                                 900                µs
+                                                        TLV62568PDDC
+                                                        VFB rising, referenced to VFB nominal                     95%
+VPG            Power good threshold, TLV62568P
+                                                        VFB falling, referenced to VFB nominal                    90%
+VPG,OL         Power good low-level output voltage      ISINK = 1 mA                                                       0.4        V
+IPG,LKG        Input leakage current into PG pin        VPG = 5 V                                                 0.01               µA
+tPG,DLY        Power good delay time                    VFB falling                                                40                 µs
+OUTPUT
+      VFB      Feedback regulation voltage                                                               0.588     0.6     0.612      V
+               High-side FET on resistance                                                                         150
+  RDS(on)                                                                                                                            mΩ
+               Low-side FET on resistance                                                                          100
+      ILIM     High-side FET current limit                                                                1.5                         A
+      fSW      Switching frequency                      VOUT = 1.8 V                                               1.5               MHz
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                Submit Documentation Feedback          5
+                                                          Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                                                                                           www.ti.com
+
+
+6.6 Typical Characteristics
+
+                        50                                                                                                                       10
+                                                                                                                                                           VIN = 2.5V
+                        45                                                                                                                       9         VIN = 3.6V
+                                                                                                                                                 8         VIN = 5.0V
+                        40
+    $
+
+
+
+
+                                                                                                                              $
+                                                                                                                                                 7
+    4XLHVFHQW &XUUHQW
+
+
+
+
+                                                                                                                              6KXWGRZQ &XUUHQW
+                        35                                                                                                                       6
+                        30                                                                                                                       5
+
+                        25                                                                                                                       4
+                                                                                                                                                 3
+                        20                                                                      TJ = -40°C
+                                                                                                TJ = 25°C                                        2
+                        15                                                                      TJ = 85°C                                        1
+                                                                                                TJ = 125°C
+                        10                                                                                                                       0
+                          2.5      3.0     3.5          4.0        4.5                          5.0       5.5                                    -40        -10           20       50        80     110      140
+                                                 Input Voltage (V)                                           D001
+                                                                                                                                                                        Junction Temperature (°C)               D002
+
+
+
+
+                                Figure 1. Quiescent Current vs Input Voltage                                                                          Figure 2. Shutdown Current vs Junction Temperature
+                                                                                      0.3
+                                                                                                TJ = -40°C
+                                                                                                TJ = 25°C
+                                                                                      0.2       TJ = 85°C
+                                                            FB Voltage Accuracy (%)
+
+
+
+
+                                                                                                TJ = 125°C
+                                                                                      0.1
+
+
+                                                                                      0.0
+
+
+                                                                                      -0.1
+
+
+                                                                                      -0.2
+
+
+                                                                                      -0.3
+                                                                                          2.5    3.0         3.5          4.0        4.5                     5.0         5.5
+                                                                                                                   Input Voltage (V)                                       D003
+
+
+
+
+                                                                                                       Figure 3. FB Voltage Accuracy
+
+
+
+
+6                        Submit Documentation Feedback                                                                                                             Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                                                                  Product Folder Links: TLV62568
+                                                                                                                                           TLV62568, TLV62568P
+www.ti.com                                                                                                     SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+7 Detailed Description
+
+7.1 Overview
+The TLV62568 is a high-efficiency synchronous step-down converter. The device operates with an adaptive off-
+time with peak current control scheme. The device operates at typically 1.5-MHz frequency pulse width
+modulation (PWM) at moderate to heavy load currents. Based on the VIN/VOUT ratio, a simple circuit sets the
+required off time for the low-side MOSFET. It makes the switching frequency relatively constant regardless of the
+variation of input voltage, output voltage, and load current.
+
+7.2 Functional Block Diagram
+                                                                                                                 PG            VIN
+
+
+
+
+                                                       Thermal                         VPG         +
+                                    Soft Start                          UVLO
+                                                      Shutdown
+                                                                                       VFB         ±
+                                                                                                                         GND
+
+
+
+                          EN                        Control Logic                  Peak Current Detect
+
+
+
+
+                                                    VREF
+                                                                    +                                                                       SW
+                                                                                                                Gate
+                                                                    _                  Modulator
+                          FB                                                                                    Drive
+
+
+
+
+                                                           VSW
+                                                                               TOFF                Zero Current Detect
+                                                           VIN
+                                                                                                                                            GND
+                               Power Good feature is only available in TLV62568P
+                                                                                                                                     GND
+                               Copyright Ú 2016, Texas Instruments Incorporated
+
+
+                                             Figure 4. TLV62568 Functional Block Diagram
+
+
+7.3 Feature Description
+7.3.1 Power Save Mode
+The device automatically enters Power Save Mode to improve efficiency at light load when the inductor current
+becomes discontinuous. In Power Save Mode, the converter reduces switching frequency and minimizes current
+consumption. In Power Save Mode, the output voltage rises slightly above the nominal output voltage. This effect
+is minimized by increasing the output capacitor.
+
+7.3.2 100% Duty Cycle Low Dropout Operation
+The device offers a low input-to-output voltage differential by entering 100% duty cycle mode. In this mode, the
+high-side MOSFET switch is constantly turned on and the low-side MOSFET is switched off. The minimum input
+voltage to maintain output regulation, depending on the load current and output voltage, is calculated as:
+VIN(MIN) = VOUT + IOUT x (RDS(ON) + RL)
+where
+      •   RDS(ON) = High side FET on-resistance
+      •   RL = Inductor ohmic resistance (DCR)                                                                                                                   (1)
+
+7.3.3 Soft Startup
+After enabling the device, internal soft startup circuitry ramps up the output voltage which reaches nominal output
+voltage during a startup time. This avoids excessive inrush current and creates a smooth output voltage rise
+slope. It also prevents excessive voltage drops of primary cells and rechargeable batteries with high internal
+impedance.
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                                            Submit Documentation Feedback    7
+                                                                    Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                            www.ti.com
+
+
+Feature Description (continued)
+The TLV62568 is able to start into a pre-biased output capacitor. The converter starts with the applied bias
+voltage and ramps the output voltage to its nominal value.
+
+7.3.4 Switch Current Limit
+The switch current limit prevents the device from high inductor current and drawing excessive current from a
+battery or input voltage rail. Excessive current might occur with a heavy load or shorted output circuit condition.
+The TLV62568 adopts the peak current control by sensing the current of the high-side switch. Once the high-side
+switch current limit is reached, the high-side switch is turned off and low-side switch is turned on to ramp down
+the inductor current with an adaptive off-time.
+
+7.3.5 Under Voltage Lockout
+To avoid mis-operation of the device at low input voltages, under voltage lockout is implemented that shuts down
+the device at voltages lower than VUVLO with VHYS_UVLO hysteresis.
+
+7.3.6 Thermal Shutdown
+The device enters thermal shutdown once the junction temperature exceeds the thermal shutdown rising
+threshold, TJSD. Once the junction temperature falls below the falling threshold, the device returns to normal
+operation automatically.
+
+7.4 Device Functional Modes
+7.4.1 Enabling/Disabling the Device
+The device is enabled by setting the EN input to a logic High. Accordingly, a logic Low disables the device. If the
+device is enabled, the internal power stage starts switching and regulates the output voltage to the set point
+voltage. The EN input must be terminated and should not be left floating.
+
+7.4.2 Power Good
+The TLV62568P has a power good output. The PG pin goes high impedance once the output is above 95% of
+the nominal voltage, and is driven low once the output voltage falls below typically 90% of the nominal voltage.
+The PG pin is an open-drain output and is specified to sink up to 1 mA. The power good output requires a pull-up
+resistor connecting to any voltage rail less than 5.5 V. The PG signal can be used for sequencing of multiple rails
+by connecting it to the EN pin of other converters. Leave the PG pin unconnected when not used.
+
+                                                    Table 1. PG Pin Logic
+                                                                                                 LOGIC STATUS
+                            DEVICE CONDITIONS
+                                                                                      HIGH Z                          LOW
+                           EN = High, VFB ≥ VPG                                           √
+Enable
+                           EN = High, VFB ≤ VPG                                                                         √
+Shutdown                   EN = Low                                                                                     √
+Thermal Shutdown           TJ > TJSD                                                                                    √
+UVLO                       1.4 V < VIN < VUVLO                                                                          √
+Power Supply Removal       VIN ≤ 1.4 V                                                    √
+
+
+
+
+8        Submit Documentation Feedback                                             Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TLV62568
+                                                                                                                    TLV62568, TLV62568P
+www.ti.com                                                                               SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+8 Application and Implementation
+
+                                                            NOTE
+                Information in the following applications sections is not part of the TI component
+                specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+                responsible for determining suitability of components for their purposes. Customers should
+                validate and test their design implementation to confirm system functionality.
+
+
+8.1 Application Information
+The following section discusses the design of the external components to complete the power supply design for
+several input and output voltage options by using typical applications as a reference.
+
+8.2 Typical Application
+                        VIN                                      TLV62568P      L1                            VOUT
+                        2.5 V to 5.5 V                                          2.2 µH                        1.8 V / 1.0 A
+                                                                 VIN      SW
+                                                C1                                          C2                    C3*
+                                     R3         4.7 µF                                      10 µF     R1
+                                                                 EN
+                                     499 k                                                            200 k
+                        VPG
+                                                                 PG GND FB
+
+
+                          C3: Optional                                                                R2
+                                                                                                      100 k
+
+
+                          Copyright Ú 2016, Texas Instruments Incorporated
+
+                                             Figure 5. TLV62568 1.8-V Output Application
+
+8.2.1 Design Requirements
+For this design example, use the parameters listed in Table 2 as the input parameters.
+
+                                                         Table 2. Design Parameters
+                         DESIGN PARAMETER                                                           EXAMPLE VALUE
+Input voltage                                                                                        2.5 V to 5.5 V
+Output voltage                                                                                           1.8 V
+Maximum output current                                                                                   1.0 A
+
+Table 3 lists the components used for the example.
+
+                                                         Table 3. List of Components
+       REFERENCE                                                      DESCRIPTION                                        MANUFACTURER (1)
+             C1               4.7 µF, Ceramic Capacitor, 10 V, X7R, size 0805, GRM21BR71A475KA73L                             Murata
+             C2               10 µF, Ceramic Capacitor, 10 V, X7R, size 0805, GRM21BR71A106KE51L                              Murata
+             L1               2.2 µH, Power Inductor, SDER041H-2R2MS                                                          Cyntec
+         R1,R2,R3             Chip resistor,1%,size 0603                                                                       Std.
+             C3               Optional, 6.8 pF if it is needed                                                                 Std.
+
+(1)   See Third-party Products Disclaimer
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                 Submit Documentation Feedback         9
+                                                           Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                   www.ti.com
+
+
+8.2.2 Detailed Design Procedure
+
+8.2.2.1 Custom Design With WEBENCH® Tools
+Click here to create a custom design using the TLV62568 device with the WEBENCH® Power Designer.
+1. Start by entering the input voltage (VIN), output voltage (VOUT), and output current (IOUT) requirements.
+2. Optimize the design for key parameters such as efficiency, footprint, and cost using the optimizer dial.
+3. Compare the generated design with other possible solutions from Texas Instruments.
+The WEBENCH Power Designer provides a customized schematic along with a list of materials with real-time
+pricing and component availability.
+In most cases, these actions are available:
+• Run electrical simulations to see important waveforms and circuit performance
+• Run thermal simulations to understand board thermal performance
+• Export customized schematic and layout into popular CAD formats
+• Print PDF reports for the design, and share the design with colleagues
+Get more information about WEBENCH tools at www.ti.com/WEBENCH.
+
+8.2.2.2 Setting the Output Voltage
+An external resistor divider is used to set output voltage according to Equation 2.
+When sizing R2, in order to achieve low current consumption and acceptable noise sensitivity, use a maximum of
+200 kΩ for R2. Larger currents through R2 improve noise sensitivity and output voltage accuracy but increase
+current consumption.
+                    æ     R1 ö          æ     R1 ö
+       VOUT = VFB ´ ç 1 +    ÷ = 0.6V ´ ç 1 +    ÷
+                    è     R2 ø          è     R2 ø                                                                                          (2)
+A feed forward capacitor, C3 improves the loop bandwidth to make a fast transient response (shown in
+Figure 19). 6.8-pF capacitance is recommended for R2 of 100-kΩ resistance. A more detailed discussion on the
+optimization for stability vs. transient response can be found in SLVA289.
+
+8.2.2.3 Output Filter Design
+The inductor and output capacitor together provide a low-pass filter. To simplify this process, Table 4 outlines
+possible inductor and capacitor value combinations. Checked cells represent combinations that are proven for
+stability by simulation and lab test. Further combinations should be checked for each individual application.
+
+                              Table 4. Matrix of Output Capacitor and Inductor Combinations
+                                                                                          COUT [µF] (2)
+             VOUT [V]                  L [µH] (1)
+                                                           4.7               10                22               2x 22               100
+         0.6 ≤ VOUT < 1.2                  1                                                                      +
+                                          2.2                                                                   ++ (3)
+         1.2 ≤ VOUT < 1.8                  1                                                    +                 +
+                                          2.2                                                 ++ (3)              +
+            1.8 ≤ VOUT                     1                                  +                 +                 +
+                                          2.2                               ++ (3)              +                 +
+
+(1)   Inductor tolerance and current de-rating is anticipated. The effective inductance can vary by +20% and -30%.
+(2)   Capacitor tolerance and bias voltage de-rating is anticipated. The effective capacitance can vary by +20% and -50%.
+(3)   This LC combination is the standard value and recommended for most applications.
+
+
+
+
+10       Submit Documentation Feedback                                                     Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                      Product Folder Links: TLV62568
+                                                                                                           TLV62568, TLV62568P
+www.ti.com                                                                           SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+8.2.2.4 Inductor Selection
+The main parameters for inductor selection is inductor value and then saturation current of the inductor. To
+calculate the maximum inductor current under static load conditions, Equation 3 is given:
+                         DI
+      IL,MAX = IOUT,MAX + L
+                          2
+
+                       VOUT
+                        1-
+                        VIN
+       DIL = VOUT ´
+                    L ´ fSW
+
+       where:
+             •   IOUT,MAX is the maximum output current
+             •   ΔIL is the inductor current ripple
+             •   fSW is the switching frequency
+             •   L is the inductor value                                                                                          (3)
+It is recommended to choose a saturation current for the inductor that is approximately 20% to 30% higher than
+IL,MAX. In addition, DC resistance and size should also be taken into account when selecting an appropriate
+inductor.
+
+8.2.2.5 Input and Output Capacitor Selection
+The architecture of the TLV62568 allows use of tiny ceramic-type output capacitors with low equivalent series
+resistance (ESR). These capacitors provide low output voltage ripple and are thus recommended. To keep its
+resistance up to high frequencies and to achieve narrow capacitance variation with temperature, it is
+recommended to use X7R or X5R dielectric.
+The input capacitor is the low impedance energy source for the converter that helps provide stable operation. A
+low ESR multilayer ceramic capacitor is recommended for best filtering. For most applications, 4.7-µF input
+capacitance is sufficient; a larger value reduces input voltage ripple.
+The TLV62568 is designed to operate with an output capacitor of 10 µF to 47 µF, as outlined in Table 4.
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                           Submit Documentation Feedback     11
+                                                        Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                                                                            www.ti.com
+
+
+8.2.3 Application Performance Curves
+VIN = 5 V, VOUT = 1.8 V, L = 2.2 μH, TA = 25°C, unless otherwise noted.
+
+                            100                                                                                                     100
+
+                             95                                                                                                      95
+
+                             90                                                                                                      90
+
+
+
+
+                                                                                                             Efficiency (%)
+     Efficiency (%)
+
+
+
+
+                             85                                                                                                      85
+
+                             80                                                                                                      80
+
+                             75                                                                                                      75
+
+                             70                                                                                                      70
+                                                                                      VIN = 2.5 V                                                                                     VIN = 2.5 V
+                             65                                                       VIN = 3.3 V                                    65                                               VIN = 3.3 V
+                                                                                      VIN = 5.0 V                                                                                     VIN = 5.0 V
+                             60                                                                                                      60
+                               1m                     10m                    100m                   1                                  1m               10m                   100m                  1
+                                                                  Load (A)                          D004
+                                                                                                                                                                  Load (A)                          D005
+
+
+
+
+                                              Figure 6. 1.2-V Output Efficiency                                                                  Figure 7. 1.8-V Output Efficiency
+
+                            100                                                                                                     100
+
+                             95                                                                                                      95
+
+                             90                                                                                                      90
+                                                                                                             Efficiency (%)
+     Efficiency (%)
+
+
+
+
+                             85                                                                                                      85
+
+                             80                                                                                                      80
+
+                             75                                                                                                      75
+
+                             70                                                                                                      70
+
+                             65                                                       VIN = 3.3 V                                    65
+                                                                                      VIN = 5.0 V                                                                                     VIN = 5.0 V
+                             60                                                                                                      60
+                               1m                     10m                    100m                   1                                  1m               10m                   100m                  1
+                                                                  Load (A)                                                                                        Load (A)                          D007
+                                                                                                    D006
+
+
+
+
+                                              Figure 8. 2.5-V Output Efficiency                                                                  Figure 9. 3.3-V Output Efficiency
+
+                            1.5                                                                                                     1.0
+
+
+                              1
+                                                                                                                                    0.5
+      Load Regulation (%)
+
+
+
+
+                                                                                                              Line Regulation (%)
+
+
+
+
+                            0.5
+
+
+                              0                                                                                                     0.0
+
+
+                            -0.5
+                                                                                                                                    -0.5
+                             -1
+                                                                                     VOUT = 1.8 V                                                                                     IOUT = 0.5A
+                                                                                     VOUT = 3.3 V                                                                                     IOUT = 1.0A
+                            -1.5                                                                                                    -1.0
+                                   0    0.1   0.2    0.3    0.4     0.5 0.6    0.7   0.8     0.9    1                                   2.5    3.0      3.5          4.0        4.5   5.0       5.5
+                                                                  Load (A)                          D009
+                                                                                                                                                              Input Voltage (V)                     D010
+                                       VIN = 5 V                                                                                       VOUT = 1.8 V
+
+                                                    Figure 10. Load Regulation                                                                        Figure 11. Line Regulation
+
+
+
+
+12                           Submit Documentation Feedback                                                                                       Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                                                           Product Folder Links: TLV62568
+                                                                                                                                                                                       TLV62568, TLV62568P
+www.ti.com                                                                                                                                               SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+                                2500                                                                                                          2500
+
+
+                                2000                                                                                                          2000
+
+
+
+
+                                                                                                                 Switching Frequency (kHz)
+   Switching Frequency (kHz)
+
+
+
+
+                                1500                                                                                                          1500
+
+
+                                1000                                                                                                          1000
+
+
+                                                                                           VOUT = 1.2 V                                                                                            VOUT = 1.2 V
+                                 500                                                       VOUT = 1.8 V                                        500                                                 VOUT = 1.8 V
+                                                                                           VOUT = 2.5 V                                                                                            VOUT = 2.5 V
+                                                                                           VOUT = 3.3 V                                                                                            VOUT = 3.3 V
+                                   0                                                                                                             0
+                                       0      0.1   0.2    0.3    0.4     0.5 0.6    0.7   0.8   0.9      1                                       2.5       3        3.5           4         4.5     5        5.5
+                                                                        Load (A)                          D011
+                                                                                                                                                                           Input Voltage (V)                      D012
+                                           VIN = 5 V                                                                                              IOUT = 0.5 A
+
+                                               Figure 12. Switching Frequency vs Load                                                                 Figure 13. Switching Frequency vs Input Voltage
+
+
+
+
+                                 VSW                                                                                                           VSW
+                               2V/DIV                                                                                                        2V/DIV
+
+
+       VOUT                                                                                                          VOUT
+   10mV/DIV                                                                                                      20mV/DIV
+        AC                                                                                                            AC
+
+
+          ICOIL                                                                                                          ICOIL
+      0.5A/DIV                                                                                                       0.5A/DIV
+
+
+
+                                                                  Time - 500ns/DIV                                                                                          7LPH      V ',9
+                                                                                                          D013                                                                                                    D014
+                                    IOUT = 0.5 A                                                                                                  IOUT = 0.1 A
+
+                                                          Figure 14. PWM Operation                                                                        Figure 15. Power Save Mode Operation
+
+
+
+            VEN                                                                                                                           VEN
+         3V/DIV                                                                                                                        3V/DIV
+
+
+
+
+           VOUT                                                                                                                          VOUT
+         1V/DIV                                                                                                                        1V/DIV
+
+
+
+           ICOIL                                                                                                     ICOIL
+         1A/DIV                                                                                                  0.5A/DIV
+
+
+
+                                                                 7LPH        V ',9                                                                                         7LPH        V ',9
+                                                                                                       D015                                                                                                       D016
+                                           IOUT = 1 A                                                                                             IOUT = 0.1 A
+
+                                                        Figure 16. Startup with Load                                                                             Figure 17. Startup with Load
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                                                                                 Submit Documentation Feedback                      13
+                                                                                             Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                                www.ti.com
+
+
+
+
+         VOUT                                                              VOUT
+     0.1V/DIV                                                          0.1V/DIV
+
+
+
+
+         ICOIL                                                             ICOIL
+     0.5A/DIV                                                          0.5A/DIV
+
+
+
+                                7LPH     V ',9                                                    7LPH      V ',9
+                                                             D017                                                                    D018
+      Load Step 0.3 A to 1 A, 1A/µs slew rate                           Load Step 0.3 A to 1 A, 1A/µs slew rate              C3 = 6.8 pF
+
+                         Figure 18. Load Transient                           Figure 19. Load Transient with a feed forward capacitor
+
+
+
+9 Power Supply Recommendations
+The power supply to the TLV62568 must have a current rating according to the supply voltage, output voltage
+and output current.
+
+
+
+
+14        Submit Documentation Feedback                                                 Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                                     Product Folder Links: TLV62568
+                                                                                                                     TLV62568, TLV62568P
+www.ti.com                                                                                  SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+10 Layout
+
+10.1 Layout Guidelines
+The PCB layout is an important step to maintain the high performance of the TLV62568 device.
+• The input/output capacitors and the inductor should be placed as close as possible to the IC. This keeps the
+   power traces short. Routing these power traces direct and wide results in low trace resistance and low
+   parasitic inductance.
+• The low side of the input and output capacitors must be connected properly to the power GND to avoid a
+   GND potential shift.
+• The sense traces connected to FB are signal traces. Special care should be taken to avoid noise being
+   induced. Keep these traces away from SW nodes.
+• GND layers might be used for shielding.
+
+10.2 Layout Example
+
+
+
+                                                                                                       GND
+    VIN                     L1                                 VOUT                                  R1
+                          PAC101   VIN           SW
+                                                      PAC601                                         R2
+                                             GND
+
+                     C1            FB            EN   C2                                                   FB
+                                                                                                          GND
+                                                                                                          VIN
+                                                                                                                PG
+                                                                                                                EN
+                                                                                                                SW
+
+                                                                                                C1                    C2
+                              R2 PAR202 PAR201
+                              R1
+                                                                                 VIN                 L1                     VOUT
+                                   GND
+                      Figure 20. TLV62568DBV Layout                                             Figure 21. TLV62568PDRL Layout
+
+
+10.3 Thermal Considerations
+Implementation of integrated circuits in low-profile and fine-pitch surface-mount packages typically requires
+special attention to power dissipation. Many system-dependent issues such as thermal coupling, airflow,
+convection surfaces, and the presence of other heat-generating components affect the power dissipation limits of
+a given component.
+Two basic approaches for enhancing thermal performance are listed below:
+• Improving the power dissipation capability of the PCB design
+• Introducing airflow in the system
+For more details on how to use the thermal parameters, see the application notes: Thermal Characteristics
+Application Notes SZZA017 and SPRA953.
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                                  Submit Documentation Feedback     15
+                                                               Product Folder Links: TLV62568
+TLV62568, TLV62568P
+SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017                                                                        www.ti.com
+
+
+11 Device and Documentation Support
+
+11.1 Device Support
+11.1.1 Third-Party Products Disclaimer
+TI'S PUBLICATION OF INFORMATION REGARDING THIRD-PARTY PRODUCTS OR SERVICES DOES NOT
+CONSTITUTE AN ENDORSEMENT REGARDING THE SUITABILITY OF SUCH PRODUCTS OR SERVICES
+OR A WARRANTY, REPRESENTATION OR ENDORSEMENT OF SUCH PRODUCTS OR SERVICES, EITHER
+ALONE OR IN COMBINATION WITH ANY TI PRODUCT OR SERVICE.
+
+11.1.2 Custom Design With WEBENCH® Tools
+Click here to create a custom design using the TLV62568 device with the WEBENCH® Power Designer.
+1. Start by entering the input voltage (VIN), output voltage (VOUT), and output current (IOUT) requirements.
+2. Optimize the design for key parameters such as efficiency, footprint, and cost using the optimizer dial.
+3. Compare the generated design with other possible solutions from Texas Instruments.
+The WEBENCH Power Designer provides a customized schematic along with a list of materials with real-time
+pricing and component availability.
+In most cases, these actions are available:
+• Run electrical simulations to see important waveforms and circuit performance
+• Run thermal simulations to understand board thermal performance
+• Export customized schematic and layout into popular CAD formats
+• Print PDF reports for the design, and share the design with colleagues
+Get more information about WEBENCH tools at www.ti.com/WEBENCH.
+
+11.2 Documentation Support
+11.2.1 Related Documentation
+Semiconductor and IC Package Thermal Metrics Application Report (SPRA953)
+Thermal Characteristics of Linear and Logic Packages Using JEDEC PCB Designs Application Report
+(SZZA017)
+
+11.3 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. In the upper
+right corner, click on Alert me to register and receive a weekly digest of any product information that has
+changed. For change details, review the revision history included in any revised document.
+
+11.4 Community Resources
+The following links connect to TI community resources. Linked contents are provided "AS IS" by the respective
+contributors. They do not constitute TI specifications and do not necessarily reflect TI's views; see TI's Terms of
+Use.
+TI E2E™ Online Community TI's Engineer-to-Engineer (E2E) Community. Created to foster collaboration
+           among engineers. At e2e.ti.com, you can ask questions, share knowledge, explore ideas and help
+           solve problems with fellow engineers.
+Design Support TI's Design Support Quickly find helpful E2E forums along with design support tools and
+           contact information for technical support.
+
+11.5 Trademarks
+E2E is a trademark of Texas Instruments.
+WEBENCH is a registered trademark of Texas Instruments.
+All other trademarks are the property of their respective owners.
+
+
+16     Submit Documentation Feedback                                            Copyright © 2016–2017, Texas Instruments Incorporated
+
+                                               Product Folder Links: TLV62568
+                                                                                                             TLV62568, TLV62568P
+www.ti.com                                                                           SLVSD89B – NOVEMBER 2016 – REVISED NOVEMBER 2017
+
+
+11.6 Electrostatic Discharge Caution
+          These devices have limited built-in ESD protection. The leads should be shorted together or the device placed in conductive foam
+          during storage or handling to prevent electrostatic damage to the MOS gates.
+
+
+11.7 Glossary
+SLYZ022 — TI Glossary.
+   This glossary lists and explains terms, acronyms, and definitions.
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2016–2017, Texas Instruments Incorporated                                            Submit Documentation Feedback          17
+                                                        Product Folder Links: TLV62568
+                                                                                                                                                                    PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    15-Jul-2026
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins     Package qty | Carrier       RoHS             Lead finish/             MSL rating/             Op temp (°C)               Part marking
+                                        (1)            (2)                                                            (3)           Ball material            Peak reflow                                              (6)
+                                                                                                                                          (4)                      (5)
+
+           TLV62568DBVR               Active      Production       SOT-23 (DBV) | 5     3000 | LARGE T&R             Yes            NIPDAU | SN          Level-1-260C-UNLIM            -40 to 125                   14VF
+         TLV62568DBVR.A               Active      Production       SOT-23 (DBV) | 5     3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   14VF
+           TLV62568DBVT               Active      Production       SOT-23 (DBV) | 5      250 | SMALL T&R             Yes            NIPDAU | SN          Level-1-260C-UNLIM            -40 to 125                   14VF
+          TLV62568DBVT.A              Active      Production       SOT-23 (DBV) | 5      250 | SMALL T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   14VF
+           TLV62568DRLR               Active      Production      SOT-5X3 (DRL) | 6     3000 | LARGE T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                    18L
+          TLV62568DRLR.A              Active      Production      SOT-5X3 (DRL) | 6     3000 | LARGE T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    18L
+           TLV62568DRLT               Active      Production      SOT-5X3 (DRL) | 6      250 | SMALL T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                    18L
+          TLV62568DRLT.A              Active      Production      SOT-5X3 (DRL) | 6      250 | SMALL T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    18L
+          TLV62568PDDCR               Active      Production          SOT-23-           3000 | LARGE T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                (9X9, 9XW)
+                                                                    THIN (DDC) | 6
+         TLV62568PDDCR.A              Active      Production          SOT-23-           3000 | LARGE T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                (9X9, 9XW)
+                                                                    THIN (DDC) | 6
+          TLV62568PDDCT               Active      Production          SOT-23-            250 | SMALL T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                (9X9, 9XW)
+                                                                    THIN (DDC) | 6
+         TLV62568PDDCT.A              Active      Production          SOT-23-            250 | SMALL T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                (9X9, 9XW)
+                                                                    THIN (DDC) | 6
+          TLV62568PDRLR               Active      Production      SOT-5X3 (DRL) | 6     3000 | LARGE T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                    18N
+         TLV62568PDRLR.A              Active      Production      SOT-5X3 (DRL) | 6     3000 | LARGE T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    18N
+          TLV62568PDRLT               Active      Production      SOT-5X3 (DRL) | 6      250 | SMALL T&R             Yes             Call TI | Sn        Level-1-260C-UNLIM            -40 to 125                    18N
+         TLV62568PDRLT.A              Active      Production      SOT-5X3 (DRL) | 6      250 | SMALL T&R             Yes                  SN             Level-1-260C-UNLIM            -40 to 125                    18N
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+
+
+                                                                                                         Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                 15-Jul-2026
+
+
+
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                       16-May-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                       TAPE DIMENSIONS
+                                                                                        K0         P1
+
+
+
+                                                                                                                         B0 W
+                                          Reel
+                                        Diameter
+                                                                                     Cavity             A0
+                                                                 A0   Dimension designed to accommodate the component width
+                                                                 B0   Dimension designed to accommodate the component length
+                                                                 K0   Dimension designed to accommodate the component thickness
+                                                                 W    Overall width of the carrier tape
+                                                                 P1   Pitch between successive cavity centers
+
+
+                                         Reel Width (W1)
+                               QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                        Sprocket Holes
+
+
+                                                   Q1       Q2          Q1    Q2
+
+                                                   Q3       Q4          Q3    Q4                    User Direction of Feed
+
+
+
+                                                             Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins               SPQ        Reel   Reel   A0                   B0         K0     P1     W     Pin1
+                               Type Drawing                               Diameter Width (mm)                 (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                            (mm) W1 (mm)
+     TLV62568DBVR             SOT-23      DBV           5        3000        178.0           8.4        3.2    3.2       1.4    4.0    8.0     Q3
+     TLV62568DBVT             SOT-23      DBV           5         250        180.0           8.4        3.2    3.2       1.4    4.0    8.0     Q3
+     TLV62568DRLR             SOT-5X3     DRL           6        3000        180.0           8.4        2.0    1.8       0.75   4.0    8.0     Q3
+     TLV62568DRLR             SOT-5X3     DRL           6        3000        180.0           8.4        1.8    1.8       0.75   4.0    8.0     Q3
+     TLV62568DRLT             SOT-5X3     DRL           6         250        180.0           8.4        1.8    1.8       0.75   4.0    8.0     Q3
+     TLV62568DRLT             SOT-5X3     DRL           6         250        180.0           8.4        2.0    1.8       0.75   4.0    8.0     Q3
+    TLV62568PDDCR             SOT-23-     DDC           6        3000        180.0           8.4        3.2    3.2       1.4    4.0    8.0     Q3
+                               THIN
+    TLV62568PDDCT             SOT-23-     DDC           6         250        180.0           8.4        3.2    3.2       1.4    4.0    8.0     Q3
+                               THIN
+    TLV62568PDRLR             SOT-5X3     DRL           6        3000        180.0           8.4        2.0    1.8       0.75   4.0    8.0     Q3
+    TLV62568PDRLR             SOT-5X3     DRL           6        3000        180.0           8.4        1.8    1.8       0.75   4.0    8.0     Q3
+    TLV62568PDRLT             SOT-5X3     DRL           6         250        180.0           8.4        1.8    1.8       0.75   4.0    8.0     Q3
+    TLV62568PDRLT             SOT-5X3     DRL           6         250        180.0           8.4        2.0    1.8       0.75   4.0    8.0     Q3
+
+
+
+
+                                                                        Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              16-May-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+                      W
+
+
+
+
+                                                          L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+     TLV62568DBVR               SOT-23            DBV           5           3000      208.0        191.0         35.0
+      TLV62568DBVT              SOT-23            DBV           5           250       210.0        185.0         35.0
+      TLV62568DRLR              SOT-5X3           DRL           6           3000      210.0        185.0         35.0
+      TLV62568DRLR              SOT-5X3           DRL           6           3000      210.0        185.0         35.0
+      TLV62568DRLT              SOT-5X3           DRL           6           250       210.0        185.0         35.0
+      TLV62568DRLT              SOT-5X3           DRL           6           250       210.0        185.0         35.0
+     TLV62568PDDCR            SOT-23-THIN         DDC           6           3000      210.0        185.0         35.0
+     TLV62568PDDCT            SOT-23-THIN         DDC           6           250       210.0        185.0         35.0
+     TLV62568PDRLR              SOT-5X3           DRL           6           3000      210.0        185.0         35.0
+     TLV62568PDRLR              SOT-5X3           DRL           6           3000      210.0        185.0         35.0
+     TLV62568PDRLT              SOT-5X3           DRL           6           250       210.0        185.0         35.0
+     TLV62568PDRLT              SOT-5X3           DRL           6           250       210.0        185.0         35.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                                                                PACKAGE OUTLINE
+ DRL0006A                                                          SCALE 8.000
+                                                                                                                SOT - 0.6 mm max height
+                                                                                                                        PLASTIC SMALL OUTLINE
+
+
+
+
+                                                   1.7
+                                                   1.5
+                                                         PIN 1                            A
+                                                         ID AREA
+
+
+                                 1
+                                                                                    6
+
+                        4X 0.5
+
+                                                                                         1.7
+                 2X 1
+                                                                                         1.5
+                                                                                        NOTE 3
+
+
+                                                                                    4                       2X 0 -10
+                                 3
+
+
+
+                                                   1.3                                       0.3                       0.05
+                                 B                                                      6X                                  TYP
+                                                   1.1                                       0.1                       0.00
+
+
+                                                                                   2X 4 -15
+
+
+
+                    0.6 MAX
+                                                                                                   C
+
+                                                                                                       SEATING PLANE
+                        0.18
+                   6X                                                                                  0.05 C
+                        0.08
+                                                 SYMM
+
+
+
+
+                        SYMM
+
+
+
+
+                                                                                                   0.27
+                                                                                              6X
+                                                                                                   0.15
+                                                                                                     0.1    C A B
+                                                          0.4
+                                                     6X                                              0.05    C
+                                                          0.2
+                                                                                                                                  4223266/F 11/2024
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.15 mm per side.
+4. Reference JEDEC registration MO-293 Variation UAAD
+
+
+
+
+                                                                                 www.ti.com
+                                                                                  EXAMPLE BOARD LAYOUT
+ DRL0006A                                                                                     SOT - 0.6 mm max height
+                                                                                                           PLASTIC SMALL OUTLINE
+
+
+
+
+                                                6X (0.67)
+                                                                  SYMM
+                                            1
+
+                                 6X (0.3)                                                     6
+
+
+
+                                                                                                  SYMM
+
+
+                               4X (0.5)
+
+                                                                                              4
+                                            3
+
+                           (R0.05) TYP
+                                                                  (1.48)
+
+
+
+                                                    LAND PATTERN EXAMPLE
+                                                               SCALE:30X
+
+
+
+
+                   0.05 MAX                                                0.05 MIN
+                   AROUND                                                  AROUND
+
+
+
+
+                 SOLDER MASK                        METAL                  METAL UNDER                     SOLDER MASK
+                 OPENING                                                   SOLDER MASK                     OPENING
+                                NON SOLDER MASK                                          SOLDER MASK
+                                    DEFINED                                                DEFINED
+                                  (PREFERRED)
+
+                                                       SOLDERMASK DETAILS
+
+
+
+
+                                                                                                                 4223266/F 11/2024
+
+NOTES: (continued)
+
+5. Publication IPC-7351 may have alternate designs.
+6. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+7. Land pattern design aligns to IPC-610, Bottom Termination Component (BTC) solder joint inspection criteria.
+
+
+
+
+                                                                  www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+ DRL0006A                                                                                    SOT - 0.6 mm max height
+                                                                                                           PLASTIC SMALL OUTLINE
+
+
+
+
+                                                  6X (0.67)
+                                                                   SYMM
+                                              1
+
+                                   6X (0.3)                                                    6
+
+
+
+                                                                                                    SYMM
+
+
+                                 4X (0.5)
+
+                                                                                                4
+                                              3
+
+                            (R0.05) TYP
+                                                                   (1.48)
+
+
+                                                      SOLDER PASTE EXAMPLE
+                                                     BASED ON 0.1 mm THICK STENCIL
+                                                              SCALE:30X
+
+
+
+
+                                                                                                                   4223266/F 11/2024
+
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                  www.ti.com
+                                                                                                            PACKAGE OUTLINE
+DBV0005A                                                          SCALE 4.000
+                                                                                                     SOT-23 - 1.45 mm max height
+                                                                                                              SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                            3.0                                                                       C
+                                            2.6
+                                          1.75                                                                0.1 C
+                                                           B                               A
+                                          1.45
+            PIN 1
+      INDEX AREA
+
+                        1                                        5
+
+
+              2X 0.95                                            (0.1)
+                                                                                          3.05
+                                                                                          2.75
+        1.9                                                                         1.9
+                        2
+                                                                 (0.15)
+
+
+
+                                                                 4
+                            3
+              0.5
+           5X
+              0.3
+                                                                                                                             0.15
+               0.2      C A B                                                   NOTE 5           4X 0 -15      (1.1)              TYP
+                                                                                                                             0.00
+                                                                                                                1.45
+                                                                                                                0.90
+                                                               4X 4 -15
+
+
+
+          0.25
+ GAGE PLANE                                                                          0.22
+                                                                                          TYP
+                                                                                     0.08
+
+
+
+   8
+     TYP                          0.6
+   0                                  TYP            SEATING PLANE
+                                  0.3
+
+
+
+
+                                                                                                                          4214839/K 08/2024
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Refernce JEDEC MO-178.
+4. Body dimensions do not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.25 mm per side.
+5. Support pin may differ or may not be present.
+
+
+
+
+                                                                                www.ti.com
+                                                                               EXAMPLE BOARD LAYOUT
+DBV0005A                                                                             SOT-23 - 1.45 mm max height
+                                                                                                     SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                 PKG
+                                                 5X (1.1)
+                                             1
+                                                                                         5
+                                  5X (0.6)
+
+
+                                                                                             SYMM
+                                                                                                     (1.9)
+                                             2
+                              2X (0.95)
+
+
+                                             3                                           4
+
+                             (R0.05) TYP                         (2.6)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                       EXPOSED METAL SHOWN
+                                                            SCALE:15X
+
+
+
+
+                                                                                                         SOLDER MASK
+                 SOLDER MASK                     METAL                   METAL UNDER                     OPENING
+                 OPENING                                                 SOLDER MASK
+
+
+
+
+         EXPOSED METAL                                        EXPOSED METAL
+
+                                          0.07 MAX                                           0.07 MIN
+                                          ARROUND                                            ARROUND
+
+                                NON SOLDER MASK                                        SOLDER MASK
+                                    DEFINED                                              DEFINED
+                                  (PREFERRED)
+
+                                                      SOLDER MASK DETAILS
+
+
+
+
+                                                                                                               4214839/K 08/2024
+
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+ DBV0005A                                                                              SOT-23 - 1.45 mm max height
+                                                                                                       SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                 PKG
+                                                 5X (1.1)
+                                             1
+                                                                                         5
+                                  5X (0.6)
+
+
+
+                                                                                             SYMM
+                                             2                                                      (1.9)
+                             2X(0.95)
+
+
+                                             3                                           4
+
+                            (R0.05) TYP
+                                                                (2.6)
+
+
+                                                   SOLDER PASTE EXAMPLE
+                                                 BASED ON 0.125 mm THICK STENCIL
+                                                            SCALE:15X
+
+
+
+
+                                                                                                                   4214839/K 08/2024
+
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+    design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                  www.ti.com
+                                                                                                             PACKAGE OUTLINE
+ DDC0006A                                                           SCALE 4.000
+                                                                                                             SOT-23 - 1.1 max height
+                                                                                                                 SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                              3.05                                                                  1.1
+                                              2.55                                                                  0.7
+                                              1.75                                                                                0.1 C
+                                                                B                        A
+                                              1.45
+                 PIN 1
+           INDEX AREA
+
+                             1
+                                                                                   6
+
+
+                   4X 0.95
+
+                                                                                        3.05
+             1.9
+                                                                                        2.75
+
+
+
+
+                                                                                   4
+                             3                                                                    4X 0 -15
+
+
+                                                                                           0.5                               0.1
+                                                                                        6X                                       TYP
+                                                                                           0.3                               0.0
+                                                                                          0.2    C A B
+
+
+
+
+                                                                          4X 4 -15
+
+
+
+
+                                                                                             C
+      0 -8 TYP
+
+
+
+                                                 SEATING PLANE                          0.25
+           0.20
+                TYP                                                                     GAGE PLANE
+           0.12
+                                       0.6
+                                           TYP
+                                       0.3
+
+
+
+
+                                                                                                                          4214841/E 08/2024
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Reference JEDEC MO-193.
+
+
+
+
+                                                                                  www.ti.com
+                                                                               EXAMPLE BOARD LAYOUT
+ DDC0006A                                                                                     SOT-23 - 1.1 max height
+                                                                                                     SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                SYMM
+                                                  6X (1.1)
+                                             1
+
+                                  6X (0.6)                                                6
+
+
+
+                                                                                              SYMM
+
+
+                              4X (0.95)
+
+                                                                                          4
+                                             3
+
+                            (R0.05) TYP
+                                                                 (2.7)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                         EXPLOSED METAL SHOWN
+                                                               SCALE:15X
+
+
+
+
+                                                                         METAL UNDER                     SOLDER MASK
+              SOLDER MASK                        METAL                   SOLDER MASK                     OPENING
+              OPENING
+
+                                                                 EXPOSED METAL
+
+
+                                                      EXPOSED METAL
+
+                                    0.07 MAX                                                  0.07 MIN
+                                    ARROUND                                                   ARROUND
+
+                             NON SOLDER MASK                                             SOLDER MASK
+                                 DEFINED                                                   DEFINED
+
+
+                                                    SOLDERMASK DETAILS
+
+
+
+
+                                                                                                              4214841/E 08/2024
+
+NOTES: (continued)
+
+4. Publication IPC-7351 may have alternate designs.
+5. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                 www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+ DDC0006A                                                                                       SOT-23 - 1.1 max height
+                                                                                                      SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                SYMM
+                                                6X (1.1)
+                                            1
+
+                                 6X (0.6)                                                6
+
+
+
+                                                                                             SYMM
+
+
+                             4X(0.95)
+
+                                                                                         4
+                                            3
+
+                           (R0.05) TYP
+                                                                 (2.7)
+
+
+                                                   SOLDER PASTE EXAMPLE
+                                                   BASED ON 0.125 THICK STENCIL
+                                                           SCALE:15X
+
+
+
+
+                                                                                                                   4214841/E 08/2024
+
+NOTES: (continued)
+
+6. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+    design recommendations.
+7. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                  www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+

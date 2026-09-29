@@ -1,0 +1,516 @@
+{
+  "version": "4.0",
+  "circuit_name": "dual_adc_usb",
+  "stage": "coding",
+  "last_updated": "2026-09-07",
+  "active_circuit_file": null,
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "sourcing_status": "approved",
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": null,
+    "errors": 0,
+    "warnings": 0,
+    "pass": false,
+    "report_path": null
+  },
+  "sourced_bom_version": "1.1",
+  "sourced_bom_path": "sourcing/sourced_bom.md",
+  "last_modified_circuit": null,
+  "coding_mode": "modular",
+  "block_manifest": [
+    {
+      "block_id": "usb_power_input",
+      "block_name": "USB-C input, ESD/TVS, soft-start, rail split",
+      "filename": "circuits/dual_adc_usb/usb_power_input.py",
+      "interface_nets": [
+        "VBUS_5V",
+        "VBUS_A5V",
+        "GND",
+        "usbDp",
+        "usbDm"
+      ],
+      "parts": [
+        "J1",
+        "D1",
+        "D2",
+        "Q1",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "L1",
+        "L2"
+      ],
+      "signature": "def usb_power_input(vbus_5v, vbus_a5v, gnd, usb_dp, usb_dm)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_digital",
+      "block_name": "Buck 5V->3V3_D (1.5MHz) + LDO 3V3->1V2 core",
+      "filename": "circuits/dual_adc_usb/power_digital.py",
+      "interface_nets": [
+        "VBUS_5V",
+        "V3V3_D",
+        "V1V2_CORE",
+        "GND"
+      ],
+      "parts": [
+        "U1",
+        "U2",
+        "L3",
+        "R10",
+        "R11"
+      ],
+      "signature": "def power_digital(vbus_5v, v3v3_d, v1v2_core, gnd)",
+      "status": "syntax_ok",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_analog",
+      "block_name": "LDO A5V->3V0_AVDD low-noise + LM27762 +/-4V0",
+      "filename": "circuits/dual_adc_usb/power_analog.py",
+      "interface_nets": [
+        "VBUS_A5V",
+        "V3V0_AVDD",
+        "VP4V0",
+        "VN4V0",
+        "GND"
+      ],
+      "parts": [
+        "U3",
+        "U4",
+        "L4",
+        "L5",
+        "L6",
+        "C24",
+        "C25",
+        "R20",
+        "R21",
+        "R22",
+        "R23"
+      ],
+      "signature": "def power_analog(vbus_a5v, v3v0_avdd, vp4v0, vn4v0, gnd)",
+      "status": "syntax_ok",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "vref_2v5",
+      "block_name": "ADR4525 2.5V ref, 0.1% divider -> 1.000V, OPA192 buffer",
+      "filename": "circuits/dual_adc_usb/vref_2v5.py",
+      "interface_nets": [
+        "VBUS_A5V",
+        "VP4V0",
+        "VN4V0",
+        "GND",
+        "vref_1v0"
+      ],
+      "parts": [
+        "U5",
+        "U6",
+        "R30",
+        "R31"
+      ],
+      "signature": "def vref_2v5(vbus_a5v, vp4v0, vn4v0, gnd, vref_1v0)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_channel",
+      "block_name": "Analog front end - 1M||20pF, 10:1 comp attenuator, OPA1656 buffer+SK, THS4521 FDA, 4th-order Butterworth fc=4.3MHz. INSTANTIATED TWICE (ch='A', ch='B')",
+      "filename": "circuits/dual_adc_usb/afe_channel.py",
+      "interface_nets": [
+        "VP4V0",
+        "VN4V0",
+        "GND",
+        "adc_vcm",
+        "ain_p",
+        "ain_n"
+      ],
+      "parts": [
+        "J2",
+        "J3",
+        "R101-R114",
+        "R201-R214",
+        "C101-C112",
+        "C201-C212",
+        "CV1",
+        "CV2",
+        "D101",
+        "D102",
+        "D201",
+        "D202",
+        "U101",
+        "U102",
+        "U201",
+        "U202"
+      ],
+      "signature": "def afe_channel(ch, vp4v0, vn4v0, gnd, adc_vcm, ain_p, ain_n)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0,
+      "instantiated_twice": true
+    },
+    {
+      "block_id": "adc_dual",
+      "block_name": "LTC2292 dual 12-bit 40MSPS parallel CMOS, 33R damping arrays, OVDD via ferrite",
+      "filename": "circuits/dual_adc_usb/adc_dual.py",
+      "interface_nets": [
+        "V3V0_AVDD",
+        "V3V3_D",
+        "GND",
+        "vref_1v0",
+        "adc_vcm",
+        "ain_ap",
+        "ain_an",
+        "ain_bp",
+        "ain_bn",
+        "encClk40",
+        "adcClkOut",
+        "adcDataA",
+        "adcDataB",
+        "adcOfA",
+        "adcOfB",
+        "adcShdn",
+        "adcOeBar"
+      ],
+      "parts": [
+        "U7",
+        "RN1",
+        "RN2",
+        "RN3",
+        "RN4",
+        "RN5",
+        "RN6",
+        "L8"
+      ],
+      "signature": "def adc_dual(v3v0_avdd, v3v3_d, gnd, vref_1v0, adc_vcm, ain_ap, ain_an, ain_bp, ain_bn, enc_clk40, adc_clk_out, adc_data_a, adc_data_b, adc_of_a, adc_of_b, adc_shdn, adc_oe_bar)",
+      "status": "escalated",
+      "erc_errors_attributed": 0,
+      "escalation_reason": "fundamental_conflict",
+      "escalation": "LTC2292 HAS NO CLKOUT PIN. Verified independently by orchestrator: grep of all 28 datasheet pages returns ZERO occurrences of \"CLKOUT\". net_plan.md 3.6 and skeleton_bom.md both assume U7.CLKOUT -> adcClkOut -> FPGA GBIN capture clock. That pin does not exist."
+    },
+    {
+      "block_id": "clock_40m",
+      "block_name": "40MHz XO on its own LP5907 LDO + LC, 33R series to ENC. FPGA never synthesises this.",
+      "filename": "circuits/dual_adc_usb/clock_40m.py",
+      "interface_nets": [
+        "VBUS_A5V",
+        "GND",
+        "encClk40",
+        "xoClkFpga"
+      ],
+      "parts": [
+        "U8",
+        "U9",
+        "R40",
+        "R41",
+        "L7"
+      ],
+      "signature": "def clock_40m(vbus_a5v, gnd, enc_clk40, xo_clk_fpga)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_ice40",
+      "block_name": "iCE40HX4K-TQ144 - decimation, trigger, SRAM burst ctrl, FIFO drain",
+      "filename": "circuits/dual_adc_usb/fpga_ice40.py",
+      "interface_nets": [
+        "V3V3_D",
+        "V1V2_CORE",
+        "GND",
+        "+ all bus nets"
+      ],
+      "parts": [
+        "U10",
+        "C90-C119"
+      ],
+      "signature": "def fpga_ice40(v3v3_d, v1v2_core, gnd, adc_data_a, adc_data_b, adc_of_a, adc_of_b, adc_shdn, adc_oe_bar, adc_clk_out, xo_clk_fpga, sram_addr, sram_data, sram_ce_bar, sram_oe_bar, sram_we_bar, fifo_data, fifo_rxf_bar, fifo_txe_bar, fifo_rd_bar, fifo_wr_bar, fifo_oe_bar, ft_clk60, cfg_sck, cfg_mosi, cfg_miso, cfg_cs_bar, fpga_creset_bar, fpga_cdone, mode_strap, probe_comp_drv, ext_trig, led_status, led_activity)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "sram_buffer",
+      "block_name": "IS61WV204816BLL-10TLI 2Mx16 async 10ns. UB#/LB# tied LOW (all accesses 16-bit).",
+      "filename": "circuits/dual_adc_usb/sram_buffer.py",
+      "interface_nets": [
+        "V3V3_D",
+        "GND",
+        "sramAddr[21]",
+        "sramData[16]",
+        "sramCeBar",
+        "sramOeBar",
+        "sramWeBar"
+      ],
+      "parts": [
+        "U11",
+        "C120",
+        "C121",
+        "C122",
+        "C123"
+      ],
+      "signature": "def sram_buffer(v3v3_d, gnd, sram_addr, sram_data, sram_ce_bar, sram_oe_bar, sram_we_bar)",
+      "status": "syntax_ok",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "config_flash",
+      "block_name": "W25Q32 SPI config flash + mode strap; 100R series on all 4 shared SPI lines",
+      "filename": "circuits/dual_adc_usb/config_flash.py",
+      "interface_nets": [
+        "V3V3_D",
+        "GND",
+        "cfgSck",
+        "cfgMosi",
+        "cfgMiso",
+        "cfgCsBar",
+        "fpgaCresetBar",
+        "fpgaCdone",
+        "modeStrap"
+      ],
+      "parts": [
+        "U12",
+        "R60",
+        "R61",
+        "R62",
+        "R63",
+        "R64",
+        "R65",
+        "JP1"
+      ],
+      "signature": "def config_flash(v3v3_d, gnd, cfg_sck, cfg_mosi, cfg_miso, cfg_cs_bar, fpga_creset_bar, fpga_cdone, mode_strap)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge_ft2232h",
+      "block_name": "FT2232HL: ch A sync-245 FIFO drain, ch B MPSSE. 93LC66 EEPROM = calibration store.",
+      "filename": "circuits/dual_adc_usb/usb_bridge_ft2232h.py",
+      "interface_nets": [
+        "V3V3_D",
+        "GND",
+        "usbDp",
+        "usbDm",
+        "fifo*",
+        "cfg*",
+        "ftClk60",
+        "ftResetBar"
+      ],
+      "parts": [
+        "U13",
+        "U14",
+        "Y1",
+        "C132",
+        "C133",
+        "R70-R80",
+        "L9",
+        "L10"
+      ],
+      "signature": "def usb_bridge_ft2232h(v3v3_d, gnd, usb_dp, usb_dm, fifo_data, fifo_rxf_bar, fifo_txe_bar, fifo_rd_bar, fifo_wr_bar, fifo_oe_bar, ft_clk60, cfg_sck, cfg_mosi, cfg_miso, cfg_cs_bar, fpga_creset_bar, fpga_cdone, ft_reset_bar)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "aux_io",
+      "block_name": "Probe-comp ~1kHz 1.00Vpp divider, bidirectional ext-trig header, status LEDs",
+      "filename": "circuits/dual_adc_usb/aux_io.py",
+      "interface_nets": [
+        "V3V3_D",
+        "GND",
+        "probeCompDrv",
+        "extTrig",
+        "ledStatus",
+        "ledActivity"
+      ],
+      "parts": [
+        "J4",
+        "J5",
+        "R90",
+        "R91",
+        "R92",
+        "R93",
+        "R94",
+        "R95",
+        "D10",
+        "D11",
+        "D12",
+        "D13"
+      ],
+      "signature": "def aux_io(v3v3_d, gnd, probe_comp_drv, ext_trig, led_status, led_activity)",
+      "status": "in_progress",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 0,
+  "architecture_rework_count": 0,
+  "open_decisions": [
+    {
+      "id": "D1",
+      "topic": "SRAM topology",
+      "status": "RESOLVED 2026-09-06",
+      "decision": "Option (a): 1x IS61WV204816BLL-10TLI, 2Mx16, 10ns, $33.54 Mouser stock 1303, Active. 21 address lines, zero architecture rework. Off-JLC, hand-soldered TSOP-48 accepted by user.",
+      "do_not": "Do NOT substitute the 2x IS61WV102416BLL option."
+    },
+    {
+      "id": "D2",
+      "topic": "40 MHz XO phase jitter (SPEC R3)",
+      "status": "RESOLVED 2026-09-06 - part chosen, jitter UNVERIFIED",
+      "decision": "Populate YXC OT322540MJBA4SL, LCSC C2831396, $0.55, stock 14369, 3225 4-pad.",
+      "carry_forward": "JITTER IS UNSPECIFIED BY THE MANUFACTURER. MUST BE MEASURED AT BRING-UP. Practical threshold ~5 ps RMS. At 10 ps, jitter-limited SNR = 74.5 dB and ~0.7 ENOB is lost. Expected 1-3 ps (inference: 40 MHz is fundamental-mode, no PLL) but this is NOT a datasheet fact. Footprint is universal so a jitter-specified part is a drop-in swap with no board change.",
+      "recorded_in": [
+        "sourcing/sourced_bom.md#0.1",
+        "architecture/design_risks.md#R3-UPDATE"
+      ]
+    }
+  ],
+  "open_verification_items": [
+    {
+      "id": "F3",
+      "item": "LTC2292 SNR = 71.3 dB still sourced from ADI product page, not the datasheet PDF. ADI host timed out 7 times total across curl and WebFetch. Must be closed by datasheet-librarian. The 12.49 ENOB result rests on it (LTC2292 = 92.2% of total noise power).",
+      "gate": "ADC SNR >= 68.5 dB substitution gate NOT tripped - no ADC substitution was made"
+    }
+  ],
+  "cost_summary": {
+    "architecture_estimate_per_board": "104-153 USD",
+    "q9_discussed_range": "70-100 USD",
+    "sourced_actual_per_board": "175-185 USD",
+    "primary_drivers": [
+      "LTC2292 actual $51.64 vs $22-30 assumed",
+      "JLCPCB Extended-part setup fees ~$24/board at qty 5, previously uncounted (upper-bound estimate)"
+    ],
+    "action": "reported not acted on, per SPEC 6 (no ceiling, no spec compromises on cost grounds)",
+    "status": "ACKNOWLEDGED AND ACCEPTED BY USER - report it, do not re-optimize"
+  },
+  "sourcing_findings": {
+    "as6c3216_verdict": "REJECTED on timing (tAW=50ns min vs 50ns slot = zero margin; tWP=45ns min in a 50ns slot) AND on availability/cost (AS6C3216-55TIN discontinued at DigiKey; successor AS6C3216A-55TIN $36.46 x2 = $72.92 vs $33.54 for one IS61WV204816BLL). Datasheet: AS6C3216A-55TIN Rev 1.0 Mar 2017 p.6.",
+    "tier_rule_status": "SPEC 6.1 Basic/Preferred rule for passives is UNMEETABLE - JLC Basic library contains no 0.1% thin-film resistors and no 250V C0G capacitors. Verified genuine (known Basic parts do return basic:true). Spec wins per SPEC 6.1 proviso.",
+    "clones_rejected": [
+      "LP5907MFX-3.0 LCSC C23380873 mfr TECH PUBLIC (noise unspecified) -> genuine TI LP5907MFX-3.0/NOPB LCSC C475492, 6.5uVrms",
+      "USBLC6-2SC6 six clone mfrs with differing junction capacitance -> genuine ST LCSC C7519"
+    ]
+  },
+  "approval_gates": {
+    "requirements": "approved",
+    "architecture": "approved",
+    "sourcing": "approved 2026-09-06"
+  },
+  "kicad_symbols": {
+    "generated": [
+      {
+        "part": "IS61WV204816BLL-10TLI",
+        "path": "lib/dual_adc_usb.kicad_sym",
+        "source": "ISSI IS61/64WV204816ALL/BLL Rev. A 10/27/2016 p.2, 48-Pin TSOP Type I",
+        "footprint": "Package_SO:TSOP-I-48_18.4x12mm_P0.5mm",
+        "verified": "48 pins, 1-48 each exactly once, 21 addr + 16 IO + 5 ctrl + 4 pwr + 2 NC, 17-pin datasheet spot-check all match",
+        "naming": "CE#/GND/IOn used to match net_plan.md 3.9 (datasheet TSOP table says CS#/VSS/I-On; datasheet BGA table says CE#)"
+      }
+    ],
+    "stock_symbols_ok": "all other significant ICs verified present in /usr/share/kicad/symbols at architecture"
+  },
+  "blocking_items_for_datasheet_stage": [
+    {
+      "id": "F3",
+      "severity": "CLOSED",
+      "status": "RESOLVED - GATE PASSES",
+      "file": "datasheets/LTC2292_LTC2293_LTC2291_229321fa.pdf (28 pp)",
+      "verified": "Dynamic Accuracy p.4, LTC2292 col, AIN=-1dBFS: SNR 71.4 dB typ @5MHz; 69.6 dB MIN over full temp @20MHz; 71.3 typ @20MHz; 71.1 @70MHz; 70.7 @140MHz. SFDR 90 dB @5MHz. 235 mW, 3V supply.",
+      "gate": "SNR >= 68.5 dB -> PASS",
+      "correction": "Design band <=3 MHz maps to the 5 MHz spec = 71.4 dB, NOT the 71.3 dB Nyquist figure the architecture assumed.",
+      "enob": "12.51 at 71.4 dB typ (was 12.49); 12.23 at the 69.6 dB guaranteed minimum. The >=12 ENOB claim now holds at GUARANTEED MINIMUM over full temperature, not merely typical."
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "status": "open",
+      "item": "ADR4525BRZ.pdf is an 80 KB HTML file, not a PDF. Reference accuracy/tempco/noise still UNVERIFIED. Retry with document-number patterns + full browser header set (the technique that worked for LTC2292)."
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "status": "open",
+      "item": "FT2232H datasheet missing - ftdichip.com returned HTML on two URLs."
+    },
+    {
+      "id": "F13",
+      "severity": "CLOSED",
+      "status": "RESOLVED",
+      "item": "THS4521 CM input range extracted [VERIFIED-PDF]: CM low -0.2 V min / -0.1 V typ referred to V-, negative-rail input CONFIRMED. Supply-rail safety check PASSES: THS4521 max supply 5.5 V; net_plan 3.5 runs it SINGLE-SUPPLY VS+=VP4V0, VS-=GND = 4.0 V total, not dual-supply 8.0 V. No violation."
+    },
+    {
+      "id": "F7",
+      "severity": "low",
+      "status": "open",
+      "item": "ADR4525BRZ stock 110 - order-early."
+    },
+    {
+      "id": "F10",
+      "severity": "low",
+      "status": "MITIGATED",
+      "item": "Genuine SRAM datasheet at datasheets/IS61WV204816BLL_issi_revA.pdf. Stale bot-block file datasheets/IS61WV204816BLL.pdf could not be deleted (hook). Never cite it."
+    },
+    {
+      "id": "D2",
+      "severity": "CARRY-FORWARD",
+      "status": "open by design",
+      "item": "XO jitter UNVERIFIED - YXC OT322540MJBA4SL on 3225 footprint, measured at bring-up. ~5 ps practical threshold; ~0.7 ENOB lost at 10 ps. Now the largest UNQUANTIFIED term in the noise budget."
+    }
+  ],
+  "datasheets_status": "complete - LTC2292 gate CLOSED and PASSES; minor non-blocking gaps remain",
+  "datasheet_findings": {
+    "OPA1656_hard_floor": "VERIFIED-PDF: i_n = 6 fA/rtHz @1kHz vs hard floor <=100 fA/rtHz -> PASS, 16x margin. e_n = 2.9 nV/rtHz @10kHz AND 4.3 nV/rtHz @1kHz - both correct, different frequencies. The architecture-vs-JLC discrepancy flagged at sourcing was NOT a contradiction. Noise budget unchanged.",
+    "contradictions_found": "None. No datasheet obtained contradicts the architecture.",
+    "LTC2292_SNR": "[VERIFIED-PDF] 71.4 dB typ @5MHz / 69.6 dB min @20MHz. Gate PASSES. ENOB 12.51 typ, 12.23 at guaranteed min.",
+    "THS4521": "[VERIFIED-PDF] negative-rail input confirmed; single-supply 4.0 V per net_plan 3.5, inside 5.5 V max."
+  },
+  "coding_dispatched": "12 skidl-block-coder agents launched in parallel 2026-09-07",
+  "open_conflicts": [
+    {
+      "id": "C1",
+      "severity": "BLOCKING",
+      "block": "adc_dual",
+      "also_affects": [
+        "fpga_ice40",
+        "clock_40m"
+      ],
+      "reason": "fundamental_conflict",
+      "finding": "LTC2292 has no CLKOUT pin. Clock pins are CLKA (pin 8) and CLKB (pin 9), both single-ended INPUTS (\"input sample starts on the positive edge\", p.11). There is no ENC+/ENC- differential pair either. Architecture assumed a CLKOUT that does not exist.",
+      "verified_by": "orchestrator, independently: 0 grep hits for CLKOUT across all 28 pages of datasheets/LTC2292_LTC2293_LTC2291_229321fa.pdf",
+      "datasheet_facts": {
+        "clock": "CLKA pin 8 / CLKB pin 9, single-ended inputs. p.11. Datasheet RECOMMENDS shorting CLKA and CLKB and driving from the same source; skew must be <1 ns; must not be asynchronous (p. ~1628).",
+        "data_access_time": "4.3 ns typ / 10 ns max at CL=5pF (Electrical Characteristics p.4)",
+        "pipeline_latency": "5 cycles",
+        "reference": "SENSEA (62) / SENSEB (19) are reference PROGRAMMING pins. External 0.5-1 V on SENSE sets input range to +/-V_SENSE. 1.000 V -> +/-1 V = 2 V(P-P), exactly the design span. SENSE=VCM selects internal ref +/-0.5V; SENSE=VDD selects internal ref +/-1V. So driving vref_1v0 onto SENSE gives the design span from the EXTERNAL precision reference - satisfies SPEC 2.1 intent.",
+        "vcm": "VCMA (61) / VCMB (20) are 1.5 V outputs. Datasheet explicitly says \"Do not connect to VCMA\" / \"Do not connect to VCMB\" - they must NOT be joined into one adc_vcm net.",
+        "per_channel_pins": "SENSEA/SENSEB, VCMA/VCMB, SHDNA(59)/SHDNB(22), OEA(58)/OEB(23) are all per-channel. net_plan 3.6 describes single SENSE/VREF/SHDN/OE pins that do not exist. SHDNA=SHDNB and OEA=OEB may be tied (no prohibition).",
+        "mux": "MUX (pin 21) is digital output multiplexer control; both 12-bit buses always exist, MUX only swaps A/B mapping."
+      },
+      "options": {
+        "a_RECOMMENDED": "FPGA captures ADC data using xo_clk_fpga - the R41 tap off the SAME 40 MHz XO that clock_40m ALREADY provides. Requires NO new parts. SPEC 2.2 is NOT violated: it says the FPGA CONSUMES the clock and never SYNTHESIZES it, and rejects a PLL-DERIVED sample clock. A direct XO tap is consumption. Timing is comfortable: data access 10 ns max against a 25 ns period, so capture on the following edge has ~15 ns margin.",
+        "b": "Re-select an ADC that actually has CLKOUT (LTC228x family, AD92xx). Expensive - LTC2292 is $51.64 and already verified against the 68.5 dB SNR gate.",
+        "c": "Keep a CLKOUT-style topology by other means - no clean path exists on this part."
+      },
+      "needs": "Architecture decision. Affects net_plan 3.6 (rewrite ADC net table), the adc_dual and fpga_ice40 signatures (adc_clk_out has no source), and clock_40m."
+    }
+  ],
+  "block_notes": {
+    "sram_buffer": "Custom symbol loaded via explicit lib= path. Verified VDD(12,36) and GND(13,37) each bind both physical pins by name. py_compile passed; isolated instantiation produced 5 parts. NC1/NC2 explicitly += NC. Minor: net_plan 3.9 lists 3x 100nF refs against 2 VDD pins - resolved as 2 at-pin + 1 beside bulk, documented in-file, not escalated (placement nuance, not a netlist conflict).",
+    "power_digital": "14 parts, compiled clean, footprints validated, standalone instantiation OK. CORRECTION FOUND: skeleton_bom.md (and my work order) said TLV62569DBVR = SOT-23-6. Wrong - DBV suffix = SOT-23-5 (EN,GND,SW,VIN,FB; no PG). SOT-23-6 belongs to the power-good variant in a different package code. Coder used SOT-23-5, matching the LCSC C141836 record which also says SOT-23-5. FB divider: VFB 0.600V, R10=453k/R11=100k -> 3.318V (+0.55%), ~6uA. U2.EN tied to V3V3_D (net_plan silent) for correct sequencing."
+  },
+  "corrections_found_during_coding": [
+    {
+      "doc": "architecture/skeleton_bom.md",
+      "item": "U1 TLV62569DBVR package listed as SOT-23-6",
+      "correct": "SOT-23-5 (DBV suffix). Confirmed against LCSC C141836 record and the KiCad symbol Regulator_Switching:TLV62569DBV.",
+      "found_by": "power_digital block coder",
+      "impact": "footprint only; corrected in code"
+    }
+  ]
+}

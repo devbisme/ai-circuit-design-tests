@@ -1,0 +1,118 @@
+{
+  "version": "5.1",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export",
+  "last_updated": "2026-09-23T13:48:30Z",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-09-23T13:48:30Z",
+    "errors": 0,
+    "warnings": 0,
+    "pass": true,
+    "report_path": "erc_report.md"
+  },
+  "review_status": "erc_pass_rev2",
+  "sourced_bom_version": "rev4-169refs",
+  "last_modified_circuit": "circuits/dual_adc_usb",
+  "coding_mode": "modular",
+  "use_cache": false,
+  "blocked_until": null,
+  "block_manifest": [
+    {
+      "block_id": "afe_input",
+      "block_name": "Input divider + clamp (x2)",
+      "filename": "circuits/dual_adc_usb/afe_input.py",
+      "function_signature": "afe_input(v_att, va_pos, va_neg, gnd, ch)",
+      "interface_nets": "CHA_ATT/CHB_ATT, VA_POS, VA_NEG, GND",
+      "parts": "J1,R101,R102,C101-C103,D101,J2,R201,R202,C201-C203,D201",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_buffer",
+      "block_name": "Dual JFET unity buffer",
+      "filename": "circuits/dual_adc_usb/afe_buffer.py",
+      "function_signature": "afe_buffer(cha_att, chb_att, cha_buf, chb_buf, va_pos, va_neg, gnd)",
+      "interface_nets": "CHA_ATT, CHB_ATT, CHA_BUF, CHB_BUF, VA_POS, VA_NEG, GND",
+      "parts": "U1,C11-C14",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_driver",
+      "block_name": "FDA + LC anti-alias (x2)",
+      "filename": "circuits/dual_adc_usb/afe_driver.py",
+      "function_signature": "afe_driver(v_buf, adc_inp, adc_inn, adc_cm, p3v3a, gnd, ch)",
+      "interface_nets": "CHA_BUF/CHB_BUF, ADC_INAP/AN/BP/BN, ADC_CM, P3V3A, GND",
+      "parts": "U2,R111-R118,L111-L114,C111-C119,D111,D112,U3,R211-R218,L211-L214,C211-C219,D211,D212",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "adc_dual",
+      "block_name": "ADS5231 dual ADC",
+      "filename": "circuits/dual_adc_usb/adc_dual.py",
+      "function_signature": "adc_dual(inap, inan, inbp, inbn, cm, clk_adc, da, db, dva, sen, sclk, sdata, sel, p3v3a, p3v3d, gnd)",
+      "interface_nets": "ADC_IN*, ADC_CM, CLK10_ADC, ADC_DA[0:11], ADC_DB[0:11], ADC_DVA, ADC_OVRA/B, ADC_SEN/SCLK/SDATA/SEL, P3V3A, P3V3D, GND",
+      "parts": "U4,R401,C401-C410",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "clock_gen",
+      "block_name": "10 MHz XO + terminations",
+      "filename": "circuits/dual_adc_usb/clock_gen.py",
+      "function_signature": "clock_gen(clk_adc, clk_fpga, p3v3d, gnd)",
+      "interface_nets": "CLK10_ADC, CLK10_FPGA, P3V3D, GND",
+      "parts": "X1,R31,R32,C31",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_core",
+      "block_name": "GW1NR-9 + JTAG + LEDs",
+      "filename": "circuits/dual_adc_usb/fpga_core.py",
+      "function_signature": "fpga_core(clk_fpga, da, db, dva, sen, sclk, sdata, sel, fifo_d, rxf_n, txe_n, rd_n, wr_n, oe_n, fifo_clk60, p1v2, p1v8, p3v3d, gnd)",
+      "interface_nets": "CLK10_FPGA, ADC_*, FIFO_D[0:7], FIFO_*_N, FIFO_CLK60, P1V2, P3V3D, GND",
+      "parts": "U5,J3,D51,D52,R51-R53,C501-C510",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge",
+      "block_name": "USB-C + FT232HL + EEPROM",
+      "filename": "circuits/dual_adc_usb/usb_bridge.py",
+      "function_signature": "usb_bridge(vbus, ft_3v3, fifo_d, rxf_n, txe_n, rd_n, wr_n, oe_n, fifo_clk60, pwren_n, gnd)",
+      "interface_nets": "VBUS, FT_3V3, FIFO_D[0:7], FIFO_*_N, FIFO_CLK60, PWREN_N, GND",
+      "parts": "U6,U7,U8,J4,Y1,R61-R65,C601-C609",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_tree",
+      "block_name": "Load switch, 2 bucks, LDO, pump",
+      "filename": "circuits/dual_adc_usb/power_tree.py",
+      "function_signature": "power_tree(vbus, vbus_sw, p3v3d, p1v8, p1v2, p3v3a, va_pos, va_neg, pwren_n, ft_3v3, gnd)",
+      "interface_nets": "VBUS, VBUS_SW, FT_3V3, PWREN_N, P3V3D, P1V2, P3V3A, VA_POS, VA_NEG, GND",
+      "parts": "U9-U13,Q1,L71,L72,FB1,R71-R76,C71-C83",
+      "status": "done",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 0,
+  "architecture_rework_count": 2,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/06_erc.md"
+  },
+  "last_handoff": "handoffs/06_erc.md"
+}

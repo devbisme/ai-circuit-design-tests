@@ -1,0 +1,2201 @@
+                                                                                                                           High Performance, 145 MHz
+                                                                                                                                     FastFET Op Amps
+                                                                                                                                      AD8065/AD8066
+FEATURES                                                                                                    APPLICATIONS
+FET input amplifier                                                                                         Instrumentation
+1 pA input bias current                                                                                     Photodiode preamps
+Low cost                                                                                                    Filters
+High speed: 145 MHz, −3 dB bandwidth (G = +1)                                                               A/D drivers
+180 V/μs slew rate (G = +2)                                                                                 Level shifting
+Low noise                                                                                                   Buffering
+  7 nV/√Hz (f = 10 kHz)                                                                                                                      CONNECTION DIAGRAMS
+  0.6 fA/√Hz (f = 10 kHz)
+                                                                                                                                             AD8065                                   AD8065
+Wide supply voltage range: 5 V to 24 V                                                                                           VOUT 1                    5   +VS        NC 1                   8   NC
+
+Single-supply and rail-to-rail output                                                                                             –VS 2                                   –IN 2                  7   +VS
+
+Low offset voltage 1.5 mV maximum                                                                                                 +IN 3                    4   –IN        +IN 3                  6   VOUT
+                                                                                                                                           TOP VIEW
+High common-mode rejection ratio: −100 dB                                                                                                 (Not to Scale)                  –VS 4       TOP VIEW 5 NC
+Excellent distortion specifications                                                                                                                                                 (Not to Scale)
+
+SFDR −88 dBc @ 1 MHz
+Low power: 6.4 mA/amplifier typical supply current                                                                                                              AD8066
+                                                                                                                                                 VOUT1 1                        8   +VS
+No phase reversal                                                                                                                                                                   VOUT2
+                                                                                                                                                   –IN1 2                       7
+Small packaging: SOIC-8, SOT-23-5, and MSOP-8                                                                                                     +IN1 3                        6   –IN2
+
+
+
+
+                                                                                                                                                                                                           02916-E-001
+                                                                                                                                                     –VS 4                      5   +IN2
+                                                                                                                                                                 TOP VIEW
+                                                                                                                                                               (Not to Scale)
+                                                                                                                                                                  Figure 1.
+
+GENERAL DESCRIPTION
+The AD8065/AD80661 FastFET™ amplifiers are voltage feedback                                                 The AD8065/AD8066 are high performance, high speed, FET
+amplifiers with FET inputs offering high performance and ease                                               input amplifiers available in small packages: SOIC-8, MSOP-8,
+of use. The AD8065 is a single amplifier, and the AD8066 is a                                               and SOT-23-5. They are rated to work over the industrial
+dual amplifier. These amplifiers are developed in the Analog                                                temperature range of −40°C to +85°C.
+Devices, Inc. proprietary XFCB process and allow exceptionally                                                              24
+low noise operation (7.0 nV/√Hz and 0.6 fA/√Hz) as well as                                                                  21      G = +10
+very high input impedance.                                                                                                  18
+                                                                                                                                                                                    VO = 200mV p-p
+
+
+With a wide supply voltage range from 5 V to 24 V, the ability to                                                           15      G = +5
+operate on single supplies, and a bandwidth of 145 MHz, the                                                                 12
+                                                                                                               GAIN (dB)
+
+
+
+
+AD8065/AD8066 are designed to work in a variety of applications.
+                                                                                                                             9
+For added versatility, the amplifiers also contain rail-to-rail outputs.                                                            G = +2
+                                                                                                                             6
+Despite the low cost, the amplifiers provide excellent overall                                                               3
+performance. The differential gain and phase errors of 0.02%                                                                        G = +1
+                                                                                                                             0
+and 0.02°, respectively, along with 0.1 dB flatness out to 7 MHz,
+                                                                                                                            –3
+make these amplifiers ideal for video applications. Additionally,
+                                                                                                                            –6
+they offer a high slew rate of 180 V/μs, excellent distortion (SFDR
+                                                                                                                                                                                                                         02916-E-002
+
+
+
+
+                                                                                                                              0.1                1                   10                    100        1000
+of −88 dBc @ 1 MHz), extremely high common-mode rejection                                                                                                  FREQUENCY (MHz)
+of −100 dB, and a low input offset voltage of 1.5 mV maximum                                                                              Figure 2. Small Signal Frequency Response
+under warmed up conditions. The AD8065/AD8066 operate
+using only a 6.4 mA/amplifier typical supply current and are
+capable of delivering up to 30 mA of load current.
+1
+    Protected by U. S. Patent No. 6,262,633.
+
+
+
+
+Rev. I
+Information furnished by Analog Devices is believed to be accurate and reliable. However, no
+responsibility is assumed by Analog Devices for its use, nor for any infringements of patents or other
+rights of third parties that may result from its use. Specifications subject to change without notice. No   One Technology Way, P.O. Box 9106, Norwood, MA 02062-9106, U.S.A.
+license is granted by implication or otherwise under any patent or patent rights of Analog Devices.         Tel: 781.329.4700                                 www.analog.com
+Trademarks and registered trademarks are the property of their respective owners.                           Fax: 781.461.3113 ©2002–2009 Analog Devices, Inc. All rights reserved.
+AD8065/AD8066
+
+TABLE OF CONTENTS
+Features .............................................................................................. 1               Wideband Operation ................................................................. 18
+Applications ....................................................................................... 1                  Input Protection ......................................................................... 18
+Connection Diagrams ...................................................................... 1                            Thermal Considerations............................................................ 19
+General Description ......................................................................... 1                         Input and Output Overload Behavior ..................................... 19
+Revision History ............................................................................... 2                  Layout, Grounding, and Bypassing Considerations .................. 20
+Specifications..................................................................................... 3                   Power Supply Bypassing ............................................................ 20
+Absolute Maximum Ratings............................................................ 6                                  Grounding ................................................................................... 20
+   Maximum Power Dissipation ..................................................... 6                                    Leakage Currents ........................................................................ 21
+   Output Short Circuit .................................................................... 6                          Input Capacitance ...................................................................... 21
+   ESD Caution .................................................................................. 6                     Output Capacitance ................................................................... 21
+Typical Performance Characteristics ............................................. 7                                     Input-to-Output Coupling ........................................................ 22
+   Test Circuits ................................................................................. 14                   Wideband Photodiode Preamp ................................................ 22
+Theory of Operation ...................................................................... 17                           High Speed JFET Input Instrumentation Amplifier.............. 23
+   Closed-Loop Frequency Response ........................................... 17                                        Video Buffer ................................................................................ 23
+   Noninverting Closed-Loop Frequency Response .................. 17                                                Outline Dimensions ....................................................................... 24
+   Inverting Closed-Loop Frequency Response ......................... 17                                                Ordering Guide .......................................................................... 25
+
+
+REVISION HISTORY
+3/09—Rev. H to Rev. I                                                                                               Changes to Connection Diagrams ................................................ 1
+Changes to High Speed JFET Input Instrumentation Amplifier                                                          Updated Ordering Guide ............................................................... 5
+Section .............................................................................................. 23           Updated Outline Dimensions ...................................................... 22
+Updated Outline Dimensions ....................................................... 24                               4/03—Rev. B to Rev. C.
+9/08—Rev. G to Rev. H                                                                                               Added SOIC-8 (R) for the AD8065 .............................................. 4
+Deleted Usable Range Parameter, Table 1 ..................................... 3                                     2/03—Rev. A to Rev. B.
+Deleted Usable Range Parameter, Table 2 ..................................... 4                                     Changes to Absolute Maximum Ratings ...................................... 4
+Deleted Usable Range Parameter, Table 3 ..................................... 5                                     Changes to Test Circuit 10 ........................................................... 14
+Changes to Layout ............................................................................ 6                    Changes to Test Circuit 11 ........................................................... 15
+Changes to Input and Output Overload Behavior Section ....... 19                                                    Changes to Noninverting Closed-Loop Frequency Response 16
+Changes to Table 5 Expressions Column .................................... 22                                       Changes to Inverting Closed-Loop Frequency Response ....... 16
+1/06—Rev. F to Rev. G                                                                                               Updated Figure 6 .......................................................................... 18
+Changes to Ordering Guide .......................................................... 26                             Changes to Figure 7 ....................................................................... 19
+                                                                                                                    Changes to Figure 10..................................................................... 21
+12/05—Rev. E to Rev. F
+                                                                                                                    Changes to Figure 11..................................................................... 22
+Updated Format .................................................................. Universal
+                                                                                                                    Changes to High Speed JFET Instrumentation Amplifier ....... 22
+Changes to Features.......................................................................... 1
+                                                                                                                    Changes to Video Buffer............................................................... 22
+Changes to General Description .................................................... 1
+Changes to Figure 22 through Figure 27 ..................................... 11                                     8/02—Rev. 0 to Rev. A.
+Updated Outline Dimensions ....................................................... 25                               Added AD8066 ..................................................................Universal
+Changes to Ordering Guide .......................................................... 26                             Added SOIC-8 (R) and MSOP-8 (RM) ........................................ 1
+                                                                                                                    Edits to General Description ......................................................... 1
+2/04—Rev. D to Rev. E.
+                                                                                                                    Edits to Specifications ..................................................................... 2
+Updated Format ................................................................ Universal
+                                                                                                                    New Figure 2 .................................................................................... 5
+Updated Figure 56 ......................................................................... 21
+                                                                                                                    Changes to Ordering Guide ........................................................... 5
+Updated Outline Dimensions ...................................................... 25
+                                                                                                                    Edits to TPCs 18, 25, and 28 .......................................................... 8
+Updated Ordering Guide .............................................................. 26
+                                                                                                                    New TPC 36 ................................................................................... 11
+11/03—Rev. C to Rev. D.                                                                                             Added Test Circuits 10 and 11 ..................................................... 14
+Changes to Features......................................................................... 1                      MSOP (RM-8) Added ................................................................... 23
+                                                                                                    Rev. I | Page 2 of 28
+                                                                                                                 AD8065/AD8066
+
+SPECIFICATIONS
+@ TA = 25°C, VS = ±5 V, RL = 1 kΩ, unless otherwise noted.
+
+Table 1.
+Parameter                               Conditions                                     Min              Typ              Max   Unit
+DYNAMIC PERFORMANCE
+  −3 dB Bandwidth                       G = +1, VO = 0.2 V p-p (AD8065)                100              145                    MHz
+                                        G = +1, VO = 0.2 V p-p (AD8066)                100              120                    MHz
+                                        G = +2, VO = 0.2 V p-p                                          50                     MHz
+                                        G = +2, VO = 2 V p-p                                            42                     MHz
+  Bandwidth for 0.1 dB Flatness         G = +2, VO = 0.2 V p-p                                          7                      MHz
+  Input Overdrive Recovery Time         G = +1, −5.5 V to +5.5 V                                        175                    ns
+  Output Recovery Time                  G = −1, −5.5 V to +5.5 V                                        170                    ns
+  Slew Rate                             G = +2, VO = 4 V step                          130              180                    V/μs
+  Settling Time to 0.1%                 G = +2, VO = 2 V step                                           55                     ns
+                                        G = +2, VO = 8 V step                                           205                    ns
+NOISE/HARMONIC PERFORMANCE
+ SFDR                                   fC = 1 MHz, G = +2, VO = 2 V p-p                                −88                    dBc
+                                        fC = 5 MHz, G = +2, VO = 2 V p-p                                −67                    dBc
+                                        fC = 1 MHz, G = +2, VO = 8 V p-p                                −73                    dBc
+  Third-Order Intercept                 fC = 10 MHz, RL = 100 Ω                                         24                     dBm
+  Input Voltage Noise                   f = 10 kHz                                                      7                      nV/√Hz
+  Input Current Noise                   f = 10 kHz                                                      0.6                    fA/√Hz
+  Differential Gain Error               NTSC, G = +2, RL = 150 Ω                                        0.02                   %
+  Differential Phase Error              NTSC, G = +2, RL = 150 Ω                                        0.02                   Degrees
+DC PERFORMANCE
+  Input Offset Voltage                  VCM = 0 V, SOIC package                                         0.4              1.5   mV
+  Input Offset Voltage Drift                                                                            1                17    μV/°C
+  Input Bias Current                    SOIC package                                                    2                6     pA
+                                        TMIN to TMAX                                                    25                     pA
+  Input Offset Current                                                                                  1                10    pA
+                                        TMIN to TMAX                                                    1                      pA
+  Open-Loop Gain                        VO = ±3 V, RL = 1 kΩ                           100              113                    dB
+INPUT CHARACTERISTICS
+  Common-Mode Input Impedance                                                                           1000 || 2.1            GΩ || pF
+  Differential Input Impedance                                                                          1000 || 4.5            GΩ || pF
+  Input Common-Mode Voltage
+Range
+    FET Input Range                                                                    −5 to +1.7       −5.0 to +2.4           V
+  Common-Mode Rejection Ratio           VCM = −1 V to +1 V                             −85              −100                   dB
+                                        VCM = −1 V to +1 V (SOT-23)                    −82              −91                    dB
+OUTPUT CHARACTERISTICS
+ Output Voltage Swing                   RL = 1 kΩ                                      −4.88 to +4.90   −4.94 to +4.95         V
+                                        RL = 150 Ω                                                      −4.8 to +4.7           V
+  Output Current                        VO = 9 V p-p, SFDR ≥ −60 dBc, f = 500 kHz                       35                     mA
+  Short-Circuit Current                                                                                 90                     mA
+  Capacitive Load Drive                 30% overshoot G = +1                                            20                     pF
+POWER SUPPLY
+  Operating Range                                                                      5                                 24    V
+  Quiescent Current per Amplifier                                                                       6.4              7.2   mA
+  Power Supply Rejection Ratio          ±PSRR                                          −85              −100                   dB
+
+
+
+
+                                                               Rev. I | Page 3 of 28
+AD8065/AD8066
+@ TA = 25°C, VS = ±12 V, RL = 1 kΩ, unless otherwise noted.
+
+Table 2.
+Parameter                                Conditions                                   Min              Typ               Max   Unit
+DYNAMIC PERFORMANCE
+  −3 dB Bandwidth                        G = +1, VO = 0.2 V p-p (AD8065)              100              145                     MHz
+                                         G = +1, VO = 0.2 V p-p (AD8066)              100              115                     MHz
+                                         G = +2, VO = 0.2 V p-p                                        50                      MHz
+                                         G = +2, VO = 2 V p-p                                          40                      MHz
+  Bandwidth for 0.1 dB Flatness          G = +2, VO = 0.2 V p-p                                        7                       MHz
+  Input Overdrive Recovery               G = +1, −12.5 V to +12.5 V                                    175                     ns
+  Output Overdrive Recovery              G = −1, −12.5 V to +12.5 V                                    170                     ns
+  Slew Rate                              G = +2, VO = 4 V step                        130              180                     V/μs
+  Settling Time to 0.1%                  G = +2, VO = 2 V step                                         55                      ns
+                                         G = +2, VO = 10 V step                                        250                     ns
+NOISE/HARMONIC PERFORMANCE
+ SFDR                                    fC = 1 MHz, G = +2, VO = 2 V p-p                              −100                    dBc
+                                         fC = 5 MHz, G = +2, VO = 2 V p-p                              −67                     dBc
+                                         fC = 1 MHz, G = +2, VO = 10 V p-p                             −85                     dBc
+  Third-Order Intercept                  fC = 10 MHz, RL = 100 Ω                                       24                      dBm
+  Input Voltage Noise                    f = 10 kHz                                                    7                       nV/√Hz
+  Input Current Noise                    f = 10 kHz                                                    1                       fA/√Hz
+  Differential Gain Error                NTSC, G = +2, RL = 150 Ω                                      0.04                    %
+  Differential Phase Error               NTSC, G = +2, RL = 150 Ω                                      0.03                    Degrees
+DC PERFORMANCE
+  Input Offset Voltage                   VCM = 0 V, SOIC package                                       0.4               1.5   mV
+  Input Offset Voltage Drift                                                                           1                 17    μV/°C
+  Input Bias Current                     SOIC package                                                  3                 7     pA
+                                         TMIN to TMAX                                                  25                      pA
+  Input Offset Current                                                                                 2                 10    pA
+                                         TMIN to TMAX                                                  2                       pA
+  Open-Loop Gain                         VO = ±10 V, RL = 1 kΩ                        103              114                     dB
+INPUT CHARACTERISTICS
+  Common-Mode Input Impedance                                                                          1000 || 2.1             GΩ || pF
+  Differential Input Impedance                                                                         1000 || 4.5             GΩ || pF
+  Input Common-Mode Voltage Range
+    FET Input Range                                                                   −12 to +8.5      −12.0 to +9.5           V
+  Common-Mode Rejection Ratio            VCM = −1 V to +1 V                           −85              −100                    dB
+                                         VCM = −1 V to +1 V (SOT-23)                  −82              −91                     dB
+OUTPUT CHARACTERISTICS
+ Output Voltage Swing                    RL = 1 kΩ                                    −11.8 to +11.8   −11.9 to +11.9          V
+                                         RL = 350 Ω                                                    −11.25 to +11.5         V
+  Output Current                         VO = 22 V p-p, SFDR ≥ −60 dBc, f = 500 kHz                    30                      mA
+  Short-Circuit Current                                                                                120                     mA
+  Capacitive Load Drive                  30% overshoot G = +1                                          25                      pF
+POWER SUPPLY
+  Operating Range                                                                     5                                  24    V
+  Quiescent Current per Amplifier                                                                      6.6               7.4   mA
+  Power Supply Rejection Ratio           ±PSRR                                        −84              −93                     dB
+
+
+
+
+                                                              Rev. I | Page 4 of 28
+                                                                                                             AD8065/AD8066
+@ TA = 25°C, VS = 5 V, RL = 1 kΩ, unless otherwise noted.
+
+Table 3.
+Parameter                                   Conditions                                  Min           Typ            Max   Unit
+DYNAMIC PERFORMANCE
+  −3 dB Bandwidth                           G = +1, VO = 0.2 V p-p (AD8065)             125           155                  MHz
+                                            G = +1, VO = 0.2 V p-p (AD8066)             110           130                  MHz
+                                            G = +2, VO = 0.2 V p-p                                    50                   MHz
+                                            G = +2, VO = 2 V p-p                                      43                   MHz
+ Bandwidth for 0.1 dB Flatness              G = +2, VO = 0.2 V p-p                                    6                    MHz
+ Input Overdrive Recovery Time              G = +1, −0.5 V to +5.5 V                                  175                  ns
+ Output Recovery Time                       G = −1, −0.5 V to +5.5 V                                  170                  ns
+ Slew Rate                                  G = +2, VO = 2 V step                       105           160                  V/μs
+ Settling Time to 0.1%                      G = +2, VO = 2 V step                                     60                   ns
+NOISE/HARMONIC PERFORMANCE
+ SFDR                                       fC = 1 MHz, G = +2, VO = 2 V p-p                          −65                  dBc
+                                            fC = 5 MHz, G = +2, VO = 2 V p-p                          −50                  dBc
+  Third-Order Intercept                     fC = 10 MHz, RL = 100 Ω                                   22                   dBm
+  Input Voltage Noise                       f = 10 kHz                                                7                    nV/√Hz
+  Input Current Noise                       f = 10 kHz                                                0.6                  fA/√Hz
+  Differential Gain Error                   NTSC, G = +2, RL = 150 Ω                                  0.13                 %
+  Differential Phase Error                  NTSC, G = +2, RL = 150 Ω                                  0.16                 Degrees
+DC PERFORMANCE
+  Input Offset Voltage                      VCM = 1.0 V, SOIC package                                 0.4            1.5   mV
+  Input Offset Voltage Drift                                                                          1              17    μV/ºC
+  Input Bias Current                        SOIC package                                              1              5     pA
+                                            TMIN to TMAX                                              25                   pA
+  Input Offset Current                                                                                1              5     pA
+                                            TMIN to TMAX                                              1                    pA
+  Open-Loop Gain                            VO = 1 V to 4 V (AD8065)                    100           113                  dB
+                                            VO = 1 V to 4 V (AD8066)                    90            103                  dB
+INPUT CHARACTERISTICS
+  Common-Mode Input Impedance                                                                         1000 || 2.1          GΩ || pF
+  Differential Input Impedance                                                                        1000 || 4.5          GΩ || pF
+  Input Common-Mode Voltage Range
+  FET Input Range                                                                       0 to 1.7      0 to 2.4             V
+  Common-Mode Rejection Ratio               VCM = 0.5 V to 1.5 V                        −74           −100                 dB
+                                            VCM = 1 V to 2 V (SOT-23)                   −78           −91                  dB
+OUTPUT CHARACTERISTICS
+ Output Voltage Swing                       RL = 1 kΩ                                   0.1 to 4.85   0.03 to 4.95         V
+                                            RL = 150 Ω                                                0.07 to 4.83         V
+  Output Current                            VO = 4 V p-p, SFDR ≥ −60 dBc, f = 500 kHz                 35                   mA
+  Short-Circuit Current                                                                               75                   mA
+  Capacitive Load Drive                     30% overshoot G = +1                                      5                    pF
+POWER SUPPLY
+  Operating Range                                                                       5                            24    V
+  Quiescent Current per Amplifier                                                       5.8           6.4            7.0   mA
+  Power Supply Rejection Ratio              ±PSRR                                       −78           −100                 dB
+
+
+
+
+                                                             Rev. I | Page 5 of 28
+AD8065/AD8066
+
+ABSOLUTE MAXIMUM RATINGS
+Table 4.                                                                            RMS output voltages should be considered. If RL is referenced to
+Parameter                              Rating                                       VS−, as in single-supply operation, then the total drive power is
+Supply Voltage                         26.4 V                                       VS × IOUT.
+Power Dissipation                      See Figure 3                                 If the rms signal levels are indeterminate, then consider the
+Common-Mode Input Voltage              VEE − 0.5 V to VCC + 0.5 V                   worst case, when VOUT = VS/4 for RL to midsupply.
+Differential Input Voltage
+Storage Temperature Range
+                                       1.8 V
+                                       −65°C to +125°C                                                                PD  VS  I S  
+                                                                                                                                           VS /42
+                                                                                                                                             RL
+Operating Temperature Range            −40°C to +85°C
+Lead Temperature                       300°C                                        In single-supply operation with RL referenced to VS−, worst case
+   (Soldering, 10 sec)                                                              is VOUT = VS/2.
+Stresses above those listed under Absolute Maximum Ratings                                                            2.0
+
+may cause permanent damage to the device. This is a stress
+
+
+
+
+                                                                                      MAXIMUM POWER DISSIPATION (W)
+rating only; functional operation of the device at these or any
+                                                                                                                      1.5
+other conditions above those indicated in the operational
+                                                                                                                              MSOP-8
+section of this specification is not implied. Exposure to absolute
+                                                                                                                                                      SOIC-8
+maximum rating conditions for extended periods may affect
+                                                                                                                      1.0
+device reliability.
+                                                                                                                                     SOT-23-5
+MAXIMUM POWER DISSIPATION
+The maximum safe power dissipation in the AD8065/AD8066                                                               0.5
+
+packages is limited by the associated rise in junction temperature
+(TJ) on the die. The plastic encapsulating the die locally reaches
+the junction temperature. At approximately 150°C, which is the                                                         0
+
+
+
+
+                                                                                                                                                                                    02916-E-003
+                                                                                                                       –60     –40     –20        0     20     40   60   80   100
+glass transition temperature, the plastic changes its properties.
+                                                                                                                                           AMBIENT TEMPERATURE (°C)
+Even temporarily exceeding this temperature limit can change
+                                                                                      Figure 3. Maximum Power Dissipation vs. Temperature for a 4-Layer Board
+the stresses that the package exerts on the die, permanently
+shifting the parametric performance of the AD8065/AD8066.                           Airflow increases heat dissipation, effectively reducing θJA. Also,
+Exceeding a junction temperature of 175°C for an extended                           more metal directly in contact with the package leads from
+time can result in changes in the silicon devices, potentially                      metal traces, through holes, ground, and power planes reduce
+causing failure.                                                                    the θJA. Care must be taken to minimize parasitic capacitances
+                                                                                    at the input leads of high speed op amps as discussed in the
+The still air thermal properties of the package and PCB (θJA),
+                                                                                    Layout, Grounding, and Bypassing Considerations section.
+ambient temperature (TA), and total power dissipated in the
+package (PD) determine the junction temperature of the die.                         Figure 3 shows the maximum safe power dissipation in the
+The junction temperature can be calculated by                                       package vs. the ambient temperature for the SOIC (125°C/W),
+                                                                                    SOT-23 (180°C/W), and MSOP (150°C/W) packages on a
+    TJ = TA + (PD × θJA)
+                                                                                    JEDEC standard 4-layer board. θJA values are approximations.
+The power dissipated in the package (PD) is the sum of the
+quiescent power dissipation and the power dissipated in the
+                                                                                    OUTPUT SHORT CIRCUIT
+package due to the load drive for all outputs. The quiescent                        Shorting the output to ground or drawing excessive current for
+power is the voltage between the supply pins (VS) times the                         the AD8065/AD8066 will likely cause catastrophic failure.
+quiescent current (IS). Assuming the load (RL) is referenced to
+midsupply, then the total drive power is VS /2 × IOUT, some of
+which is dissipated in the package and some in the load (VOUT ×                     ESD CAUTION
+IOUT). The difference between the total drive power and the load
+power is the drive power dissipated in the package.
+      PD  Quiescent Power  Total Drive Power  Load Power 
+
+     PD  VS  I S    S  OUT  
+                        V V       V OUT 2
+                         2   RL     RL
+
+
+
+
+                                                                    Rev. I | Page 6 of 28
+                                                                                                                                                                    AD8065/AD8066
+
+TYPICAL PERFORMANCE CHARACTERISTICS
+Default Conditions: ±5 V, CL = 5 pF, RL = 1 kΩ, VOUT = 2 V p-p, Temperature = 25°C.
+             24                                                                                                       6.9
+                                                                                                                               RL = 150
+             21      G = +10                                                                                          6.8      G = +2
+                                                             VO = 200mV p-p                                                                              VOUT = 0.2V p-p
+             18                                                                                                       6.7
+                                                                                                                                                         VOUT = 0.7V p-p
+             15      G = +5                                                                                           6.6
+                                                                                                                                                         VOUT = 1.4V p-p
+             12                                                                                                       6.5
+ GAIN (dB)
+
+
+
+
+                                                                                                          GAIN (dB)
+              9                                                                                                       6.4
+                     G = +2
+              6                                                                                                       6.3
+
+              3                                                                                                       6.2
+                     G = +1
+              0                                                                                                       6.1
+
+             –3                                                                                                       6.0
+
+             –6                                                                                                       5.9
+
+                                                                                        02916-E-004
+
+
+
+
+                                                                                                                                                                                          02916-E-007
+               0.1                 1         10                 100              1000                                    0.1                    1                    10            100
+
+                                       FREQUENCY (MHz)                                                                                              FREQUENCY (MHz)
+
+                  Figure 4. Small Signal Frequency Response for Various Gains                                              Figure 7. 0.1 dB Flatness Frequency Response (See Figure 43)
+
+              6                                                                                                        9
+                     VO = 200mV p-p                                                                                            VO = 200mV p-p
+                     G = +1                                                                                                    G = +2
+              4                                                                                                        8
+                                                  VS = +5V
+
+                                                                                                                                                      VS = +5V
+              2                                                                                                        7
+                                                                                                                                                                      VS = ±5V
+                                                                      VS = ±5V
+ GAIN (dB)
+
+
+
+
+                                                                                                          GAIN (dB)
+
+
+
+
+              0                                                                                                        6
+                                                                                                                                                      VS = ±12V
+                                              VS = ±12V
+             –2                                                                                                        5
+
+
+
+             –4                                                                                                        4
+
+
+
+             –6                                                                                                        3
+                                                                                        02916-E-005
+
+
+
+
+                                                                                                                                                                                          02916-E-008
+               0.1                 1         10                 100              1000                                   0.1                1               10              100    1000
+
+                                       FREQUENCY (MHz)                                                                                              FREQUENCY (MHz)
+
+             Figure 5. Small Signal Frequency Response for Various Supplies                                            Figure 8. Small Signal Frequency Response for Various Supplies
+                                      (See Figure 42)                                                                                           (See Figure 43)
+
+              2                                                                                                        8
+                     VO = 2V p-p
+                     G = +1                                                                                            7     G = +2
+              1                                                                                                                                     VS = +5V
+                                                                                                                                                                     VS = ±5V
+                                                                                                                       6
+              0                                                                                                                                     VS = ±12V
+                                                              VS = ±5V
+                                                                                                                       5
+                                                                                                          GAIN (dB)
+ GAIN (dB)
+
+
+
+
+             –1
+                                                                                                                       4
+             –2                           VS = ±12V
+                                                                                                                       3
+
+             –3
+                                                                                                                       2
+
+             –4                                                                                                        1
+
+
+             –5                                                                                                        0
+                                                                                        02916-E-006
+
+
+
+
+                                                                                                                                                                                          02916-E-009
+
+
+
+
+               0.1                 1         10                 100              1000                                   0.1                1               10              100    1000
+
+                                       FREQUENCY (MHz)                                                                                              FREQUENCY (MHz)
+
+             Figure 6. Large Signal Frequency Response for Various Supplies                                            Figure 9. Large Signal Frequency Response for Various Supplies
+                                      (See Figure 42)                                                                                           (See Figure 43)
+
+
+
+
+                                                                                        Rev. I | Page 7 of 28
+AD8065/AD8066
+              9                                                                                                                 8
+                     VO = 200mV p-p
+                                                              CL = 25pF
+                     G = +1                                   RSNUB = 20                                                       6
+              6                                CL = 25pF                                                                                                                              CL = 55pF
+                                                                                                                                                                   CL = 5pF
+                                                                                                                                4
+                                               CL = 20pF                                                                                                                              CL = 25pF
+              3
+                                                                                                                                2
+
+
+
+
+                                                                                                        GAIN (dB)
+ GAIN (dB)
+
+
+
+
+              0                                                                                                                 0
+
+                                                 CL = 5pF                                                                      –2
+             –3
+                                                                                                                               –4
+
+             –6                                                                                                                        VO = 200mV p-p
+                                                                                                                               –6
+                                                                                                                                       G = +2
+
+             –9                                                                                                                –8
+
+
+
+
+                                                                                      02916-E-010
+
+
+
+
+                                                                                                                                                                                                                  02916-E-013
+               0.1              1              10             100              1000                                              0.1                  1             10          100               1000
+
+                                       FREQUENCY (MHz)                                                                                                      FREQUENCY (MHz)
+
+Figure 10. Small Signal Frequency Response for Various CLOAD (See Figure 42)                           Figure 13. Small Signal Frequency Response for Various CLOAD (See Figure 43)
+
+              8                                                                                                                 8
+                                                            VOUT = 0.2V p-p
+              6                                                                                                                 7                                              RL = 100
+
+                     G = +2           VOUT = 2V p-p
+              4                                                                                                                 6
+
+              2                                                                                                                 5                            RL = 1k
+ GAIN (dB)
+
+
+
+
+                                                                                                        GAIN (dB)
+
+
+                                      VOUT = 4V p-p
+              0                                                                                                                 4
+
+             –2                                                                                                                 3
+
+
+             –4                                                                                                                 2
+
+                                                                                                                                       VO = 200mV p-p
+             –6                                                                                                                 1
+                                                                                                                                       G = +2
+
+             –8                                                                                                                 0
+                                                                                      02916-E-011
+
+
+
+
+                                                                                                                                                                                                                  02916-E-014
+               0.1              1              10             100              1000                                              0.1                  1             10          100               1000
+
+                                       FREQUENCY (MHz)                                                                                                      FREQUENCY (MHz)
+
+              Figure 11. Frequency Response for Various Output Amplitudes                              Figure 14. Small Signal Frequency Response for Various RLOAD (See Figure 43)
+                                     (See Figure 43)
+
+             14                                                                                                                80                                                                    120
+                     VO = 200mV p-p
+             12      G = +2                                                                                                                                          PHASE
+                                                              RF = RG = 1k,                                                   60                                                                    60
+             10
+                                                              RS = 500
+                                                                                                        OPEN-LOOP GAIN (dB)
+
+
+
+
+                                                                                                                                                                                                            PHASE (DEGREES)
+              8
+                                                              RF = RG = 500,                                                  40                                                                    0
+ GAIN (dB)
+
+
+
+
+                                                              RS = 250
+              6
+                                                              RF = RG = 500,                                                                               GAIN
+              4                                               RS = 250,
+                                       RF = RG = 1k,                                                                          20                                                                    –60
+                                                              CF = 2.2pF
+              2                            RS = 500,
+                                           CF = 3.3pF
+              0                                                                                                                 0                                                                    –120
+
+             –2
+
+             –4                                                                                                               –20                                                                    –180
+                                                                                                                                                                                                                  02916-E-015
+                                                                                      02916-E-012
+
+
+
+
+               0.1              1              10             100              1000                                             0.01            0.1           1           10       100            1000
+
+                                       FREQUENCY (MHz)                                                                                                      FREQUENCY (MHz)
+
+Figure 12. Small Signal Frequency Response for Various RF/CF (See Figure 43)                                                                          Figure 15. Open-Loop Response
+
+
+
+
+                                                                                      Rev. I | Page 8 of 28
+                                                                                                                                                                                                      AD8065/AD8066
+                         –30                                                                                                                       –40
+
+                         –40       G = +2
+                                                                                                                                                   –50
+                         –50
+                                                                                                                                                   –60
+
+
+
+
+                                                                                                                               DISTORTION (dBc)
+                                                                                                                                                                                    HD2 G = +2
+DISTORTION (dBc)
+
+
+
+
+                         –60
+
+                                                                                                                                                   –70                                                     HD3 G = +2
+                         –70                       HD2 RL = 150
+                                        HD2 RL = 1k                                                                                                                    HD2 G = +1
+                         –80                                                                                                                       –80
+                                                                          HD3 RL = 1k
+                         –90
+                                                                   HD3 RL = 150                                                                   –90
+                        –100                                                                                                                                                                    HD3 G = +1
+
+                                                                                                                                                  –100
+                        –110
+
+                        –120                                                                                                                      –110
+
+
+
+
+                                                                                                                                                                                                                                    02916-E-019
+                                                                                                             02916-E-016
+                            0.1                         1                       10                     100                                            0.1                      1                      10                   100
+
+                                                            FREQUENCY (MHz)                                                                                                        FREQUENCY (MHz)
+
+                          Figure 16. Harmonic Distortion vs. Frequency for Various Loads                                                            Figure 19. Harmonic Distortion vs. Frequency for Various Gains
+                                                 (See Figure 43)                                                                                                    (See Figure 42 and Figure 43)
+
+                         –30                                                                                                                       –20
+                                                                                                                                                            VS = ±12V
+                         –40       G = +2                                                                                                          –30
+                                                                                                                                                            G = +2
+                                   VS = ±12V                                                                                                                                         HD2 VO = 20V p-p
+                                   F = 1MHz                                                                                                        –40
+                         –50
+                                                                                                                                                   –50                       HD3 VO = 20V p-p
+                                                                                                                               DISTORTION (dBc)
+DISTORTION (dBc)
+
+
+
+
+                         –60
+                                                                                                                                                   –60
+                         –70                                HD2 RL = 150                                                                                           HD2 VO = 10V p-p
+                                                                                                                                                   –70
+                                         HD3 RL = 150
+                         –80
+                                                                                                                                                   –80      HD3 VO = 10V p-p
+                         –90
+                                                                                     HD2 RL = 300                                                 –90
+
+                        –100                                                                                                                      –100                                                       HD2 VO = 2V p-p
+                                                   HD3 RL = 300
+                        –110                                                                                                                      –110                                               HD3 VO = 2V p-p
+
+                        –120                                                                                                                      –120
+
+
+
+
+                                                                                                                                                                                                                                    02916-E-020
+                                                                                                             02916-E-017
+
+
+
+
+                               0    1   2      3    4   5     6   7   8     9   10 11 12 13 14 15                                                     0.1                                 1.0                              10.0
+
+                                                     OUTPUT AMPLITUDE (V p-p)                                                                                                      FREQUENCY (MHz)
+
+Figure 17. Harmonic Distortion vs. Amplitude for Various Loads VS = ±12 V                                                                         Figure 20. Harmonic Distortion vs. Frequency for Various Amplitudes
+                             (See Figure 43)                                                                                                                                (See Figure 43)
+
+                          50                                                                                                                       100
+                                                                                           RL = 100
+                          45                VS = ±12V
+INTERCEPT POINT (dBm)
+
+
+
+
+                          40
+                                   VS = ±5V
+                                                                                                                                NOISE (nV/ Hz)
+
+
+
+
+                          35
+                                                                                                                                                    10
+                          30
+                                            VS = +5V
+
+                          25
+
+
+                          20
+
+
+                          15                                                                                                                         1
+                                                                                                             02916-E-018
+
+
+
+
+                                                                                                                                                                                                                                     02916-E-021
+
+
+
+
+                               1                                                      10                                                              10      100       1k         10k   100k       1M       10M    100M       1G
+
+                                                            FREQUENCY (MHz)                                                                                                        FREQUENCY (Hz)
+
+                         Figure 18. Third-Order Intercept vs. Frequency and Supply Voltage                                                                                   Figure 21. Voltage Noise
+
+
+
+
+                                                                                                             Rev. I | Page 9 of 28
+AD8065/AD8066
+                                                                                                         CL = 20pF                         G = +1
+            G = +1
+
+                                                                                                                              CL = 5pF
+
+
+
+
+                                                                                                     50mV/DIV                              25ns/DIV
+           50mV/DIV                          25ns/DIV
+
+
+
+
+                                                                         02916-022
+
+
+
+
+                                                                                                                                                                02916-025
+ Figure 22. Small Signal Transient Response 5 V Supply (See Figure 42)                        Figure 25. Small Signal Transient Response ±5 V (See Figure 42)
+
+
+          G = +1                                                                                                                            G5µs
+                                                                                                                                              = +2
+          VS = ±12V         VOUT = 10V p-p                                                                                                  VS = ±12V
+                                                                                                                     VOUT = 10V p-p
+
+
+
+                            VOUT = 4V p-p
+                                                                                                                     VOUT = 2V p-p
+
+
+
+                             VOUT = 2V p-p
+
+
+
+
+              2V/DIV                               50ns/DIV
+                                                                                                      2V/DIV                                   50ns/DIV
+                                                                         02916-023
+
+
+
+
+                                                                                                                                                                02916-026
+      Figure 23. Large Signal Transient Response (See Figure 42)                                Figure 26. Large Signal Transient Response (See Figure 43)
+
+
+         G = –1                                                                                                                                G = +1
+         VS = ±5V                                                                                                                              VS = ±5V
+
+
+
+
+                                                                                                     2.0V/DIV                            100ns/DIV
+           2.0V/DIV                                 100ns/DIV
+                                                                         02916-024
+
+
+
+
+                                                                                                                                                                02916-027
+
+
+
+
+         Figure 24. Output Overdrive Recovery (See Figure 44)                                       Figure 27. Input Overdrive Recovery (See Figure 42)
+
+
+
+
+                                                                     Rev. I | Page 10 of 28
+                                                                                                                                                                                              AD8065/AD8066
+
+                                                                           VIN = 140mV/DIV
+                                                                                                                                                                                              VIN = 500mV/DIV
+
+
+
+
+                                                                           VOUT – 2VIN
+                   +0.1%                                                                                                                 +0.1%
+
+
+
+                   –0.1%                       t=0                                                                                       –0.1%                     t=0
+
+                                                                                                                                                                                                           VOUT – 2VIN
+
+
+
+
+                                                                                                                                                         2mV/DIV                                            10ns/DIV
+                                               2mV/DIV                                   64s/DIV
+
+
+
+
+                                                                                                                   02916-E-028
+
+
+
+
+                                                                                                                                                                                                                                                    02916-E-031
+                                      Figure 28. Long-Term Settling Time (See Figure 49)                                                             Figure 31. 0.1% Short-Term Settling Time (See Figure 49)
+
+                            0                                                                                                                   42
+
+
+
+
+                                                                                                                                                                                                                                  BJT INPUT STAGE
+                                                                                                                                                36                                                         +Ib
+                                                                                                                                                30
+
+
+
+
+                                                                                                                                     Ib (A)
+                           –5                                                                                                                   24
+                                                                                                                                                                                                      –Ib
+                                                                                       –Ib                                                      18
+INPUT BIAS CURRENT (pA)
+
+
+
+
+                                                                                                                                                12
+                          –10                                                                                                                    6
+                                                                                                                                                 0
+                                                                                                                                                10
+                          –15                                                                                                                    5      –Ib
+
+
+
+
+                                                                                                                                                                                                                                  FET INPUT STAGE
+                                                                                     +Ib                                                         0
+
+                          –20                                                                                                                   –5
+                                                                                                                                                                   +Ib
+                                                                                                                                     Ib (pA)
+
+
+
+
+                                                                                                                                               –10
+                                                                                                                                               –15
+                          –25
+                                                                                                                                               –20
+                                                                                                                                               –25
+                          –30                                                                                                                  –30
+                                                                                                                   02916-E-029
+
+
+
+
+                                                                                                                                                                                                                                                    02916-E-032
+                                 25       35              45          55          65             75          85                                   –12 –10     –8   –6     –4   –2   0   2         4    6         8     10   12
+                                                           TEMPERATURE (°C)                                                                                          COMMON-MODE VOLTAGE (V)
+
+                                        Figure 29. Input Bias Current vs. Temperature                                                           Figure 32. Input Bias Current vs. Common-Mode Voltage Range
+                                                                                                                                                    (See the Input and Output Overload Behavior Section)
+
+                           0.3                                                                                                                 40
+                                                                                                                                                                                                      N = 299
+                                                                                                                                               35                                                     SD = 0.388
+                           0.2                                                                                                                                                                        MEAN = –0.069
+
+                                                                                                                                               30
+OFFSET VOLTAGE (mV)
+
+
+
+
+                           0.1
+                                                                VS = +5V                                                                       25
+
+                            0                    VS = ±5V                                                                                      20
+
+
+                                                                                                                                               15
+                          –0.1                                                                   VS = ±12V
+
+                                                                                                                                               10
+                          –0.2
+                                                                                                                                                 5
+
+                          –0.3                                                                                                                   0
+                                                                                                                   02916-E-030
+
+
+
+
+                                                                                                                                                                                                                                                    02916-E-033
+
+
+
+
+                              –14 –12 –10 –8         –6    –4    –2   0      2   4     6     8    10   12    14                                  –2.0     –1.5     –1.0    –0.5     0       0.5       1.0            1.5    2.0
+                                                     COMMON-MODE VOLTAGE (V)                                                                                         INPUT OFFSET VOLTAGE (mV)
+                                 Figure 30. Input Offset Voltage vs. Common-Mode Voltage                                                                            Figure 33. Input Offset Voltage
+
+
+
+
+                                                                                                                  Rev. I | Page 11 of 28
+AD8065/AD8066
+                                 –30                                                                                                                             100
+
+
+                                 –40
+                                                                                                                                                                  10
+
+
+
+
+                                                                                                                                OUTPUT IMPEDANCE ()
+                                 –50
+
+                                                                                                                                                                   1                                                                   G = +1
+CMRR (dB)
+
+
+
+
+                                 –60
+
+
+                                 –70                                                                                                                                                                              G = +2
+                                           VS = ±12V
+                                                                                                                                                                  0.1
+
+                                 –80
+
+                                                                                                                                                                 0.01
+                                 –90               VS = ±5V
+
+
+                                –100                                                                                                                               0
+
+
+
+
+                                                                                                              02916-E-034
+
+
+
+
+                                                                                                                                                                                                                                                       02916-E-037
+                                    0.1                       1                       10              100                                                           100            1k        10k           100k          1M      10M            100M
+
+                                                                  FREQUENCY (MHz)                                                                                                                     FREQUENCY (Hz)
+
+                                              Figure 34. CMRR vs. Frequency (See Figure 46)                                           Figure 37. Output Impedance vs. Frequency (See Figure 45 and Figure 47)
+
+                                0.30                                                                                                                              80
+
+
+
+
+                                                                                                                                OUTPUT SATURATION VOLTAGE (mV)
+OUTPUT SATURATION VOLTAGE (V)
+
+
+
+
+                                0.25
+                                                                                                                                                                  70
+                                                                             VCC – VOH
+                                                                                                                                                                                                       VCC – VOH
+                                0.20
+                                                                                                                                                                  60
+
+                                0.15
+
+                                                                                                                                                                  50                                                VOL – VEE
+                                0.10
+
+                                                              VOL – VEE                                                                                           40
+                                0.05
+
+
+
+                                   0                                                                                                                              30
+                                                                                                              02916-E-035
+
+
+
+
+                                                                                                                                                                                                                                                       02916-E-038
+                                       0                10                 20              30         40                                                                25         35            45         55             65     75             85
+
+                                                                        ILOAD (mA)                                                                                                                TEMPERATURE (°C)
+
+                                   Figure 35. Output Saturation Voltage vs. Output Load Current                                                                              Figure 38. Output Saturation Voltage vs. Temperature
+
+                                   0                                                                                                                               0
+                                                                                                                                                                              VIN = 2V p-p
+                                 –10                                                                                                                             –10          G = +1
+                                 –20                                                                                                                             –20
+                                 –30                         –PSRR
+                                                                                                                                                                 –30
+                                                                                                                                CROSSTALK (dB)
+
+
+
+
+                                 –40                                                  +PSRR
+PSRR (dB)
+
+
+
+
+                                                                                                                                                                 –40
+                                 –50
+                                                                                                                                                                 –50
+                                 –60
+                                                                                                                                                                 –60                                       B TO A
+                                 –70
+                                                                                                                                                                 –70
+                                 –80                                                                                                                                                                                            A TO B
+                                 –90                                                                                                                             –80
+
+                                –100                                                                                                                             –90
+                                                                                                                                                                                                                                                       02916-E-039
+                                                                                                              02916-E-036
+
+
+
+
+                                   0.01           0.1               1            10             100   1000                                                          0.1                      1                      10                   100
+                                                                  FREQUENCY (MHz)                                                                                                                 FREQUENCY (MHz)
+                                       Figure 36. PSRR vs. Frequency (See Figure 48 and Figure 50)                                                                             Figure 39. Crosstalk vs. Frequency (See Figure 51)
+
+
+
+
+                                                                                                             Rev. I | Page 12 of 28
+                                                                                                                                                                          AD8065/AD8066
+                      6.60                                                                                                        125
+                                                                     VS = ±12V
+                                                                                                                                  120
+                      6.55              VS = ±5V
+                                                                                                                                  115                             VS = ±12V
+SUPPLY CURRENT (mA)
+
+
+
+
+                      6.50
+
+
+
+
+                                                                                                            OPEN-LOOP GAIN (dB)
+                                                                                                                                  110
+
+                      6.45                                                                                                        105
+                                                VS = +5V
+                      6.40                                                                                                        100       VS = +5V
+
+                                                                                                                                   95
+                      6.35                                                                                                                             VS = ±5V
+                                                                                                                                   90
+                      6.30
+                                                                                                                                   85
+
+                      6.25                                                                                                         80
+
+
+
+
+                                                                                          02916-E-040
+
+
+
+
+                                                                                                                                                                                          02916-E-041
+                          –40    –20        0        20       40       60        80                                                     0       10                20          30   40
+                                             TEMPERATURE (°C)                                                                                               ILOAD (mA)
+
+
+                       Figure 40. Quiescent Supply Current vs. Temperature for Various                               Figure 41. Open-Loop Gain vs. Load Current for Various Supply Voltages
+                                              Supply Voltages
+
+
+
+
+                                                                                         Rev. I | Page 13 of 28
+AD8065/AD8066
+TEST CIRCUITS
+SOIC-8 Pinout
+                                +VCC                                                                                                     +VCC
+
+                                          4.7F
+                                                                                                                                                4.7F
+
+
+
+
+                                          0.1F
+                                                                                                                                                0.1F
+
+                  24.9                                                                                                        2.2pF
+
+
+                                                                                                           499                499
+                                                                                             VIN
+
+                                                                                                   49.9
+
+
+                                                            FET PROBE                                                                                         FET PROBE
+                                                   RSNUB
+                          AD8065                                                                                                   AD8065
+ VIN
+                                                     1k         CLOAD                                                 249
+                                                                                                                                                                1k
+       49.9                              0.1F                                                                                                 0.1F
+
+
+
+
+                                          4.7F                                                                                                 4.7F
+                                                                        02916-E-042
+
+
+
+
+                                                                                                                                                                       02916-E-044
+                               –VEE                                                                                                      –VEE
+
+                              Figure 42. G = +1                                                                            Figure 44. G = −1
+
+
+                                +VCC                                                                                    +VCC
+
+                                          4.7F
+                                                                                                                                       4.7F
+
+
+
+
+                                           0.1F
+                                                                                                                                       0.1F
+
+                      2.2pF
+                                                                                                            24.9
+
+       499           499
+
+
+
+
+                                                            FET PROBE
+                                                   RSNUB
+                          AD8065
+                                                                                                                     AD8065
+ VIN                                                                                                                              NETWORK ANALYZER S22
+               249
+                                                      1k        CLOAD
+       49.9                              0.1F                                                                                        0.1F
+
+
+
+
+                                          4.7F                                                                                       4.7F
+                                                                               02916-E-043
+
+
+
+
+                                                                                                                                                         02916-E-045
+
+
+
+
+                                –VEE                                                                                    –VEE
+
+                              Figure 43. G = +2                                                                   Figure 45. Output Impedance G = +1
+
+
+
+
+                                                                    Rev. I | Page 14 of 28
+                                                                                                                                                  AD8065/AD8066
+                                        +VCC
+                                                                                                                                                    VIN
+                                                  4.7F                                                                                             1V p-p
+
+
+                                                                                                                                          +VCC
+                                                                                                                                 49.9
+                                                  0.1F
+                                                                                                               24.9
+
+
+           499                499
+
+
+
+VIN
+
+                                                           FET PROBE                                                                                         FET PROBE
+
+                                      AD8065                                                                           AD8065
+49.9
+               499                                       1k
+                                                                                                                                        0.1F                1k
+                        499                      0.1F
+
+
+
+
+                                                  4.7F                                                                                 4.7F
+
+
+
+
+                                                                                                                                                                    02916-E-048
+                                                                               02916-E-046
+
+
+
+                                                                                                                         –VEE
+                                        –VEE
+
+                             Figure 46. CMRR                                                                              Figure 48. Positive PSRR
+
+
+                               +VCC                                                                                              +VCC
+
+                                          4.7F
+                                                                                                                                                4.7F
+
+
+
+
+                                          0.1F
+                                                                                                                                                0.1F
+
+
+                                                                                                                         2.2pF
+        499          499
+
+                                                                                                        499             499
+
+
+
+
+                             AD8065
+        249                               NETWORK ANALYZER                                                                                              976       TO SCOPE
+                                                        S22                                                                 AD8065
+                                                                                                                249
+                                          0.1F                                                   VIN
+                                                                                                                                                0.1F              49.9
+                                                                                                               49.9
+
+
+                                          4.7F
+                                                                02916-E-047
+
+
+
+
+                                                                                                                                                4.7F
+                                                                                                                                                                                  02916-E-049
+
+                               –VEE
+                                                                                                                                 –VEE
+
+                  Figure 47. Output Impedance G = +2                                                                      Figure 49. Settling Time
+
+
+
+
+                                                                              Rev. I | Page 15 of 28
+AD8065/AD8066
+               +VCC                                                                                                                          24.9
+
+                         4.7F
+
+
+
+
+                                                                                                                                                              FET PROBE
+                         0.1F                                                                          24.9
+                                                                                                                                            AD8066
+       24.9
+                                                                                                    +5V
+                                                                                                                4.7F                                       1k
+
+
+
+                                                                                                                0.1F
+                                                                                                                                             RECEIVE SIDE
+
+
+                                           FET PROBE
+           AD8065                                                                                   AD8066
+                                                                                 VIN
+                                     1k                                                                        0.1F
+                       49.9                                                                                                          1k
+                                                                                          49.9
+                                                                                                                4.7F
+
+      VIN
+
+
+
+
+                                                                                                                                                                                02916-E-051
+      1V p-p
+                                                  02916-E-050
+
+
+
+
+                                                                                                    –5V
+
+               –VEE                                                                                DRIVE SIDE
+
+               Figure 50. Negative PSRR                                                                     Figure 51. Crosstalk—AD8066
+                                                                                                                        2.2pF
+
+
+
+
+                                                                                         499                           499
+
+
+
+                                                                                                                         5V
+
+                                                                                 1.5V                                         4.7F
+
+
+                                                                                                                              0.1F
+
+
+
+                                                                                                                                                     FET PROBE
+                                                                                                                   AD8065
+                                                                                                   249
+                                                                                   VIN
+
+                                                                                                                                                        1k
+                                                                                                49.9
+
+                                                                                                                                                                  02916-E-052
+
+
+                                                                                            1.5V                                                     1.5V
+
+
+                                                                                                                 Figure 52. Single Supply
+
+
+
+
+                                                                Rev. I | Page 16 of 28
+                                                                                                                                                                                              AD8065/AD8066
+
+THEORY OF OPERATION
+The AD8065/AD8066 are voltage feedback operational amplifiers                                                             NONINVERTING CLOSED-LOOP FREQUENCY
+that combine a laser-trimmed JFET input stage with the Analog                                                             RESPONSE
+Devices eXtra Fast Complementary Bipolar (XFCB) process,
+                                                                                                                          Solving for the transfer function
+resulting in an outstanding combination of precision and speed.
+The supply voltage range is from 5 V to 24 V. The amplifiers feature                                                             VO     2  f crossover RG  RF 
+                                                                                                                                    
+a patented rail-to-rail output stage capable of driving within 0.5 V                                                             VI RF  RG  s  2  f crossover  RG
+of either power supply while sourcing or sinking up to 30 mA.                                                             where fcrossover is the frequency where the amplifier’s open-loop
+Also featured is a single-supply input stage that handles common-                                                         gain equals 0 db
+mode signals from below the negative supply to within 3 V of the
+                                                                                                                                    VO RF  RG
+positive rail. Operation beyond the JFET input range is possible                                                          At dc        
+because of an auxiliary bipolar input stage that functions with                                                                     VI   RG
+input voltages up to the positive supply. The amplifiers operate as                                                       Closed-loop −3 dB frequency
+if they have a rail-to-rail input and exhibit no phase reversal
+                                                                                                                                                               RG
+behavior for common-mode voltages within the power supply.                                                                         f 3dB  f crossover 
+                                                                                                                                                             RF  RG
+With voltage noise of 7 nV/√Hz and −88 dBc distortion for
+1 MHz, 2 V p-p signals, the AD8065/AD8066 are a great choice                                                              INVERTING CLOSED-LOOP FREQUENCY
+for high resolution data acquisition systems. Their low noise,                                                            RESPONSE
+sub-pA input current, precision offset, and high speed make                                                                      VO       2  f crossover  RF
+                                                                                                                                    
+them superb preamps for fast photodiode applications. The                                                                        VI s RF  RG   2  f crossover  RG
+speed and output drive capability of the AD8065/AD8066 also
+make them useful in video applications.                                                                                             VO   R
+                                                                                                                          At dc         F
+                                                                                                                                    VI   RG
+CLOSED-LOOP FREQUENCY RESPONSE
+                                                                                                                          Closed-loop −3 dB frequency
+The AD8065/AD8066 are classic voltage feedback amplifiers
+with an open-loop frequency response that can be approximated as                                                                                                    RG
+                                                                                                                                   f 3dB  f crossover 
+the integrator response shown in Figure 53. Basic closed-loop                                                                                                    R F  RG
+frequency response for inverting and noninverting configurations
+can be derived from the schematics shown.
+                                                                               RF                                                                       RF
+
+
+                                                              RG                                                              VI           RG
+                                                                                                 VO                                                                        VO
+                                                                          VE        A                                                             VE         A
+                                                              VI
+
+
+
+
+                                                         80                                     A = (2  fcrossover)/s
+                               OPEN-LOOP GAIN (A) (dB)
+
+
+
+
+                                                         60
+
+
+
+
+                                                         40
+
+
+
+
+                                                                                                                                                      fcrossover = 65MHz
+                                                         20
+                                                                                                                                                                                02916-E-053
+
+
+
+
+                                                          0
+                                                                   0.01                 0.1            1                    10                  100
+                                                                                              FREQUENCY (MHz)
+
+                                                                     Figure 53. Open-Loop Gain vs. Frequency and Basic Connections
+
+
+
+                                                                                                    Rev. I | Page 17 of 28
+AD8065/AD8066
+The closed-loop bandwidth is inversely proportional to the noise                         Actual distortion performance depends on a number of
+gain of the op amp circuit, (RF + RG )/RG. This simple model is                          variables:
+accurate for noise gains above 2. The actual bandwidth of circuits
+                                                                                                 The closed-loop gain of the application
+with noise gains at or below 2 is higher than those predicted
+                                                                                                 Whether it is inverting or noninverting
+with this model due to the influence of other poles in the
+                                                                                                 Amplifier loading
+frequency response of the real op amp.
+                                                                                                 Signal frequency and amplitude
+                                                RF
+                                                                                                 Board layout
+
+            RG
+                          +VOS –                                                         Also see Figure 16 to Figure 20. The lowest distortion is obtained
+                                                                  VO
+                                                                                         with the AD8065 used in low gain inverting applications,
+                     RS
+                                             Ib –    A                                   because this eliminates common-mode effects. Higher closed-
+           VI
+                                                                                         loop gains result in worse distortion performance.
+
+
+
+                                                                       02916-E-054
+                                             Ib+
+                                                                                         INPUT PROTECTION
+                                                                                         The inputs of the AD8065/AD8066 are protected with back-to-
+                Figure 54. Voltage Feedback Amplifier DC Errors
+                                                                                         back diodes between the input terminals as well as ESD diodes
+Figure 54 shows a voltage feedback amplifier’s dc errors. For                            to either power supply. This results in an input stage with picoamps
+both inverting and noninverting configurations                                           of input current that can withstand up to 1500 V ESD events
+                                                                                         (human body model) with no degradation.
+                              R  RF                     R  RF 
+     VO error   I b  RS  G        I b  RF  VOS  G      
+                              RG                         RG                          Excessive power dissipation through the protection devices
+                                                                                         destroys or degrades the performance of the amplifier. Differ-
+The voltage error due to Ib+ and Ib– is minimized if RS = RF || RG                       ential voltages greater than 0.7 V result in an input current of
+(though with the AD8065 input currents at less than 20 pA over                           approximately (|V+ − V−| 0.7 V)/RI, where RI is the resistance in
+temperature, this is likely not a concern). To include common-                           series with the inputs.
+mode and power supply rejection effects, total VOS can be modeled
+                                                                                         For input voltages beyond the positive supply, the input current
+                     Δ VS Δ VCM
+     VOS  VOS nom                                                                     is approximately (VI − VCC − 0.7)/RI. Beyond the negative supply,
+                     PSR CMR                                                             the input current is about (VI − VEE + 0.7)/RI. If the inputs of the
+VOS nom is the offset voltage specified at nominal conditions,                           amplifier are to be subjected to sustained differential voltages
+                                                                                         greater than 0.7 V, or to input voltages beyond the amplifier
+ΔVS is the change in power supply from nominal conditions,
+                                                                                         power supply, input current should be limited to 30 mA by an
+PSR is the power supply rejection, ΔVCM is the change in common-
+                                                                                         appropriately sized input resistor (RI), as shown in Figure 55.
+mode voltage from nominal conditions, and CMR is the common-
+                                                                                                                                                         (VI – VEE – 0.7V)
+mode rejection.                                                                                  RI >
+                                                                                                        (| V+– V– | – 0.7V)
+                                                                                                                                                  RI >
+                                                                                                               30mA                                           30mA
+WIDEBAND OPERATION                                                                           FOR LARGE | V+ – V– |                                RI >
+                                                                                                                                                         (VI – VEE + 0.7V)
+                                                                                                                                                            30mA
+Figure 42 through Figure 44 show the circuits used for wideband                                                                 AD8065                   FOR VI BEYOND
+                                                                                                                      RI
+characterization for gains of +1, +2, and −1. Source impedance at                                        VI
+                                                                                                                                                         SUPPLY VOLTAGES
+                                                                                                                                                     VO
+the summing junction (RF || RG) forms a pole in the amplifier’s loop
+response with the amplifier’s input capacitance of 6.6 pF. This                                                                                                              02916-E-055
+
+
+can cause peaking and ringing if the time constant formed is too
+low. Feedback resistances of 300 Ω to 1 kΩ are recommended,                                                            Figure 55. Current-Limiting Resistor
+because they do not unduly load down the amplifier, and the
+time constant formed will not be too low. Peaking in the
+frequency response can be compensated for with a small
+capacitor (CF) in parallel with the feedback resistor, as
+illustrated in Figure 12. This shows the effect of different
+feedback capacitances on the peaking and bandwidth for a
+noninverting G = +2 amplifier.
+For the best settling times and the best distortion, the impedances
+at the AD8065/AD8066 input terminals should be matched. This
+minimizes nonlinear common-mode capacitive effects that can
+degrade ac performance.
+
+
+
+
+                                                                        Rev. I | Page 18 of 28
+                                                                                                                                           AD8065/AD8066
+THERMAL CONSIDERATIONS                                                                   INPUT AND OUTPUT OVERLOAD BEHAVIOR
+With 24 V power supplies and 6.5 mA quiescent current, the                               A simplified schematic of the AD8065/AD8066 input stage is
+AD8065 dissipates 156 mW with no load. The AD8066 dissipates                             shown in Figure 56. This shows the cascoded N-channel JFET
+312 mW. This can lead to noticeable thermal effects, especially                          input pair, the ESD and other protection diodes, and the
+in the small SOT-23-5 (thermal resistance of 160°C/W). VOS                               auxiliary NPN input stage that eliminates any phase inversion
+temperature drift is trimmed to guarantee a maximum drift of                             behavior. When the common-mode input voltage to the amplifier
+17 μV/°C, so it can change up to 0.425 mV due to warm-up                                 is driven to within approximately 3 V of the positive power supply,
+effects for an AD8065/AD8066 in a SOT-23-5 package on 24 V.                              the input JFET’s bias current turns off and the bias of the NPN
+Ib increases by a factor of 1.7 for every 10°C rise in temperature.                      pair turns on, taking over control of the amplifier. The NPN
+Ib is close to five times higher at 24 V supplies as opposed to a                        differential pair now sets the amplifier’s offset, and the input
+single 5 V supply.                                                                       bias current is now in the range of several tens of microamps.
+                                                                                         This behavior is shown in Figure 32. Normal operation resumes
+Heavy loads increase power dissipation and raise the chip                                when the common-mode voltage goes below the 3 V from the
+junction temperature as described in the Maximum Power                                   positive supply threshold.
+Dissipation section. Care should be taken not to exceed the
+rated power dissipation of the package.                                                  The output transistors of the rail-to-rail output stage have
+                                                                                         circuitry to limit the extent of their saturation when the output
+                                                                                         is overdriven. This helps output recovery time. Output recovery
+                                                                                         from a 0.5 V output overdrive on a ±5 V supply is shown in
+                                                                                         Figure 24.
+
+
+                                                                                         VCC
+
+                                                      R1                                                                  R5
+
+                                                                                                                          TO REST OF AMP
+
+
+                       VTHRESHOLD                             Q2                                                             Q5
+
+
+
+
+                                                                                                                                            VBIAS
+
+
+                                                                                          D1         R6
+                                                                             R3
+                                                      Q1                                                                  Q6
+                                           VN                                             D2
+                                                                        D3                                     D4                    VP
+                                                                                    Q3         Q4
+
+                                                        S                                                                S
+                                                                               R4                   R7
+
+
+                                                                   R2                                               R8
+                                                                                                                                           Q7
+
+
+
+
+                                                                             IT1                         IT2
+                                                                                                                                                    02916-E-056
+
+
+
+
+                                                                                                                         –VEE
+
+                                                            Figure 56. Simplified Input Stage
+
+
+
+
+                                                                   Rev. I | Page 19 of 28
+AD8065/AD8066
+
+LAYOUT, GROUNDING, AND BYPASSING CONSIDERATIONS
+POWER SUPPLY BYPASSING                                                        GROUNDING
+Power supply pins are actually inputs and care must be taken so               A ground plane layer is important in densely packed PC boards
+that a noise-free stable dc voltage is applied. The purpose of                to spread the current minimizing parasitic inductances.
+bypass capacitors is to create low impedances from the supply                 However, an understanding of where the current flows in a
+to ground at all frequencies, thereby shunting or filtering most              circuit is critical to implementing effective high speed circuit
+of the noise.                                                                 design. The length of the current path is directly proportional to
+                                                                              the magnitude of parasitic inductances and, therefore, the high
+Decoupling schemes are designed to minimize the bypassing
+                                                                              frequency impedance of the path. High speed currents in an
+impedance at all frequencies with a parallel combination of
+                                                                              inductive ground return create unwanted voltage noise.
+capacitors. 0.1 μF (X7R or NPO) chip capacitors are critical and
+should be as close as possible to the amplifier package. The                  The length of the high frequency bypass capacitor leads is most
+4.7 μF tantalum capacitor is less critical for high frequency                 critical. A parasitic inductance in the bypass grounding works
+bypassing, and, in most cases, only one is needed per board at                against the low impedance created by the bypass capacitor.
+the supply inputs.                                                            Place the ground leads of the bypass capacitors at the same
+                                                                              physical location. Because load currents flow from the supplies
+                                                                              as well, the ground for the load impedance should be at the
+                                                                              same physical location as the bypass capacitor grounds. For the
+                                                                              larger value capacitors, which are effective at lower frequencies,
+                                                                              the current return path distance is less critical.
+
+
+
+
+                                                             Rev. I | Page 20 of 28
+                                                                                                                                      AD8065/AD8066
+LEAKAGE CURRENTS                                                                     OUTPUT CAPACITANCE
+Poor PC board layout, contaminants, and the board insulator                          To a lesser extent, parasitic capacitances on the output can cause
+material can create leakage currents that are much larger than                       peaking and ringing of the frequency response. There are two
+the input bias current of the AD8065/AD8066. Any voltage                             methods to effectively minimize their effect:
+differential between the inputs and nearby runs sets up leakage
+                                                                                            As shown in Figure 57, put a small value resistor (RS) in
+currents through the PC board insulator, for example, 1 V/100 GΩ
+                                                                                             series with the output to isolate the load capacitor from the
+= 10 pA. Similarly, any contaminants on the board can create
+                                                                                             amp’s output stage. A good value to choose is 20 Ω (see
+significant leakage (skin oils are a common problem). To reduce
+                                                                                             Figure 10).
+leakage significantly, put a guard ring (shield) around the inputs
+                                                                                            Increase the phase margin with higher noise gains or add a
+and input leads that are driven to the same voltage potential as
+                                                                                             pole with a parallel resistor and capacitor from −IN to the
+the inputs. This way there is no voltage potential between the
+                                                                                             output.
+inputs and surrounding area to set up any leakage currents. For
+the guard ring to be completely effective, it must be driven by a
+relatively low impedance source and should completely
+surround the input leads on all sides, above and below, using a                                                                 RS = 20
+multilayer board.                                                                                             AD8065                                     VO
+
+                                                                                             VI                                                     CL
+Another effect that can cause leakage currents is the charge
+
+
+
+
+                                                                                                                                                          02916-E-057
+absorption of the insulator material itself. Minimizing the
+amount of material between the input leads and the guard ring                                             Figure 57. Output Isolation Resistor
+helps to reduce the absorption. Also, low absorption materials,
+such as Teflon® or ceramic, could be necessary in some instances.
+INPUT CAPACITANCE
+Along with bypassing and ground, high speed amplifiers can be
+sensitive to parasitic capacitance between the inputs and ground.
+A few pF of capacitance reduces the input impedance at high
+frequencies, in turn increasing the amplifier’s gain, causing peaking
+of the frequency response or even oscillations, if severe enough.
+It is recommended that the external passive components connected
+to the input pins be placed as close as possible to the inputs to
+avoid parasitic capacitance. The ground and power planes must
+be kept at a small distance from the input pins on all layers of
+the board.
+                                                                                                              CF
+
+
+
+
+                                                                                                              RF
+
+
+
+
+                          IPHOTO                      RSH = 1011                                        CM
+
+                                            CS
+                                                                                                    CD
+                                                                                                         CM                      VO
+
+                                   VB
+                                                              CF + CS
+                                                                                                                                      02916-E-058
+
+
+
+
+                                                                                     RF
+
+
+
+                                                       Figure 58. Wideband Photodiode Preamp
+
+
+
+
+                                                                    Rev. I | Page 21 of 28
+AD8065/AD8066
+INPUT-TO-OUTPUT COUPLING                                                               The preamp’s output noise over frequency is shown in Figure 59.
+To minimize capacitive coupling between the inputs and output,
+the output signal traces should not be parallel with the inputs.                                                                   f1 =
+                                                                                                                                                        1
+                                                                                                                                           2 RF (CF + CS + CM + 2CD)
+
+WIDEBAND PHOTODIODE PREAMP
+                                                                                                                                             1
+                                                                                                                                   f2 =
+Figure 58 shows an I/V converter with an electrical model of a                                                                            2RFCF
+
+
+
+
+                                                                                       VOLTAGE NOISE (nV/ Hz)
+photodiode. The basic transfer function is                                                                                                           fCR
+                                                                                                                                   f3 =
+                                                                                                                                          (CS + CM + 2CD + CF) /CF
+                   I PHOTO  RF
+     VOUT 
+                    1  sC F RF                                                                                         RF NOISE
+
+where IPHOTO is the output current of the photodiode, and the
+                                                                                                                                   f2                                            f3
+parallel combination of RF and CF sets the signal bandwidth.                                                                                       VEN (CF + CS + CM + 2CD)/CF
+
+
+The stable bandwidth attainable with this preamp is a function                                                     f1
+
+of RF, the gain bandwidth product of the amplifier, and the total                                                VEN
+
+
+
+
+                                                                                                                                                                                      02916-E-059
+                                                                                                                               NOISE DUE TO AMPLIFIER
+capacitance at the amplifier’s summing junction, including CS
+and the amplifier input capacitance. RF and the total capacitance                                                                               FREQUENCY (Hz)
+                                                                                                                         Figure 59. Photodiode Voltage Noise Contributions
+produce a pole in the amplifier’s loop transmission that can
+result in peaking and instability. Adding CF creates a 0 in the
+                                                                                       The pole in the loop transmission translates to a 0 in the
+loop transmission that compensates for the pole’s effect and
+                                                                                       amplifier’s noise gain, leading to an amplification of the input
+reduces the signal bandwidth. It can be shown that the signal
+                                                                                       voltage noise over frequency. The loop transmission 0
+bandwidth resulting in a 45° phase margin (f(45)) is defined by
+                                                                                       introduced by CF limits the amplification. The noise gain
+                         f CR                                                          bandwidth extends past the preamp signal bandwidth and is
+      f  45  
+                    2  RF  C S                                                      eventually rolled off by the decreasing loop gain of the
+                                                                                       amplifier. Keeping the input terminal impedances matched is
+where fCR is the amplifier crossover frequency, RF is the feedback                     recommended to eliminate common-mode noise peaking
+resistor, and CS is the total capacitance at the amplifier summing                     effects, which adds to the output noise.
+junction (amplifier + photodiode + board parasitics).
+                                                                                       Integrating the square of the output voltage noise spectral
+The value of CF that produces f(45) can be shown to be                                 density over frequency and then taking the square root allows
+                        CS                                                             users to obtain the total rms output noise of the preamp. Table 5
+     CF                                                                               summarizes approximations for the amplifier and feedback and
+                   2  RF  f CR
+                                                                                       source resistances. Noise components for an example preamp
+The frequency response in this case shows about 2 dB of                                with RF = 50 kΩ, CS = 15 pF, and CF = 2 pF (bandwidth of about
+peaking and 15% overshoot. Doubling CF and cutting the                                 1.6 MHz) are also listed.
+bandwidth in half results in a flat frequency response with
+about 5% transient overshoot.
+
+Table 5. RMS Noise Contributions of Photodiode Preamp
+Contributor                  Expression                                                                         RMS Noise with RF = 50 kΩ, CS = 15 pF, CS = 15 pF
+RF (×2)                        2  4 kT  RF  f 2  1.57                                                       64.5 μV
+
+Amp to f1                    VEN      f1                                                                       2.4 μV
+
+Amp (f2 – f1)                          C S  C M  C F  2C D                                                   31 μV
+                             VEN                                f 2  f1
+                                                 CF
+Amp to (past f2)                       C S  C M  2C D  C F                                                   260 μV
+                             VEN                              f 3  1.57
+                                                 CF
+                                                                                                                270 μV (Total)
+
+
+
+
+                                                                      Rev. I | Page 22 of 28
+                                                                                                                                                   AD8065/AD8066
+                                                  VCC
+
+
+                                                                     4.7F
+                                                         0.1F
+                            RS1
+
+                                                1/2
+                      VN                                                                                        2.2pF
+                                             AD8066
+
+                                                                     4.7F                                       R2
+                                                        0.1F
+                                                                                                                500
+
+                                                   VEE                                                          VCC
+
+
+                                                                                                                                       4.7F
+                                                                                    R1                                0.1F
+                                                                                   500
+
+                                            RF = 500
+                                                                                                        AD8065                                      VO
+
+
+
+                                  RG                                                                                                   4.7 F
+                                                                                                                  0.1 F
+
+                                                                                    R3
+                                                        RF = 500                  500                         VEE
+
+
+                                                  VCC
+
+
+                                                                     4.7F
+                                                         0.1 F
+                                                                                           R4
+                                                                                          500          2.2pF
+                                                1/2
+
+                            RS2              AD8066
+
+                      VP                                             4.7F
+                                                        0.1 F
+
+
+
+
+                                                                                                                                                         02916-E-060
+                                                  VEE
+
+                                                          Figure 60. High Speed Instrumentation Amplifier
+
+
+HIGH SPEED JFET INPUT INSTRUMENTATION                                                     VIDEO BUFFER
+AMPLIFIER                                                                                 The output current capability and speed of the AD8065 make it
+Figure 60 shows an example of a high speed instrumentation                                useful as a video buffer, shown in Figure 61.
+amplifier with high input impedance using the                                             The G = +2 configuration compensates for the voltage division
+AD8065/AD8066. The dc transfer function is                                                of the signal due to the signal termination. This buffer maintains
+                                                                                          0.1 dB flatness for signals up to 7 MHz, from low amplitudes up
+                           1000 
+     VOUT  V N  V P  1                                                            to 2 V p-p (see Figure 7). Differential gain and phase have been
+                              RG                                                       measured to be 0.02% and 0.028°, respectively, at ±5 V supplies.
+For G = +1, it is recommended that the feedback resistors for                                                         +VS
+
+the two preamps be set to a low value (for instance 50 Ω for
+                                                                                                                              0.1 F            4.7 F
+50 Ω source impedance). The bandwidth for G = +1 is 50 MHz.                                           249
+For higher gains, the bandwidth is set by the preamp, equaling                                   +                                                                     75
+
+     Inamp3dB   f CR  RG / 2  RF 
+                                                                                                                AD8065
+                                                                                                 VI                                                                                +
+                                                                                                 –                                                                                 VO
+                                                                                                                                                                             75
+                                                                                                                              0.1 F            4.7 F                             –
+Common-mode rejection of the in-amp is primarily
+determined by the match of the resistor ratios R1:R2 to R3:R4.                                                        –VS
+                                                                                                                               2.2pF
+It can be estimated
+     VO   1  2 
+        
+     VCM 1  1 2
+                                                                                                                               499
+                                                                                                                                                                                   02916-E-061
+
+
+
+
+                                                                                                         499
+
+
+The summing junction impedance for the preamps is equal to                                                                Figure 61. Video Buffer
+RF || 0.5(RG). This is the value to be used for matching purposes.
+
+
+
+
+                                                                        Rev. I | Page 23 of 28
+AD8065/AD8066
+
+OUTLINE DIMENSIONS
+                                                   5.00 (0.1968)
+                                                   4.80 (0.1890)
+
+
+                                                    8           5
+                               4.00 (0.1574)                           6.20 (0.2441)
+                               3.80 (0.1497)        1                  5.80 (0.2284)
+                                                               4
+
+
+
+
+                                                   1.27 (0.0500)                                         0.50 (0.0196)
+                                                       BSC                                                                45°
+                                                                         1.75 (0.0688)                   0.25 (0.0099)
+                           0.25 (0.0098)                                 1.35 (0.0532)
+                                                                                          8°
+                           0.10 (0.0040)                                                  0°
+                     COPLANARITY                                0.51 (0.0201)
+                         0.10                                                                             1.27 (0.0500)
+                                                                0.31 (0.0122)            0.25 (0.0098)
+                               SEATING                                                                    0.40 (0.0157)
+                                 PLANE                                                   0.17 (0.0067)
+
+                                        COMPLIANT TO JEDEC STANDARDS MS-012-A A
+                             CONTROLLING DIMENSIONS ARE IN MILLIMETERS; INCH DIMENSIONS
+
+
+
+
+                                                                                                                                012407-A
+                             (IN PARENTHESES) ARE ROUNDED-OFF MILLIMETER EQUIVALENTS FOR
+                             REFERENCE ONLY AND ARE NOT APPROPRIATE FOR USE IN DESIGN.
+
+                                   Figure 62. 8-Lead Standard Small Outline Package [SOIC_N]
+                                                        Narrow Body (R-8)
+                                          Dimensions shown in millimeters and (inches)
+
+
+                                            3.00
+                                            2.90
+                                            2.80
+
+
+
+                                      5                  4              3.00
+                      1.70
+                      1.60                                              2.80
+                      1.50                                              2.60
+                                      1        2         3
+
+
+
+
+                                                             0.95 BSC
+                                            1.90
+                                            BSC
+                     1.30
+                     1.15
+                     0.90
+                                                                    1.45 MAX      0.20 MAX
+                                                                    0.95 MIN      0.08 MIN
+                                                                                                                            0.55
+                0.15 MAX                                                                           10°                      0.45
+                0.05 MIN                                                   SEATING                  5°        0.20
+                                                        0.50 MAX           PLANE                              BSC           0.35
+                                                        0.35 MIN                                    0°
+                                                                                                                                           121608-A
+
+
+
+
+                                           COMPLIANT TO JEDEC STANDARDS MO-178-AA
+
+                                   Figure 63. 5-Lead Small Outline Transistor Package [SOT-23]
+                                                             (RJ-5)
+                                                 Dimensions shown in millimeters
+
+
+
+
+                                                                    Rev. I | Page 24 of 28
+                                                                                                                                   AD8065/AD8066
+                                                                      3.20
+                                                                      3.00
+                                                                      2.80
+
+
+                                                                  8          5    5.15
+                                                          3.20
+                                                                                  4.90
+                                                          3.00
+                                                                                  4.65
+                                                          2.80    1
+                                                                             4
+
+
+                                                          PIN 1
+                                                                  0.65 BSC
+                                                   0.95
+                                                   0.85                             1.10 MAX
+                                                   0.75
+                                                                                                                0.80
+                                                     0.15         0.38                                    8°    0.60
+                                                                                           0.23
+                                                     0.00         0.22                                    0°    0.40
+                                                                                           0.08
+                                                          COPLANARITY            SEATING
+                                                              0.10               PLANE
+
+
+                                                                 COMPLIANT TO JEDEC STANDARDS MO-187-AA
+
+                                                          Figure 64. 8-Lead Mini Small Outline Package [MSOP]
+                                                                                  (RM-8)
+                                                                     Dimensions shown in millimeters
+
+ORDERING GUIDE
+Model                                 Temperature Range                              Package Description               Package Option   Branding
+AD8065AR                              −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065AR-REEL                         −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065AR-REEL7                        −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065ARZ1                            −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065ARZ-REEL1                       −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065ARZ-REEL71                      −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8065ART-R2                          −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA
+AD8065ART-REEL                        −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA
+AD8065ART-REEL7                       −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA
+AD8065ARTZ-R21                        −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA #
+AD8065ARTZ-REEL1                      −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA #
+AD8065ARTZ-REEL71                     −40°C to +85°C                                 5-Lead SOT-23                     RJ-5             HRA #
+AD8066AR                              −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066AR-REEL                         −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066AR-REEL7                        −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066ARZ1                            −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066ARZ-RL1                         −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066ARZ-R71                         −40°C to +85°C                                 8-Lead SOIC_N                     R-8
+AD8066ARM                             −40°C to +85°C                                 8-Lead MSOP                       RM-8             H1B
+AD8066ARM-REEL                        −40°C to +85°C                                 8-Lead MSOP                       RM-8             H1B
+AD8066ARM-REEL7                       −40°C to +85°C                                 8-Lead MSOP                       RM-8             H1B
+AD8066ARMZ1                           −40°C to +85°C                                 8-Lead MSOP                       RM-8             H7C
+AD8066ARMZ-REEL71                     −40°C to +85°C                                 8-Lead MSOP                       RM-8             H7C
+1
+    Z = RoHS Compliant Part, # denotes RoHS compliant product may be top or bottom marked.
+
+
+
+
+                                                                                 Rev. I | Page 25 of 28
+AD8065/AD8066
+
+NOTES
+
+
+
+
+                Rev. I | Page 26 of 28
+                                 AD8065/AD8066
+
+NOTES
+
+
+
+
+        Rev. I | Page 27 of 28
+AD8065/AD8066
+
+NOTES
+
+
+
+
+©2002–2009 Analog Devices, Inc. All rights reserved. Trademarks and
+registered trademarks are the property of their respective owners.
+                                                    D02916-0-3/09(I)
+
+
+                                                                       Rev. I | Page 28 of 28
+

@@ -1,0 +1,2410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/devb/projects/AI/skidl-skills-tests/dual-adc-usb-2/circuits/dual_adc_usb/__main__.py</source>
+    <date>09/09/2026 08:02 AM</date>
+    <tool>SKiDL (3.0.0)</tool>
+  </design>
+  <components>
+    <comp ref="J1">
+      <value>"USB-C Receptacle (USB2.0)"</value>
+      <footprint>Connector_USB:USB_C_Receptacle_XKB_U262-16XN-4BVC11</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""USB_C_Receptacle_USB2.0_16P""/>
+    </comp>
+    <comp ref="R1">
+      <value>"5.1k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R2">
+      <value>"5.1k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R3">
+      <value>"1M"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C2">
+      <value>"4.7nF 2kV"</value>
+      <footprint>Capacitor_SMD:C_1808_4520Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="F1">
+      <value>"500mA Hold / 1A Trip"</value>
+      <footprint>Fuse:Fuse_1206_3216Metric</footprint>
+      <libsource lib="Device" part=""Polyfuse""/>
+    </comp>
+    <comp ref="C1">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="D2">
+      <value>"PESD5V0S1BA"</value>
+      <footprint>Diode_SMD:D_SOD-323</footprint>
+      <libsource lib="Device" part=""D_TVS""/>
+    </comp>
+    <comp ref="FB1">
+      <value>"90ohm@100MHz"</value>
+      <footprint>Inductor_SMD:L_CommonModeChoke_Coilcraft_0805USB</footprint>
+      <libsource lib="Device" part=""Filter_EMI_CommonMode""/>
+    </comp>
+    <comp ref="D1">
+      <value>"USBLC6-2SC6"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Power_Protection.kicad_sym" part=""USBLC6-2SC6""/>
+    </comp>
+    <comp ref="U1">
+      <value>"AP7361C-33E-13"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""AP7361C-33E""/>
+    </comp>
+    <comp ref="U2">
+      <value>"AP2112K-1.2TRG1"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""AP2112K-1.2""/>
+    </comp>
+    <comp ref="C3">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C4">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C5">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C6">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C7">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R4">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D3">
+      <value>"LED_green"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="Q1">
+      <value>"AO3401A"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Transistor_FET.kicad_sym" part=""Q_PMOS_GSD""/>
+    </comp>
+    <comp ref="R5">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R6">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="FB2">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="L2">
+      <value>"LQM2HPN100MGL"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""L""/>
+    </comp>
+    <comp ref="C12">
+      <value>"22uF"</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB3">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="U4">
+      <value>"LP5907MFX-3.3/NOPB"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""LP5907MFX-3.3""/>
+    </comp>
+    <comp ref="U3">
+      <value>"LM2776DBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_SwitchedCapacitor.kicad_sym" part=""LM2776""/>
+    </comp>
+    <comp ref="C8">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C9">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C10">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C11">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="L1">
+      <value>"LQM2HPN100MGL"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""L""/>
+    </comp>
+    <comp ref="C13">
+      <value>"22uF"</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB6">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="U5">
+      <value>"REF3025AIDBZR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Reference_Voltage.kicad_sym" part=""REF3025""/>
+    </comp>
+    <comp ref="R7">
+      <value>"4.02k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R8">
+      <value>"1.00k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R9">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C14">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C15">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C16">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C17">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C18">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C19">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C20">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C21">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="X1">
+      <value>"ASEM1-10.000MHZ-LC-T"</value>
+      <footprint>Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Oscillator.kicad_sym" part=""ASE-xxxMHz""/>
+    </comp>
+    <comp ref="R10">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U16">
+      <value>"74LVC1G34GW,125"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <libsource lib="/usr/share/kicad/symbols/74xGxx.kicad_sym" part=""74LVC1G34""/>
+    </comp>
+    <comp ref="R11">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U17">
+      <value>"74LVC1G34GW,125"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <libsource lib="/usr/share/kicad/symbols/74xGxx.kicad_sym" part=""74LVC1G34""/>
+    </comp>
+    <comp ref="R12">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C22">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C23">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C24">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="J2">
+      <value>"BNC_Amphenol_031-6575"</value>
+      <footprint>Connector_Coaxial:BNC_Amphenol_031-6575_Horizontal</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""Conn_Coaxial""/>
+    </comp>
+    <comp ref="R100">
+      <value>"475k"</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R101">
+      <value>"475k"</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C100">
+      <value>"2-10pF"</value>
+      <footprint>Capacitor_SMD:C_Trimmer_Voltronics_JR</footprint>
+      <libsource lib="Device" part=""C_Trim""/>
+    </comp>
+    <comp ref="R102">
+      <value>"49.9k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C101">
+      <value>"180pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="D101">
+      <value>"ESD9L12ST5G (DNP, <2pF, >=45V)"</value>
+      <footprint>Diode_SMD:D_SOD-923</footprint>
+      <libsource lib="Device" part=""D_TVS""/>
+    </comp>
+    <comp ref="R103">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D100">
+      <value>"BAV99"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Diode.kicad_sym" part=""BAV99""/>
+    </comp>
+    <comp ref="U100">
+      <value>"AD8066ARZ"</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""AD8066ARZ""/>
+    </comp>
+    <comp ref="C107">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C108">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C109">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C110">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R104">
+      <value>"246"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R105">
+      <value>"246"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C103">
+      <value>"140pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C102">
+      <value>"120pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U101">
+      <value>"OPA836IDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""OPA836IDBVR""/>
+    </comp>
+    <comp ref="R106">
+      <value>"768"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R108">
+      <value>"300"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R107">
+      <value>"1536"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C104">
+      <value>"220pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C105">
+      <value>"10pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C111">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C112">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R109">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C106">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="J3">
+      <value>"BNC_Amphenol_031-6575"</value>
+      <footprint>Connector_Coaxial:BNC_Amphenol_031-6575_Horizontal</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""Conn_Coaxial""/>
+    </comp>
+    <comp ref="R200">
+      <value>"475k"</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R201">
+      <value>"475k"</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C200">
+      <value>"2-10pF"</value>
+      <footprint>Capacitor_SMD:C_Trimmer_Voltronics_JR</footprint>
+      <libsource lib="Device" part=""C_Trim""/>
+    </comp>
+    <comp ref="R202">
+      <value>"49.9k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C201">
+      <value>"180pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="D201">
+      <value>"ESD9L12ST5G (DNP, <2pF, >=45V)"</value>
+      <footprint>Diode_SMD:D_SOD-923</footprint>
+      <libsource lib="Device" part=""D_TVS""/>
+    </comp>
+    <comp ref="R203">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D200">
+      <value>"BAV99"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Diode.kicad_sym" part=""BAV99""/>
+    </comp>
+    <comp ref="U200">
+      <value>"AD8066ARZ"</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""AD8066ARZ""/>
+    </comp>
+    <comp ref="C207">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C208">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C209">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C210">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R204">
+      <value>"246"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R205">
+      <value>"246"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C203">
+      <value>"140pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C202">
+      <value>"120pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U201">
+      <value>"OPA836IDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""OPA836IDBVR""/>
+    </comp>
+    <comp ref="R206">
+      <value>"768"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R208">
+      <value>"300"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R207">
+      <value>"1536"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C204">
+      <value>"220pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C205">
+      <value>"10pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C211">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C212">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R209">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C206">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U110">
+      <value>"AD9235BRUZ-20"</value>
+      <footprint>Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""AD9235BRUZ-20""/>
+    </comp>
+    <comp ref="R132">
+      <value>"1.8k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R133">
+      <value>"1.5k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C130">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C131">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C132">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C127">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C128">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C129">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C120">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C121">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C122">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C123">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C124">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB10">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C125">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C126">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R120">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R121">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R122">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R123">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R124">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R125">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R126">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R127">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R128">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R129">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R130">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R131">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U210">
+      <value>"AD9235BRUZ-20"</value>
+      <footprint>Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""AD9235BRUZ-20""/>
+    </comp>
+    <comp ref="R232">
+      <value>"1.8k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R233">
+      <value>"1.5k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C230">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C231">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C232">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C227">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C228">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C229">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C220">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C221">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C222">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C223">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C224">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB20">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C225">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C226">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R220">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R221">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R222">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R223">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R224">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R225">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R226">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R227">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R228">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R229">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R230">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R231">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U8">
+      <value>"IS61WV25616BLL-10TLI"</value>
+      <footprint>Package_SO:TSOP-II-44_10.16x18.41mm_P0.8mm</footprint>
+      <libsource lib="lib/dual_adc_usb.kicad_sym" part=""IS61WV25616BLL-10TLI""/>
+    </comp>
+    <comp ref="C41">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C42">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C43">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C44">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C45">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C46">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U6">
+      <value>"FT232HL"</value>
+      <footprint>Package_QFP:LQFP-48_7x7mm_P0.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Interface_USB.kicad_sym" part=""FT232H""/>
+    </comp>
+    <comp ref="R18">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R19">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R14">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R15">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R16">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R13">
+      <value>"12.0k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R17">
+      <value>"2.2k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="Y1">
+      <value>"X322512MSB4SI"</value>
+      <footprint>Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm</footprint>
+      <libsource lib="Device" part=""Crystal""/>
+    </comp>
+    <comp ref="C25">
+      <value>"27pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C26">
+      <value>"27pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB5">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="FB4">
+      <value>"BLM18PG601SN1D"</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C27">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C28">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C29">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C30">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C31">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C32">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C33">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C34">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C35">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C36">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C37">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C38">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C39">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C40">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U7">
+      <value>"93LC46BT-I/OT"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Memory_EEPROM.kicad_sym" part=""93CxxC""/>
+    </comp>
+    <comp ref="U9">
+      <value>"iCE40HX4K-TQ144"</value>
+      <footprint>Package_QFP:TQFP-144_20x20mm_P0.5mm</footprint>
+      <libsource lib="FPGA_Lattice" part=""ICE40HX4K-TQ144""/>
+    </comp>
+    <comp ref="C47">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C48">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C49">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C50">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C51">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C52">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C53">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C54">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C55">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C56">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C57">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C58">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C59">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C60">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C61">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C62">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R26">
+      <value>"470"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C63">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R20">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D4">
+      <value>"Blue"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="R23">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C64">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R24">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U18">
+      <value>"W25Q32JVSSIQ"</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Memory_Flash.kicad_sym" part=""W25Q32JVSS""/>
+    </comp>
+    <comp ref="J4">
+      <value>"FPGA_PROG"</value>
+      <footprint>Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector_Generic.kicad_sym" part=""Conn_02x05_Odd_Even""/>
+    </comp>
+    <comp ref="J5">
+      <value>"EXT_TRIG"</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector_Generic.kicad_sym" part=""Conn_01x02""/>
+    </comp>
+    <comp ref="R25">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D7">
+      <value>"BAV99"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Diode.kicad_sym" part=""BAV99""/>
+    </comp>
+    <comp ref="D5">
+      <value>"Green"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="R21">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="D6">
+      <value>"Amber"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="R22">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+  </components>
+  <nets>
+    <net code="0" name="VBUS">
+      <node ref="U1" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="D2" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="F1" pin="2"/>
+      <node ref="R5" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="D1" pin="5"/>
+    </net>
+    <net code="1" name="GND">
+      <node ref="C37" pin="2"/>
+      <node ref="C42" pin="2"/>
+      <node ref="D201" pin="2"/>
+      <node ref="C107" pin="2"/>
+      <node ref="D2" pin="2"/>
+      <node ref="C17" pin="2"/>
+      <node ref="C104" pin="2"/>
+      <node ref="C123" pin="2"/>
+      <node ref="C224" pin="2"/>
+      <node ref="C60" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C38" pin="2"/>
+      <node ref="U201" pin="2"/>
+      <node ref="C43" pin="2"/>
+      <node ref="C25" pin="2"/>
+      <node ref="C124" pin="2"/>
+      <node ref="U17" pin="3"/>
+      <node ref="C108" pin="2"/>
+      <node ref="C18" pin="2"/>
+      <node ref="C61" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="U210" pin="8"/>
+      <node ref="R102" pin="2"/>
+      <node ref="C44" pin="2"/>
+      <node ref="C26" pin="2"/>
+      <node ref="C39" pin="2"/>
+      <node ref="C109" pin="2"/>
+      <node ref="U210" pin="11"/>
+      <node ref="U4" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="C111" pin="2"/>
+      <node ref="C62" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="U210" pin="23"/>
+      <node ref="C101" pin="2"/>
+      <node ref="U110" pin="8"/>
+      <node ref="C225" pin="2"/>
+      <node ref="C45" pin="2"/>
+      <node ref="U6" pin="42"/>
+      <node ref="C40" pin="2"/>
+      <node ref="C110" pin="2"/>
+      <node ref="C20" pin="2"/>
+      <node ref="C112" pin="2"/>
+      <node ref="U110" pin="11"/>
+      <node ref="U6" pin="4"/>
+      <node ref="J5" pin="2"/>
+      <node ref="C125" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="U110" pin="23"/>
+      <node ref="C226" pin="2"/>
+      <node ref="U6" pin="9"/>
+      <node ref="C46" pin="2"/>
+      <node ref="D101" pin="2"/>
+      <node ref="D1" pin="2"/>
+      <node ref="C21" pin="2"/>
+      <node ref="C47" pin="2"/>
+      <node ref="U9" pin="63"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C22" pin="2"/>
+      <node ref="U9" pin="64"/>
+      <node ref="C204" pin="2"/>
+      <node ref="U6" pin="41"/>
+      <node ref="C126" pin="2"/>
+      <node ref="C63" pin="2"/>
+      <node ref="R233" pin="2"/>
+      <node ref="C106" pin="2"/>
+      <node ref="C48" pin="2"/>
+      <node ref="U18" pin="4"/>
+      <node ref="R1" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="R133" pin="2"/>
+      <node ref="C230" pin="2"/>
+      <node ref="U6" pin="10"/>
+      <node ref="C49" pin="2"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C231" pin="2"/>
+      <node ref="C211" pin="2"/>
+      <node ref="C130" pin="2"/>
+      <node ref="U6" pin="11"/>
+      <node ref="C27" pin="2"/>
+      <node ref="D4" pin="1"/>
+      <node ref="R2" pin="2"/>
+      <node ref="D3" pin="1"/>
+      <node ref="C102" pin="2"/>
+      <node ref="U210" pin="3"/>
+      <node ref="C50" pin="2"/>
+      <node ref="U9" pin="109"/>
+      <node ref="C207" pin="2"/>
+      <node ref="C232" pin="2"/>
+      <node ref="X1" pin="2"/>
+      <node ref="C212" pin="2"/>
+      <node ref="C131" pin="2"/>
+      <node ref="U6" pin="22"/>
+      <node ref="C28" pin="2"/>
+      <node ref="U110" pin="3"/>
+      <node ref="R15" pin="2"/>
+      <node ref="C51" pin="2"/>
+      <node ref="C208" pin="2"/>
+      <node ref="C227" pin="2"/>
+      <node ref="U1" pin="2"/>
+      <node ref="C132" pin="2"/>
+      <node ref="U6" pin="23"/>
+      <node ref="C29" pin="2"/>
+      <node ref="R3" pin="2"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U6" pin="35"/>
+      <node ref="C52" pin="2"/>
+      <node ref="U5" pin="3"/>
+      <node ref="C209" pin="2"/>
+      <node ref="C206" pin="2"/>
+      <node ref="C127" pin="2"/>
+      <node ref="U6" pin="36"/>
+      <node ref="C30" pin="2"/>
+      <node ref="U9" pin="103"/>
+      <node ref="C64" pin="2"/>
+      <node ref="C228" pin="2"/>
+      <node ref="U7" pin="5"/>
+      <node ref="U210" pin="2"/>
+      <node ref="U6" pin="47"/>
+      <node ref="U9" pin="13"/>
+      <node ref="C53" pin="2"/>
+      <node ref="C210" pin="2"/>
+      <node ref="R13" pin="2"/>
+      <node ref="U6" pin="48"/>
+      <node ref="C31" pin="2"/>
+      <node ref="U9" pin="132"/>
+      <node ref="U110" pin="2"/>
+      <node ref="U9" pin="14"/>
+      <node ref="J1" pin="A1"/>
+      <node ref="J3" pin="2"/>
+      <node ref="C128" pin="2"/>
+      <node ref="C54" pin="2"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C229" pin="2"/>
+      <node ref="J1" pin="A12"/>
+      <node ref="C32" pin="2"/>
+      <node ref="U9" pin="140"/>
+      <node ref="R8" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="J1" pin="B1"/>
+      <node ref="U9" pin="5"/>
+      <node ref="C55" pin="2"/>
+      <node ref="U9" pin="59"/>
+      <node ref="J1" pin="B12"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C129" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="U101" pin="2"/>
+      <node ref="C220" pin="2"/>
+      <node ref="U9" pin="69"/>
+      <node ref="C56" pin="2"/>
+      <node ref="J2" pin="2"/>
+      <node ref="U9" pin="86"/>
+      <node ref="C11" pin="2"/>
+      <node ref="C34" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="C221" pin="2"/>
+      <node ref="U16" pin="3"/>
+      <node ref="C120" pin="2"/>
+      <node ref="U8" pin="12"/>
+      <node ref="C57" pin="2"/>
+      <node ref="C202" pin="2"/>
+      <node ref="U8" pin="34"/>
+      <node ref="C35" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C15" pin="2"/>
+      <node ref="R202" pin="2"/>
+      <node ref="C121" pin="2"/>
+      <node ref="C222" pin="2"/>
+      <node ref="U9" pin="53"/>
+      <node ref="C58" pin="2"/>
+      <node ref="C41" pin="2"/>
+      <node ref="J4" pin="9"/>
+      <node ref="U2" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C36" pin="2"/>
+      <node ref="C16" pin="2"/>
+      <node ref="C223" pin="2"/>
+      <node ref="C201" pin="2"/>
+      <node ref="C122" pin="2"/>
+      <node ref="U9" pin="127"/>
+      <node ref="C59" pin="2"/>
+      <node ref="J4" pin="2"/>
+    </net>
+    <net code="2" name="V3V3_D">
+      <node ref="R23" pin="1"/>
+      <node ref="U6" pin="46"/>
+      <node ref="C29" pin="1"/>
+      <node ref="FB4" pin="1"/>
+      <node ref="U18" pin="7"/>
+      <node ref="U7" pin="6"/>
+      <node ref="C52" pin="1"/>
+      <node ref="C43" pin="1"/>
+      <node ref="R17" pin="1"/>
+      <node ref="U6" pin="40"/>
+      <node ref="U9" pin="123"/>
+      <node ref="U18" pin="8"/>
+      <node ref="U8" pin="11"/>
+      <node ref="C34" pin="1"/>
+      <node ref="C48" pin="1"/>
+      <node ref="R18" pin="1"/>
+      <node ref="R16" pin="1"/>
+      <node ref="C61" pin="1"/>
+      <node ref="U1" pin="3"/>
+      <node ref="C30" pin="1"/>
+      <node ref="U8" pin="33"/>
+      <node ref="R4" pin="1"/>
+      <node ref="R19" pin="1"/>
+      <node ref="U6" pin="39"/>
+      <node ref="U9" pin="131"/>
+      <node ref="U9" pin="46"/>
+      <node ref="J4" pin="1"/>
+      <node ref="D7" pin="1"/>
+      <node ref="U7" pin="8"/>
+      <node ref="C4" pin="1"/>
+      <node ref="C39" pin="1"/>
+      <node ref="FB20" pin="1"/>
+      <node ref="C44" pin="1"/>
+      <node ref="C53" pin="1"/>
+      <node ref="D6" pin="2"/>
+      <node ref="U9" pin="108"/>
+      <node ref="R20" pin="1"/>
+      <node ref="U9" pin="57"/>
+      <node ref="C49" pin="1"/>
+      <node ref="C31" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="U6" pin="12"/>
+      <node ref="C5" pin="1"/>
+      <node ref="FB10" pin="1"/>
+      <node ref="C45" pin="1"/>
+      <node ref="C40" pin="1"/>
+      <node ref="C54" pin="1"/>
+      <node ref="C41" pin="1"/>
+      <node ref="U9" pin="72"/>
+      <node ref="U2" pin="3"/>
+      <node ref="C50" pin="1"/>
+      <node ref="C32" pin="1"/>
+      <node ref="C59" pin="1"/>
+      <node ref="U6" pin="24"/>
+      <node ref="D5" pin="2"/>
+      <node ref="U9" pin="100"/>
+      <node ref="U9" pin="30"/>
+      <node ref="C46" pin="1"/>
+      <node ref="FB5" pin="1"/>
+      <node ref="C42" pin="1"/>
+      <node ref="C37" pin="1"/>
+      <node ref="C51" pin="1"/>
+      <node ref="C47" pin="1"/>
+      <node ref="U9" pin="89"/>
+      <node ref="U9" pin="6"/>
+      <node ref="C33" pin="1"/>
+      <node ref="U18" pin="3"/>
+      <node ref="R24" pin="1"/>
+    </net>
+    <net code="3" name="V1V2">
+      <node ref="U9" pin="92"/>
+      <node ref="U9" pin="27"/>
+      <node ref="C60" pin="1"/>
+      <node ref="U2" pin="5"/>
+      <node ref="C58" pin="1"/>
+      <node ref="C57" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="C56" pin="1"/>
+      <node ref="C6" pin="1"/>
+      <node ref="C55" pin="1"/>
+      <node ref="R26" pin="1"/>
+      <node ref="U9" pin="40"/>
+      <node ref="U9" pin="111"/>
+      <node ref="C62" pin="1"/>
+    </net>
+    <net code="4" name="V5_A">
+      <node ref="C108" pin="1"/>
+      <node ref="C208" pin="1"/>
+      <node ref="C107" pin="1"/>
+      <node ref="C18" pin="1"/>
+      <node ref="U100" pin="8"/>
+      <node ref="U3" pin="4"/>
+      <node ref="D100" pin="1"/>
+      <node ref="U200" pin="8"/>
+      <node ref="C207" pin="1"/>
+      <node ref="L2" pin="2"/>
+      <node ref="U3" pin="3"/>
+      <node ref="C10" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="D200" pin="1"/>
+    </net>
+    <net code="5" name="VN5_A">
+      <node ref="C209" pin="1"/>
+      <node ref="L1" pin="2"/>
+      <node ref="U100" pin="4"/>
+      <node ref="U200" pin="4"/>
+      <node ref="C13" pin="1"/>
+      <node ref="C110" pin="1"/>
+      <node ref="C210" pin="1"/>
+      <node ref="C109" pin="1"/>
+    </net>
+    <net code="6" name="V3V3_A">
+      <node ref="C123" pin="1"/>
+      <node ref="C224" pin="1"/>
+      <node ref="U101" pin="6"/>
+      <node ref="C220" pin="1"/>
+      <node ref="R132" pin="1"/>
+      <node ref="U210" pin="7"/>
+      <node ref="U201" pin="6"/>
+      <node ref="U5" pin="1"/>
+      <node ref="C124" pin="1"/>
+      <node ref="U210" pin="12"/>
+      <node ref="C221" pin="1"/>
+      <node ref="C120" pin="1"/>
+      <node ref="U110" pin="7"/>
+      <node ref="C111" pin="1"/>
+      <node ref="U110" pin="12"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C222" pin="1"/>
+      <node ref="C121" pin="1"/>
+      <node ref="C211" pin="1"/>
+      <node ref="C112" pin="1"/>
+      <node ref="C20" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="C223" pin="1"/>
+      <node ref="C122" pin="1"/>
+      <node ref="C212" pin="1"/>
+      <node ref="U101" pin="5"/>
+      <node ref="R232" pin="1"/>
+      <node ref="U4" pin="5"/>
+      <node ref="U201" pin="5"/>
+      <node ref="FB6" pin="1"/>
+    </net>
+    <net code="7" name="V3V3_CLK">
+      <node ref="U17" pin="5"/>
+      <node ref="FB6" pin="2"/>
+      <node ref="C24" pin="1"/>
+      <node ref="X1" pin="4"/>
+      <node ref="C23" pin="1"/>
+      <node ref="U16" pin="5"/>
+      <node ref="C22" pin="1"/>
+      <node ref="X1" pin="1"/>
+    </net>
+    <net code="8" name="VREF_0V5_TAP">
+      <node ref="R9" pin="1"/>
+      <node ref="R8" pin="1"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U101" pin="3"/>
+    </net>
+    <net code="9" name="VREF_0V5_B">
+      <node ref="R9" pin="2"/>
+      <node ref="U201" pin="3"/>
+    </net>
+    <net code="10" name="PWREN_N">
+      <node ref="R6" pin="2"/>
+      <node ref="U6" pin="33"/>
+    </net>
+    <net code="11" name="USB_DP">
+      <node ref="FB1" pin="2"/>
+      <node ref="D1" pin="6"/>
+      <node ref="U6" pin="7"/>
+      <node ref="D1" pin="1"/>
+    </net>
+    <net code="12" name="USB_DM">
+      <node ref="FB1" pin="4"/>
+      <node ref="D1" pin="3"/>
+      <node ref="U6" pin="6"/>
+      <node ref="D1" pin="4"/>
+    </net>
+    <net code="13" name="BNC_A_SIG">
+      <node ref="J2" pin="1"/>
+      <node ref="R100" pin="1"/>
+      <node ref="D101" pin="1"/>
+    </net>
+    <net code="14" name="BNC_B_SIG">
+      <node ref="D201" pin="1"/>
+      <node ref="R200" pin="1"/>
+      <node ref="J3" pin="1"/>
+    </net>
+    <net code="15" name="ADC_A_IN">
+      <node ref="U110" pin="9"/>
+      <node ref="C106" pin="1"/>
+      <node ref="R109" pin="2"/>
+    </net>
+    <net code="16" name="ADC_B_IN">
+      <node ref="U210" pin="9"/>
+      <node ref="C206" pin="1"/>
+      <node ref="R209" pin="2"/>
+    </net>
+    <net code="17" name="ADC_A_VINN">
+      <node ref="C132" pin="1"/>
+      <node ref="C131" pin="1"/>
+      <node ref="C130" pin="1"/>
+      <node ref="R133" pin="1"/>
+      <node ref="U110" pin="10"/>
+      <node ref="R132" pin="2"/>
+    </net>
+    <net code="18" name="ADC_B_VINN">
+      <node ref="C232" pin="1"/>
+      <node ref="C231" pin="1"/>
+      <node ref="C230" pin="1"/>
+      <node ref="R233" pin="1"/>
+      <node ref="U210" pin="10"/>
+      <node ref="R232" pin="2"/>
+    </net>
+    <net code="19" name="CLK_ADC_A">
+      <node ref="R11" pin="2"/>
+      <node ref="U110" pin="13"/>
+    </net>
+    <net code="20" name="CLK_ADC_B">
+      <node ref="U210" pin="13"/>
+      <node ref="R12" pin="2"/>
+    </net>
+    <net code="21" name="clk_10m_xo">
+      <node ref="R10" pin="2"/>
+      <node ref="U9" pin="52"/>
+      <node ref="U17" pin="2"/>
+      <node ref="U16" pin="2"/>
+    </net>
+    <net code="22" name="CLK60">
+      <node ref="U6" pin="29"/>
+      <node ref="U9" pin="129"/>
+    </net>
+    <net code="23" name="ADCA_OTR">
+      <node ref="U110" pin="1"/>
+      <node ref="U9" pin="17"/>
+    </net>
+    <net code="24" name="ADCA_PDWN">
+      <node ref="U9" pin="18"/>
+      <node ref="U110" pin="14"/>
+    </net>
+    <net code="25" name="ADCB_OTR">
+      <node ref="U210" pin="1"/>
+      <node ref="U9" pin="33"/>
+    </net>
+    <net code="26" name="ADCB_PDWN">
+      <node ref="U210" pin="14"/>
+      <node ref="U9" pin="34"/>
+    </net>
+    <net code="27" name="SRAM_CE_N">
+      <node ref="U8" pin="6"/>
+      <node ref="U9" pin="95"/>
+    </net>
+    <net code="28" name="SRAM_OE_N">
+      <node ref="U8" pin="41"/>
+      <node ref="U9" pin="96"/>
+    </net>
+    <net code="29" name="SRAM_WE_N">
+      <node ref="U9" pin="97"/>
+      <node ref="U8" pin="17"/>
+    </net>
+    <net code="30" name="SRAM_UB_N">
+      <node ref="U8" pin="40"/>
+      <node ref="U9" pin="98"/>
+    </net>
+    <net code="31" name="SRAM_LB_N">
+      <node ref="U9" pin="99"/>
+      <node ref="U8" pin="39"/>
+    </net>
+    <net code="32" name="FIFO_RXF_N">
+      <node ref="U9" pin="113"/>
+      <node ref="U6" pin="21"/>
+    </net>
+    <net code="33" name="FIFO_TXE_N">
+      <node ref="U9" pin="114"/>
+      <node ref="U6" pin="25"/>
+    </net>
+    <net code="34" name="FIFO_RD_N">
+      <node ref="U9" pin="115"/>
+      <node ref="U6" pin="26"/>
+    </net>
+    <net code="35" name="FIFO_WR_N">
+      <node ref="U9" pin="116"/>
+      <node ref="U6" pin="27"/>
+    </net>
+    <net code="36" name="FIFO_OE_N">
+      <node ref="U6" pin="30"/>
+      <node ref="U9" pin="117"/>
+    </net>
+    <net code="37" name="EXT_TRIG">
+      <node ref="R25" pin="1"/>
+      <node ref="J5" pin="1"/>
+    </net>
+    <net code="38" name="LED_USB_N">
+      <node ref="R21" pin="2"/>
+      <node ref="U9" pin="119"/>
+    </net>
+    <net code="39" name="LED_CAP_N">
+      <node ref="U9" pin="120"/>
+      <node ref="R22" pin="2"/>
+    </net>
+    <net code="40" name="ADCA_D11">
+      <node ref="R131" pin="2"/>
+      <node ref="U9" pin="16"/>
+    </net>
+    <net code="41" name="ADCA_D10">
+      <node ref="R130" pin="2"/>
+      <node ref="U9" pin="15"/>
+    </net>
+    <net code="42" name="ADCA_D9">
+      <node ref="R129" pin="2"/>
+      <node ref="U9" pin="12"/>
+    </net>
+    <net code="43" name="ADCA_D8">
+      <node ref="U9" pin="11"/>
+      <node ref="R128" pin="2"/>
+    </net>
+    <net code="44" name="ADCA_D7">
+      <node ref="U9" pin="10"/>
+      <node ref="R127" pin="2"/>
+    </net>
+    <net code="45" name="ADCA_D6">
+      <node ref="U9" pin="9"/>
+      <node ref="R126" pin="2"/>
+    </net>
+    <net code="46" name="ADCA_D5">
+      <node ref="R125" pin="2"/>
+      <node ref="U9" pin="8"/>
+    </net>
+    <net code="47" name="ADCA_D4">
+      <node ref="R124" pin="2"/>
+      <node ref="U9" pin="7"/>
+    </net>
+    <net code="48" name="ADCA_D3">
+      <node ref="U9" pin="4"/>
+      <node ref="R123" pin="2"/>
+    </net>
+    <net code="49" name="ADCA_D2">
+      <node ref="R122" pin="2"/>
+      <node ref="U9" pin="3"/>
+    </net>
+    <net code="50" name="ADCA_D1">
+      <node ref="R121" pin="2"/>
+      <node ref="U9" pin="2"/>
+    </net>
+    <net code="51" name="ADCA_D0">
+      <node ref="U9" pin="1"/>
+      <node ref="R120" pin="2"/>
+    </net>
+    <net code="52" name="ADCB_D11">
+      <node ref="R231" pin="2"/>
+      <node ref="U9" pin="32"/>
+    </net>
+    <net code="53" name="ADCB_D10">
+      <node ref="U9" pin="31"/>
+      <node ref="R230" pin="2"/>
+    </net>
+    <net code="54" name="ADCB_D9">
+      <node ref="R229" pin="2"/>
+      <node ref="U9" pin="29"/>
+    </net>
+    <net code="55" name="ADCB_D8">
+      <node ref="U9" pin="28"/>
+      <node ref="R228" pin="2"/>
+    </net>
+    <net code="56" name="ADCB_D7">
+      <node ref="U9" pin="26"/>
+      <node ref="R227" pin="2"/>
+    </net>
+    <net code="57" name="ADCB_D6">
+      <node ref="R226" pin="2"/>
+      <node ref="U9" pin="25"/>
+    </net>
+    <net code="58" name="ADCB_D5">
+      <node ref="R225" pin="2"/>
+      <node ref="U9" pin="24"/>
+    </net>
+    <net code="59" name="ADCB_D4">
+      <node ref="U9" pin="23"/>
+      <node ref="R224" pin="2"/>
+    </net>
+    <net code="60" name="ADCB_D3">
+      <node ref="R223" pin="2"/>
+      <node ref="U9" pin="22"/>
+    </net>
+    <net code="61" name="ADCB_D2">
+      <node ref="U9" pin="21"/>
+      <node ref="R222" pin="2"/>
+    </net>
+    <net code="62" name="ADCB_D1">
+      <node ref="R221" pin="2"/>
+      <node ref="U9" pin="20"/>
+    </net>
+    <net code="63" name="ADCB_D0">
+      <node ref="U9" pin="19"/>
+      <node ref="R220" pin="2"/>
+    </net>
+    <net code="64" name="SRAM_A17">
+      <node ref="U8" pin="44"/>
+      <node ref="U9" pin="74"/>
+    </net>
+    <net code="65" name="SRAM_A16">
+      <node ref="U8" pin="43"/>
+      <node ref="U9" pin="73"/>
+    </net>
+    <net code="66" name="SRAM_A15">
+      <node ref="U8" pin="42"/>
+      <node ref="U9" pin="62"/>
+    </net>
+    <net code="67" name="SRAM_A14">
+      <node ref="U8" pin="27"/>
+      <node ref="U9" pin="61"/>
+    </net>
+    <net code="68" name="SRAM_A13">
+      <node ref="U8" pin="26"/>
+      <node ref="U9" pin="60"/>
+    </net>
+    <net code="69" name="SRAM_A12">
+      <node ref="U9" pin="56"/>
+      <node ref="U8" pin="25"/>
+    </net>
+    <net code="70" name="SRAM_A11">
+      <node ref="U9" pin="55"/>
+      <node ref="U8" pin="24"/>
+    </net>
+    <net code="71" name="SRAM_A10">
+      <node ref="U9" pin="49"/>
+      <node ref="U8" pin="23"/>
+    </net>
+    <net code="72" name="SRAM_A9">
+      <node ref="U9" pin="48"/>
+      <node ref="U8" pin="22"/>
+    </net>
+    <net code="73" name="SRAM_A8">
+      <node ref="U8" pin="21"/>
+      <node ref="U9" pin="47"/>
+    </net>
+    <net code="74" name="SRAM_A7">
+      <node ref="U8" pin="20"/>
+      <node ref="U9" pin="45"/>
+    </net>
+    <net code="75" name="SRAM_A6">
+      <node ref="U8" pin="19"/>
+      <node ref="U9" pin="44"/>
+    </net>
+    <net code="76" name="SRAM_A5">
+      <node ref="U8" pin="18"/>
+      <node ref="U9" pin="43"/>
+    </net>
+    <net code="77" name="SRAM_A4">
+      <node ref="U8" pin="5"/>
+      <node ref="U9" pin="42"/>
+    </net>
+    <net code="78" name="SRAM_A3">
+      <node ref="U8" pin="4"/>
+      <node ref="U9" pin="41"/>
+    </net>
+    <net code="79" name="SRAM_A2">
+      <node ref="U8" pin="3"/>
+      <node ref="U9" pin="39"/>
+    </net>
+    <net code="80" name="SRAM_A1">
+      <node ref="U9" pin="38"/>
+      <node ref="U8" pin="2"/>
+    </net>
+    <net code="81" name="SRAM_A0">
+      <node ref="U8" pin="1"/>
+      <node ref="U9" pin="37"/>
+    </net>
+    <net code="82" name="SRAM_D15">
+      <node ref="U8" pin="38"/>
+      <node ref="U9" pin="94"/>
+    </net>
+    <net code="83" name="SRAM_D14">
+      <node ref="U9" pin="93"/>
+      <node ref="U8" pin="37"/>
+    </net>
+    <net code="84" name="SRAM_D13">
+      <node ref="U9" pin="91"/>
+      <node ref="U8" pin="36"/>
+    </net>
+    <net code="85" name="SRAM_D12">
+      <node ref="U9" pin="90"/>
+      <node ref="U8" pin="35"/>
+    </net>
+    <net code="86" name="SRAM_D11">
+      <node ref="U9" pin="88"/>
+      <node ref="U8" pin="32"/>
+    </net>
+    <net code="87" name="SRAM_D10">
+      <node ref="U9" pin="87"/>
+      <node ref="U8" pin="31"/>
+    </net>
+    <net code="88" name="SRAM_D9">
+      <node ref="U8" pin="30"/>
+      <node ref="U9" pin="85"/>
+    </net>
+    <net code="89" name="SRAM_D8">
+      <node ref="U8" pin="29"/>
+      <node ref="U9" pin="84"/>
+    </net>
+    <net code="90" name="SRAM_D7">
+      <node ref="U8" pin="16"/>
+      <node ref="U9" pin="83"/>
+    </net>
+    <net code="91" name="SRAM_D6">
+      <node ref="U9" pin="82"/>
+      <node ref="U8" pin="15"/>
+    </net>
+    <net code="92" name="SRAM_D5">
+      <node ref="U9" pin="81"/>
+      <node ref="U8" pin="14"/>
+    </net>
+    <net code="93" name="SRAM_D4">
+      <node ref="U9" pin="80"/>
+      <node ref="U8" pin="13"/>
+    </net>
+    <net code="94" name="SRAM_D3">
+      <node ref="U9" pin="79"/>
+      <node ref="U8" pin="10"/>
+    </net>
+    <net code="95" name="SRAM_D2">
+      <node ref="U9" pin="78"/>
+      <node ref="U8" pin="9"/>
+    </net>
+    <net code="96" name="SRAM_D1">
+      <node ref="U8" pin="8"/>
+      <node ref="U9" pin="76"/>
+    </net>
+    <net code="97" name="SRAM_D0">
+      <node ref="U8" pin="7"/>
+      <node ref="U9" pin="75"/>
+    </net>
+    <net code="98" name="FIFO_D7">
+      <node ref="U9" pin="112"/>
+      <node ref="U6" pin="20"/>
+    </net>
+    <net code="99" name="FIFO_D6">
+      <node ref="U6" pin="19"/>
+      <node ref="U9" pin="110"/>
+    </net>
+    <net code="100" name="FIFO_D5">
+      <node ref="U6" pin="18"/>
+      <node ref="U9" pin="107"/>
+    </net>
+    <net code="101" name="FIFO_D4">
+      <node ref="U6" pin="17"/>
+      <node ref="U9" pin="106"/>
+    </net>
+    <net code="102" name="FIFO_D3">
+      <node ref="U6" pin="16"/>
+      <node ref="U9" pin="105"/>
+    </net>
+    <net code="103" name="FIFO_D2">
+      <node ref="U6" pin="15"/>
+      <node ref="U9" pin="104"/>
+    </net>
+    <net code="104" name="FIFO_D1">
+      <node ref="U9" pin="102"/>
+      <node ref="U6" pin="14"/>
+    </net>
+    <net code="105" name="FIFO_D0">
+      <node ref="U9" pin="101"/>
+      <node ref="U6" pin="13"/>
+    </net>
+    <net code="106" name="usbVbusRaw">
+      <node ref="J1" pin="B9"/>
+      <node ref="F1" pin="1"/>
+      <node ref="J1" pin="A9"/>
+      <node ref="J1" pin="B4"/>
+      <node ref="J1" pin="A4"/>
+    </net>
+    <net code="107" name="N$67">
+      <node ref="R1" pin="1"/>
+      <node ref="J1" pin="A5"/>
+    </net>
+    <net code="108" name="N$68">
+      <node ref="J1" pin="B5"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="109" name="usbShield">
+      <node ref="R3" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="J1" pin="S1"/>
+    </net>
+    <net code="110" name="usbDpRaw">
+      <node ref="J1" pin="B6"/>
+      <node ref="J1" pin="A6"/>
+      <node ref="FB1" pin="1"/>
+    </net>
+    <net code="111" name="usbDmRaw">
+      <node ref="FB1" pin="3"/>
+      <node ref="J1" pin="B7"/>
+      <node ref="J1" pin="A7"/>
+    </net>
+    <net code="112" name="N$69">
+      <node ref="D3" pin="2"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="113" name="V5_SW">
+      <node ref="Q1" pin="3"/>
+      <node ref="FB2" pin="1"/>
+      <node ref="FB3" pin="1"/>
+    </net>
+    <net code="114" name="V5_A_MID">
+      <node ref="FB2" pin="2"/>
+      <node ref="L2" pin="1"/>
+    </net>
+    <net code="115" name="V3V3_A_PRE">
+      <node ref="C19" pin="1"/>
+      <node ref="U4" pin="3"/>
+      <node ref="C14" pin="1"/>
+      <node ref="FB3" pin="2"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="116" name="VN5_RAW">
+      <node ref="L1" pin="1"/>
+      <node ref="U3" pin="1"/>
+      <node ref="C11" pin="1"/>
+    </net>
+    <net code="117" name="VREF_2V5">
+      <node ref="C21" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="U5" pin="2"/>
+      <node ref="R7" pin="1"/>
+    </net>
+    <net code="118" name="gateDrive">
+      <node ref="R5" pin="1"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="119" name="flyP">
+      <node ref="C8" pin="1"/>
+      <node ref="U3" pin="5"/>
+      <node ref="C9" pin="1"/>
+    </net>
+    <net code="120" name="flyN">
+      <node ref="U3" pin="6"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C8" pin="2"/>
+    </net>
+    <net code="121" name="clk_xo_raw">
+      <node ref="R10" pin="1"/>
+      <node ref="X1" pin="3"/>
+    </net>
+    <net code="122" name="clk_adc_a_pre">
+      <node ref="R11" pin="1"/>
+      <node ref="U16" pin="4"/>
+    </net>
+    <net code="123" name="clk_adc_b_pre">
+      <node ref="R12" pin="1"/>
+      <node ref="U17" pin="4"/>
+    </net>
+    <net code="124" name="ATTN_A_MID">
+      <node ref="R101" pin="1"/>
+      <node ref="C100" pin="1"/>
+      <node ref="R100" pin="2"/>
+    </net>
+    <net code="125" name="ATTN_A">
+      <node ref="C100" pin="2"/>
+      <node ref="R101" pin="2"/>
+      <node ref="R103" pin="1"/>
+      <node ref="C101" pin="1"/>
+      <node ref="R102" pin="1"/>
+    </net>
+    <net code="126" name="AFE_A_BUFIN">
+      <node ref="U100" pin="3"/>
+      <node ref="R103" pin="2"/>
+      <node ref="D100" pin="2"/>
+    </net>
+    <net code="127" name="AFE_A_1">
+      <node ref="U100" pin="2"/>
+      <node ref="R104" pin="1"/>
+      <node ref="U100" pin="1"/>
+    </net>
+    <net code="128" name="AFE_A_2">
+      <node ref="U100" pin="6"/>
+      <node ref="C103" pin="2"/>
+      <node ref="U100" pin="7"/>
+      <node ref="R106" pin="1"/>
+    </net>
+    <net code="129" name="AFE_A_OUT">
+      <node ref="R107" pin="2"/>
+      <node ref="C105" pin="2"/>
+      <node ref="R109" pin="1"/>
+      <node ref="U101" pin="1"/>
+    </net>
+    <net code="130" name="AFE_A_SK_NA">
+      <node ref="R105" pin="1"/>
+      <node ref="R104" pin="2"/>
+      <node ref="C103" pin="1"/>
+    </net>
+    <net code="131" name="AFE_A_SK_NB">
+      <node ref="R105" pin="2"/>
+      <node ref="U100" pin="5"/>
+      <node ref="C102" pin="1"/>
+    </net>
+    <net code="132" name="AFE_A_MFB_NA">
+      <node ref="R108" pin="1"/>
+      <node ref="R107" pin="1"/>
+      <node ref="C104" pin="1"/>
+      <node ref="R106" pin="2"/>
+    </net>
+    <net code="133" name="AFE_A_MFB_NB">
+      <node ref="C105" pin="1"/>
+      <node ref="R108" pin="2"/>
+      <node ref="U101" pin="4"/>
+    </net>
+    <net code="134" name="ATTN_B_MID">
+      <node ref="C200" pin="1"/>
+      <node ref="R201" pin="1"/>
+      <node ref="R200" pin="2"/>
+    </net>
+    <net code="135" name="ATTN_B">
+      <node ref="R203" pin="1"/>
+      <node ref="C201" pin="1"/>
+      <node ref="R202" pin="1"/>
+      <node ref="C200" pin="2"/>
+      <node ref="R201" pin="2"/>
+    </net>
+    <net code="136" name="AFE_B_BUFIN">
+      <node ref="R203" pin="2"/>
+      <node ref="U200" pin="3"/>
+      <node ref="D200" pin="2"/>
+    </net>
+    <net code="137" name="AFE_B_1">
+      <node ref="U200" pin="1"/>
+      <node ref="U200" pin="2"/>
+      <node ref="R204" pin="1"/>
+    </net>
+    <net code="138" name="AFE_B_2">
+      <node ref="C203" pin="2"/>
+      <node ref="U200" pin="6"/>
+      <node ref="R206" pin="1"/>
+      <node ref="U200" pin="7"/>
+    </net>
+    <net code="139" name="AFE_B_OUT">
+      <node ref="C205" pin="2"/>
+      <node ref="R207" pin="2"/>
+      <node ref="R209" pin="1"/>
+      <node ref="U201" pin="1"/>
+    </net>
+    <net code="140" name="AFE_B_SK_NA">
+      <node ref="C203" pin="1"/>
+      <node ref="R205" pin="1"/>
+      <node ref="R204" pin="2"/>
+    </net>
+    <net code="141" name="AFE_B_SK_NB">
+      <node ref="R205" pin="2"/>
+      <node ref="U200" pin="5"/>
+      <node ref="C202" pin="1"/>
+    </net>
+    <net code="142" name="AFE_B_MFB_NA">
+      <node ref="R208" pin="1"/>
+      <node ref="R206" pin="2"/>
+      <node ref="C204" pin="1"/>
+      <node ref="R207" pin="1"/>
+    </net>
+    <net code="143" name="AFE_B_MFB_NB">
+      <node ref="C205" pin="1"/>
+      <node ref="U201" pin="4"/>
+      <node ref="R208" pin="2"/>
+    </net>
+    <net code="144" name="N$70">
+      <node ref="U110" pin="4"/>
+      <node ref="C127" pin="1"/>
+    </net>
+    <net code="145" name="N$71">
+      <node ref="U110" pin="6"/>
+      <node ref="C128" pin="1"/>
+    </net>
+    <net code="146" name="N$72">
+      <node ref="C129" pin="1"/>
+      <node ref="U110" pin="5"/>
+    </net>
+    <net code="147" name="DRVDD_A">
+      <node ref="U110" pin="24"/>
+      <node ref="C126" pin="1"/>
+      <node ref="C125" pin="1"/>
+      <node ref="FB10" pin="2"/>
+    </net>
+    <net code="148" name="N$73">
+      <node ref="R120" pin="1"/>
+      <node ref="U110" pin="15"/>
+    </net>
+    <net code="149" name="N$74">
+      <node ref="U110" pin="16"/>
+      <node ref="R121" pin="1"/>
+    </net>
+    <net code="150" name="N$75">
+      <node ref="U110" pin="17"/>
+      <node ref="R122" pin="1"/>
+    </net>
+    <net code="151" name="N$76">
+      <node ref="U110" pin="18"/>
+      <node ref="R123" pin="1"/>
+    </net>
+    <net code="152" name="N$77">
+      <node ref="R124" pin="1"/>
+      <node ref="U110" pin="19"/>
+    </net>
+    <net code="153" name="N$78">
+      <node ref="R125" pin="1"/>
+      <node ref="U110" pin="20"/>
+    </net>
+    <net code="154" name="N$79">
+      <node ref="U110" pin="21"/>
+      <node ref="R126" pin="1"/>
+    </net>
+    <net code="155" name="N$80">
+      <node ref="R127" pin="1"/>
+      <node ref="U110" pin="22"/>
+    </net>
+    <net code="156" name="N$81">
+      <node ref="U110" pin="25"/>
+      <node ref="R128" pin="1"/>
+    </net>
+    <net code="157" name="N$82">
+      <node ref="R129" pin="1"/>
+      <node ref="U110" pin="26"/>
+    </net>
+    <net code="158" name="N$83">
+      <node ref="U110" pin="27"/>
+      <node ref="R130" pin="1"/>
+    </net>
+    <net code="159" name="N$84">
+      <node ref="R131" pin="1"/>
+      <node ref="U110" pin="28"/>
+    </net>
+    <net code="160" name="N$85">
+      <node ref="C227" pin="1"/>
+      <node ref="U210" pin="4"/>
+    </net>
+    <net code="161" name="N$86">
+      <node ref="U210" pin="6"/>
+      <node ref="C228" pin="1"/>
+    </net>
+    <net code="162" name="N$87">
+      <node ref="U210" pin="5"/>
+      <node ref="C229" pin="1"/>
+    </net>
+    <net code="163" name="DRVDD_B">
+      <node ref="U210" pin="24"/>
+      <node ref="FB20" pin="2"/>
+      <node ref="C225" pin="1"/>
+      <node ref="C226" pin="1"/>
+    </net>
+    <net code="164" name="N$88">
+      <node ref="R220" pin="1"/>
+      <node ref="U210" pin="15"/>
+    </net>
+    <net code="165" name="N$89">
+      <node ref="R221" pin="1"/>
+      <node ref="U210" pin="16"/>
+    </net>
+    <net code="166" name="N$90">
+      <node ref="U210" pin="17"/>
+      <node ref="R222" pin="1"/>
+    </net>
+    <net code="167" name="N$91">
+      <node ref="R223" pin="1"/>
+      <node ref="U210" pin="18"/>
+    </net>
+    <net code="168" name="N$92">
+      <node ref="R224" pin="1"/>
+      <node ref="U210" pin="19"/>
+    </net>
+    <net code="169" name="N$93">
+      <node ref="U210" pin="20"/>
+      <node ref="R225" pin="1"/>
+    </net>
+    <net code="170" name="N$94">
+      <node ref="U210" pin="21"/>
+      <node ref="R226" pin="1"/>
+    </net>
+    <net code="171" name="N$95">
+      <node ref="U210" pin="22"/>
+      <node ref="R227" pin="1"/>
+    </net>
+    <net code="172" name="N$96">
+      <node ref="R228" pin="1"/>
+      <node ref="U210" pin="25"/>
+    </net>
+    <net code="173" name="N$97">
+      <node ref="R229" pin="1"/>
+      <node ref="U210" pin="26"/>
+    </net>
+    <net code="174" name="N$98">
+      <node ref="U210" pin="27"/>
+      <node ref="R230" pin="1"/>
+    </net>
+    <net code="175" name="N$99">
+      <node ref="R231" pin="1"/>
+      <node ref="U210" pin="28"/>
+    </net>
+    <net code="176" name="FT_SIWU_N">
+      <node ref="U6" pin="28"/>
+      <node ref="R18" pin="2"/>
+    </net>
+    <net code="177" name="FT_PWRSAV_N">
+      <node ref="U6" pin="31"/>
+      <node ref="R19" pin="2"/>
+    </net>
+    <net code="178" name="FT_VBUS_SENSE">
+      <node ref="R15" pin="1"/>
+      <node ref="R14" pin="2"/>
+      <node ref="U6" pin="32"/>
+    </net>
+    <net code="179" name="FT_RESET_N">
+      <node ref="U6" pin="34"/>
+      <node ref="R16" pin="2"/>
+    </net>
+    <net code="180" name="N$100">
+      <node ref="U6" pin="5"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="181" name="EE_CS">
+      <node ref="U7" pin="1"/>
+      <node ref="U6" pin="45"/>
+    </net>
+    <net code="182" name="EE_SK">
+      <node ref="U6" pin="44"/>
+      <node ref="U7" pin="2"/>
+    </net>
+    <net code="183" name="EE_DATA">
+      <node ref="U6" pin="43"/>
+      <node ref="U7" pin="4"/>
+      <node ref="U7" pin="3"/>
+      <node ref="R17" pin="2"/>
+    </net>
+    <net code="184" name="FT_OSCI">
+      <node ref="U6" pin="1"/>
+      <node ref="Y1" pin="1"/>
+      <node ref="C25" pin="1"/>
+    </net>
+    <net code="185" name="FT_OSCO">
+      <node ref="U6" pin="2"/>
+      <node ref="C26" pin="1"/>
+      <node ref="Y1" pin="2"/>
+    </net>
+    <net code="186" name="FT_VPHY">
+      <node ref="C27" pin="1"/>
+      <node ref="U6" pin="3"/>
+      <node ref="FB5" pin="2"/>
+    </net>
+    <net code="187" name="FT_VPLL">
+      <node ref="U6" pin="8"/>
+      <node ref="FB4" pin="2"/>
+      <node ref="C28" pin="1"/>
+    </net>
+    <net code="188" name="FT_VCCA_1V8">
+      <node ref="C35" pin="1"/>
+      <node ref="U6" pin="37"/>
+    </net>
+    <net code="189" name="FT_VCORE_1V8">
+      <node ref="C38" pin="1"/>
+      <node ref="U6" pin="38"/>
+      <node ref="C36" pin="1"/>
+    </net>
+    <net code="190" name="ICE40_VCCPLL_FILT">
+      <node ref="C63" pin="1"/>
+      <node ref="R26" pin="2"/>
+      <node ref="U9" pin="54"/>
+      <node ref="U9" pin="126"/>
+    </net>
+    <net code="191" name="CDONE">
+      <node ref="U9" pin="65"/>
+      <node ref="J4" pin="8"/>
+      <node ref="D4" pin="2"/>
+      <node ref="R20" pin="2"/>
+    </net>
+    <net code="192" name="CRESET_N">
+      <node ref="C64" pin="1"/>
+      <node ref="R23" pin="2"/>
+      <node ref="J4" pin="7"/>
+      <node ref="U9" pin="66"/>
+    </net>
+    <net code="193" name="SPI_SCK">
+      <node ref="U9" pin="70"/>
+      <node ref="U18" pin="6"/>
+      <node ref="J4" pin="3"/>
+    </net>
+    <net code="194" name="SPI_SI">
+      <node ref="U9" pin="67"/>
+      <node ref="J4" pin="4"/>
+      <node ref="U18" pin="5"/>
+    </net>
+    <net code="195" name="SPI_SO">
+      <node ref="U9" pin="68"/>
+      <node ref="J4" pin="5"/>
+      <node ref="U18" pin="2"/>
+    </net>
+    <net code="196" name="SPI_SS_N">
+      <node ref="U18" pin="1"/>
+      <node ref="R24" pin="2"/>
+      <node ref="J4" pin="6"/>
+      <node ref="U9" pin="71"/>
+    </net>
+    <net code="197" name="EXT_TRIG_CLAMPED">
+      <node ref="D7" pin="2"/>
+      <node ref="R25" pin="2"/>
+      <node ref="U9" pin="118"/>
+    </net>
+    <net code="198" name="N$101">
+      <node ref="R21" pin="1"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="199" name="N$102">
+      <node ref="R22" pin="1"/>
+      <node ref="D6" pin="1"/>
+    </net>
+  </nets>
+</export>

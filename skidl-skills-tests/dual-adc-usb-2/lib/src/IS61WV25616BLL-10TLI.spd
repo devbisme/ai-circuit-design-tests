@@ -1,0 +1,42 @@
+;
+; IS61WV25616BLL-10TLI -- ISSI 256K x 16 asynchronous CMOS SRAM, TSOP-II-44
+;
+; Pin table transcribed from datasheets/IS61WV25616BLL-10TLI_SUMMARY.md
+; (ISSI Rev. E, 11/21/07 -- pin configuration page read directly, high confidence).
+; Active-low pins are named with a trailing '#' and drawn with the input_low style:
+;   CE# WE# OE# LB# UB#   (datasheet renders these with an overbar)
+; Pin 28 is a true no-connect on this device.
+;
+device IS61WV25616BLL-10TLI
+Reference: U
+Value: IS61WV25616BLL-10TLI
+Footprint: Package_SO:TSOP-II-44_10.16x18.41mm_P0.8mm
+Datasheet: https://www.issi.com/WW/pdf/61-64WV25616ALL-BLL.pdf
+Description: 256K x 16 asynchronous CMOS SRAM, 10ns, 2.4-3.6V, TSOP-II-44
+keywords: SRAM asynchronous static RAM 256Kx16 4Mbit
+
+    left
+        i       A0      1 2 3 4 5
+        i       A5      18 19 20 21 22
+        i       A10     23 24 25 26 27
+        i       A15     42 43 44
+        *
+        i_      CE#     6
+        i_      WE#     17
+        i_      OE#     41
+        i_      LB#     39
+        i_      UB#     40
+
+    right
+        b       I/O0    7 8 9 10
+        b       I/O4    13 14 15 16
+        b       I/O8    29 30 31 32
+        b       I/O12   35 36 37 38
+        *
+        x       NC      28
+
+    top
+        p       VDD     11 33
+
+    bottom
+        p       GND     12 34

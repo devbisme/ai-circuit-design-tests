@@ -1,0 +1,2854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-4/circuits/dual_adc_usb/__main__.py</source>
+    <date>09/11/2026 07:31 AM</date>
+    <tool>SKiDL (3.0.0)</tool>
+  </design>
+  <components>
+    <comp ref="J1">
+      <value>"TYPE-C-31-M-12"</value>
+      <footprint>Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12</footprint>
+      <fields>
+        (field (name "MPN") "TYPE-C-31-M-12")
+        (field (name "LCSC") "C165948")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""USB_C_Receptacle_USB2.0_16P""/>
+    </comp>
+    <comp ref="R1">
+      <value>"5.1k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF5101T5E")
+        (field (name "LCSC") "C23186")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R2">
+      <value>"5.1k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF5101T5E")
+        (field (name "LCSC") "C23186")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R4">
+      <value>"1M"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF1004T5E")
+        (field (name "LCSC") "C22935")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C4">
+      <value>"4.7nF 100V"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CC0603KRX7R0BB472")
+        (field (name "LCSC") "C115052")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U1">
+      <value>"USBLC6-2SC6"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        (field (name "MPN") "USBLC6-2SC6")
+        (field (name "LCSC") "C2687116")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Power_Protection.kicad_sym" part=""USBLC6-2SC6""/>
+    </comp>
+    <comp ref="D1">
+      <value>"SMF5.0A"</value>
+      <footprint>Diode_SMD:D_SOD-123F</footprint>
+      <fields>
+        (field (name "MPN") "SMF5.0A")
+        (field (name "LCSC") "C19077497")
+      </fields>
+      <libsource lib="Device" part=""D_TVS""/>
+    </comp>
+    <comp ref="FB1">
+      <value>"220R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG221SN1D")
+        (field (name "LCSC") "C85840")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C1">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C2">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U2">
+      <value>"SY6280AAC"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "SY6280AAC")
+        (field (name "LCSC") "C55136")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""SY6280AAC""/>
+    </comp>
+    <comp ref="R3">
+      <value>"8.45k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF8451T5E")
+        (field (name "LCSC") "C14892")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C3">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL21A106KAYNNNE")
+        (field (name "LCSC") "C15850")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U3">
+      <value>"TLV1117LV33DCYR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223-3_TabPin2</footprint>
+      <fields>
+        (field (name "MPN") "TLV1117LV33DCYR")
+        (field (name "LCSC") "C15578")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""TLV1117-33""/>
+    </comp>
+    <comp ref="C5">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL21A106KAYNNNE")
+        (field (name "LCSC") "C15850")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C6">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL21A106KAYNNNE")
+        (field (name "LCSC") "C15850")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C7">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U4">
+      <value>"TLV75512PDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "TLV75512PDBVR")
+        (field (name "LCSC") "C2877864")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""TLV75512PDBV""/>
+    </comp>
+    <comp ref="C8">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C9">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U5">
+      <value>"TLV75518PDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "TLV75518PDBVR")
+        (field (name "LCSC") "C2877863")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_Linear.kicad_sym" part=""TLV75518PDBV""/>
+    </comp>
+    <comp ref="C10">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C11">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U6">
+      <value>"TPS7A2033PDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "TPS7A2033PDBVR")
+        (field (name "LCSC") "C2862740")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""TPS7A2033PDBVR""/>
+    </comp>
+    <comp ref="C12">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C13">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R5">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF1001T5E")
+        (field (name "LCSC") "C21190")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="LED1">
+      <value>"green"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CT-1608UGC-P4")
+        (field (name "LCSC") "C52675989")
+      </fields>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="TP1">
+      <value>"VBUS_SW"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP2">
+      <value>"VD_3V3"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP3">
+      <value>"VD_1V8"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP4">
+      <value>"VD_1V2"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP5">
+      <value>"VA_3V3"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP6">
+      <value>"GND"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="FB2">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C14">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C15">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U7">
+      <value>"LM27762DSSR"</value>
+      <footprint>Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65</footprint>
+      <fields>
+        (field (name "MPN") "LM27762DSSR")
+        (field (name "LCSC") "C473398")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Regulator_SwitchedCapacitor.kicad_sym" part=""LM27762""/>
+    </comp>
+    <comp ref="C16">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C17">
+      <value>"2.2uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603B225K160NT")
+        (field (name "LCSC") "C43922")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R6">
+      <value>"107k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "RC0402FR-07107KL")
+        (field (name "LCSC") "C138070")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R7">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1003TCE")
+        (field (name "LCSC") "C25741")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C18">
+      <value>"2.2uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603B225K160NT")
+        (field (name "LCSC") "C43922")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R8">
+      <value>"105k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1053TCE")
+        (field (name "LCSC") "C25742")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R9">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1003TCE")
+        (field (name "LCSC") "C25741")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C19">
+      <value>"2.2uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603B225K160NT")
+        (field (name "LCSC") "C43922")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB3">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C20">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB4">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C21">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="TP7">
+      <value>"VA_P2V5"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="TP8">
+      <value>"VA_N2V5"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="R10">
+      <value>"453k"</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC1206F4533TS")
+        (field (name "LCSC") "C2999488")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R11">
+      <value>"453k"</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC1206F4533TS")
+        (field (name "LCSC") "C2999488")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R12">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "RT0603BRD07100KL")
+        (field (name "LCSC") "C122538")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C30">
+      <value>"15pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "GCM1885C2A150JA16D")
+        (field (name "LCSC") "C388905")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C31">
+      <value>"160pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1885C1H161JA01D")
+        (field (name "LCSC") "C710893")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R13">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF1001T5E")
+        (field (name "LCSC") "C21190")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C32">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C33">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R14">
+      <value>"1.10k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "PTFR0603B1K10P9")
+        (field (name "LCSC") "C351674")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R15">
+      <value>"1.10k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "PTFR0603B1K10P9")
+        (field (name "LCSC") "C351674")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R16">
+      <value>"1.00k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRH0603B1001TS")
+        (field (name "LCSC") "C49196685")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R17">
+      <value>"1.00k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRH0603B1001TS")
+        (field (name "LCSC") "C49196685")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C34">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C35">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R18">
+      <value>"49.9"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF499JTCE")
+        (field (name "LCSC") "C25120")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R19">
+      <value>"49.9"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF499JTCE")
+        (field (name "LCSC") "C25120")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C36">
+      <value>"220pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C1H221JA01D")
+        (field (name "LCSC") "C71693")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C37">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C38">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="J2">
+      <value>"BNC-KWE-6"</value>
+      <footprint>ProjectLocal:BNC_cntitle_BNC-KWE-6_Horizontal</footprint>
+      <fields>
+        (field (name "MPN") "BNC-KWE-6")
+        (field (name "LCSC") "C20415789")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""Conn_Coaxial""/>
+    </comp>
+    <comp ref="VC1">
+      <value>"2-6pF"</value>
+      <footprint>ProjectLocal:C_Trimmer_SEHWA_STC3M</footprint>
+      <fields>
+        (field (name "MPN") "STC3MA06-T1")
+        (field (name "LCSC") "C22468120")
+      </fields>
+      <libsource lib="Device" part=""C_Trim""/>
+    </comp>
+    <comp ref="D2">
+      <value>"BAV199"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        (field (name "MPN") "BAV199")
+        (field (name "LCSC") "C5184419")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""BAV199""/>
+    </comp>
+    <comp ref="U8">
+      <value>"OPA354AIDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "OPA354AIDBVR")
+        (field (name "LCSC") "C36384")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""OPA354AIDBVR""/>
+    </comp>
+    <comp ref="U9">
+      <value>"THS4521IDGKR"</value>
+      <footprint>Package_SO:VSSOP-8_3x3mm_P0.65mm</footprint>
+      <fields>
+        (field (name "MPN") "THS4521IDGKR")
+        (field (name "LCSC") "C170157")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Amplifier_Difference.kicad_sym" part=""THS4521IDGK""/>
+    </comp>
+    <comp ref="R20">
+      <value>"453k"</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC1206F4533TS")
+        (field (name "LCSC") "C2999488")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R21">
+      <value>"453k"</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC1206F4533TS")
+        (field (name "LCSC") "C2999488")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R22">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "RT0603BRD07100KL")
+        (field (name "LCSC") "C122538")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C40">
+      <value>"15pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "GCM1885C2A150JA16D")
+        (field (name "LCSC") "C388905")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C41">
+      <value>"160pF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1885C1H161JA01D")
+        (field (name "LCSC") "C710893")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R23">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603WAF1001T5E")
+        (field (name "LCSC") "C21190")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C42">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C43">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R24">
+      <value>"1.10k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "PTFR0603B1K10P9")
+        (field (name "LCSC") "C351674")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R25">
+      <value>"1.10k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "PTFR0603B1K10P9")
+        (field (name "LCSC") "C351674")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R26">
+      <value>"1.00k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRH0603B1001TS")
+        (field (name "LCSC") "C49196685")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R27">
+      <value>"1.00k"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRH0603B1001TS")
+        (field (name "LCSC") "C49196685")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C44">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C45">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R28">
+      <value>"49.9"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF499JTCE")
+        (field (name "LCSC") "C25120")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R29">
+      <value>"49.9"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF499JTCE")
+        (field (name "LCSC") "C25120")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C46">
+      <value>"220pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C1H221JA01D")
+        (field (name "LCSC") "C71693")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C47">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C48">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="J3">
+      <value>"BNC-KWE-6"</value>
+      <footprint>ProjectLocal:BNC_cntitle_BNC-KWE-6_Horizontal</footprint>
+      <fields>
+        (field (name "MPN") "BNC-KWE-6")
+        (field (name "LCSC") "C20415789")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""Conn_Coaxial""/>
+    </comp>
+    <comp ref="VC2">
+      <value>"2-6pF"</value>
+      <footprint>ProjectLocal:C_Trimmer_SEHWA_STC3M</footprint>
+      <fields>
+        (field (name "MPN") "STC3MA06-T1")
+        (field (name "LCSC") "C22468120")
+      </fields>
+      <libsource lib="Device" part=""C_Trim""/>
+    </comp>
+    <comp ref="D3">
+      <value>"BAV199"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        (field (name "MPN") "BAV199")
+        (field (name "LCSC") "C5184419")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""BAV199""/>
+    </comp>
+    <comp ref="U10">
+      <value>"OPA354AIDBVR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        (field (name "MPN") "OPA354AIDBVR")
+        (field (name "LCSC") "C36384")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""OPA354AIDBVR""/>
+    </comp>
+    <comp ref="U11">
+      <value>"THS4521IDGKR"</value>
+      <footprint>Package_SO:VSSOP-8_3x3mm_P0.65mm</footprint>
+      <fields>
+        (field (name "MPN") "THS4521IDGKR")
+        (field (name "LCSC") "C170157")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Amplifier_Difference.kicad_sym" part=""THS4521IDGK""/>
+    </comp>
+    <comp ref="U12">
+      <value>"ADS5231IPAGT"</value>
+      <footprint>Package_QFP:TQFP-64_10x10mm_P0.5mm</footprint>
+      <fields>
+        (field (name "MPN") "ADS5231IPAGT")
+        (field (name "LCSC") "C2670079")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""ADS5231IPAGT""/>
+    </comp>
+    <comp ref="FB5">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="FB6">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C54">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C55">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C56">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C57">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C58">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C59">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C60">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C61">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C62">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R51">
+      <value>"2R 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC0402F2R00TS")
+        (field (name "LCSC") "C2998051")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C50">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R52">
+      <value>"2R 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC0402F2R00TS")
+        (field (name "LCSC") "C2998051")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C51">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C98">
+      <value>"2.2uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603B225K160NT")
+        (field (name "LCSC") "C43922")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C99">
+      <value>"2.2uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "0603B225K160NT")
+        (field (name "LCSC") "C43922")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R50">
+      <value>"56.2k 1%"</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "FRC0603F5622TS")
+        (field (name "LCSC") "C2930117")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C52">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C53">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="RN1">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN2">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN3">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN4">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN5">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN6">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="RN7">
+      <value>"4x33R"</value>
+      <footprint>Resistor_SMD:R_Array_Convex_4x0603</footprint>
+      <fields>
+        (field (name "MPN") "4D03WGJ0330T5E")
+        (field (name "LCSC") "C25508")
+      </fields>
+      <libsource lib="Device" part=""R_Pack04""/>
+    </comp>
+    <comp ref="R53">
+      <value>"10k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R54">
+      <value>"10k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R55">
+      <value>"10k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R56">
+      <value>"10k 1%"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="FB7">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="X1">
+      <value>"20MHz"</value>
+      <footprint>Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm</footprint>
+      <fields>
+        (field (name "MPN") "SX3M20.000B10F20TNN")
+        (field (name "LCSC") "C5452685")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Oscillator.kicad_sym" part=""ASE-xxxMHz""/>
+    </comp>
+    <comp ref="C63">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C64">
+      <value>"1uF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05A105KA5NQNC")
+        (field (name "LCSC") "C52923")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R57">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF330JTCE")
+        (field (name "LCSC") "C25105")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R58">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF330JTCE")
+        (field (name "LCSC") "C25105")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="TP9">
+      <value>"ADC_CLK"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="U13">
+      <value>"FT232HL-REEL"</value>
+      <footprint>Package_QFP:LQFP-48_7x7mm_P0.5mm</footprint>
+      <fields>
+        (field (name "MPN") "FT232HL-REEL")
+        (field (name "LCSC") "C51997")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Interface_USB.kicad_sym" part=""FT232H""/>
+    </comp>
+    <comp ref="R64">
+      <value>"12k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1202TCE")
+        (field (name "LCSC") "C25752")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="Y1">
+      <value>"12MHz"</value>
+      <footprint>Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm</footprint>
+      <fields>
+        (field (name "MPN") "X322512MSB4SI")
+        (field (name "LCSC") "C9002")
+      </fields>
+      <libsource lib="Device" part=""Crystal_GND24""/>
+    </comp>
+    <comp ref="C65">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C66">
+      <value>"22pF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "GRM1555C2A220JA01D")
+        (field (name "LCSC") "C710855")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="R66">
+      <value>"33"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF330JTCE")
+        (field (name "LCSC") "C25105")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R67">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R65">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C79">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U14">
+      <value>"93LC56BT-I/OT"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        (field (name "MPN") "93LC56BT-I/OT")
+        (field (name "LCSC") "C190271")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Memory_EEPROM.kicad_sym" part=""93LCxxBxxOT""/>
+    </comp>
+    <comp ref="R60">
+      <value>"2.2k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF2201TCE")
+        (field (name "LCSC") "C25879")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R61">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R62">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R63">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="C78">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="FB8">
+      <value>"600R@100MHz"</value>
+      <footprint>Inductor_SMD:L_0805_2012Metric</footprint>
+      <fields>
+        (field (name "MPN") "BLM21PG601SN1D")
+        (field (name "LCSC") "C41556732")
+      </fields>
+      <libsource lib="Device" part=""FerriteBead""/>
+    </comp>
+    <comp ref="C67">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C75">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C68">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C69">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C70">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C71">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C72">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C73">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C77">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C74">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C76">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="U15">
+      <value>"GW1NR-LV9QN88PC6/I5"</value>
+      <footprint>Package_DFN_QFN:ArtInChip_QFN-88-1EP_10x10mm_P0.4mm_EP6.74x6.74mm</footprint>
+      <fields>
+        (field (name "MPN") "GW1NR-LV9QN88PC6/I5")
+        (field (name "LCSC") "C5799578")
+      </fields>
+      <libsource lib="dual_adc_usb" part=""GW1NR-LV9QN88PC6/I5""/>
+    </comp>
+    <comp ref="C80">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C81">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C82">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C83">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C84">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C85">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C86">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C87">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C88">
+      <value>"10uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A106MA8NRNC")
+        (field (name "LCSC") "C96446")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C89">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C90">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C91">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C92">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C93">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C94">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="C95">
+      <value>"4.7uF"</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL10A475KO8NNNC")
+        (field (name "LCSC") "C19666")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="TP10">
+      <value>"SPARE_B1"</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+      <libsource lib="/usr/share/kicad/symbols/Connector.kicad_sym" part=""TestPoint""/>
+    </comp>
+    <comp ref="R70">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1001TCE")
+        (field (name "LCSC") "C11702")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R71">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1001TCE")
+        (field (name "LCSC") "C11702")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R72">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R73">
+      <value>"4.7k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF4701TCE")
+        (field (name "LCSC") "C25900")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R74">
+      <value>"10k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1002TCE")
+        (field (name "LCSC") "C25744")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R75">
+      <value>"4.7k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF4701TCE")
+        (field (name "LCSC") "C25900")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="J4">
+      <value>"JTAG_1V8"</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical</footprint>
+      <fields>
+        (field (name "LCSC") "C492406")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Connector_Generic.kicad_sym" part=""Conn_01x07""/>
+    </comp>
+    <comp ref="U16">
+      <value>"SN74LV4T125PWR"</value>
+      <footprint>Package_SO:TSSOP-14_4.4x5mm_P0.65mm</footprint>
+      <fields>
+        (field (name "MPN") "SN74LV4T125PWR")
+        (field (name "LCSC") "C90755")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/74xx.kicad_sym" part=""SN74LV4T125""/>
+    </comp>
+    <comp ref="C96">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="LED2">
+      <value>"GRN_STAT"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CT-1608UGC-P4")
+        (field (name "LCSC") "C52675989")
+      </fields>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="LED3">
+      <value>"GRN_ACT"</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        (field (name "MPN") "CT-1608UGC-P4")
+        (field (name "LCSC") "C52675989")
+      </fields>
+      <libsource lib="Device" part=""LED""/>
+    </comp>
+    <comp ref="R80">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1001TCE")
+        (field (name "LCSC") "C11702")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R81">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1001TCE")
+        (field (name "LCSC") "C11702")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R82">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1000TCE")
+        (field (name "LCSC") "C25076")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R83">
+      <value>"100"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1000TCE")
+        (field (name "LCSC") "C25076")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R84">
+      <value>"1k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1001TCE")
+        (field (name "LCSC") "C11702")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="R85">
+      <value>"100k"</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "0402WGF1003TCE")
+        (field (name "LCSC") "C25741")
+      </fields>
+      <libsource lib="Device" part=""R""/>
+    </comp>
+    <comp ref="U17">
+      <value>"SN74LV1T34DCKR"</value>
+      <footprint>Package_TO_SOT_SMD:SOT-353_SC-70-5</footprint>
+      <fields>
+        (field (name "MPN") "SN74LV1T34DCKR")
+        (field (name "LCSC") "C78541")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Logic_LevelTranslator.kicad_sym" part=""SN74LV1T34DCK""/>
+    </comp>
+    <comp ref="C97">
+      <value>"100nF"</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        (field (name "MPN") "CL05B104KB54PNC")
+        (field (name "LCSC") "C307331")
+      </fields>
+      <libsource lib="Device" part=""C""/>
+    </comp>
+    <comp ref="J5">
+      <value>"EXT_IO"</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
+      <fields>
+        (field (name "LCSC") "C37208")
+      </fields>
+      <libsource lib="/usr/share/kicad/symbols/Connector_Generic.kicad_sym" part=""Conn_01x06""/>
+    </comp>
+  </components>
+  <nets>
+    <net code="0" name="GND">
+      <node ref="C57" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="Y1" pin="4"/>
+      <node ref="J1" pin="A1"/>
+      <node ref="C92" pin="2"/>
+      <node ref="J2" pin="2"/>
+      <node ref="C42" pin="2"/>
+      <node ref="J1" pin="A12"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C53" pin="2"/>
+      <node ref="R53" pin="2"/>
+      <node ref="U13" pin="22"/>
+      <node ref="C58" pin="2"/>
+      <node ref="C93" pin="2"/>
+      <node ref="J1" pin="B1"/>
+      <node ref="U9" pin="6"/>
+      <node ref="U16" pin="13"/>
+      <node ref="C43" pin="2"/>
+      <node ref="R54" pin="2"/>
+      <node ref="J1" pin="B12"/>
+      <node ref="U12" pin="2"/>
+      <node ref="U13" pin="23"/>
+      <node ref="C65" pin="2"/>
+      <node ref="C31" pin="2"/>
+      <node ref="C59" pin="2"/>
+      <node ref="C94" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="U12" pin="4"/>
+      <node ref="U13" pin="35"/>
+      <node ref="U15" pin="43"/>
+      <node ref="C17" pin="2"/>
+      <node ref="R55" pin="2"/>
+      <node ref="U12" pin="7"/>
+      <node ref="U13" pin="36"/>
+      <node ref="C66" pin="2"/>
+      <node ref="U15" pin="46"/>
+      <node ref="U16" pin="7"/>
+      <node ref="R25" pin="1"/>
+      <node ref="C60" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="U12" pin="23"/>
+      <node ref="U13" pin="47"/>
+      <node ref="C95" pin="2"/>
+      <node ref="R56" pin="2"/>
+      <node ref="C96" pin="2"/>
+      <node ref="C32" pin="2"/>
+      <node ref="U12" pin="25"/>
+      <node ref="U13" pin="48"/>
+      <node ref="U15" pin="65"/>
+      <node ref="C61" pin="2"/>
+      <node ref="C15" pin="2"/>
+      <node ref="U15" pin="89"/>
+      <node ref="U12" pin="44"/>
+      <node ref="R7" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="U11" pin="6"/>
+      <node ref="U12" pin="47"/>
+      <node ref="C78" pin="2"/>
+      <node ref="U6" pin="2"/>
+      <node ref="C62" pin="2"/>
+      <node ref="U12" pin="48"/>
+      <node ref="C80" pin="2"/>
+      <node ref="J4" pin="7"/>
+      <node ref="LED2" pin="1"/>
+      <node ref="U17" pin="3"/>
+      <node ref="C18" pin="2"/>
+      <node ref="U12" pin="49"/>
+      <node ref="C12" pin="2"/>
+      <node ref="LED3" pin="1"/>
+      <node ref="R15" pin="1"/>
+      <node ref="U12" pin="55"/>
+      <node ref="C81" pin="2"/>
+      <node ref="C79" pin="2"/>
+      <node ref="U15" pin="2"/>
+      <node ref="U12" pin="58"/>
+      <node ref="C67" pin="2"/>
+      <node ref="C97" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="U4" pin="2"/>
+      <node ref="U12" pin="59"/>
+      <node ref="C82" pin="2"/>
+      <node ref="R9" pin="2"/>
+      <node ref="U12" pin="61"/>
+      <node ref="C75" pin="2"/>
+      <node ref="U12" pin="64"/>
+      <node ref="C83" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="X1" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="C68" pin="2"/>
+      <node ref="U15" pin="21"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C84" pin="2"/>
+      <node ref="LED1" pin="1"/>
+      <node ref="U15" pin="24"/>
+      <node ref="R3" pin="2"/>
+      <node ref="C69" pin="2"/>
+      <node ref="R70" pin="2"/>
+      <node ref="C50" pin="2"/>
+      <node ref="C63" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C85" pin="2"/>
+      <node ref="C20" pin="2"/>
+      <node ref="R71" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C70" pin="2"/>
+      <node ref="C64" pin="2"/>
+      <node ref="R1" pin="2"/>
+      <node ref="U12" pin="6"/>
+      <node ref="C86" pin="2"/>
+      <node ref="C47" pin="2"/>
+      <node ref="C71" pin="2"/>
+      <node ref="C51" pin="2"/>
+      <node ref="R2" pin="2"/>
+      <node ref="U7" pin="1"/>
+      <node ref="C87" pin="2"/>
+      <node ref="J5" pin="5"/>
+      <node ref="C48" pin="2"/>
+      <node ref="C21" pin="2"/>
+      <node ref="U13" pin="42"/>
+      <node ref="C72" pin="2"/>
+      <node ref="R73" pin="2"/>
+      <node ref="R85" pin="2"/>
+      <node ref="J5" pin="6"/>
+      <node ref="U1" pin="2"/>
+      <node ref="C98" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="U13" pin="4"/>
+      <node ref="C88" pin="2"/>
+      <node ref="J3" pin="2"/>
+      <node ref="U13" pin="9"/>
+      <node ref="R22" pin="2"/>
+      <node ref="R64" pin="2"/>
+      <node ref="C73" pin="2"/>
+      <node ref="U16" pin="1"/>
+      <node ref="U3" pin="1"/>
+      <node ref="TP6" pin="1"/>
+      <node ref="U5" pin="2"/>
+      <node ref="C54" pin="2"/>
+      <node ref="C99" pin="2"/>
+      <node ref="C89" pin="2"/>
+      <node ref="U13" pin="41"/>
+      <node ref="U7" pin="4"/>
+      <node ref="C37" pin="2"/>
+      <node ref="C77" pin="2"/>
+      <node ref="U14" pin="2"/>
+      <node ref="U7" pin="13"/>
+      <node ref="C55" pin="2"/>
+      <node ref="C90" pin="2"/>
+      <node ref="U16" pin="4"/>
+      <node ref="C5" pin="2"/>
+      <node ref="R50" pin="2"/>
+      <node ref="C38" pin="2"/>
+      <node ref="U13" pin="10"/>
+      <node ref="C74" pin="2"/>
+      <node ref="C41" pin="2"/>
+      <node ref="D1" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C56" pin="2"/>
+      <node ref="C91" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="R12" pin="2"/>
+      <node ref="C52" pin="2"/>
+      <node ref="U13" pin="11"/>
+      <node ref="Y1" pin="2"/>
+      <node ref="C76" pin="2"/>
+      <node ref="U16" pin="10"/>
+    </net>
+    <net code="1" name="VBUS_SW">
+      <node ref="C5" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="U6" pin="3"/>
+      <node ref="C3" pin="1"/>
+      <node ref="FB2" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="U3" pin="3"/>
+      <node ref="TP1" pin="1"/>
+      <node ref="U6" pin="1"/>
+    </net>
+    <net code="2" name="VD_3V3">
+      <node ref="C8" pin="1"/>
+      <node ref="U13" pin="24"/>
+      <node ref="C7" pin="1"/>
+      <node ref="R67" pin="2"/>
+      <node ref="U5" pin="1"/>
+      <node ref="C93" pin="1"/>
+      <node ref="C69" pin="1"/>
+      <node ref="U15" pin="67"/>
+      <node ref="C89" pin="1"/>
+      <node ref="U5" pin="3"/>
+      <node ref="FB8" pin="1"/>
+      <node ref="U15" pin="78"/>
+      <node ref="U15" pin="23"/>
+      <node ref="U13" pin="46"/>
+      <node ref="C85" pin="1"/>
+      <node ref="R65" pin="2"/>
+      <node ref="C70" pin="1"/>
+      <node ref="R61" pin="2"/>
+      <node ref="U15" pin="44"/>
+      <node ref="J5" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U13" pin="40"/>
+      <node ref="U14" pin="6"/>
+      <node ref="U4" pin="1"/>
+      <node ref="C67" pin="1"/>
+      <node ref="C90" pin="1"/>
+      <node ref="U16" pin="14"/>
+      <node ref="C86" pin="1"/>
+      <node ref="U13" pin="39"/>
+      <node ref="U4" pin="3"/>
+      <node ref="C71" pin="1"/>
+      <node ref="R62" pin="2"/>
+      <node ref="U15" pin="58"/>
+      <node ref="C10" pin="1"/>
+      <node ref="C75" pin="1"/>
+      <node ref="C91" pin="1"/>
+      <node ref="C96" pin="1"/>
+      <node ref="U15" pin="64"/>
+      <node ref="C87" pin="1"/>
+      <node ref="C6" pin="1"/>
+      <node ref="R5" pin="1"/>
+      <node ref="U13" pin="12"/>
+      <node ref="C76" pin="1"/>
+      <node ref="TP2" pin="1"/>
+      <node ref="R63" pin="2"/>
+      <node ref="C92" pin="1"/>
+      <node ref="C68" pin="1"/>
+      <node ref="C88" pin="1"/>
+      <node ref="C78" pin="1"/>
+    </net>
+    <net code="3" name="VD_1V8">
+      <node ref="J4" pin="1"/>
+      <node ref="U15" pin="12"/>
+      <node ref="U5" pin="5"/>
+      <node ref="U17" pin="5"/>
+      <node ref="C95" pin="1"/>
+      <node ref="C94" pin="1"/>
+      <node ref="C11" pin="1"/>
+      <node ref="R75" pin="2"/>
+      <node ref="R74" pin="2"/>
+      <node ref="C97" pin="1"/>
+      <node ref="TP3" pin="1"/>
+      <node ref="R72" pin="2"/>
+    </net>
+    <net code="4" name="VD_1V2">
+      <node ref="U15" pin="45"/>
+      <node ref="C9" pin="1"/>
+      <node ref="C84" pin="1"/>
+      <node ref="C83" pin="1"/>
+      <node ref="C82" pin="1"/>
+      <node ref="TP4" pin="1"/>
+      <node ref="C81" pin="1"/>
+      <node ref="C80" pin="1"/>
+      <node ref="U15" pin="66"/>
+      <node ref="U15" pin="22"/>
+      <node ref="U4" pin="5"/>
+      <node ref="U15" pin="1"/>
+    </net>
+    <net code="5" name="VA_3V3">
+      <node ref="FB5" pin="1"/>
+      <node ref="U9" pin="7"/>
+      <node ref="C13" pin="1"/>
+      <node ref="C37" pin="1"/>
+      <node ref="U6" pin="5"/>
+      <node ref="FB7" pin="1"/>
+      <node ref="C47" pin="1"/>
+      <node ref="U11" pin="7"/>
+      <node ref="U9" pin="3"/>
+      <node ref="TP5" pin="1"/>
+      <node ref="U11" pin="3"/>
+      <node ref="FB6" pin="1"/>
+    </net>
+    <net code="6" name="VA_P2V5">
+      <node ref="FB3" pin="2"/>
+      <node ref="U10" pin="5"/>
+      <node ref="C42" pin="1"/>
+      <node ref="TP7" pin="1"/>
+      <node ref="U8" pin="5"/>
+      <node ref="C20" pin="1"/>
+      <node ref="D3" pin="2"/>
+      <node ref="D2" pin="2"/>
+      <node ref="C32" pin="1"/>
+    </net>
+    <net code="7" name="VA_N2V5">
+      <node ref="C43" pin="1"/>
+      <node ref="D3" pin="1"/>
+      <node ref="D2" pin="1"/>
+      <node ref="C21" pin="1"/>
+      <node ref="U10" pin="2"/>
+      <node ref="TP8" pin="1"/>
+      <node ref="FB4" pin="2"/>
+      <node ref="C33" pin="1"/>
+      <node ref="U8" pin="2"/>
+    </net>
+    <net code="8" name="USB_DP">
+      <node ref="U13" pin="7"/>
+      <node ref="J1" pin="B6"/>
+      <node ref="U1" pin="6"/>
+      <node ref="J1" pin="A6"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="9" name="USB_DM">
+      <node ref="U1" pin="4"/>
+      <node ref="J1" pin="B7"/>
+      <node ref="U1" pin="3"/>
+      <node ref="U13" pin="6"/>
+      <node ref="J1" pin="A7"/>
+    </net>
+    <net code="10" name="AIN_A_P">
+      <node ref="C36" pin="1"/>
+      <node ref="U12" pin="50"/>
+      <node ref="R18" pin="2"/>
+    </net>
+    <net code="11" name="AIN_A_N">
+      <node ref="C36" pin="2"/>
+      <node ref="R19" pin="2"/>
+      <node ref="U12" pin="51"/>
+    </net>
+    <net code="12" name="AIN_B_P">
+      <node ref="R28" pin="2"/>
+      <node ref="U12" pin="63"/>
+      <node ref="C46" pin="1"/>
+    </net>
+    <net code="13" name="AIN_B_N">
+      <node ref="R29" pin="2"/>
+      <node ref="U12" pin="62"/>
+      <node ref="C46" pin="2"/>
+    </net>
+    <net code="14" name="ADC_VCM">
+      <node ref="C52" pin="1"/>
+      <node ref="C53" pin="1"/>
+      <node ref="C38" pin="1"/>
+      <node ref="U12" pin="52"/>
+      <node ref="C48" pin="1"/>
+      <node ref="U9" pin="2"/>
+      <node ref="U11" pin="2"/>
+    </net>
+    <net code="15" name="ADC_DA11">
+      <node ref="U15" pin="32"/>
+      <node ref="RN3" pin="5"/>
+    </net>
+    <net code="16" name="ADC_DA10">
+      <node ref="U15" pin="31"/>
+      <node ref="RN3" pin="6"/>
+    </net>
+    <net code="17" name="ADC_DA9">
+      <node ref="RN3" pin="7"/>
+      <node ref="U15" pin="30"/>
+    </net>
+    <net code="18" name="ADC_DA8">
+      <node ref="RN3" pin="8"/>
+      <node ref="U15" pin="29"/>
+    </net>
+    <net code="19" name="ADC_DA7">
+      <node ref="U15" pin="28"/>
+      <node ref="RN2" pin="5"/>
+    </net>
+    <net code="20" name="ADC_DA6">
+      <node ref="U15" pin="27"/>
+      <node ref="RN2" pin="6"/>
+    </net>
+    <net code="21" name="ADC_DA5">
+      <node ref="RN2" pin="7"/>
+      <node ref="U15" pin="26"/>
+    </net>
+    <net code="22" name="ADC_DA4">
+      <node ref="RN2" pin="8"/>
+      <node ref="U15" pin="25"/>
+    </net>
+    <net code="23" name="ADC_DA3">
+      <node ref="U15" pin="20"/>
+      <node ref="RN1" pin="5"/>
+    </net>
+    <net code="24" name="ADC_DA2">
+      <node ref="U15" pin="19"/>
+      <node ref="RN1" pin="6"/>
+    </net>
+    <net code="25" name="ADC_DA1">
+      <node ref="RN1" pin="7"/>
+      <node ref="U15" pin="18"/>
+    </net>
+    <net code="26" name="ADC_DA0">
+      <node ref="RN1" pin="8"/>
+      <node ref="U15" pin="17"/>
+    </net>
+    <net code="27" name="ADC_DB11">
+      <node ref="RN6" pin="5"/>
+      <node ref="U15" pin="47"/>
+    </net>
+    <net code="28" name="ADC_DB10">
+      <node ref="U15" pin="42"/>
+      <node ref="RN6" pin="6"/>
+    </net>
+    <net code="29" name="ADC_DB9">
+      <node ref="RN6" pin="7"/>
+      <node ref="U15" pin="41"/>
+    </net>
+    <net code="30" name="ADC_DB8">
+      <node ref="RN6" pin="8"/>
+      <node ref="U15" pin="40"/>
+    </net>
+    <net code="31" name="ADC_DB7">
+      <node ref="RN5" pin="5"/>
+      <node ref="U15" pin="39"/>
+    </net>
+    <net code="32" name="ADC_DB6">
+      <node ref="U15" pin="38"/>
+      <node ref="RN5" pin="6"/>
+    </net>
+    <net code="33" name="ADC_DB5">
+      <node ref="RN5" pin="7"/>
+      <node ref="U15" pin="37"/>
+    </net>
+    <net code="34" name="ADC_DB4">
+      <node ref="RN5" pin="8"/>
+      <node ref="U15" pin="36"/>
+    </net>
+    <net code="35" name="ADC_DB3">
+      <node ref="RN4" pin="5"/>
+      <node ref="U15" pin="34"/>
+    </net>
+    <net code="36" name="ADC_DB2">
+      <node ref="RN4" pin="6"/>
+      <node ref="U15" pin="33"/>
+    </net>
+    <net code="37" name="ADC_DB1">
+      <node ref="RN4" pin="7"/>
+      <node ref="U15" pin="49"/>
+    </net>
+    <net code="38" name="ADC_DB0">
+      <node ref="RN4" pin="8"/>
+      <node ref="U15" pin="48"/>
+    </net>
+    <net code="39" name="ADC_OVRA">
+      <node ref="U15" pin="51"/>
+      <node ref="RN7" pin="8"/>
+    </net>
+    <net code="40" name="ADC_OVRB">
+      <node ref="U15" pin="50"/>
+      <node ref="RN7" pin="7"/>
+    </net>
+    <net code="41" name="ADC_DVA">
+      <node ref="RN7" pin="6"/>
+      <node ref="U15" pin="72"/>
+    </net>
+    <net code="42" name="ADC_SEL">
+      <node ref="U12" pin="1"/>
+      <node ref="R53" pin="1"/>
+      <node ref="U15" pin="73"/>
+    </net>
+    <net code="43" name="ADC_SEN">
+      <node ref="R54" pin="1"/>
+      <node ref="U15" pin="74"/>
+      <node ref="U12" pin="41"/>
+    </net>
+    <net code="44" name="ADC_SCLK">
+      <node ref="U15" pin="75"/>
+      <node ref="U12" pin="42"/>
+      <node ref="R55" pin="1"/>
+    </net>
+    <net code="45" name="ADC_SDATA">
+      <node ref="U15" pin="76"/>
+      <node ref="U12" pin="45"/>
+      <node ref="R56" pin="1"/>
+    </net>
+    <net code="46" name="ADC_CLK">
+      <node ref="R57" pin="2"/>
+      <node ref="U12" pin="24"/>
+      <node ref="TP9" pin="1"/>
+    </net>
+    <net code="47" name="ADC_CLK_FPGA">
+      <node ref="U15" pin="35"/>
+      <node ref="R58" pin="2"/>
+    </net>
+    <net code="48" name="FT_D7">
+      <node ref="U15" pin="61"/>
+      <node ref="U13" pin="20"/>
+    </net>
+    <net code="49" name="FT_D6">
+      <node ref="U15" pin="60"/>
+      <node ref="U13" pin="19"/>
+    </net>
+    <net code="50" name="FT_D5">
+      <node ref="U13" pin="18"/>
+      <node ref="U15" pin="59"/>
+    </net>
+    <net code="51" name="FT_D4">
+      <node ref="U13" pin="17"/>
+      <node ref="U15" pin="57"/>
+    </net>
+    <net code="52" name="FT_D3">
+      <node ref="U13" pin="16"/>
+      <node ref="U15" pin="56"/>
+    </net>
+    <net code="53" name="FT_D2">
+      <node ref="U13" pin="15"/>
+      <node ref="U15" pin="55"/>
+    </net>
+    <net code="54" name="FT_D1">
+      <node ref="U13" pin="14"/>
+      <node ref="U15" pin="54"/>
+    </net>
+    <net code="55" name="FT_D0">
+      <node ref="U13" pin="13"/>
+      <node ref="U15" pin="53"/>
+    </net>
+    <net code="56" name="FT_RXF_N">
+      <node ref="U13" pin="21"/>
+      <node ref="U15" pin="62"/>
+    </net>
+    <net code="57" name="FT_TXE_N">
+      <node ref="U13" pin="25"/>
+      <node ref="U15" pin="63"/>
+    </net>
+    <net code="58" name="FT_RD_N">
+      <node ref="U13" pin="26"/>
+      <node ref="U15" pin="68"/>
+    </net>
+    <net code="59" name="FT_WR_N">
+      <node ref="U13" pin="27"/>
+      <node ref="U15" pin="69"/>
+    </net>
+    <net code="60" name="FT_OE_N">
+      <node ref="U15" pin="70"/>
+      <node ref="U13" pin="30"/>
+    </net>
+    <net code="61" name="FT_SIWU_N">
+      <node ref="U15" pin="71"/>
+      <node ref="U13" pin="28"/>
+    </net>
+    <net code="62" name="FT_CLKOUT">
+      <node ref="U15" pin="52"/>
+      <node ref="R66" pin="2"/>
+    </net>
+    <net code="63" name="LED_STAT_1V8">
+      <node ref="U15" pin="79"/>
+      <node ref="U16" pin="2"/>
+    </net>
+    <net code="64" name="LED_ACT_1V8">
+      <node ref="U16" pin="5"/>
+      <node ref="U15" pin="80"/>
+    </net>
+    <net code="65" name="TRIG_OUT_1V8">
+      <node ref="U16" pin="9"/>
+      <node ref="U15" pin="81"/>
+    </net>
+    <net code="66" name="GPIO_OUT_1V8">
+      <node ref="U16" pin="12"/>
+      <node ref="U15" pin="82"/>
+    </net>
+    <net code="67" name="TRIG_IN_1V8">
+      <node ref="U17" pin="4"/>
+      <node ref="U15" pin="83"/>
+    </net>
+    <net code="68" name="VBUS">
+      <node ref="J1" pin="A4"/>
+      <node ref="J1" pin="B9"/>
+      <node ref="J1" pin="A9"/>
+      <node ref="D1" pin="1"/>
+      <node ref="FB1" pin="1"/>
+      <node ref="U1" pin="5"/>
+      <node ref="J1" pin="B4"/>
+    </net>
+    <net code="69" name="VBUS_F">
+      <node ref="FB1" pin="2"/>
+      <node ref="U2" pin="5"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="70" name="USB_CC1">
+      <node ref="R1" pin="1"/>
+      <node ref="J1" pin="A5"/>
+    </net>
+    <net code="71" name="USB_CC2">
+      <node ref="J1" pin="B5"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="72" name="USB_SHIELD">
+      <node ref="J1" pin="S1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="C4" pin="1"/>
+    </net>
+    <net code="73" name="SW_ISET">
+      <node ref="U2" pin="3"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="74" name="N$33">
+      <node ref="R5" pin="2"/>
+      <node ref="LED1" pin="2"/>
+    </net>
+    <net code="75" name="CP_VIN">
+      <node ref="FB2" pin="2"/>
+      <node ref="U7" pin="12"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C14" pin="1"/>
+      <node ref="U7" pin="8"/>
+      <node ref="U7" pin="3"/>
+    </net>
+    <net code="76" name="CP_FLYP">
+      <node ref="C16" pin="1"/>
+      <node ref="U7" pin="10"/>
+    </net>
+    <net code="77" name="CP_FLYN">
+      <node ref="C16" pin="2"/>
+      <node ref="U7" pin="9"/>
+    </net>
+    <net code="78" name="CP_NEG">
+      <node ref="U7" pin="5"/>
+      <node ref="C17" pin="1"/>
+    </net>
+    <net code="79" name="CP_FBP">
+      <node ref="R7" pin="1"/>
+      <node ref="R6" pin="2"/>
+      <node ref="U7" pin="2"/>
+    </net>
+    <net code="80" name="CP_FBN">
+      <node ref="U7" pin="7"/>
+      <node ref="R9" pin="1"/>
+      <node ref="R8" pin="2"/>
+    </net>
+    <net code="81" name="VA_P2V5_R">
+      <node ref="C18" pin="1"/>
+      <node ref="R6" pin="1"/>
+      <node ref="FB3" pin="1"/>
+      <node ref="U7" pin="11"/>
+    </net>
+    <net code="82" name="VA_N2V5_R">
+      <node ref="U7" pin="6"/>
+      <node ref="C19" pin="1"/>
+      <node ref="FB4" pin="1"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="83" name="BNC_A">
+      <node ref="J2" pin="1"/>
+      <node ref="C30" pin="1"/>
+      <node ref="VC1" pin="1"/>
+      <node ref="R10" pin="1"/>
+    </net>
+    <net code="84" name="AFE_A_MID">
+      <node ref="R11" pin="1"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="85" name="AFE_A_TAP">
+      <node ref="R13" pin="1"/>
+      <node ref="C31" pin="1"/>
+      <node ref="R12" pin="1"/>
+      <node ref="D2" pin="3"/>
+      <node ref="VC1" pin="2"/>
+      <node ref="R11" pin="2"/>
+      <node ref="C30" pin="2"/>
+    </net>
+    <net code="86" name="AFE_A_BUFIN">
+      <node ref="R13" pin="2"/>
+      <node ref="U8" pin="3"/>
+    </net>
+    <net code="87" name="AFE_A_BUF">
+      <node ref="U8" pin="1"/>
+      <node ref="U8" pin="4"/>
+      <node ref="R14" pin="1"/>
+    </net>
+    <net code="88" name="AFE_A_FIP">
+      <node ref="R14" pin="2"/>
+      <node ref="C34" pin="2"/>
+      <node ref="U9" pin="8"/>
+      <node ref="R16" pin="2"/>
+    </net>
+    <net code="89" name="AFE_A_FIN">
+      <node ref="C35" pin="2"/>
+      <node ref="R17" pin="2"/>
+      <node ref="U9" pin="1"/>
+      <node ref="R15" pin="2"/>
+    </net>
+    <net code="90" name="AFE_A_FON">
+      <node ref="U9" pin="5"/>
+      <node ref="C34" pin="1"/>
+      <node ref="R19" pin="1"/>
+      <node ref="R16" pin="1"/>
+    </net>
+    <net code="91" name="AFE_A_FOP">
+      <node ref="U9" pin="4"/>
+      <node ref="R17" pin="1"/>
+      <node ref="R18" pin="1"/>
+      <node ref="C35" pin="1"/>
+    </net>
+    <net code="92" name="BNC_B">
+      <node ref="J3" pin="1"/>
+      <node ref="C40" pin="1"/>
+      <node ref="R20" pin="1"/>
+      <node ref="VC2" pin="1"/>
+    </net>
+    <net code="93" name="AFE_B_MID">
+      <node ref="R21" pin="1"/>
+      <node ref="R20" pin="2"/>
+    </net>
+    <net code="94" name="AFE_B_TAP">
+      <node ref="D3" pin="3"/>
+      <node ref="R23" pin="1"/>
+      <node ref="C41" pin="1"/>
+      <node ref="R22" pin="1"/>
+      <node ref="VC2" pin="2"/>
+      <node ref="C40" pin="2"/>
+      <node ref="R21" pin="2"/>
+    </net>
+    <net code="95" name="AFE_B_BUFIN">
+      <node ref="U10" pin="3"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="96" name="AFE_B_BUF">
+      <node ref="U10" pin="1"/>
+      <node ref="U10" pin="4"/>
+      <node ref="R24" pin="1"/>
+    </net>
+    <net code="97" name="AFE_B_FIP">
+      <node ref="U11" pin="8"/>
+      <node ref="R26" pin="2"/>
+      <node ref="R24" pin="2"/>
+      <node ref="C44" pin="2"/>
+    </net>
+    <net code="98" name="AFE_B_FIN">
+      <node ref="R27" pin="2"/>
+      <node ref="R25" pin="2"/>
+      <node ref="C45" pin="2"/>
+      <node ref="U11" pin="1"/>
+    </net>
+    <net code="99" name="AFE_B_FON">
+      <node ref="R29" pin="1"/>
+      <node ref="R26" pin="1"/>
+      <node ref="U11" pin="5"/>
+      <node ref="C44" pin="1"/>
+    </net>
+    <net code="100" name="AFE_B_FOP">
+      <node ref="R27" pin="1"/>
+      <node ref="U11" pin="4"/>
+      <node ref="R28" pin="1"/>
+      <node ref="C45" pin="1"/>
+    </net>
+    <net code="101" name="ADC_AVDD">
+      <node ref="U12" pin="57"/>
+      <node ref="U12" pin="3"/>
+      <node ref="FB6" pin="2"/>
+      <node ref="C57" pin="1"/>
+      <node ref="U12" pin="46"/>
+      <node ref="C56" pin="1"/>
+      <node ref="U12" pin="56"/>
+      <node ref="C55" pin="1"/>
+      <node ref="C54" pin="1"/>
+    </net>
+    <net code="102" name="ADC_VDRV">
+      <node ref="U12" pin="8"/>
+      <node ref="U12" pin="43"/>
+      <node ref="C62" pin="1"/>
+      <node ref="C61" pin="1"/>
+      <node ref="C60" pin="1"/>
+      <node ref="FB5" pin="2"/>
+      <node ref="C59" pin="1"/>
+      <node ref="U12" pin="40"/>
+      <node ref="C58" pin="1"/>
+      <node ref="U12" pin="5"/>
+    </net>
+    <net code="103" name="ADC_REFT">
+      <node ref="U12" pin="53"/>
+      <node ref="R51" pin="1"/>
+    </net>
+    <net code="104" name="ADC_REFT_C">
+      <node ref="C50" pin="1"/>
+      <node ref="R51" pin="2"/>
+      <node ref="C98" pin="1"/>
+    </net>
+    <net code="105" name="ADC_REFB">
+      <node ref="R52" pin="1"/>
+      <node ref="U12" pin="54"/>
+    </net>
+    <net code="106" name="ADC_REFB_C">
+      <node ref="C99" pin="1"/>
+      <node ref="C51" pin="1"/>
+      <node ref="R52" pin="2"/>
+    </net>
+    <net code="107" name="ADC_ISET">
+      <node ref="U12" pin="60"/>
+      <node ref="R50" pin="1"/>
+    </net>
+    <net code="108" name="ADC_DA_R11">
+      <node ref="U12" pin="38"/>
+      <node ref="RN3" pin="4"/>
+    </net>
+    <net code="109" name="ADC_DA_R10">
+      <node ref="U12" pin="37"/>
+      <node ref="RN3" pin="3"/>
+    </net>
+    <net code="110" name="ADC_DA_R9">
+      <node ref="RN3" pin="2"/>
+      <node ref="U12" pin="36"/>
+    </net>
+    <net code="111" name="ADC_DA_R8">
+      <node ref="RN3" pin="1"/>
+      <node ref="U12" pin="35"/>
+    </net>
+    <net code="112" name="ADC_DA_R7">
+      <node ref="RN2" pin="4"/>
+      <node ref="U12" pin="34"/>
+    </net>
+    <net code="113" name="ADC_DA_R6">
+      <node ref="U12" pin="33"/>
+      <node ref="RN2" pin="3"/>
+    </net>
+    <net code="114" name="ADC_DA_R5">
+      <node ref="RN2" pin="2"/>
+      <node ref="U12" pin="32"/>
+    </net>
+    <net code="115" name="ADC_DA_R4">
+      <node ref="U12" pin="31"/>
+      <node ref="RN2" pin="1"/>
+    </net>
+    <net code="116" name="ADC_DA_R3">
+      <node ref="U12" pin="30"/>
+      <node ref="RN1" pin="4"/>
+    </net>
+    <net code="117" name="ADC_DA_R2">
+      <node ref="U12" pin="29"/>
+      <node ref="RN1" pin="3"/>
+    </net>
+    <net code="118" name="ADC_DA_R1">
+      <node ref="RN1" pin="2"/>
+      <node ref="U12" pin="28"/>
+    </net>
+    <net code="119" name="ADC_DA_R0">
+      <node ref="RN1" pin="1"/>
+      <node ref="U12" pin="27"/>
+    </net>
+    <net code="120" name="ADC_DB_R11">
+      <node ref="RN6" pin="4"/>
+      <node ref="U12" pin="21"/>
+    </net>
+    <net code="121" name="ADC_DB_R10">
+      <node ref="RN6" pin="3"/>
+      <node ref="U12" pin="20"/>
+    </net>
+    <net code="122" name="ADC_DB_R9">
+      <node ref="U12" pin="19"/>
+      <node ref="RN6" pin="2"/>
+    </net>
+    <net code="123" name="ADC_DB_R8">
+      <node ref="U12" pin="18"/>
+      <node ref="RN6" pin="1"/>
+    </net>
+    <net code="124" name="ADC_DB_R7">
+      <node ref="U12" pin="17"/>
+      <node ref="RN5" pin="4"/>
+    </net>
+    <net code="125" name="ADC_DB_R6">
+      <node ref="U12" pin="16"/>
+      <node ref="RN5" pin="3"/>
+    </net>
+    <net code="126" name="ADC_DB_R5">
+      <node ref="RN5" pin="2"/>
+      <node ref="U12" pin="15"/>
+    </net>
+    <net code="127" name="ADC_DB_R4">
+      <node ref="RN5" pin="1"/>
+      <node ref="U12" pin="14"/>
+    </net>
+    <net code="128" name="ADC_DB_R3">
+      <node ref="RN4" pin="4"/>
+      <node ref="U12" pin="13"/>
+    </net>
+    <net code="129" name="ADC_DB_R2">
+      <node ref="RN4" pin="3"/>
+      <node ref="U12" pin="12"/>
+    </net>
+    <net code="130" name="ADC_DB_R1">
+      <node ref="U12" pin="11"/>
+      <node ref="RN4" pin="2"/>
+    </net>
+    <net code="131" name="ADC_DB_R0">
+      <node ref="U12" pin="10"/>
+      <node ref="RN4" pin="1"/>
+    </net>
+    <net code="132" name="ADC_OVRA_R">
+      <node ref="U12" pin="39"/>
+      <node ref="RN7" pin="1"/>
+    </net>
+    <net code="133" name="ADC_OVRB_R">
+      <node ref="U12" pin="9"/>
+      <node ref="RN7" pin="2"/>
+    </net>
+    <net code="134" name="ADC_DVA_R">
+      <node ref="RN7" pin="3"/>
+      <node ref="U12" pin="26"/>
+    </net>
+    <net code="135" name="OSC_VDD">
+      <node ref="C63" pin="1"/>
+      <node ref="X1" pin="1"/>
+      <node ref="X1" pin="4"/>
+      <node ref="FB7" pin="2"/>
+      <node ref="C64" pin="1"/>
+    </net>
+    <net code="136" name="OSC_OUT">
+      <node ref="R58" pin="1"/>
+      <node ref="X1" pin="3"/>
+      <node ref="R57" pin="1"/>
+    </net>
+    <net code="137" name="FT_VCORE">
+      <node ref="U13" pin="37"/>
+      <node ref="U13" pin="38"/>
+      <node ref="C74" pin="1"/>
+    </net>
+    <net code="138" name="FT_VPHY">
+      <node ref="U13" pin="8"/>
+      <node ref="U13" pin="3"/>
+      <node ref="C77" pin="1"/>
+      <node ref="FB8" pin="2"/>
+      <node ref="C73" pin="1"/>
+      <node ref="C72" pin="1"/>
+    </net>
+    <net code="139" name="FT_CLKOUT_R">
+      <node ref="U13" pin="29"/>
+      <node ref="R66" pin="1"/>
+    </net>
+    <net code="140" name="FT_PWRSAV_N">
+      <node ref="R67" pin="1"/>
+      <node ref="U13" pin="31"/>
+    </net>
+    <net code="141" name="FT_RESET_N">
+      <node ref="U13" pin="34"/>
+      <node ref="R65" pin="1"/>
+      <node ref="C79" pin="1"/>
+    </net>
+    <net code="142" name="FT_XIN">
+      <node ref="C65" pin="1"/>
+      <node ref="U13" pin="1"/>
+      <node ref="Y1" pin="1"/>
+    </net>
+    <net code="143" name="FT_XOUT">
+      <node ref="Y1" pin="3"/>
+      <node ref="U13" pin="2"/>
+      <node ref="C66" pin="1"/>
+    </net>
+    <net code="144" name="FT_REF">
+      <node ref="U13" pin="5"/>
+      <node ref="R64" pin="1"/>
+    </net>
+    <net code="145" name="FT_EECS">
+      <node ref="R61" pin="1"/>
+      <node ref="U13" pin="45"/>
+      <node ref="U14" pin="5"/>
+    </net>
+    <net code="146" name="FT_EECLK">
+      <node ref="R62" pin="1"/>
+      <node ref="U14" pin="4"/>
+      <node ref="U13" pin="44"/>
+    </net>
+    <net code="147" name="FT_EEDATA">
+      <node ref="U14" pin="3"/>
+      <node ref="R60" pin="2"/>
+      <node ref="U13" pin="43"/>
+      <node ref="R63" pin="1"/>
+    </net>
+    <net code="148" name="FT_EEDO">
+      <node ref="U14" pin="1"/>
+      <node ref="R60" pin="1"/>
+    </net>
+    <net code="149" name="SPARE_B1">
+      <node ref="U15" pin="77"/>
+      <node ref="TP10" pin="1"/>
+    </net>
+    <net code="150" name="JTAG_TMS">
+      <node ref="J4" pin="2"/>
+      <node ref="U15" pin="5"/>
+    </net>
+    <net code="151" name="JTAG_TCK">
+      <node ref="U15" pin="6"/>
+      <node ref="R73" pin="1"/>
+      <node ref="J4" pin="3"/>
+    </net>
+    <net code="152" name="JTAG_TDI">
+      <node ref="U15" pin="7"/>
+      <node ref="J4" pin="5"/>
+    </net>
+    <net code="153" name="JTAG_TDO">
+      <node ref="U15" pin="8"/>
+      <node ref="J4" pin="4"/>
+    </net>
+    <net code="154" name="FPGA_RECONFIG_N">
+      <node ref="J4" pin="6"/>
+      <node ref="R72" pin="1"/>
+      <node ref="U15" pin="9"/>
+    </net>
+    <net code="155" name="FPGA_JTAGSEL_N">
+      <node ref="R74" pin="1"/>
+      <node ref="U15" pin="4"/>
+    </net>
+    <net code="156" name="FPGA_MODE0">
+      <node ref="R70" pin="1"/>
+      <node ref="U15" pin="88"/>
+    </net>
+    <net code="157" name="FPGA_MODE1">
+      <node ref="U15" pin="87"/>
+      <node ref="R71" pin="1"/>
+    </net>
+    <net code="158" name="FPGA_DONE">
+      <node ref="U15" pin="10"/>
+      <node ref="R75" pin="1"/>
+    </net>
+    <net code="159" name="LED_STAT">
+      <node ref="U16" pin="3"/>
+      <node ref="R80" pin="1"/>
+    </net>
+    <net code="160" name="LED_ACT">
+      <node ref="R81" pin="1"/>
+      <node ref="U16" pin="6"/>
+    </net>
+    <net code="161" name="LED_STAT_K">
+      <node ref="LED2" pin="2"/>
+      <node ref="R80" pin="2"/>
+    </net>
+    <net code="162" name="LED_ACT_K">
+      <node ref="R81" pin="2"/>
+      <node ref="LED3" pin="2"/>
+    </net>
+    <net code="163" name="EXT_TRIG_OUT_R">
+      <node ref="R82" pin="1"/>
+      <node ref="U16" pin="8"/>
+    </net>
+    <net code="164" name="EXT_TRIG_OUT">
+      <node ref="R82" pin="2"/>
+      <node ref="J5" pin="3"/>
+    </net>
+    <net code="165" name="EXT_GPIO_OUT_R">
+      <node ref="U16" pin="11"/>
+      <node ref="R83" pin="1"/>
+    </net>
+    <net code="166" name="EXT_GPIO_OUT">
+      <node ref="R83" pin="2"/>
+      <node ref="J5" pin="4"/>
+    </net>
+    <net code="167" name="EXT_TRIG_IN">
+      <node ref="J5" pin="2"/>
+      <node ref="R85" pin="1"/>
+      <node ref="R84" pin="1"/>
+    </net>
+    <net code="168" name="EXT_TRIG_IN_R">
+      <node ref="R84" pin="2"/>
+      <node ref="U17" pin="2"/>
+    </net>
+  </nets>
+</export>

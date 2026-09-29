@@ -1,0 +1,135 @@
+{
+  "version": "5.0",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export",
+  "last_updated": "2026-09-10T17:05:30Z",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-09-10T17:05:30Z",
+    "errors": 0,
+    "warnings": 0,
+    "pass": true,
+    "report_path": "erc_report.md"
+  },
+  "review_status": "erc_pass_exported",
+  "sourced_bom_version": "1",
+  "last_modified_circuit": "circuits/dual_adc_usb/clock_gen.py",
+  "coding_mode": "modular",
+  "block_manifest": [
+    {
+      "block_id": "usb_c_port",
+      "block_name": "USB-C receptacle, ESD, VBUS entry",
+      "filename": "circuits/dual_adc_usb/usb_c_port.py",
+      "function_signature": "usb_c_port(vbus, gnd, usb_dp, usb_dm)",
+      "interface_nets": "`VBUS, GND, USB_DP, USB_DM`",
+      "parts": "J1, R1, R2, D1, D2, FB1, C1\u2013C3, TP1",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_digital",
+      "block_name": "Digital rails +3V3_AON/+3V3/+1V2/+1V8",
+      "filename": "circuits/dual_adc_usb/power_digital.py",
+      "function_signature": "power_digital(vbus, gnd, pwr_en, v3v3_aon, v3v3, v1v2, v1v8)",
+      "interface_nets": "`VBUS, GND, PWR_EN, +3V3_AON, +3V3, +1V2, +1V8`",
+      "parts": "U1, U2, U3, U4, L1, L2, R3\u2013R8, C4\u2013C20, TP2\u2013TP5",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_analog",
+      "block_name": "\u00b14.2 V bipolar rails + AVDD 3.0 V",
+      "filename": "circuits/dual_adc_usb/power_analog.py",
+      "function_signature": "power_analog(vbus, gnd, pwr_en, vpos, vneg, avdd)",
+      "interface_nets": "`VBUS, GND, PWR_EN, +4V2A, -4V2A, +3V0A`",
+      "parts": "U5, U6, R9\u2013R12, FB2, FB3, C21\u2013C33, TP6\u2013TP9",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "analog_frontend",
+      "block_name": "Attenuator, clamp, buffer, AAF, FDA",
+      "filename": "circuits/dual_adc_usb/analog_frontend.py",
+      "function_signature": "analog_frontend(bnc_in, adc_p, adc_n, vcm, vpos, vneg, gnd)",
+      "interface_nets": "`CH1_IN, CH1_ADC_P, CH1_ADC_N, VCM, +4V2A, -4V2A, GND`",
+      "parts": "J2, U7, U8, R13\u2013R27, C34\u2013C47, CT1, D3 (per instance; instantiated x2)",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "adc_pair",
+      "block_name": "2\u00d7 AD9235, refs, VCM divider, DRVDD ferrite",
+      "filename": "circuits/dual_adc_usb/adc_pair.py",
+      "function_signature": "adc_pair(ch1_p, ch1_n, ch2_p, ch2_n, clk_adc1, clk_adc2, adc1_d, adc2_d, adc1_otr, adc2_otr, avdd, v3v3, vcm, gnd)",
+      "interface_nets": "`CH1_ADC_P, CH1_ADC_N, CH2_ADC_P, CH2_ADC_N, CLK_ADC1, CLK_ADC2, ADC1_D[11:0], ADC2_D[11:0], ADC1_OTR, ADC2_OTR, +3V0A, +3V3, VCM, GND`",
+      "parts": "U9, U10, R28\u2013R31, FB4, C48\u2013C70, TP10\u2013TP13",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "clock_gen",
+      "block_name": "10 MHz XO + dual fanout buffer",
+      "filename": "circuits/dual_adc_usb/clock_gen.py",
+      "function_signature": "clock_gen(v3v3, gnd, clk_adc1, clk_adc2, clk_fpga)",
+      "interface_nets": "`+3V3, GND, CLK_ADC1, CLK_ADC2, CLK_FPGA`",
+      "parts": "Y1, U11, R32\u2013R34, C71, C72",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_capture",
+      "block_name": "GW1NR-9, decoupling, JTAG header",
+      "filename": "circuits/dual_adc_usb/fpga_capture.py",
+      "function_signature": "fpga_capture(v3v3, v1v2, v1v8, gnd, clk_fpga, adc1_d, adc2_d, adc1_otr, adc2_otr, fd, ifclk, slwr_n, slrd_n, sloe_n, fifoadr, flaga, flagb, flagc, pktend_n, fpga_rst_n, trig_io, led_cap_n)",
+      "interface_nets": "`+3V3, +1V2, +1V8, GND, CLK_FPGA, ADC1_D[11:0], ADC2_D[11:0], ADC1_OTR, ADC2_OTR, FD[7:0], IFCLK, SLWR_N, SLRD_N, SLOE_N, FIFOADR[1:0], FLAGA, FLAGB, FLAGC, PKTEND_N, FPGA_RST_N, TRIG_IO, LED_CAP_N`",
+      "parts": "U12, J3, R35, R36, C73\u2013C90, TP14",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_controller",
+      "block_name": "CY7C68013A, 24 MHz crystal, EEPROM, reset",
+      "filename": "circuits/dual_adc_usb/usb_controller.py",
+      "function_signature": "usb_controller(v3v3_aon, gnd, usb_dp, usb_dm, fd, ifclk, slwr_n, slrd_n, sloe_n, fifoadr, flaga, flagb, flagc, pktend_n, pwr_en, fpga_rst_n)",
+      "interface_nets": "`+3V3_AON, GND, USB_DP, USB_DM, FD[7:0], IFCLK, SLWR_N, SLRD_N, SLOE_N, FIFOADR[1:0], FLAGA, FLAGB, FLAGC, PKTEND_N, PWR_EN, FPGA_RST_N`",
+      "parts": "U13, U14, Y2, R37\u2013R42, FB5, C91\u2013C105, TP15",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "aux_io",
+      "block_name": "Ext trigger header + ESD, status LEDs",
+      "filename": "circuits/dual_adc_usb/aux_io.py",
+      "function_signature": "aux_io(v3v3, v3v3_aon, gnd, trig_io, led_cap_n)",
+      "interface_nets": "`+3V3, +3V3_AON, GND, TRIG_IO, LED_CAP_N`",
+      "parts": "J4, D4, D5, D6, R43\u2013R46, TP16\u2013TP19",
+      "datasheet_summaries": "see handoffs/04_datasheets.md ## Summaries by block",
+      "status": "done",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 1,
+  "architecture_rework_count": 1,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/06_erc.md"
+  },
+  "last_handoff": "handoffs/06_erc.md"
+}

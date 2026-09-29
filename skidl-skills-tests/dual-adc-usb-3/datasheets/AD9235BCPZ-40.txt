@@ -1,0 +1,1936 @@
+                                                                                               12-Bit, 20/40/65 MSPS
+                                                                                                  Dual A/D Converter
+                                                                                                            AD9238
+   FEATURES                                                                                 FUNCTIONAL BLOCK DIAGRAM
+   Integrated Dual 12-Bit Analog-to-Digital Converters
+                                                                                              AVDD                    DRVDD
+   Single 3 V Supply Operation (2.7 V to 3.6 V)
+   SNR = 70 dBc (to Nyquist, AD9238-65)                                                                                              OEB_A
+                                                                                  VIN+_A                                             OTR_A
+   SFDR = 85 dBc (to Nyquist, AD9238-65)                                                     SHA          A/D
+
+
+
+
+                                                                                                                           BUFFERS
+                                                                                  VIN–_A                                             D11_A
+   Low Power: 600 mW at 65 MSPS
+
+
+
+
+                                                                                                                             O/P
+                                                                                 REFT_A                                              D0_A
+   Differential Input with 500 MHz 3 dB Bandwidth                                REFB_A
+   On-Chip Reference and SHA                                                                                                         MUX_SELECT
+                                                                                   VREF                                CLOCK         CLK_A
+   Flexible Analog Input: 1 V p-p to 2 V p-p Range                                                                   DUTY CYCLE
+                                                                                                                     STABILIZER      CLK_B
+   Offset Binary or Twos Complement Data Format                                   SENSE                                              DCS
+   Clock Duty Cycle Stabilizer                                                                                                       DFS
+                                                                                              0.5V                       MODE        PDWN_A
+   APPLICATIONS                                                                    AGND                                 SELECT       PDWN_B
+   Ultrasound Equipment                                                                                                              SHARED_REF
+
+   IF Sampling in Communications Receivers:                                      REFB_B                                              OEB_B
+                                                                                 REFT_B                                              OTR_B
+      IS-95, CDMA One, IMT-2000
+
+
+
+
+                                                                                                                           BUFFERS
+   Battery-Powered Instruments                                                    VIN–_B                                             D11_B
+
+
+
+
+                                                                                                                             O/P
+                                                                                             SHA          A/D
+                                                                                                                                     D0_B
+   Hand-Held Scopemeters                                                          VIN+_B
+
+   Low Cost Digital Oscilloscopes
+                                                                                              AGND                    DRGND
+
+
+
+
+GENERAL DESCRIPTION                                                          PRODUCT HIGHLIGHTS
+The AD9238 is a dual, 3 V, 12-bit, 20 MSPS/40 MSPS/65 MSPS                   1. Integrated, dual version of the AD9235—a 12-bit,
+analog-to-digital converter. It features dual high performance                  20 MSPS/40 MSPS/65 MSPS ADC.
+sample-and-hold amplifiers and an integrated voltage reference.              2. Speed grade options of 20 MSPS, 40 MSPS, and 65 MSPS
+The AD9238 uses a multistage differential pipelined architecture                allow flexibility between power, cost, and performance to suit
+with output error correction logic to provide 12-bit accuracy and               an application.
+guarantee no missing codes over the full operating temperature
+range at data rates up to 65 MSPS.                                           3. The AD9238 operates from a single 3 V power supply and
+                                                                                features a separate digital output driver supply to accommo-
+The wide bandwidth, differential SHA allows for a variety of                    date 2.5 V and 3.3 V logic families.
+user selectable input ranges and offsets including single-ended
+applications. It is suitable for various applications including multi-       4. Low power consumption:
+plexed systems that switch full-scale voltage levels in successive              AD9238-20 operating at 20 MSPS consumes a low 180 mW.
+channels and for sampling inputs at frequencies well beyond the                 AD9238-40 operating at 40 MSPS consumes a low 330 mW.
+Nyquist rate. The AD9238 is suitable for applications in commu-                 AD9238-65 operating at 65 MSPS consumes a low 600 mW.
+nications, imaging, and medical ultrasound.                                  5. The patented SHA input maintains excellent performance for
+Dual single-ended clock inputs are used to control all internal con-            input frequencies up to 100 MHz and can be configured for
+version cycles. A duty cycle stabilizer is available on the AD9238-65           single-ended or differential operation.
+and can compensate for wide variations in the clock duty cycle,              6. Typical channel isolation of 80 dB @ fIN = 10 MHz.
+allowing the converters to maintain excellent performance. The               7. The clock duty cycle stabilizer (AD9238-65 only) maintains
+digital output data is presented in either straight binary or twos              performance over a wide range of clock duty cycles.
+complement format. Out-of-range signals indicate an overflow
+condition, which can be used with the most significant bit to deter-         8. The OTR output bits indicate when either input signal is
+mine low or high overflow.                                                      beyond the selected input range.
+Fabricated on an advanced CMOS process, the AD9238 is avail-                 9. Multiplexed data output option enables single-port operation
+able in a space saving 64-lead LQFP and is specified over the                   from either data port A or data port B.
+industrial temperature range (–40°C to +85°C).
+
+REV. A
+
+Information furnished by Analog Devices is believed to be accurate and
+reliable. However, no responsibility is assumed by Analog Devices for its
+use, nor for any infringements of patents or other rights of third parties
+that may result from its use. No license is granted by implication or oth-   One Technology Way, P.O. Box 9106, Norwood, MA 02062-9106, U.S.A.
+erwise under any patent or patent rights of Analog Devices. Trademarks       Tel: 781/329-4700                                   www.analog.com
+and registered trademarks are the property of their respective owners.       Fax: 781/326-8703      © 2003 Analog Devices, Inc. All rights reserved.
+AD9238–SPECIFICATIONS
+                                            (AVDD = 3 V, DRVDD = 2.5 V, Maximum Sample Rate, CLK_A = CLK_B; AIN = –0.5 dBFS Differential Input,
+DC SPECIFICATIONS 1.0 V Internal Reference, T to T , unless otherwise noted.)MIN       MAX
+
+                                                          Test              AD9238BST-20                 AD9238BST-40                  AD9238BST-65
+Parameter                                            Temp Level            Min Typ Max                  Min Typ   Max                 Min Typ   Max                 Unit
+RESOLUTION                                           Full      VI          12                           12                            12                            Bits
+ACCURACY
+ No Missing Codes Guaranteed                         Full      VI          12                           12                            12                            Bits
+ Offset Error                                        Full      VI                  ±0.30 ±1.2                    ±0.50     ±1.1               ±0.50     ±1.1        % FSR
+ Gain Error1                                         Full      IV                  ±0.30 ±2.2                    ±0.50     ±2.4               ±0.50     ±2.5        % FSR
+ Differential Nonlinearity (DNL)2                    Full      V                   ±0.35                         ±0.35                        ±0.35                 LSB
+                                                     25⬚C      I                   ±0.35 ±0.9                    ±0.35     ±0.8               ±0.35     ±1.0        LSB
+   Integral Nonlinearity (INL)2                      Full      V                   ±0.45                         ±0.60                        ±0.70                 LSB
+                                                     25⬚C      I                   ±0.40 ±1.4                    ±0.50     ±1.4               ±0.55     ±1.75       LSB
+TEMPERATURE DRIFT
+ Offset Error                                        Full      V                   ±2                            ±2                           ±3                    ppm/°C
+ Gain Error1                                         Full      V                   ±12                           ±12                          ±12                   ppm/°C
+INTERNAL VOLTAGE REFERENCE
+  Output Voltage Error (1 V Mode)                    Full      VI                  ±5        ±35                 ±5        ±35                ±5        ±35         mV
+  Load Regulation @ 1.0 mA                           Full      V                   0.8                           0.8                          0.8                   mV
+  Output Voltage Error (0.5 V Mode)                  Full      V                   ±2.5                          ±2.5                         ±2.5                  mV
+  Load Regulation @ 0.5 mA                           Full      V                   0.1                           0.1                          0.1                   mV
+INPUT REFERRED NOISE
+  Input Span = 1 V                                   25⬚C      V                   0.54                          0.54                         0.54                  LSB rms
+  Input Span = 2.0 V                                 25⬚C      V                   0.27                          0.27                         0.27                  LSB rms
+ANALOG INPUT
+ Input Span = 1.0 V                                  Full      IV                  1                             1                            1                     V p-p
+ Input Span = 2.0 V                                  Full      IV                  2                             2                            2                     V p-p
+ Input Capacitance3                                  Full      V                   7                             7                            7                     pF
+REFERENCE INPUT RESISTANCE                           Full      V                   7                             7                            7                     k⍀
+POWER SUPPLIES
+ Supply Voltages
+   AVDD                                              Full      IV          2.7 3.0           3.6        2.7 3.0            3.6        2.7 3.0           3.6         V
+   DRVDD                                             Full      IV          2.25 3.0          3.6        2.25 3.0           3.6        2.25 3.0          3.6         V
+ Supply Current
+   IAVDD2                                            Full      V                   60                            110                          200                   mA
+   IDRVDD2                                           Full      V                   4                             10                           14                    mA
+ PSRR                                                Full      V                   ±0.01                         ±0.01                        ±0.01                 % FSR
+POWER CONSUMPTION
+ DC Input4                                           Full      V                   180                           330                          600                   mW
+ Sine Wave Input2                                    Full      VI                  190       212                 360       397                640       698         mW
+ Standby Power5                                      Full      V                   2.0                           2.0                          2.0                   mW
+MATCHING CHARACTERISTICS
+ Offset Error                                        Full      V                   ±0.1                          ±0.1                         ±0.1                  % FSR
+ Gain Error                                          Full      V                   ±0.05                         ±0.05                        ±0.05                 % FSR
+NOTES
+1
+  Gain error and gain temperature coefficient are based on the A/D converter only (with a fixed 1.0 V external reference).
+2
+  Measured at maximum clock rate with a low frequency sine wave input and approximately 5 pF loading on each output bit.
+3
+  Input capacitance refers to the effective capacitance between one differential input pin and AVSS. Refer to Figure 2 for the equivalent analog input structure.
+4
+  Measured with dc input at maximum clock rate.
+5
+  Standby power is measured with the CLK_A and CLK_B pins inactive (i.e., set to AVDD or AGND).
+Specifications subject to change without notice.
+
+
+
+
+                                                                                       –2–                                                                           REV. A
+                                                                                                                                                     AD9238
+DC SPECIFICATIONS (continued)
+                                                        Test   AD9238BST-20                       AD9238BST-40                    AD9238BST-65
+Parameter                                          Temp Level Min  Typ   Max                     Min  Typ   Max                  Min Typ Max            Unit
+LOGIC INPUTS
+ High Level Input Voltage                          Full   IV       2.0                           2.0                             2.0                    V
+ Low Level Input Voltage                           Full   IV                           0.8                            0.8                        0.8    V
+ High Level Input Current                          Full   IV       –10                 +10       –10                  +10        –10             +10    µA
+ Low Level Input Current                           Full   IV       –10                 +10       –10                  +10        –10             +10    µA
+ Input Capacitance                                 Full   V                  2                             2                              2             pF
+LOGIC OUTPUTS*
+ DRVDD = 3.3 V
+   High Level Output Voltage                       Full   IV       3.29                          3.29                            3.29                   V
+     (IOH = 50 mA)
+   High Level Output Voltage                       Full   IV       3.25                          3.25                            3.25                   V
+     (IOH = 0.5 mA)
+   Low Level Output Voltage                        Full   IV                           0.05                           0.05                       0.05   V
+     (IOL = 50 mA)
+   Low Level Output Voltage                        Full   IV                           0.2                            0.2                        0.2    V
+     (IOL = 1.6 mA)
+   DRVDD = 2.5 V
+   High Level Output Voltage                       Full   IV       2.49                          2.49                            2.49                   V
+     (IOH = 50 mA)
+   High Level Output Voltage                       Full   IV       2.45                          2.45                            2.45                   V
+     (IOH = 0.5 mA)
+   Low Level Output Voltage                        Full   IV                           0.05                           0.05                       0.05   V
+     (IOL = 50 mA)
+   Low Level Output Voltage                        Full   IV                           0.2                            0.2                        0.2    V
+     (IOL = 1.6 mA)
+*Output Voltage Levels measured with 5 pF load on each output.
+Specifications subject to change without notice.
+
+
+
+SWITCHING SPECIFICATIONS
+                                                        Test   AD9238BST-20                       AD9238BST-40                    AD9238BST-65
+Parameter                                          Temp Level Min  Typ   Max                     Min  Typ   Max                  Min Typ Max            Unit
+SWITCHING PERFORMANCE
+ Max Conversion Rate                               Full   VI       20                            40                              65                     MSPS
+ Min Conversion Rate                               Full   V                            1                              1                          1      MSPS
+ CLK Period                                        Full   V        50.0                          25.0                            15.4                   ns
+ CLK Pulsewidth High1                              Full   V        15.0                          8.8                             6.2                    ns
+ CLK Pulsewidth Low1                               Full   V        15.0                          8.8                             6.2                    ns
+DATA OUTPUT PARAMETERS
+ Output Delay2 (tPD)                               Full   IV       2         3.5       6         2         3.5        6          2        3.5    6      ns
+ Pipeline Delay (Latency)                          Full   V                  7                             7                              7             Cycles
+ Aperture Delay (tA)                               Full   V                  1.0                           1.0                            1.0           ns
+ Aperture Uncertainty (tJ)                         Full   V                  0.5                           0.5                            0.5           ps rms
+ Wake-Up Time3                                     Full   V                  2.5                           2.5                            2.5           ms
+OUT-OF-RANGE RECOVERY TIME Full                           V                  1                             1                              2             Cycles
+NOTES
+1
+  The AD9238-65 model has a duty cycle stabilizer circuit that, when enabled, corrects for a wide range of duty cycles (see TPC 20).
+2
+  Output delay is measured from CLOCK 50% transition to DATA 50% transition, with a 5 pF load on each output.
+3
+  Wake-up time is dependent on the value of the decoupling capacitors; typical values shown with 0.1 µF and 10 µF capacitors on REFT and REFB.
+Specifications subject to change without notice.
+
+
+
+
+REV. A                                                                           –3–
+AD9238
+                                           (AVDD = 3 V, DRVDD = 2.5 V, Maximum Sample Rate, CLK_A = CLK_B; AIN = –0.5 dBFS Differential Input,
+AC SPECIFICATIONS 1.0 V Internal Reference, T to T , unless otherwise noted.)
+                                                                          MIN    MAX
+
+                                                        Test         AD9238BST-20                      AD9238BST-40                AD9238BST-65
+Parameter                                  Temp         Level      Min   Typ    Max                   Min Typ    Max              Min Typ    Max                  Unit
+SIGNAL-TO-NOISE RATIO
+   fINPUT = 2.4 MHz                        25°C         V                       70.4                           70.4                      70.3                     dBc
+   fINPUT = 9.7 MHz                        Full         V                       70.2                                                                              dBc
+                                           25°C         IV         69.7         70.4                                                                              dBc
+     fINPUT = 19.6 MHz                     Full         V                                                      70.1                                               dBc
+                                           25°C         IV                                            69.7     70.3                                               dBc
+     fINPUT = 32.5 MHz                     Full         V                                                                              69.3                       dBc
+                                           25°C         IV                                                                        68.7 69.5                       dBc
+     fINPUT = 100 MHz                      25°C         V                       68.7                           68.3                    67.6                       dBc
+SIGNAL-TO-NOISE AND
+  DISTORTION RATIO
+    fINPUT = 2.4 MHz                       25°C         V                       70.2                           70.2                      70.1                     dBc
+    fINPUT = 9.7 MHz                       Full         V                       70.1                                                                              dBc
+                                           25°C         IV         69.3         70.2                                                                              dBc
+     fINPUT = 19.6 MHz                     Full         V                                                      69.9                                               dBc
+                                           25°C         IV                                            69.4     70.1                                               dBc
+     fINPUT = 32.5 MHz                     Full         V                                                                              68.9                       dBc
+                                           25°C         IV                                                                        68.1 69.1                       dBc
+     fINPUT = 100 MHz                      25°C         V                       67.9                           67.9                    66.6                       dBc
+TOTAL HARMONIC
+ DISTORTION
+   fINPUT = 2.4 MHz                        25°C         V                       –83.0                          –83.0                     –83.0                    dBc
+   fINPUT = 9.7 MHz                        Full         V                       –81.0                                                                             dBc
+                                           25°C         I                       –83.0       –74.6                                                                 dBc
+     fINPUT = 19.6 MHz                     Full         V                                                      –81.0                                              dBc
+                                           25°C         I                                                      –83.0     –75.5                                    dBc
+     fINPUT = 32.5 MHz                     Full         V                                                                                –78.0                    dBc
+                                           25°C         I                                                                                –80.0         –71.7      dBc
+     fINPUT = 100 MHz                      25°C         V                       –77.0                          –79.0                     –74.0                    dBc
+WORST HARMONIC
+ (2nd or 3rd)
+   fINPUT = 9.7 MHz                        Full         V                       –84.0                                                                             dBc
+   fINPUT = 19.6 MHz                       Full         V                                                      –85.0                                              dBc
+   fINPUT = 32.5 MHz                       Full         V                                                                                –80.0                    dBc
+SPURIOUS FREE
+  DYNAMIC RANGE
+   fINPUT = 2.4 MHz                        25°C         V                       86.0                           86.0                      86.0                     dBc
+   fINPUT = 9.7 MHz                        Full         V                       84.0                                                                              dBc
+                                           25°C         I          76.1         86.0                                                                              dBc
+     fINPUT = 19.6 MHz                     Full         V                                                      85.0                                               dBc
+                                           25°C         I                                             76.7     86.0                                               dBc
+     fINPUT = 32.5 MHz                     Full         V                                                                              80.0                       dBc
+                                           25°C         I                                                                         72.5 83.0                       dBc
+     fINPUT = 100 MHz                      25°C         V                       79.0                           81.0                    75.0                       dBc
+CROSSTALK                                  Full         V                       –80                            –80                       –80                      dB
+Specifications subject to change without notice.
+
+                                                    �        ���
+                                                                      ���                                                                      ���
+                                    ���                                               ���
+             ������                                                                                                                ���
+               �����                                                                            ���
+                                                                                                             ���         ���
+
+
+               �����
+
+                ����             ���          ���        ���        ���          ���          ���        ���           ���       ���      �
+                 ���
+                                                                                                                                           �����������������
+                                                                                                                                                     ���������
+
+                                                                   Figure 1. Timing Diagram
+                                                                                  –4–                                                                            REV. A
+                                                                                                                                               AD9238
+ABSOLUTE MAXIMUM RATINGS1                                                                     EXPLANATION OF TEST LEVELS
+                             With                                                             I   100% production tested.
+                             Respect                                                          II 100% production tested at 25°C and sample tested at specified
+Pin Name                     To              Min       Max                   Unit                temperatures.
+ELECTRICAL                                                                                    III Sample tested only.
+ AVDD                        AGND            –0.3      +3.9        V
+  DRVDD                      DRGND           –0.3      +3.9        V                          IV Parameter is guaranteed by design and characterization testing.
+ AGND                        DRGND           –0.3      +0.3        V                          V Parameter is a typical value only.
+ AVDD                        DRVDD           –3.9      +3.9        V                          VI 100% production tested at 25°C; guaranteed by design and
+  Digital Outputs            DRGND           –0.3      DRVDD + 0.3 V                             characterization testing for industrial temperature range; 100%
+  CLK, DCS,                                                                                      production tested at temperature extremes for military devices.
+  MUX_SELECT,
+  SHARED_REF,
+  OEB, DFS                   AGND            –0.3      AVDD + 0.3            V
+ VINA, VINB                  AGND            –0.3      AVDD + 0.3            V
+ VREF                        AGND            –0.3      AVDD + 0.3            V
+  SENSE                      AGND            –0.3      AVDD + 0.3            V
+  REFB, REFT                 AGND            –0.3      AVDD + 0.3            V
+  PDWN                       AGND            –0.3      AVDD + 0.3            V
+ENVIRONMENTAL2
+ Operating Temperature                       –45       +85                   °C
+ Junction Temperature                                  +150                  °C
+ Lead Temperature (10 sec)                             +300                  °C
+ Storage Temperature                         –65       +150                  °C
+NOTES
+1
+  Absolute maximum ratings are limiting values to be applied individually, and beyond
+  which the serviceability of the circuit may be impaired. Functional operability is
+  not necessarily implied. Exposure to absolute maximum rating conditions for an
+  extended period of time may affect device reliability.
+2
+  Typical thermal impedances (64-lead LQFP); JA = 54°C/W. These measurements
+  were taken on a 4-layer board in still air, in accordance with EIA/JESD51-7.
+
+
+
+
+                                                                         ORDERING GUIDE
+        Model                        Temperature Range                   Package Description                                         Package Option
+        AD9238BST-20                 –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238BST-40                 –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238BST-65                 –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238BSTRL-20               –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238BSTRL-40               –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238BSTRL-65               –40°C to +85°C                      64-Lead Low Profile Quad Flat Pack (LQFP)                   ST-64-1
+        AD9238-20PCB                                                     Evaluation Board with AD9238BST-20
+        AD9238-40PCB                                                     Evaluation Board with AD9238BST-40
+        AD9238-65PCB                                                     Evaluation Board with AD9238BST-65
+
+
+
+
+CAUTION
+ESD (electrostatic discharge) sensitive device. Electrostatic charges as high as 4000 V readily accumulate on
+the human body and test equipment and can discharge without detection. Although the AD9238 features
+proprietary ESD protection circuitry, permanent damage may occur on devices subjected to high energy
+electrostatic discharges. Therefore, proper ESD precautions are recommended to avoid performance
+degradation or loss of functionality.
+
+
+
+REV. A                                                                                  –5–
+AD9238
+                                                                             PIN CONFIGURATION
+
+
+
+
+                                                            SHARED_REF
+                                                                         MUX_SELECT
+
+
+
+
+                                                                                                               D11_A (MSB)
+                                                                                      PDWN_A
+
+
+
+
+                                                                                                                                                   DRGND
+                                                                                                                                                           DRVDD
+                                                                                      OEB_A
+                                                                                                       OTR_A
+                                                    CLK_A
+
+
+
+
+                                                                                                                             D10_A
+                                             AVDD
+
+
+
+
+                                                                                                                                     D9_A
+                                                                                                                                     D8_A
+
+
+
+                                                                                                                                                           D7_A
+                                                                                                                                                                          D6_A
+                                                                                                                                                                          D5_A
+                                              64 63 62 61 60 59 58 57 56 55 54 53 52 51 50 49
+
+
+                                  AGND 1                                                                                                                                                48 D4_A
+                                                    PIN 1
+                                 VIN+_A 2           IDENTIFIER                                                                                                                          47 D3_A
+                                 VIN–_A 3                                                                                                                                               46 D2_A
+                                  AGND 4                                                                                                                                                45 D1_A
+                                  AVDD 5                                                                                                                                                44 D0_A
+                                REFT_A 6                                                                                                                                                43 DNC
+                                REFB_A 7                                                                                                                                                42 DNC
+                                  VREF 8
+                                                                                                          AD9238                                                                        41 DRVDD
+                                                                                                       64-LEAD LQFP
+                                 SENSE 9                                                                  TOP VIEW                                                                      40 DRGND
+                                REFB_B 10                                                               (Not to Scale)                                                                  39 OTR_B
+                                 REFT_B 11                                                                                                                                              38 D11_B (MSB)
+                                  AVDD 12                                                                                                                                               37 D10_B
+                                  AGND 13                                                                                                                                               36 D9_B
+                                 VIN–_B 14                                                                                                                                              35 D8_B
+                                 VIN+_B 15                                                                                                                                              34 D7_B
+                                  AGND 16                                                                                                                                               33 D6_B
+
+                                             17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+                                             AVDD
+                                                    CLK_B
+                                                             DCS
+                                                             DFS
+                                                                                      PDWN_B
+                                                                                               OEB_B
+                                                                                                       DNC
+                                                                                                                DNC
+                                                                                                                             D0_B
+                                                                                                                                     D1_B
+                                                                                                                                            D2_B
+                                                                                                                                                   DRGND
+                                                                                                                                                           DRVDD
+                                                                                                                                                                   D3_B
+                                                                                                                                                                          D4_B
+                                                                                                                                                                                 D5_B
+                                       DNC = DO NOT CONNECT
+
+                                                PIN FUNCTION DESCRIPTIONS
+Pin Number       Mnemonic                     Description
+2                VIN+_A                       Analog Input Pin (+) for Channel A
+3                VIN–_A                       Analog Input Pin (–) for Channel A
+15               VIN+_B                       Analog Input Pin (+) for Channel B
+14               VIN–_B                       Analog Input Pin (–) for Channel B
+6                REFT_A                       Differential Reference (+) for Channel A
+7                REFB_A                       Differential Reference (–) for Channel A
+11               REFT_B                       Differential Reference (+) for Channel B
+10               REFB_B                       Differential Reference (–) for Channel B
+8                VREF                         Voltage Reference Input/Output
+9                SENSE                        Reference Mode Selection
+18               CLK_B                        Clock Input Pin for Channel B
+63               CLK_A                        Clock Input Pin for Channel A
+19               DCS                          Enable Duty Cycle Stabilizer (DCS) Mode
+20               DFS                          Data Output Format Select Bit (Low for Offset Binary, High for Twos Complement)
+21               PDWN_B                       Power-Down Function Selection for Channel B (Active High)
+60               PDWN_A                       Power-Down Function Selection for Channel A (Active High)
+22               OEB_B                        Output Enable Bit for Channel B
+59               OEB_A                        Output Enable Bit for Channel A (Low Setting Enables Channel A Output Data Bus)
+44–51, 54–57     D0_A (LSB)–D11_A (MSB)       Channel A Data Output Bits
+25–27, 30–38     D0_B (LSB)–D11_B (MSB)       Channel B Data Output Bits
+39               OTR_B                        Out-of-Range Indicator for Channel B
+58               OTR_A                        Out-of-Range Indicator for Channel A
+62               SHARED_REF                   Shared Reference Control Bit (Low for Independent Reference Mode,
+                                              High for Shared Reference Mode)
+61               MUX_SELECT                   Data Multiplexed Mode. (See description for how to enable; high setting disables
+                                              output data Multiplexed mode).
+5, 12, 17, 64    AVDD                         Analog Power Supply
+1, 4, 13, 16     AGND                         Analog Ground
+28, 40, 53       DRGND                        Digital Output Ground
+29, 41, 52       DRVDD                        Digital Output Driver Supply. Must be decoupled to DRGND with a minimum
+                                              0.1 µF capacitor. Recommended decoupling is 0.1 µF capacitor in parallel with 10 µF.
+23, 24, 42, 43   DNC                          Do Not Connect Pins. Should be left floating.
+                                                                                                                        –6–                                                                              REV. A
+                                                                                                                                AD9238
+TERMINOLOGY                                                                   Effective Number of Bits (ENOB)
+Aperture Delay                                                                Using the following formula:
+Aperture delay is a measure of the sample-and-hold amplifier                                   ENOB = ( SINAD – 1.76) / 6.02
+(SHA) performance and is measured from the rising edge of the
+clock input to when the input signal is held for conversion.                  effective number of bits for a device for sine wave inputs at a
+                                                                              given input frequency can be calculated directly from its
+Aperture Jitter
+                                                                              measured SINAD.
+The variation in aperture delay for successive samples, which is
+manifested as noise on the input to the A/D converter.                        Signal-to-Noise Ratio (SNR)
+                                                                              The ratio of the rms value of the measured input signal to the rms
+Integral Nonlinearity (INL)
+                                                                              sum of all other spectral components below the Nyquist frequency,
+INL refers to the deviation of each individual code from a line
+                                                                              excluding the first six harmonics and dc. The value for SNR is
+drawn from negative full scale through positive full scale. The
+                                                                              expressed in decibels relative to the peak carrier signal (dBc).
+point used as negative full scale occurs 1/2 LSB before the first
+code transition. Positive full scale is defined as a level 1 1/2 LSB          Spurious Free Dynamic Range (SFDR)
+beyond the last code transition. The deviation is measured from               The difference in dB between the rms amplitude of the input
+the middle of each particular code to the true straight line.                 signal and the peak spurious signal.
+Differential Nonlinearity (DNL, No Missing Codes)                             Nyquist Sampling
+An ideal ADC exhibits code transitions that are exactly 1 LSB                 When the frequency components of the analog input are below
+apart. DNL is the deviation from this ideal value. Guaranteed no              the Nyquist frequency (fCLOCK/2), this is often referred to as
+missing codes to 12-bit resolution indicates that all 4096 codes              Nyquist sampling.
+must be present over all operating ranges.                                    IF Sampling
+Offset Error                                                                  Due to the effects of aliasing, an ADC is not necessarily limited
+The major carry transition should occur for an analog value                   to Nyquist sampling. Higher sampled frequencies will be aliased
+1/2 LSB below VIN+ = VIN–. Offset error is defined as the                     down into the first Nyquist zone (DC – fCLOCK/2) on the output
+deviation of the actual transition from that point.                           of the ADC. Care must be taken that the bandwidth of the sam-
+                                                                              pled signal does not overlap Nyquist zones and alias onto itself.
+Gain Error
+                                                                              Nyquist sampling performance is limited by the bandwidth of the
+The first code transition should occur at an analog value 1/2 LSB
+                                                                              input SHA and clock jitter (jitter adds more noise at higher input
+above negative full scale. The last transition should occur at an
+                                                                              frequencies).
+analog value 1 1/2 LSB below the nominal full scale. Gain error
+is the deviation of the actual difference between first and last code         Two-Tone SFDR
+transitions and the ideal difference between first and last code              The ratio of the rms value of either input tone to the rms value
+transitions.                                                                  of the peak spurious component. The peak spurious component
+                                                                              may or may not be an IMD product.
+Temperature Drift
+The temperature drift for zero error and gain error specifies the             Out-of-Range Recovery Time
+maximum change from the initial (25°C) value to the value at                  Out-of-range recovery time is the time it takes for the A/D con-
+TMIN or TMAX.                                                                 verter to reacquire the analog input after a transient from 10%
+                                                                              above positive full scale to 10% above negative full scale, or from
+Power Supply Rejection
+                                                                              10% below negative full scale to 10% below positive full scale.
+The specification shows the maximum change in full scale from
+the value with the supply at the minimum limit to the value with              Crosstalk
+the supply at its maximum limit.                                              Coupling onto one channel being driven by a (–0.5 dBFS) signal
+                                                                              when the adjacent interfering channel is driven by a full-scale
+Total Harmonic Distortion (THD)
+                                                                              signal. Measurement includes all spurs resulting from both direct
+The ratio of the rms sum of the first six harmonic components
+                                                                              coupling and mixing components.
+to the rms value of the measured input signal, expressed as a
+percentage or in decibels relative to the peak carrier signal (dBc).
+Signal-to-Noise and Distortion (S/N+D, SINAD) Ratio
+The ratio of the rms value of the measured input signal to the rms
+sum of all other spectral components below the Nyquist frequency,
+including harmonics but excluding dc. The value for S/N+D is
+expressed in decibels relative to the peak carrier signal (dBc).
+
+
+
+
+REV. A                                                                  –7–
+AD9238–Typical Performance Characteristics
+                          0                                                                                       100
+
+                                                                                                                  95
+                        –20
+                                                                                                                  90
+
+                                                                                                                  85                                        SFDR
+    MAGNITUDE – dBFS
+
+
+
+
+                        –40
+
+
+
+
+                                                                                              SFDR/SNR – dBc
+                                                                                                                  80
+
+                        –60                                                                                       75
+                                                               SECOND      THIRD
+                                                                                                                                              SNR
+                                                               HARMONIC    HARMONIC
+                                                                                                                  70
+                        –80
+                                    CROSSTALK                                                                     65
+
+                                                                                                                  60
+                       –100
+                                                                                                                  55
+
+                       –120                                                                                       50
+                              0      5        10       15       20        25    30                                     40   45             50       55             60    65
+                                                   FREQUENCY – MHz                                                                    ADC SAMPLE RATE – MSPS
+
+
+ TPC 1. Single-Tone FFT of Channel A Digitizing                                             TPC 4. AD9238-65 Single-Tone SNR/SFDR vs. FS with
+ fIN = 12.5 MHz while Channel B is Digitizing fIN = 10 MHz                                  fIN = 32.5 MHz
+
+
+                         �                                                                                        100
+
+                                                                                                                   95
+                       ���
+                                                                                                                   90
+
+                                                                                                                   85                                 SFDR
+                                                                                                                                                      SNR
+                       ���
+                                                                                               SFDR/SNR – dBc
+
+                                                                                                                   80
+
+                       ���               ������                                                                    75
+    ��
+
+
+
+
+                                         ��������                                                                                                     SNR
+                                                                                                                                                      SNR
+                                                                                                                   70
+                       ���                                     ���������
+                                                                                                                   65
+
+                                                                                                                   60
+                   ����
+                                                                                                                   55
+
+                       ����                                                                                        50
+                              �      �        ��       ��      ��     ��        ��                                   20          25            30            35          40
+                                                   ���������������                                                                    ADC SAMPLE RATE – MSPS
+
+
+ TPC 2. Single-Tone FFT of Channel A Digitizing                                             TPC 5. AD9238-40 Single-Tone SNR/SFDR vs. FS with
+ fIN = 70 MHz while Channel B is Digitizing fIN = 76 MHz                                    fIN = 20 MHz
+
+
+                          �                                                                                    ���
+
+                                                                                                                  ��
+                        ���
+                                                                                                                  ��
+                                                                                                                                                                ����
+                                                                                                                  ��
+                        ���
+                                                                                                 ��������������
+
+
+
+
+                                  ���������                                                                       ��
+                                                    ������
+                        ���
+    ��
+
+
+
+
+                                                    ��������                                                      ��
+                                                                                                                                                                   ���
+                                                                                                                  ��
+                        ���
+                                                                                                                  ��
+
+                       ����                                                                                       ��
+
+                                                                                                                  ��
+
+                       ����                                                                                       ��
+                              �      �        ��       ��     ��          ��    ��                                     �         �            ��           ��            ��
+                                                   ���������������                                                                   �����������������������
+
+
+TPC 3. Single-Tone FFT of Channel A Digitizing                                              TPC 6. AD9238-20 Single-Tone SNR/SFDR vs. FS with
+fIN = 120 MHz while Channel B is Digitizing fIN = 126 MHz                                   fIN = 10 MHz
+
+
+
+
+                                                                                      –8–                                                                                REV. A
+                                                                                                                                               AD9238
+                      100                                                                             95
+
+
+                       90                                                                             90
+                                                          SFDR
+                                                          SNR
+
+                       80                                                                             85
+     SFDR/SNR – dBc
+
+
+
+
+                                                                                 SFDR/SNR – dBc
+                                                                                                                             SNR
+                                                                                                                             SFDR
+
+                       70                                                                             80
+
+                                                          SNR
+                       60                                                                             75
+
+
+                       50                                                                             70                        SNR
+
+
+                       40                                                                             65
+                         –35   –30   –25     –20    –15     –10   –5   0                                   0   20   40      60    80     100   120    140
+                                       INPUT AMPLITUDE – dBFS                                                        INPUT FREQUENCY – MHz
+
+
+     TPC 7. AD9238-65 Single-Tone SNR/SFDR vs. AIN                                TPC 10. AD9238-65 Single-Tone SNR/SFDR vs. fIN
+     with fIN = 32.5 MHz
+
+
+                      100                                                                             95
+
+
+                       90                                                                             90
+                                                                                                                          SNR
+                                                                                                                          SFDR
+
+                       80                          SNR
+                                                   SFDR                                               85
+                                                                                     SFDR/SNR – dBc
+     SFDR/SNR – dBc
+
+
+
+
+                       70                                                                             80
+
+
+
+                       60                          SNR                                                75
+
+                                                                                                                          SNR
+                       50                                                                             70
+
+
+                       40                                                                             65
+                         –35   –30   –25     –20    –15     –10   –5   0                                   0   20   40      60    80     100    120   140
+                                       INPUT AMPLITUDE – dBFS                                                        INPUT FREQUENCY – MHz
+
+
+     TPC 8. AD9238-40 Single-Tone SNR/SFDR vs. AIN                                 TPC 11. AD9238-40 Single-Tone SNR/SFDR vs. fIN
+     with fIN = 20 MHz
+
+
+                      100                                                                             95
+
+
+
+                      90                                                                              90
+
+                                                   SNR
+                                                   SFDR                                                                   SFDR
+                                                                                                                          SNR
+                      80                                                                              85
+                                                                                   SFDR/SNR – dBc
+    SFDR/SNR – dBc
+
+
+
+
+                      70                                                                              80
+
+
+                                                    SNR
+                      60                                                                              75
+
+
+                                                                                                                          SNR
+                      50                                                                              70
+
+
+
+                      40                                                                              65
+                        –35    –30   –25     –20    –15     –10   –5   0                                   0   20   40      60    80    100    120    140
+                                       INPUT AMPLITUDE – dBFS                                                        INPUT FREQUENCY – MHz
+
+
+     TPC 9. AD9238-20 Single-Tone SNR/SFDR vs. AIN                               TPC 12. AD9238-20 Single-Tone SNR/SFDR vs. fIN
+     with fIN = 10 MHz
+
+
+
+
+REV. A                                                                     –9–
+AD9238
+                         0                                                                     100
+                                                                                                             SNR
+                                                                                                             SFDR
+                                                                                                95
+                       –20
+
+                                                                                                90
+  MAGNITUDE – dBFS
+
+
+
+
+                       –40
+
+
+
+
+                                                                             SFDR/SNR – dBFS
+                                                                                                85
+
+                       –60                                                                      80
+
+
+                                                                                               75
+                       –80
+
+                                                                                               70
+                                                                                                             SNR
+                      –100
+                                                                                               65
+
+                      –120                                                                     60
+                             0   5   10       15      20    25   30                              –24   –21    –18     –15       –12   –9   –6
+                                          FREQUENCY – MHz                                                    INPUT AMPLITUDE – dBFS
+
+
+               TPC 13. Dual-Tone FFT with fIN1 = 45 MHz and                                     TPC 16. Dual-Tone SNR/SFDR vs. AIN with
+               fIN2 = 46 MHz                                                                    fIN1 = 45 MHz and fIN2 = 46 MHz
+
+
+                         0                                                                     100
+
+                                                                                                95            SNR
+                                                                                                              SFDR
+                       –20
+
+                                                                                                90
+   MAGNITUDE – dBFS
+
+
+
+
+                       –40
+                                                                             SFDR/SNR – dBFS
+
+                                                                                                85
+
+                       –60                                                                      80
+
+
+                                                                                               75
+                       –80                                                                                   SNR
+                                                                                               70
+                      –100
+                                                                                               65
+
+                      –120                                                                     60
+                             0   5   10       15      20    25   30                              –24   –21    –18     –15       –12   –9   –6
+                                          FREQUENCY – MHz                                                    INPUT AMPLITUDE – dBFS
+
+
+             TPC 14. Dual-Tone FFT with fIN1 = 70 MHz and                                       TPC 17. Dual-Tone SNR/SFDR vs. AIN with
+             fIN2 = 71 MHz                                                                      fIN1 = 70 MHz and fIN2 = 71 MHz
+
+
+                         0                                                                     100
+
+                                                                                               95
+                      –20
+
+                                                                                               90
+                                                                                                             SNR
+                                                                                                             SFDR
+  MAGNITUDE – dBFS
+
+
+
+
+                      –40
+                                                                             SFDR/SNR – dBFS
+
+
+
+
+                                                                                               85
+
+                      –60                                                                      80
+
+
+                                                                                               75
+                      –80
+                                                                                                             SNR
+                                                                                               70
+                      –100
+                                                                                               65
+
+                      –120                                                                     60
+                             0   5   10       15     20     25   30                              –24   –21    –18     –15       –12   –9   –6
+                                          FREQUENCY – MHz                                                    INPUT AMPLITUDE – dBFS
+
+
+      TPC 15. Dual-Tone FFT with fIN1 = 200 MHz and                                             TPC 18. Dual-Tone SNR/SFDR vs. AIN with
+      fIN2 = 201 MHz                                                                            fIN1 = 200 MHz and fIN2 = 201 MHz
+
+
+
+
+                                                                      –10–                                                                 REV. A
+                                                                                                                                                                                                    AD9238
+                           74                                                                   12.0
+
+                                                                                                                                    600                                                    –65
+
+
+
+                                                                                                                                    500
+
+
+
+
+                                                                                                                  AVDD POWER – mW
+                           72
+   SINAD – dBc
+
+
+
+
+                                                                                                                                    400
+                                                                                                11.5
+                                                                                                                                                                      –40
+                                    SINAD –20
+                                                                                                                                    300
+                           70
+
+
+                                                                                                                                    200                      –20
+                                                         SINAD –40               SINAD –65
+
+
+                           68                                                                   11.0                                100
+                                0               20               40                       60                                                  0         10           20    30       40           50          60
+                                                     CLOCK FREQUENCY                                                                                                  SAMPLE RATE – MSPS
+
+
+                            TPC 19. SINAD vs. FS with Nyquist Input                                                                 TPC 22. Analog Power Consumption vs. FS
+
+
+                            95                                                                                                      1.0
+                                                                 DCS ON – SFDR
+                            90                                                                                                      0.8
+
+                            85                                                                                                      0.6
+                                           DCS OFF – SFDR
+                                                                                                                                    0.4
+        SINAD/SFDR – dBc
+
+
+
+
+                            80
+                                                                        DCS ON – SINAD                                              0.2
+                            75                                                                                INL – LSB
+                                                                                                                                     0
+                            70
+                                                                                                                             –0.2
+                            65
+                                                                   DCS OFF – SINAD                                           –0.4
+                            60
+                                                                                                                             –0.6
+                            55                                                                                               –0.8
+
+                            50                                                                                               –1.0
+                              30      35        40         45     50        55       60        65                                         0       500        1000     1500   2000   2500     3000     3500    4000
+                                                         DUTY CYCLE – %                                                                                                      CODE
+
+
+                            TPC 20. SINAD/SFDR vs. Clock Duty Cycle                                                                               TPC 23. AD9238-65 Typical INL
+
+
+                           84                                                                                                       1.0
+                                                          SFDR                                                                      0.8
+                           82
+
+                           80                                                                                                       0.6
+
+                                                                                                                                    0.4
+                           78
+      SINAD/SFDR – dB
+
+
+
+
+                                                                                                                                    0.2
+                                                                                                              DNL – LSB
+
+
+
+
+                           76
+                                                                                                                                      0
+                           74
+                                                                                                                              –0.2
+                           72
+                                                                                                                              –0.4
+                           70
+                                                           SINAD                                                              –0.6
+                           68                                                                                                 –0.8
+
+                           66                                                                                                 –1.0
+                             –50                     0                 50                      100                                        0       500         1000    1500   2000   2500     3000     3500        4000
+                                                         TEMPERATURE – C                                                                                                    CODE
+
+
+TPC 21. SINAD/SFDR vs. Temperature with fIN = 32.5 MHz                                                                                            TPC 24. AD9238-65 Typical DNL
+
+
+
+
+REV. A                                                                                                 –11–
+AD9238
+Equivalent Circuits
+                        AVDD                                                         �����
+
+
+
+
+                                                                                                                                 ������������
+ VIN+_A, VIN–_A,
+                                                                                                                                 ������������
+ VIN+_B, VIN–_B,
+                                                                                                                                 ������������
+
+
+
+
+           Figure 2. Equivalent Analog Input Circuit                                Figure 3. Equivalent Digital Output Circuit
+
+
+
+
+                                                            AVDD
+
+
+
+
+                                       CLK_A, CLK_B
+                                           DCS, DFS,
+                                        MUX_SELECT
+                                        SHARED_REF
+
+
+
+
+                                                Figure 4. Equivalent Digital Input Circuit
+
+
+
+
+THEORY OF OPERATION                                                        The output-staging block aligns the data, carries out the error
+The AD9238 consists of two high performance analog-to-digital              correction, and passes the data to the output buffers. The output
+converters (ADCs) that are based on the AD9235 converter core.             buffers are powered from a separate supply, allowing adjustment
+The dual ADC paths are independent, except for a shared internal           of the output voltage swing.
+band gap reference source, VREF. Each of the ADC’s paths consists
+of a proprietary front end sample-and-hold amplifier (SHA)                 ANALOG INPUT
+followed by a pipelined switched capacitor ADC. The pipelined              The analog input to the AD9238 is a differential switched capacitor,
+ADC is divided into three sections, consisting of a 4-bit first stage      SHA, that has been designed for optimum performance while
+followed by eight 1.5-bit stages and a final 3-bit flash. Each stage       processing a differential input signal. The SHA input accepts inputs
+provides sufficient overlap to correct for flash errors in the preced-     over a wide common-mode range. An input common-mode voltage
+ing stages. The quantized outputs from each stage are combined             of midsupply is recommended to maintain optimal performance.
+through the digital correction logic block into a final 12-bit result.     The SHA input is a differential switched capacitor circuit. In
+The pipelined architecture permits the first stage to operate on a         Figure 5, the clock signal alternatively switches the SHA between
+new input sample, while the remaining stages operate on preceding          sample mode and hold mode. When the SHA is switched into
+samples. Sampling occurs on the rising edge of the respective clock.       sample mode, the signal source must be capable of charging the
+Each stage of the pipeline, excluding the last, consists of a low          sample capacitors and settling within one-half of a clock cycle. A
+resolution flash ADC and a residual multiplier to drive the next           small resistor in series with each input can help reduce the peak
+stage of the pipeline. The residual multiplier uses the flash ADC          transient current required from the output stage of the driving
+output to control a switched capacitor digital-to-analog converter         source. Also, a small shunt capacitor can be placed across the inputs
+(DAC) of the same resolution. The DAC output is subtracted from            to provide dynamic charging currents. This passive network will
+the stage’s input signal and the residual is amplified (multiplied)        create a low-pass filter at the ADC’s input; therefore, the precise
+to drive the next pipeline stage. The residual multiplier stage is         values are dependant on the application. In IF undersampling
+also called a multiplying DAC (MDAC). One bit of redundancy                applications, any shunt capacitors should be removed. In combi-
+is used in each one of the stages to facilitate digital correction of      nation with the driving source impedance, they would limit the
+flash errors. The last stage simply consists of a flash ADC.               input bandwidth. For best dynamic performance, the source
+The input stage contains a differential SHA that can be config-            impedances driving VIN+ and VIN– should be matched such that
+ured as ac- or dc-coupled in differential or single-ended modes.           common-mode settling errors are symmetrical. These errors will
+                                                                           be reduced by the common-mode rejection of the ADC.
+                                                                        –12–                                                           REV. A
+                                                                                                                            AD9238
+                                                     H                    The output common-mode voltage of the AD8138 is easily set to
+                                                                          AVDD/2, and the driver can be configured in a Sallen-Key filter
+                       T                T                                 topology to provide band limiting of the input signal.
+                               5pF
+                                                                          At input frequencies in the second Nyquist zone and above, the
+     VIN+
+            CPAR
+                                                                          performance of most amplifiers will not be adequate to achieve
+                                                                          the true performance of the AD9238. This is especially true in
+                                                                          IF undersampling applications where frequencies in the 70 MHz
+                       T
+                                                                          to 200 MHz range are being sampled. For these applications,
+                               5pF                                        differential transformer coupling is the recommended input con-
+     VIN–                                                                 figuration, as shown in Figure 6.
+            CPAR
+                                        T
+                                                                                                                              AVDD
+                                                                                                                  50
+                                                                                                                           VINA
+                                                     H                                                            10pF
+                                                                                 2V p-p     49.9                            AD9238
+              Figure 5. Switched Capacitor Input                                                                  50
+                                                                                                                           VINB
+An internal differential reference buffer creates positive and nega-                                              10pF        AGND
+
+tive reference voltages, REFT and REFB, respectively, that define                                              1k
+
+the span of the ADC core. The output common-mode of the
+                                                                                                     0.1F     1k
+reference buffer is set to midsupply, and the REFT and REFB
+voltages and span are defined as follows:
+             REFT = 1/ 2 ( AVDD + VREF )                                           Figure 6. Differential Transformer Coupling
+                                                                          The signal characteristics must be considered when selecting a
+             REFB = 1/ 2 ( AVDD − VREF )
+                                                                          transformer. Most RF transformers will saturate at frequencies
+              Span = 2 × (REFT − REFB ) = 2 × VREF                        below a few MHz, and excessive signal power can also cause core
+It can be seen from the equations above that the REFT and REFB            saturation, which leads to distortion.
+voltages are symmetrical about the midsupply voltage and, by              Single-Ended Input Configuration
+definition, the input span is twice the value of the VREF voltage.        A single-ended input may provide adequate performance in
+The internal voltage reference can be pin-strapped to fixed values        cost-sensitive applications. In this configuration, there will be a
+of 0.5 V or 1.0 V, or adjusted within the same range as discussed         degradation in SFDR and in distortion performance due to the
+in the Internal Reference Connection section. Maximum SNR                 large input common-mode swing. However, if the source imped-
+performance will be achieved with the AD9238 set to the largest           ances on each input are matched, there should be little effect on
+input span of 2 V p-p. The relative SNR degradation will be 3 dB          SNR performance.
+when changing from 2 V p-p mode to 1 V p-p mode.
+                                                                          CLOCK INPUT AND CONSIDERATIONS
+The SHA may be driven from a source that keeps the signal                 Typical high speed ADCs use both clock edges to generate a
+peaks within the allowable range for the selected reference volt-         variety of internal timing signals, and as a result may be sensitive
+age. The minimum and maximum common-mode input levels                     to clock duty cycle. Commonly, a 5% tolerance is required on the
+are defined as follows:                                                   clock duty cycle to maintain dynamic performance characteristics.
+                   VCM MIN = VREF 2                                       The AD9238 provides separate clock inputs for each channel. The
+                   VCM MAX = (AVDD + VREF ) 2                             optimum performance is achieved with the clocks operated at the
+                                                                          same frequency and phase. Clocking the channels asynchronously
+The minimum common-mode input level allows the AD9238
+                                                                          may degrade performance significantly. In some applications, it is
+to accommodate ground-referenced inputs. Although optimum
+                                                                          desirable to skew the clock timing of adjacent channels. The AD9238’s
+performance is achieved with a differential input, a single-ended
+                                                                          separate clock inputs allow for clock timing skew (typically ±1 ns)
+source may be driven into VIN+ or VIN–. In this configuration,
+                                                                          between the channels without significant performance degradation.
+one input will accept the signal, while the opposite input should
+be set to midscale by connecting it to an appropriate reference.          The AD9238-65 contains two clock duty cycle stabilizers, one for
+For example, a 2 V p-p signal may be applied to VIN+ while a              each converter, that retime the nonsampling edge, providing an
+1 V reference is applied to VIN–. The AD9238 will then accept             internal clock with a nominal 50% duty cycle (DCS is not avail-
+an input signal varying between 2 V and 0 V. In the single-ended          able on the –40 MSPS or –20 MSPS versions). Input clock rates
+configuration, distortion performance may degrade significantly           of over 40 MHz can use the DCS so that a wide range of input
+as compared to the differential case. However, the effect will be         clock duty cycles can be accommodated. Maintaining a 50% duty
+less noticeable at lower input frequencies and in the lower speed         cycle clock is particularly important in high speed applications,
+grade models (AD9238-40 and AD9238-20).                                   when proper track-and-hold times for the converter are required
+                                                                          to maintain high performance. The DCS can be enabled by tying
+Differential Input Configurations
+                                                                          the DCS pin high.
+As previously detailed, optimum performance will be achieved
+while driving the AD9238 in a differential input configuration.           The duty cycle stabilizer utilizes a delay locked loop to create the
+For baseband applications, the AD8138 differential driver pro-            nonsampling edge. As a result, any changes to the sampling fre-
+vides excellent performance and a flexible interface to the ADC.          quency will require approximately 2 µs to 3 µs to allow the DLL
+                                                                          to acquire and settle to the new rate.
+REV. A                                                                 –13–
+AD9238
+High speed, high resolution ADCs are sensitive to the quality of                                          will result in a typical power consumption of 1 mW for the ADC.
+the clock input. The degradation in SNR at a given full-scale input                                       Note that if DCS is enabled, it is mandatory to disable the clock
+frequency (fINPUT) due only to aperture jitter (tJ) can be calculated                                     of an independently powered-down channel. Otherwise, sig-
+with the following equation:                                                                              nificant distortion will result on the active channel. If the clock
+                                                   [
+      SNR degradation = 20 × log 10 1/ 2 × p × fINPUT × t J                          ]                    inputs remain active while in total standby mode, typical power
+                                                                                                          dissipation of 12 mW will result.
+In the equation, the rms aperture jitter, tJ, represents the root-sum-
+                                                                                                          The minimum standby power is achieved when both channels are
+square of all jitter sources, which includes the clock input, analog
+                                                                                                          placed into full power-down mode (PDWN_A = PDWN_B =
+input signal, and ADC aperture jitter specification. Undersampling
+                                                                                                          HI). Under this condition, the internal references are powered
+applications are particularly sensitive to jitter.
+                                                                                                          down. When either or both of the channel paths are enabled after a
+For optimal performance, especially in cases where aperture jitter                                        power-down, the wake-up time will be directly related to the
+may affect the dynamic range of the AD9238, it is important to                                            recharging of the REFT and REFB decoupling capacitors and to
+minimize input clock jitter. The clock input circuitry should use                                         the duration of the power-down. Typically, it takes approximately
+stable references, for example using analog power and ground                                              5 ms to restore full operation with fully discharged 0.1 µF and
+planes to generate the valid high and low digital levels for the                                          10 µF decoupling capacitors on REFT and REFB.
+AD9238 clock input. Power supplies for clock drivers should be sep-
+                                                                                                          A single channel can be powered down for moderate power savings.
+arated from the ADC output driver supplies to avoid modulating
+                                                                                                          The powered-down channel shuts down internal circuits, but both
+the clock signal with digital noise. Low jitter crystal controlled
+                                                                                                          the reference buffers and shared reference remain powered. Because
+oscillators make the best clock sources. If the clock is generated
+                                                                                                          the buffer and voltage reference remain powered, the wake-up
+from another type of source (by gating, dividing, or other methods),
+                                                                                                          time is reduced to several clock cycles.
+it should be retimed by the original clock at the last step.
+                                                                                                          DIGITAL OUTPUTS
+POWER DISSIPATION AND STANDBY MODE                                                                        The AD9238 output drivers can be configured to interface with
+The power dissipated by the AD9238 is proportional to its                                                 2.5 V or 3.3 V logic families by matching DRVDD to the digital
+sampling rates. The digital (DRVDD) power dissipation is deter-                                           supply of the interfaced logic. The output drivers are sized to pro-
+mined primarily by the strength of the digital drivers and the load                                       vide sufficient output current to drive a wide variety of logic families.
+on each output bit. The digital drive current can be calculated by                                        However, large drive currents tend to cause current glitches on
+             IDRVDD = VDRVDD × C LOAD × fCLOCK × N                                                        the supplies that may affect converter performance. Applications
+where N is the number of bits changing and CLOAD is the average                                           requiring the ADC to drive large capacitive loads or large fan-outs
+load on the digital pins that changed.                                                                    may require external buffers or latches.
+
+The analog circuitry is optimally biased so that each speed grade                                         The data format can be selected for either offset binary or twos
+provides excellent performance while affording reduced power                                              complement. This is discussed later in the Data Format section.
+consumption. Each speed grade dissipates a baseline power at low
+                                                                                                          TIMING
+sample rates that increases with clock frequency.
+                                                                                                          The AD9238 provides latched data outputs with a pipeline delay
+Either channel of the AD9238 can be placed into standby mode                                              of seven clock cycles. Data outputs are available one propaga-
+independently by asserting the PWDN_A or PDWN_B pins.                                                     tion delay (tPD) after the rising edge of the clock signal. Refer to
+It is recommended that the input clock(s) and analog input(s)                                             Figure 1 for a detailed timing diagram.
+remain static during either independent or total standby, which
+
+
+                       A0               A1                                                                                                                      A8        ANALOG INPUT
+       A–1                                               A2
+                                                                                                                                                 A7                       ADC A
+                                                                       A3
+                                                                                               A4                  A5           A6
+
+
+
+                       B0               B1                                                                                                                      B8
+       B–1                                               B2                                                                                                               ANALOG INPUT
+                                                                          B3                                                                     B7                       ADC B
+                                                                                               B4                  B5           B6
+
+
+
+
+                                                                                                                                                                          CLK_A = CLK_B =
+                                                                                                                                                                          MUX_SELECT
+
+
+
+
+                                                                                                                                                                              D0_A
+                 B–8        A–7   B–7        A–6       B–6    A–5   B–5        A–4       B–4        A–3      B–3        A–2   B–2    A–1   B–1        A0   B0        A1
+                                                                                                                                                                              –D11_A
+
+
+                       tODF                                     tODR
+
+
+      Figure 7. Example of Multiplexed Data Format Using the Channel A Output and the Same Clock Tied to CLK_A,
+      CLK_B, and MUX_SELECT
+                                                                                                –14–                                                                              REV. A
+                                                                                                                              AD9238
+The internal duty cycle stabilizer can be enabled on the AD9238-65         ences from the dual ADCs together externally for superior gain
+using the DCS pin. This provides a stable 50% duty cycle to                and offset matching performance. If the ADCs are to function
+internal circuits.                                                         independently, the reference decoupling can be treated inde-
+The length of the output data lines and loads placed on them should        pendently and can provide superior isolation between the dual
+be minimized to reduce transients within the AD9238. These                 channels. To enable Shared Reference mode, the SHARED_REF
+transients can detract from the converter’s dynamic performance.           pin must be tied high and external differential references must
+                                                                           be externally shorted. (REFT_A must be externally shorted to
+The lowest typical conversion rate of the AD9238 is 1 MSPS. At             REFT_B and REFB_A must be shorted to REFB_B.)
+clock rates below 1 MSPS, dynamic performance may degrade.
+                                                                           Internal Reference Connection
+DATA FORMAT                                                                A comparator within the AD9238 detects the potential at the
+The AD9238 data output format can be configured for either                 SENSE pin and configures the reference into four possible states,
+twos complement or offset binary. This is controlled by the Data           which are summarized in Table I. If SENSE is grounded, the refer-
+Format Select pin (DFS). Connecting DFS to AGND will pro-                  ence amplifier switch is connected to the internal resistor divider
+duce offset binary output data. Conversely, connecting DFS to              (see Figure 8), setting VREF to 1 V. Connecting the SENSE pin to
+AVDD will format the output data as twos complement.                       VREF switches the reference amplifier output to the SENSE pin,
+                                                                           completing the loop and providing a 0.5 V reference output. If a
+The output data from the dual A/D converters can be multiplexed            resistor divider is connected as shown in Figure 9, the switch will
+onto a single 12-bit output bus. The multiplexing is accomplished          again be set to the SENSE pin. This will put the reference ampli-
+by toggling the MUX_SELECT bit, which directs channel data                 fier in a noninverting mode with the VREF output defined as follows:
+to the same or opposite channel data port. When MUX_SELECT
+is logic high, the Channel A data is directed to Channel A output                               VREF = 0.5 × ( 1 + R 2 R1 )
+bus, and Channel B data is directed to the Channel B output bus.           In all reference configurations, REFT and REFB drive the ADC
+When MUX_SELECT is logic low, the channel data is reversed, i.e.,          core and establish its input span. The input range of the ADC
+Channel A data is directed to the Channel B output bus and                 always equals twice the voltage at the reference pin for either an
+Channel B data is directed to the Channel A output bus. By                 internal or an external reference.
+toggling the MUX_SELECT bit, multiplexed data is available
+on either of the output data ports.
+                                                                                        VIN+
+If the ADCs are run with synchronized timing, this same clock can
+be applied to the MUX_SELECT bit. After the MUX_SELECT                                   VIN–
+rising edge, either data port will have the data for its respective
+                                                                                                                              REFT
+channel; after the falling edge, the alternate channel’s data will be
+placed on the bus. Typically, the other unused bus would be                                                                       0.1�F
+disabled by setting the appropriate OEB high to reduce power                                                         ADC          0.1�F
+                                                                                                                    CORE                  10�F
+consumption and noise. Figure 7 shows an example of multiplex
+mode. When multiplexing data, the data rate is two times the                                                                  REFB
+
+sample rate. Note that both channels must remain active in this                                                                   0.1�F
+mode and that each channel's power-down pin must remain low.
+                                                                                         VREF
+VOLTAGE REFERENCE
+A stable and accurate 0.5 V voltage reference is built into the            10�F
+AD9238. The input range can be adjusted by varying the reference                        0.1�F
+                                                                                                    SELECT
+                                                                                                                    0.5V
+                                                                                                     LOGIC
+voltage applied to the AD9238, using either the internal reference                     SENSE
+with different external resistor configurations or an externally
+applied reference voltage. The input span of the ADC tracks refer-
+ence voltage changes linearly.
+If the ADC is being driven differentially through a transformer,                                                  AD9238
+the reference voltage can be used to bias the center tap (common-
+mode voltage).
+The Shared Reference mode allows the user to connect the refer-                       Figure 8. Internal Reference Configuration
+
+
+
+                                                 Table I. Reference Configuration Summary
+                                                                                                        Resulting Differential
+              Selected Mode                      SENSE Voltage                 Resulting VREF (V)       Span (V p-p)
+              External Reference                 AVDD                          N/A                      2  External Reference
+              Internal Fixed Reference           VREF                          0.5                      1.0
+              Programmable Reference             0.2 V to VREF                 0.5  (1 + R2/R1)        2  VREF (See Figure 9)
+              Internal Fixed Reference           AGND to 0.2 V                 1.0                      2.0
+
+
+REV. A                                                                  –15–
+AD9238
+External Reference Operation                                                                          1.2
+The use of an external reference may be necessary to enhance the
+gain accuracy of the ADC or to improve thermal drift character-                                       1.0
+istics. When multiple ADCs track one another, a single reference                                                                                        VREF = 1V
+(internal or external) may be necessary to reduce gain matching                                       0.8
+
+
+
+
+                                                                                     VREF ERROR – %
+errors to an acceptable level. A high precision external reference
+                                                                                                                                                    VREF = 0.5V
+may also be selected to provide lower gain and offset temperature                                     0.6
+drift. Figure 10 shows the typical drift characteristics of the inter-
+nal reference in both 1 V and 0.5 V modes.
+                                                                                                      0.4
+When the SENSE pin is tied to AVDD, the internal reference will
+be disabled, allowing the use of an external reference. An internal                                   0.2
+reference buffer will load the external reference with an equiva-
+lent 7 k load. The internal buffer will still generate the positive                                   0
+and negative full-scale references, REFT and REFB, for the ADC                                         –40 –30 –20 –10     0     10 20 30 40 50          60   70    80
+                                                                                                                                TEMPERATURE – C
+core. The input span will always be twice the value of the refer-
+ence voltage; therefore, the external reference must be limited to
+                                                                                                                    Figure 10. Typical VREF Drift
+a maximum of 1 V.
+If the internal reference of the AD9238 is used to drive multiple
+                                                                                                      0.05
+converters to improve gain matching, the loading of the reference
+by the other converters must be considered. Figure 11 depicts
+                                                                                                        0
+how the internal reference voltage is affected by loading.
+
+                                                                                              –0.05                                               0.5V ERROR
+                                                                               ERROR – %
+              VIN+
+
+                                                                                             –0.10
+              VIN–
+                                                                                                                                     1V ERROR
+                                                     REFT
+                                                                                              –0.15
+                                                        0.1�F
+                                             ADC       0.1�F                                  –0.20
+                                            CORE                 10�F
+
+                                                     REFB
+                                                                                              –0.25
+                                                                                                             0       0.5       1.0       1.5      2.0         2.5        3.0
+                                                        0.1�F
+                                                                                                                                      LOAD – mA
+
+
+                 VREF
+                                                                                                                 Figure 11. VREF Accuracy vs. Load
+
+10�F
+       10�F       R2      SELECT
+                                            0.5V
+                           LOGIC
+         SENSE
+                  R1
+
+
+
+
+                                         AD9238
+
+
+       Figure 9. Programmable Reference Configuration
+
+
+
+
+                                                                        –16–                                                                                             REV. A
+REV. A
+                                                                                                                 ������            ������
+                                                                                                              �� �������        �� �������
+                                                                                                          �       �        �        �
+                                                                                                              �������           �������
+                                                                              ���
+                                                                             ����                                ������            ������     ����
+                                                             ����                                                                                    ���                                                       ���
+                                                                                                              �� �������        �� �������    ���    ��                                                           ���
+                                                                                                          �       �        ��       ��                                        ������               ����   ��
+                                                                                     ��                                                                           �������
+                                                      ����                                                                                                                     ���     �                               ����
+                                                                                                              �������           �������
+                                                                                           ���
+                                                                                                                                                                                                                                 EVALUATION BOARD DIAGRAMS
+
+
+
+
+                                                 ��                                                                                          �����
+                                                                                           ����                                                                                             ���        ���
+                                                                       ���                                       ������            ������                                                  ����
+                                                                      �����                                                                                                                          �����       ���
+                                                                                                              �� �������        �� �������                                                  ���                    ���
+                                                                                                          �       �        ��       ��                     ����
+                                                         ���
+                                                       �����                                                  �������           �������
+                                                                                                                                                                                                               ���
+                                                                                                                                                                             ���������             ����   ��      ���
+                                                                                          ���                                     ����
+                                                                                          ����                                  �      �                                       ���     �                               �������
+                                                                                                                                  B A                 ��
+                                                                                                                                    �
+                                                                                                                                                     ���                                    ���        ���
+                                                                                                                                                                  ��������                 ����      �����       ���
+                                                                                                                                                                              ����          ���                     ���
+                                                                                                                                                     ��                        �� �    �
+                                                                                                                                                     ���
+                                                                                                                                                                  ��������                                     ���
+                                                                                                                                                                             �������               ����   ��      ���
+                                                                                                                                   �
+                                                                                                                                 � �                                           ���     �                              ��������
+                                                                                                                              �        �
+                                                                                                                                 ����
+
+
+
+
+–17–
+                                                                                                                                                                                            ���        ���
+                                                                          ���                                    ������           ������                                                   ����                      �� �
+                                                                         ����                                                                                                                        �����
+                                                                                                              �� �������       �� �������                                                   ���                         ���
+                                                             ����                                         �       �        ��       ��                                         ����
+                                                                                     ��
+                                                        ����                                                  �������           �������                                        ���     �
+                                                                                           ���
+                                                       ��                                  ����                                                                                                                ���
+                                                                        ���                                      ������            ������                                                                            ���
+                                                                                                                                                     ���                      ������               ����   ��
+                                                                       �����                                  �� �������        �� �������           ��
+                                                                                                          �       �        ��       ��                                         ���     �                               ����
+                                                                                                                                                                  �������
+                                                                     ���                                      �������           �������                                                      ���
+                                                                                                                                              ���                                                      ���
+
+
+
+
+         Figure 12. Evaluation Board Schematic
+                                                                     �����                                                                                                                 �����
+                                                                                                                                              ����                                                   �����       ���
+                                                                                          ���                    ������            ������                                                   ����                    ���
+                                                                                          ����                �� �������        �� �������
+                                                                                                          �       �        �        �
+                                                                                                              �������           �������
+                                                        ����
+
+
+                                                              ���
+                                                              ����           ���      ���         ���
+                                                                             �����    ����        �����
+                                                              ����                    ����
+                                                                                                                                                                                                                                                             AD9238
+                                                                                                                                                                                                                                                                                                      AD9238
+
+                                                                                                                ����
+                                                                                                                ���
+                                                                                                    ����
+                                                                                            �               �
+                                                                                                    � �
+                                                                                                    �
+                                                                                                                                                                                                                                                       ����
+                                                                                                                                                                                                                                                                                    ���
+                                                                                    ���                                          ���                                                                                                                                 ���            ���
+                                                                                                                                                                                                                                                       ����
+                                                                                   ����    ���                                  ����                                                                                                                                 ���
+                                                                                   ����   �����                                                                                                                                                                                             ������
+                                                                                                                                                                     ���
+                                                                                                                                                               ���
+                                                                                                                    ���                                ���                                                                                                                    ���
+                                                                                                                         �                                                                                                                                                                �������
+                                                                                                                         ������                        ���                                                                                                                   ����
+                                                                                                                                                                                                                                                                     ���
+                                                                                                                           �                                                                                                                           ����          ���
+                                                                                           ���                     � ���                                             ���
+                                                                                          ����                               ���                               ���                                                                                                                          ������
+                                                                                                                   ��          ���                     ���
+                                                             �����������                                                     ���   �                                                                                                                   ����
+                                                                                                                   � ���     �                         ���                                                                                                                          ���
+                                                             ��                                                                                                                                                                                                                     ���
+                                                                                           ���                         � ���
+                                                                                                                                                                      ���           ������������
+                                                                                          ����                                                                       ����
+                                                                      ���                                                          ���                               ����                                                                              ����
+                                                                                                                                                                                                                             �����                                                         ���
+                                                                      �����                                ���                    ����                                                                                                                 ���
+                                                                                                                                                                                     ��                      �                                 �                                          ����
+                                                                                                           �����                                                                                                     �                 �
+                                                                                                                                                                        ���                                                                                                               ����
+                                                                                                                                               ����                    �����                        ���
+                                                                                                                                               ���                                                  �����                    ������
+                                                                                                                                                                                                                                               �
+                                                                                                                                                        ���      ���                                                                                                                   ���
+                                                                                                                                    ����
+                                                                                                                                                        ���      ���
+                                                                                                       ���                                    ����                                                           �                 ��              �                                      �����
+                                                                                                       ���                                                                                                                                                       ���
+                                                                                                       ����                                                                                                                                                      ���
+                                                                                                                                                                                                                                                       ����
+                                                                                                                   ����                                                                                                                                                                ���
+                                                                                                                   ���                                                                                                                                                                 ���
+
+
+
+
+–18–
+                                                                                                     ����
+                                                                                                �         �
+                                                                                                     � �
+                                                                                      ���            �
+                                                                                     ����
+                                                                                     ����                                                                                                                                                                                            ���
+                                                                                                                              ���                                                                                                                                      ���           ���
+                                                                                                                                                                                                                                                        ����
+                                                                                             ���                             ����                                                                                                                                      ���
+                                                                                            �����                                                                                                                                                                                            ������
+                                                                                                                                                               ��� ���                                                                                  ����
+                                                             �����������                              ���                ���                            ���                                                                                                                    ���
+                                                                                                                                                                                                                                                                                          �������
+                                                                                                     ����                    � ������                   ���                                                                                                                   ����
+                                                                                                                                                                                                                                                                       ���
+                                                              ��                                                                                                                                                                                                       ���
+                                                                                                                        � ���    �                                    ���
+                                                                                                                                ���                            ���                                                                                                                           ������
+                                                                                             ���                    ��            ���
+                                                                                                                                ���   �                 ���                                                                                             ����
+                                                                           ��               ����
+
+
+
+
+         Figure 13. Evaluation Board Schematic (continued)
+                                                                                                                        � ���     �                     ���                                                                                                                         ���
+                                                                           �����
+                                                                                                                            � ���                                      ���                                                                                                          ���
+                                                                                                                                                                                                                                                        ����
+                                                                                                                                                                      ����
+                                                                                                                                     ���                              ����                                                     �����
+                                                                                                                                    ����                                                                                                                ����                          ���
+                                                                                                            ���                                                                                                                                         ���
+                                                                                                           �����                                                                                                 �       �                 �       �                                 ����
+                                                                                                                                                                             ���                                                                                                     ����
+                                                                                                                                                ����                        �����                    ��
+                                                                                                                                                                                                     �����                    ������
+                                                                                                                                                ���                                                                                                �
+                                                                                                                                       ����              ���           ��                                                                                                             ���
+                                                                                                                                                         ���          ���                 ��                                                                                         �����
+                                                                                                           ���                                 ����                                                              �               ��                �
+                                                                                                           ���                                                                                                                                                 ���
+                                                                                                           ����                                                                      ������������
+                                                                                                                                                                                                                                                               ���
+                                                                                                                                                                                                                                                       AVDD
+                                                                                                                                                                                                                                                                                     ���
+                                                                                                                                                                                                                                                                                     ���
+
+
+
+
+REV. A
+REV. A
+                                                                                                                                                                                                                                                                                                   DUTAVDD
+
+                                                                                                                                                                                                                                                                                                  C2
+                                                                                                                                                                                          C15           C16        C18           C17          C20       C19           C22            C21
+                                                                                                                                                                                          0.001F       0.1F      0.001F       0.1F        0.1F     0.001F       0.1F                       10F
+                                                                                                                                                                                                                                                                                     0.001F
+                                                             AVDD                                                                                                                                                                                                                                 6.3V
+                                                                                                        C37                     C38          C36                     C35
+                                                                                                      0.1F                     0.1F      0.1F                     0.1F
+                                                                   C30                                             C34                                C33
+                                                                                    C1                            10F                               10F
+                                                                 0.1F
+                                                                                    10F                          6.3V                               6.3V
+                                                                                    6.3V                                                                                                    1                                            64
+                                                                                                                                                                                                 AVSS1                           AVDD1                                                                   AVDD
+                                                                                                                                                                                            2                                            63
+                                                                                                                                                                                 VIN+_A          VIN+_A                          CLK_A                      DUTCLKA                            JP10
+                                                                                                                                                                                            3                                            62
+                                                                                                                  C39                   JP6           C40                C52     VIN–_A          VIN–_A                  SHAREDREF
+                                                                  AVDD                       AGND;4               0.1F                              0.1F             0.01F               4                                            61
+                                                                                                                                                                                                 AVSS2                   MUXSELECT                                                             JP9
+                                                                                             AVDD;8                                                                                         5                                            60
+                                                                                    5 +IN                                               JP7                                                      AVDD2                       PDWN_A
+                                                                                              7                                                                                             6                                            59
+                                                                  R3                   U4 OUT                                                                                                    REFT_A                          OEB_A                                                         JP28
+                                                                  5.49k                                                                                                                    7                                            58
+                                                                                    6 –IN                                                                                                        REFB_A                          OTR_A                      OTRA
+                                                                                          AD822                                                                                             8                                            57
+                                                                                                                                                                                                 VREF                    (MSB)D11_A                         DA13
+                                                                                                                                                                                            9                                            56
+                                                                                                                                                                                                 SENSE                           D10_A                      DA12
+                                                                    CW                                                                                                                      10                                           55                                   R38     R43   R6
+                                                                                                                   TP9                                                                           REFB_B                           D9_A                      DA11
+                                                                           R4                                      WHT                                                                                                                                                        5k     5k   5k
+                                                             1 1.2V                                 AGND;4                                                                                  11                                           54
+                                                                           10k                                                                                                                  REFT_B                           D8_A                      DA10
+                                                                  D1                                AVDD;8                                                                                  12                                           53
+                                                             2                              3 +IN                                                                                                AVDD3                       DRVSS3
+                                                                             C29                      1                                                                                     13                                           52
+                                                                                               U4 OUT                                                                   C57                      AVSS3                       DRVDD3
+                                                                           0.1F                                                                             C32                            14                                           51
+                                                                                            2 –IN                                                            0.1F    0.01F     VIN–_B          VIN–_B                           D7_A                      DA9
+                                                                                                  AD822           JP5                                                                       15                                           50
+                                                                                                                                                                                 VIN+_B          VIN+_B                           D6_A                      DA8
+                                                                                                                                                                                            16                                           49                                    JP27
+                                                                                                                                                                                                 AVSS4                            D5_A                      DA7
+                                                                                                                                                                                            17                                           48                                                    CLKAO
+                                                                                                                                                                                                 AVDD4                            D4_A                      DA6
+
+
+
+
+–19–
+                                                                                                                                                                                            18                                           47
+                                                                                                           JP3                                                               DUTCLKB             CLK_B                            D3_A                      DA5                JP29
+                                                                                                                                                                                            19                                           46                                                    AVDD
+                                                                                                                                                                                                 DUTYEN                           D2_A                      DA4
+                                                                                                           JP2                           C12                                                20                                           45
+                                                                                                                                        10F                                                     DFS                              D1_A                      DA3
+                                                                                                                                                                                            21                                           44                                    JP23
+                                                                            C31                                                         6.3V                                                     PDWN_B                           D0_A                      DA2
+                                                                  R36                                      JP1                                                                              22                                           43
+                                                                  10k      0.1F                                                                                                                OEB_B                            DNC                       DA1
+                                                                                       DUTAVDD                                                                                              23                                           42
+                                                                                                                                                                                DB0              DNC                              DNC                       DA0
+                                                                                                           JP4                                                                              24                                           41
+                                                                                                                                                                                DB1              DNC                         DRVDD2
+                                                                                                                                                                                            25                                           40
+                                                                                                                                                                                DB2              D0_B                        DRVSS2
+                                                                                                                                                                                            26                                           39
+                                                                                                                                                                                DB3              D1_B                         OTR_B                         OTRB
+                                                                  R37                                                                                                                       27                                           38
+                                                                  10k                                                                                                          DB4              D2_B                    (MSB)D11_B                         DB13
+                                                                                                                                                                                            28                                           37
+
+
+
+
+         Figure 14. Evaluation Board Schematic (continued)
+                                                                                                    JP12                                           JP35                                          DRVSS1                          D10_B                      DB12
+                                                                                                                                                                                            29                                           36
+                                                                                                                                                                                                 DRVDD1                           D9_B                      DB11
+                                                                                                                                                                                            30                    U1                     35
+                                                                                                    JP11                                           JP8                          DB5              D3_B                             D8_B                      DB10
+                                                                                                                                                                                            31                                           34
+                                                                              AVDD                                              AVDD                                            DB6              D4_B                             D7_B                      DB9
+                                                                                                                                                                                            32                  AD9238                   33
+                                                                                                                                                                                DB7              D5_B                             D6_B                      DB8
+                                                                                                            R41           R51                              R5           R44
+                                                                                                            5k           5k                             5k           5k
+                                                                                                                                                                                                                                                                               DUTDRVDD
+
+                                                                                                                                                                                          C23            C24           C25          C26           C13             C14         C11
+                                                                                                                                                                                          0.001F        0.1F         0.001F      0.1F         0.001F         0.1F       10F
+                                                                                                                                                                                                                                                                              6.3V
+                                                                                                                                                                                                                                                                                                                AD9238
+AD9238
+                ���                                                 ���
+                ����     ��       ���          ��         ��        ����
+                         �����    �����        �����      �����     ����
+                ����
+
+                                                                                    DVDD
+
+
+
+                                           1                            20                 ���
+                                                ��                ���
+                   ��������               19                            10                 ���
+                                                ��      U10   ���                                ��� ���
+                                                                                                 �     �                            �                                  �
+                                                       ��������
+                  � ��� ��� �              2                            18                                                          �                                  �
+                                                ��                 ��
+                  � ��� ��� �              3
+                                                ��                 ��
+                                                                        17                       � ��� ��� �                        �                                  �
+         ����
+                  � ��� ��� �              4
+                                                ��                 ��
+                                                                        16                       � ��� ��� �                        �                                  �
+
+
+
+
+                                                                                                                                           �������������������������
+         DA13
+                  � ��� ��� �              5
+                                                ��                 ��
+                                                                        15                       � ��� ��� �                        ��                                 �
+         DA12
+                  � ���� ��� �             6
+                                                ��                 ��
+                                                                        14                       � ��� ��� �                        ��                                 ��
+         DA11
+                  � ���� ��� �             7
+                                                ��                 ��
+                                                                        13                       � ��� ��� �                        ��                                 ��
+         DA10
+                  3 RP10 ��� 6             8                            12                       � ��� ��� �                        ��                                 ��
+          DA9                                   ��                 ��
+                  4 RP10 ��� �             9
+                                                ��                 ��
+                                                                        11                       � ��� ��� �                        ��                                 ��
+          DA8
+                                                                                                 � ��� ��� �                        ��                                 ��
+                                                                                                 � RP3 ��� �                        ��                                 ��
+                                                                                                 3 RP3 ��� 6                        ��                                 ��
+                                           1
+                                                ��                ���
+                                                                        20                       4 RP3 ��� 5                        ��                                 ��
+                                          19
+                                                ��       U7   ���
+                                                                        10                       � ��� ��� �                        ��                                 ��
+
+                                                       ��������                                  2 RP4 ��� 7                        ��                                 ��
+                  � RP11 ��� �             2                            ��                       3 RP4 ��� 6                        ��                                 ��
+          DA7                                   ��                 ��
+                  2 ���� ��� �             3                            17                       � ��� ��� �                        ��                                 ��
+          DA6                                   ��                 ��
+                  � ���� ��� �             4                            16                                                          ��                                 ��
+          DA5                                   ��                 ��
+                  4 ���� ��� �             5                            15                                                          ��                                 ��
+          DA4                                   ��                 ��
+                  � ���� ��� �             6                            14                                                          ��                                 ��
+          DA3                                   ��                 ��
+                  2 ���� ��� �             7                            13                                                                 ��
+          DA2                                   ��                 ��
+                  � ���� ��� �             8                            12
+          DA1                                   ��                 ��                                                                ���������
+                  � ���� ��� �             9                            11
+          ���                                   ��                 ��
+
+
+
+
+                                                                                                                             ����
+
+
+                ���      ��       ��           ��         ��        ���
+                ����     �����    �����        �����      �����     ����
+                ����                                                ����
+
+                                                                                    ����
+                                           �                  ���       ��
+                                                 ��
+                                          ��             ��             ��                                                          ��                                 ��
+                                                 ��           ���
+                  � ����� ��� �                                                                                                     ��                                 ��
+                                                       ��������
+                  � ���� ��� �             �                            ��                       � ��� ��� �                        ��                                 ��
+         ����                                    ��                ��
+                  � ���� ��� �             �                            ��                       � ��� ��� �                        ��                                 ��
+         ����                                    ��                ��
+                                                                                                                                           �������������������������
+
+
+                  � ���� ��� �             �
+                                                 ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+         ����
+                  � ���� ��� �             �
+                                                 ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+         ����
+                  � ���� ��� �             �
+                                                 ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+         ����
+                  � ���� ��� �             �
+                                                 ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+          ���
+                  � ���� ��� �             �
+                                                 ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+          ���
+                  � ���� ��� �             �     ��                ��
+                                                                        ��                       � ��� ��� �                        ��                                 ��
+          ���
+                                                                                                 � ��� ��� �                        ��                                 ��
+                                                                                                 � ��� ��� �                        ��                                 ��
+                                                                                                        ��� �
+                                                                                                 � �����������������������          ��                                 ��
+                                           �     ��           ��� ��                             � ��� ��� �                        ��                                 ��
+                                          ��
+                                                 ��      ��   ��� ��                             � ��� ��� �                        ��                                 ��
+
+                                                       ��������                                  � ��� ��� �                        ��                                 ��
+                  � ���� ��� �             � ��                         ��                       � ��� ��� �                        ��                                 ��
+          ���                                                      ��
+                  � ���� ��� �             �                                                                                                                           ��
+          ���                                    ��                �� ��                                                            ��
+                  � ���� ��� �             �                                                                                        ��                                 ��
+          ���                                    ��                �� ��
+                  � ���� ��� �             �                                                     � ��� ��� �                        ��                                 ��
+          ���                                    ��                �� ��
+                  � ���� ��� �                                                                                                             ��
+                                           �     ��                �� ��
+          ���
+                  � ���� ��� �             �
+          ���                                    ��                �� ��                                                                 ���������
+                  � ���� ��� �             �                          ��
+          ���                                    ��                ��
+                                           �    ��                 �� ��             ���
+                                                                                     ���
+                   ��������
+
+
+
+                                    Figure 15. Evaluation Board Schematic (continued)
+
+
+
+                                                                             –20–                                                                                           REV. A
+                                       AD9238
+
+
+
+
+           Figure 16. PCB Top Layer
+
+
+
+
+         Figure 17. PCB Bottom Layer
+REV. A              –21–
+AD9238
+
+
+
+
+          Figure 18. PCB Ground Plane
+
+
+
+
+         Figure 19. PCB Split Power Plane
+                      –22–                  REV. A
+                                            AD9238
+
+
+
+
+          Figure 20. PCB Top Silkscreen
+
+
+
+
+         Figure 21. PCB Bottom Silkscreen
+
+REV. A                –23–
+AD9238
+                                                                             OUTLINE DIMENSIONS
+
+
+                                                            64-Lead Low Profile Quad Flat Package [LQFP]
+                                                                              (ST-64-1)
+                                                                             Dimensions shown in millimeters
+
+                                                                           0.75                                          9.00 BSC
+
+
+
+
+                                                                                                                                                                                                    C02640–0–9/03(A)
+                                                                           0.60           1.60                              SQ
+                                                                           0.45           MAX
+                                                                                                            64                                49
+                                                                                                        1                                          48
+
+                                                                        SEATING                                  PIN 1
+                                                                          PLANE
+
+
+
+                                                                                                                         TOP VIEW                        7.00
+                                                     10                                                                 (PINS DOWN)                    BSC SQ
+                                   1.45               6
+                                                                0.20
+                                   1.40               2
+                                                                0.09
+                                   1.35
+                                                                  7                          VIEW A
+                                                                 3.5
+                                      0.15                        0                                   16                                          33
+                                      0.05      SEATING     0.10 MAX                                        17                                32
+                                                PLANE       COPLANARITY
+                                                                                                                                       0.23
+                                                  VIEW A                                                          0.40
+                                                                                                                                       0.18
+                                             ROTATED 90 CCW                                                      BSC
+                                                                                                                                       0.13
+                                                                       COMPLIANT TO JEDEC STANDARDS MS-026BBD
+
+
+
+
+Revision History
+Location                                                                                                                                                                                 Page
+9/03—Data Sheet changed from REV. 0 to REV. A.
+Changes to DC SPECIFICATIONS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Changes to SWITCHING SPECIFICATIONS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Changes to AC SPECIFICATIONS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Changes to Figure 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Changes to ORDERING GUIDE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Changes to TPCs 2, 3, and 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Changes to CLOCK INPUT AND CONSIDERATIONS section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Added text to DATA FORMAT section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Changes to Figure 9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Added EVALUATION BOARD DIAGRAMS section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Updated OUTLINE DIMENSIONS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+
+
+
+
+                                                                                            –24–                                                                                     REV. A
+

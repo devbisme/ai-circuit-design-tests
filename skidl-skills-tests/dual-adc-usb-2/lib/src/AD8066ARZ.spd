@@ -1,0 +1,37 @@
+;
+; AD8066ARZ -- Analog Devices dual FastFET op-amp, 145 MHz, SOIC-8
+;
+; Pin table transcribed from datasheets/AD8066ARZ_SUMMARY.md.
+; This is the universal dual-op-amp SOIC-8 pinout (pin 4 = V-, pin 8 = V+).
+; Drawn as ONE single-unit symbol (not KiCad-style A/B/PWR units) so every pin
+; has a unique name and can be addressed directly from SKiDL by name or number.
+;
+device AD8066ARZ
+Reference: U
+Value: AD8066ARZ
+Footprint: Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/AD8065_8066.pdf
+Description: Dual FastFET 145MHz rail-to-rail output FET-input op-amp, SOIC-8
+keywords: opamp dual FET-input high-speed amplifier
+fp_filters: SOIC*3.9x4.9mm*P1.27mm*
+
+    left
+        i       +IN1    3
+        i       -IN1    2
+        *
+        *
+        i       +IN2    5
+        i       -IN2    6
+
+    right
+        o       OUT1    1
+        *
+        *
+        *
+        o       OUT2    7
+
+    top
+        p       +VS     8
+
+    bottom
+        p       -VS     4

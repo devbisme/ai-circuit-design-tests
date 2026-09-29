@@ -1,0 +1,578 @@
+ ▐▛███▛█   Claude Code v2.1.267
+▝▜██████▀  Opus 5 · Claude Pro
+  ▝▝ ▝▝    ~/…/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-2
+
+
+❯ design an electronic system as described in the dual-adc-prompt.txt file.     
+
+● I'll start by reading the prompt file.
+
+  Listed 2 directories, ran 1 shell command (ctrl+o to expand)
+
+● Skill(skidl-skills:new-circuit)
+  ⎿  Successfully loaded skill
+
+  Listed 2 directories, ran 1 shell command (ctrl+o to expand)
+
+● State is initial (blank slate), so no resume prompt is needed. Launching the
+  orchestrator.
+
+● skidl-skills:orchestrator(Run dual-ADC USB design pipeline)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The design pipeline is running in the background as an autonomous
+  orchestrator.
+
+  Setup done:
+  - Fresh pipeline_state.json (stage initial, circuit dual_adc_usb) — blank
+    slate, no reuse of sibling designs
+  - Created handoffs/, circuits/, datasheets/, outputs/
+
+  Passed to the orchestrator: the four hard requirements (2ch, ±10 V, 10 MSPS,
+  12 bits, BNC, USB 2.0 bus-powered), plus instructions to run with no approval
+  gates and to enumerate options + pick a recommendation for every decision.
+
+  One thing I flagged to it up front, since it constrains the whole
+  architecture: 2 × 10 MSPS × 12 bits = 240 Mbit/s raw, which USB 2.0 high-speed
+  cannot sustain (~200–250 Mbit/s practical bulk throughput, and that's before
+  protocol overhead — and the board must also live inside a 5 V / 500 mA
+  bus-power budget). So the board can't be a continuous streamer at full spec;
+  it needs on-board capture memory with burst readout, decimation, or a
+  reduced-channel full-rate mode. I told the orchestrator to weigh those
+  explicitly and state the real streaming capability in SPEC.md rather than
+  quietly pretending the link is fast enough.
+
+  I'll report back with the summary and file list when it finishes.
+
+✻ Cogitated for 1m 23s · done Tuesday 10:22 AM
+
+● Agent "Run dual-ADC USB design pipeline" failed: Agent terminated early due to
+an API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+2:30pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CerAvRgfvsHXktEoULp82, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 2:30pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cogitated for 38m 41s · done Tuesday 11:00 AM
+
+❯ /exit                                                                         
+
+❯ resume the design of the dual ADC circuit.                                    
+
+  Read 1 file, listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● Architecture actually completed — the state file just never got updated before
+  the agent died. Fixing that, then resuming from sourcing.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● skidl-part-search is available (pcbparts MCP is not — the architect already
+  flagged that as risk R-15). Resuming the pipeline from the sourcing phase.
+
+● skidl-skills:orchestrator(Resume dual-ADC pipeline at sourcing)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Resumed. Status of what survived the interruption:
+
+  Done (phases 1–2):
+  - SPEC.md + handoffs/01_requirements.md
+  - architecture/ — block diagram, net plan, IC selection, skeleton BOM, 15
+    design risks
+  - handoffs/02_architecture.md (marked status: complete)
+
+  The state file had gone stale — the previous run wrote the architecture
+  handoff, then died on the spend limit before recording it, so
+  pipeline_state.json still claimed architecture was unfinished. I reconciled it
+  rather than letting the pipeline redo ~40 minutes of work.
+
+  Architecture it landed on (for context, since you haven't seen it yet):
+  - 9 blocks, 15 ICs, ~$85–115/board at qty 5–10
+  - Two AD9235 ADCs on a shared low-jitter 10 MHz XO; iCE40HX4K FPGA + 512 kB
+    external SRAM
+  - On the USB bandwidth problem I flagged earlier: it chose capture-to-SRAM 
+    with burst readout — 131,072 samples/channel (13.1 ms gap-free at full 10
+    MSPS / 12-bit / both channels), plus decimated continuous streaming at 5
+    MSPS/ch. That's 4× the buffer depth in the spec, not a compromise.
+  - AFE is 20:1 passive attenuator + ×2 gain into a 0.5–2.5 V ADC span; ENOB
+    budget closes at ~11.1 bits
+  - It found that an FT2232H's channel B is unusable in sync-FIFO mode, so it
+    defined an in-band 4-byte command protocol and downgraded to FT232H — one
+    fewer wasted chip
+  - Power budget: ~345 mA of the 500 mA USB ceiling, with PWREN#-gated analog
+    rails to stay under 100 mA pre-enumeration
+
+  Now running: sourcing → datasheets → block coding → ERC → netlist export.
+
+  One caveat I passed along: the pcbparts MCP isn't connected, so live JLCPCB
+  stock/tier/price can't be verified (the architect logged this as risk R-15). I
+  told the sourcer to use the skidl-part-search CLI and mark unverifiable
+  stock/price fields as estimates rather than inventing numbers. Expect the BOM
+  to need a real stock check before you'd order anything.
+
+  I also told it to checkpoint state after every phase, so another spend-limit
+  hit won't lose work again.
+
+✻ Cooked for 1m 23s · done Tuesday 5:56 PM
+
+● Agent "Resume dual-ADC pipeline at sourcing" failed: Agent terminated early
+due to an API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CernYAcPTJzeoAbh1tGcS, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cogitated for 0s · done Tuesday 6:47 PM
+
+● Agent "Block coder power_digital" finished · 12m 19s
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cogitated for 0s · done Tuesday 6:47 PM
+
+● Agent "Block coder power_analog" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CernYZLsMrmnPUyUxxftc, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Sautéed for 0s · done Tuesday 6:47 PM
+
+● Agent "Block coder adc_channel" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CernZ7qj5P4ywLTRxZPND, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+✻ Cooked for 0s · done Tuesday 6:47 PM
+
+● Agent "Block coder afe_channel" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011Cero7RMa7j6ptfCE28EWv, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Baked for 59m 48s · done Tuesday 6:54 PM
+
+● Agent "Generate kipart symbols for 4 parts" failed: Agent terminated early due
+to an API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CerrNdkDpqQ3LNDJNc3uc, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Sautéed for 0s · done Tuesday 7:37 PM
+
+● Agent "Phase 03 part sourcing" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CerrhqFZ1JkGkuCgyq9Ek, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Sautéed for 0s · done Tuesday 7:41 PM
+
+● Agent "Block coder clock_gen" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CerriD6hud6QRp3AsshxX, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Worked for 0s · done Tuesday 7:41 PM
+
+● Agent "Block coder usb_bridge" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CerriPN6Bk4FyX3wLnwPZ, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Brewed for 0s · done Tuesday 7:42 PM
+
+● Agent "Block coder sram_buffer" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+10:50pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011Cerrj8481baDMVteu4Ziw, model sent to the API: claude-sonnet-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 10:50pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Churned for 0s · done Tuesday 7:42 PM
+
+❯ continue the design process.                                                  
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Good — a lot survived. Sourcing and datasheets completed; 7 of 9 blocks are
+  coded. Let me verify precisely what's left.
+
+  Listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● 7 of 9 blocks are coded and their symbol library was generated. Missing:
+  afe_channel, fpga_core, then assembly/ERC/export. Updating state, then
+  launching the two remaining block coders in parallel.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Block coder afe_channel)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Block coder fpga_core)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Both remaining block coders are running in parallel.
+
+  What survived the spend-limit interruptions (more than the failure
+  notifications suggested — several agents wrote their files before dying):
+
+  ┌───────────────────────┬─────────────────────────────────────────────────┐
+  │         Phase         │                     Status                      │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ 01 Requirements       │ ✅ SPEC.md + handoff                            │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ 02 Architecture       │ ✅ 5 docs + handoff                             │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ 03 Sourcing           │ ✅ sourcing/sourced_bom.md (32 KB) + handoff    │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ 04 Datasheets         │ ✅ 26 part summaries + 5 PDFs + handoff         │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ 05 Coding             │ 🔄 7 of 9 blocks written (1364 lines), 2        │
+  │                       │ running now                                     │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Assembly / ERC /      │ ⬜ not started                                  │
+  │ Export                │                                                 │
+  └───────────────────────┴─────────────────────────────────────────────────┘
+
+  The four parts that needed custom symbols (AD9235, AD8066, OPA836,
+  IS61WV25616) got generated via kipart into lib/dual_adc_usb.kicad_sym — that
+  risk is closed.
+
+  I also fixed the state file again: it had blocks marked in_progress that were
+  actually finished, and would have caused redundant rework.
+
+  Change in approach: I'm not re-spawning the orchestrator. It died twice, and
+  each restart re-reads the whole design before doing any new work — expensive,
+  and the expense is what keeps killing it. Driving the remaining phases
+  directly (2 blocks → assemble → ERC → export) skips that overhead. Given
+  you've hit the monthly spend limit twice, the cheaper path is also the more
+  likely one to actually finish.
+
+  Remaining after these two blocks: __init__.py/__main__.py assembly, ERC,
+  netlist + BOM export. I'll report when the coders land.
+
+✻ Churned for 2m 28s · done 7:30 AM
+
+● Agent "Block coder afe_channel" finished · 14m 51s
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● afe_channel landed. All 8 written blocks import cleanly; fpga_core is still
+  running.
+
+  afe_channel results:
+  - Synthesized the anti-alias filter values the architect had deferred —
+    Sallen-Key + MFB pair, both sections within ~0.2% of their target Q (0.5412
+    / 1.3065)
+  - Both channel instances build with zero ref-designator collisions (56 parts),
+    ERC clean in isolation
+  - All 11 footprints verified against real .kicad_mod files on disk
+
+  It flagged two things rather than papering over them, which is the right call:
+  1. C_trim out of range — the attenuator compensation trimmer computes to ~18.9
+     pF nominal, but the sourced part is a 2–10 pF trimmer. Following
+     net_plan.md literally (C_trim parallels only R_top2) produces a value the
+     specified part can't reach. Either the trimmer part or the compensation
+     topology is wrong — needs resolution before layout.
+  2. OPA836 PD pin polarity unconfirmed against the datasheet.
+
+  Both are recorded in the block handoff. I'll fold them into the ERC/review
+  phase rather than letting them ride into the netlist silently. Waiting on
+  fpga_core — it's the biggest block (144-pin FPGA, ~40 parts, five buses), so
+  it'll take a while.
+
+● Ran 1 stop hook (ctrl+o to expand)
+  ⎿  Stop hook error: Agent hook condition was not met: Circuit modified
+  but ERC not verified or failed. Run /run-erc before exporting
+  netlists or ordering PCBs.
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Acknowledged — and the hook is right to fire, but full-circuit ERC isn't
+  runnable yet.
+
+  Current state: fpga_core is still being written (the last of 9 blocks), and
+  there's no __init__.py/__main__.py, so there is no assembled circuit to check.
+  Each block has only been ERC'd in isolation, where every interface net reads
+  as undriven — that's expected and not meaningful.
+
+  Nothing is being exported. No netlist, no BOM, no fab output has been
+  produced, and I won't produce any until ERC passes on the assembled design.
+
+  Order from here, with ERC as the gate before export:
+  1. fpga_core completes (in progress)
+  2. Assemble — __init__.py + __main__.py wiring all 9 blocks, 11 instantiations
+  3. Run ERC on the full circuit, fix findings, iterate to clean
+  4. Only then export netlist + BOM to outputs/
+
+  Two known issues from afe_channel also have to be resolved in step 3, not
+  deferred: the C_trim value (~18.9 pF computed vs. a 2–10 pF sourced trimmer)
+  and the unconfirmed OPA836 PD-pin polarity. Neither is an ERC error as such —
+  ERC won't catch a wrong component value — so I'll handle them as explicit
+  review items alongside the ERC pass.
+
+  Waiting on the FPGA block; I'll continue to assembly when it lands.
+
+● Ran 1 stop hook (ctrl+o to expand)
+  ⎿  Stop hook error: Agent hook condition was not met: Circuit modified
+  but ERC not verified or failed. Run /run-erc before exporting
+  netlists or ordering PCBs.
+
+  Ran 2 shell commands (ctrl+o to expand)
+● The hook keeps firing on stop, so rather than idle, let me run a real
+  per-block ERC sweep now — that catches problems before assembly instead of
+  after.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● ERC output bypasses stdout redirection — my earlier "warnings=0" counts were
+  an artifact of that, not real. Re-checked properly:
+
+  Searched for 1 pattern, ran 3 shell commands (ctrl+o to expand)
+
+● Found a real issue, not just an ERC artifact. Let me look at the decoupling
+  before fixing.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Two separate internal regulator outputs were shorted together. The datasheet
+  summary (FT232HL_SUMMARY.md:58-59) lists VCCA as the 1.8 V analog/PHY
+  regulator output and VCCCORE as the 1.8 V core output — distinct sources.
+  Splitting them, one 1 µF cap each:
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● The pre-assembly sweep was worth running — it caught a real defect.
+
+  Per-block ERC, 8 of 9 blocks: 0 errors after one fix.
+
+  The fix — usb_bridge, FT232H 1.8 V rails shorted together. ERC flagged
+  POWER-OUT pin 38/VCCCORE <==> POWER-OUT pin 37/VCCA. I checked whether this
+  was just a symbol-annotation false positive, and it wasn't: FT232HL_SUMMARY.md
+  documents VCCA and VCCCORE as two independent internal regulator outputs —
+  VCCA feeds the USB PHY analog section, VCCCORE the digital core. The block
+  author had shorted them onto one net on the stated assumption that "both come
+  off the same internal regulator," and hung both 1 µF caps on the shared node.
+
+  Beyond the ERC violation, that shorts two independent LDO outputs so they
+  fight each other, and couples USB PHY switching noise straight into the core
+  rail. Split into FT_VCCA_1V8 (C35) and FT_VCORE_1V8 (C36), one cap per rail.
+  No BOM change. Recorded in the block handoff and
+  outputs/erc_blocks_preassembly.md.
+
+  On the hook's condition — I've deliberately left erc_status.pass = false. This
+  sweep is not the release gate and I won't mark it as one: fpga_core doesn't
+  exist, the circuit isn't assembled, and blocks ERC'd in isolation produce ~190
+  "no drivers / one pin" warnings that are meaningless until the blocks are
+  wired together. Marking this green would defeat the check's purpose. No
+  netlist or BOM has been exported, and none will be until full-circuit ERC is
+  clean.
+
+  Two items also carried forward that ERC structurally cannot catch — wrong
+  values pass ERC fine:
+  1. afe_channel C_trim computes to ~18.9 pF against a sourced 2–10 pF trimmer
+  2. OPA836 PD-pin polarity unconfirmed
+
+  Still waiting on fpga_core. Once it lands: assemble → full-circuit ERC →
+  resolve findings → export.
+
+● Ran 1 stop hook (ctrl+o to expand)
+  ⎿  Stop hook error: Agent hook condition was not met: Circuit modified
+  but ERC not verified or failed. Run /run-erc before exporting
+  netlists or ordering PCBs.
+
+  Listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● fpga_core.py has landed (436 lines, signature matches the spec exactly). All 9
+  blocks now exist. Running its ERC, then assembling.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 9 blocks ERC clean in isolation (0 errors each). Launching the assembler.
+
+● skidl-skills:skidl-assembler(Assemble dual_adc_usb circuit)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Block coder fpga_core" finished · 20m 28s
+
+● fpga_core confirmed complete with its handoff. Updating the manifest — all 9
+  blocks now done.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 9 blocks are written, and the assembler is now wiring them together.
+
+  fpga_core results — it did the check I most wanted on that block: it parsed
+  the real 144-pin iCE40HX4K KiCad symbol and verified the pin budget rather
+  than assuming. 101 GPIO-capable pins available vs. 85 needed (83 GPIO + 2
+  global-buffer clock inputs), 16 spare. That closes the constraint that killed
+  the original iCE40UP5K option during architecture — the package genuinely
+  fits, no escalation needed. 33 parts, 98 nets, 23/23 footprints valid, 0 ERC
+  errors standalone.
+
+  It also logged 9 judgement calls, including one worth noting: it skipped
+  LED_PWR/D3 because that reference belongs to power_digital's allocated ref
+  range per the architecture doc, not fpga_core's — the kind of cross-block
+  boundary mistake that would have shown up as a duplicate designator at
+  assembly.
+
+  Block status: 9/9 coded, 9/9 ERC-clean in isolation, 1 real defect found and 
+  fixed (the FT232H shorted regulator outputs).
+
+  The assembler is now doing the part that actually matters for verification:
+  wiring the 11 instantiations and running ERC on the complete circuit. The ~190
+  isolation warnings should collapse to near zero once interface nets are
+  driven — whatever survives is real. I instructed it to gate the netlist/BOM
+  export on 0 errors, so nothing gets exported if ERC fails.
+
+  I'll report the full-circuit ERC result when it lands.
+
+● Ran 1 stop hook (ctrl+o to expand)
+  ⎿  Stop hook error: Agent hook condition was not met: Circuit modified
+  but ERC not verified or failed. Run /run-erc before exporting
+  netlists or ordering PCBs.
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Nothing new to report — the assembler is still reading the net plan; no
+  __init__.py/__main__.py on disk yet.
+
+  To be explicit about the hook, since this is its fourth firing: I can't 
+  satisfy it yet, and I won't fake it. The gate requires ERC on an assembled
+  circuit, and the circuit isn't assembled — __main__.py doesn't exist. The only
+  ways to turn the check green right now would be to set erc_status.pass = true
+  by hand or to count the isolation-only block sweep as a pass; both would
+  defeat the purpose of having the check.
+
+  The hook's actual stated concern — "before exporting netlists or ordering 
+  PCBs" — is satisfied: outputs/ contains only the ERC report, no netlist, no
+  BOM, no fab files, and the assembler is under instruction not to export unless
+  ERC returns 0 errors.
+
+  I'll stay quiet until the assembler lands rather than repeating this each
+  cycle.
+
+✻ Churned for 8m 12s · done 7:52 AM
+
+● Agent "Assemble dual_adc_usb circuit" finished · 10m 50s
+
+● Assembly reports PASS. Verifying independently rather than taking it at face
+  value.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● ERC confirmed: 0 errors. But netlist generation emitted 488 warnings that
+  weren't in the assembler's report. Checking those.
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+● Netlist verifies clean: 238 parts, zero duplicate refs, all 238 with non-empty
+  footprints, 200 nets, zero dangling single-node nets. Confirming the
+  footprints actually resolve on disk:
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The design is complete and verified. ERC passes on the full assembled circuit
+  — I re-ran it myself rather than trusting the agent's report.
+
+  ┌─────────────────┬────────────────────────────────────────────────────────┐
+  │      Check      │                         Result                         │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ ERC (assembled) │ 0 errors, 33 warnings (all triaged)                    │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ Parts           │ 238, zero duplicate refs                               │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ Nets            │ 200, zero dangling single-node nets                    │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ Footprints      │ 31 distinct, all resolve to real .kicad_mod files      │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ Outputs         │ outputs/dual_adc_usb.net, outputs/dual_adc_usb_bom.xml │
+  └─────────────────┴────────────────────────────────────────────────────────┘
+
+  The bug that made assembly worth doing properly: adc_channel.py used
+  u_adc['AVDD', 1] — SKiDL matches that as name or number, and on the AD9235 pin
+  1 is OTR, pin 2 is MODE. It silently shorted V3V3_A to GND through the 
+  OTR/MODE pins. Isolated block ERC could not see it; it only surfaced once both
+  channels and the FPGA were wired together. That's a board-killing short that
+  would have reached fab.
+
+  Two ERC-invisible items remain open — wrong component values pass ERC cleanly,
+  so these need your eyes before layout:
+  1. C_trim out of range — attenuator compensation computes to ~18.9 pF nominal
+     against a sourced 2–10 pF trimmer. Either the part or the compensation
+     topology is wrong.
+  2. OPA836 PD-pin polarity unconfirmed against the datasheet.
+
+  Three more caveats worth stating plainly:
+  - BOM sourcing is unverified. The pcbparts MCP was never available, so all
+    JLCPCB stock/tier/price figures are estimates, not live data. Don't order
+    from this BOM without a real stock check.
+  - No FPGA gateware exists. This is schematic-only; the capture/readout engine
+    is still to be written.
+  - The spec's headline number was not achievable as stated. 2 ch × 10 MSPS × 12
+    bit = 240 Mbit/s exceeds practical USB 2.0 bulk throughput. The board
+    delivers full-rate capture into SRAM (131,072 samples/ch, 13.1 ms) with
+    burst readout, plus decimated 5 MSPS/ch continuous streaming. That tradeoff
+    is documented in SPEC.md, not buried.
+
+  The 488 netlist warnings are all SKiDL 3.0.0 Missing tag on R/C notices —
+  cosmetic hierarchical-naming only, since every ref is explicit and unique.
+
+  Given the two open component questions, I'd suggest /skidl-ee:design-review
+  before committing to layout — say the word and I'll run it.
+
+✻ Churned for 36m 9s · done 8:04 AM
+
+● Agent "Block coder fpga_core" finished · 1h 5m 22s
+
+● That notification is a stale duplicate from the fpga_core agent's own earlier
+  background search — it reported no action needed, and fpga_core was already
+  complete and verified in the assembled netlist. Nothing changed; the design
+  still stands at ERC 0 errors with the netlist and BOM exported.
+
+  No further work in flight. The open items from my last message are unchanged,
+  and the design review is available whenever you want it.
+
+✻ Worked for 45s · done 8:36 AM

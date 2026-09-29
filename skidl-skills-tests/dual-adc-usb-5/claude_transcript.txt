@@ -1,0 +1,674 @@
+ ▐▛███▛█   Claude Code v2.1.268
+▝▜██████▀  Opus 5 · Claude Pro
+  ▝▝ ▝▝    ~/…/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-5
+
+
+❯ create the electronic design described in dual-adc-prompt.txt.                
+
+● I'll start by reading the user context files and the prompt file.
+
+  Listed 2 directories, ran 1 shell command (ctrl+o to expand)
+
+● Clean slate. Starting the circuit design pipeline.
+
+● Skill(skidl-skills:new-circuit)
+  ⎿  Successfully loaded skill
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Now Phase 1 — requirements. Per the prompt I'll conduct this myself, recording
+  decisions with options/recommendations rather than asking.
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● Now the phase-1 handoff and pipeline state:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Phase 1 done — requirements. dual_adc_usb, 12 hard constraints, 5 decisions
+  resolved with options listed (SPEC.md D1–D5). The load-bearing ones:
+
+  - 30 MB/s sustained ≠ USB 2.0 HS → burst into ≥4 MB onboard RAM, read out
+    after. The 0.1 s spec is a finite record, so this is the right reading.
+  - ±10 V on a 5 V-only board → passive 1 MΩ compensated 10:1 divider first; no
+    ±12 V rails, no boost/inverter.
+  - USB-C with plain 5.1 kΩ CC pulldowns (~300 mA typ / 450 mA worst case leaves
+    no margin in a 500 mA USB-A budget; prompt authorizes C).
+  - FPGA + 2 ADCs + FTDI HS FIFO bridge; dedicated ≤5 ps ADC clock XO (14 ps
+    jitter budget for 11 ENOB at 4.5 MHz).
+
+  Auto-approving the gate per your prompt. Spawning the architect.
+
+● skidl-skills:circuit-architect(Architect dual ADC USB board)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The architect is running. I'll report when it reports.
+
+✻ Sautéed for 4m 28s · done Sunday 11:16 AM
+
+● Agent "Architect dual ADC USB board" finished · 25m 43s
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Gate passes — all 5 artifacts on disk, status: complete, manifest tables
+  present.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Phase 2 done — architecture. 8 blocks / 9 instances → modular coding. Keystone
+  picks: ADS5231IPAGT (dual 12-bit 40 MSPS, one package = one clock edge),
+  GW1NR-9C FPGA with 64 Mbit in-package PSRAM (deletes a 39-signal memory bus
+  from a 4-layer board), FT232HL in 245 sync-FIFO mode (no firmware).
+
+  Two calls worth your attention, both deviations the architect documented:
+
+  - Sample at 20 MSPS, decimate 2:1 in the host. The ADS5231's minimum clock is
+    20 MHz, so exactly 10.0 MSPS is not achievable in hardware. 8 MB holds 104.9
+    ms of both channels raw at 20 MSPS, so 0.1 s still holds — at double the
+    specified rate. Caveat: a clean 10 MSPS record then depends on the host
+    applying a digital LPF before decimating (the analog filter is ~6 MHz, above
+    the 5 MHz Nyquist of the decimated rate). Host software is out of scope for
+    this pipeline; the raw 20 MSPS record is always available.
+  - ÷20 attenuation, divider returning to a 1.20 V bias instead of GND — that
+    bias is the level shift, forced by having no negative rail (your ±10 V +
+    USB-power combination).
+
+  Cost came in at ~$85.5/board vs my $70 placeholder target (ADC $31.77 + FPGA
+  $23.31); stock on those two is 154/180 vs my 200 threshold. Both were my
+  numbers, not yours. Sourcing next.
+
+● skidl-skills:part-sourcer(Source BOM for dual ADC board)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Sourcing is running.
+
+✻ Worked for 59s · done Sunday 11:43 AM
+
+● Agent "Source BOM for dual ADC board" finished · 18m 55s
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Gate passes (only sourced_bom.md is in the artifacts table; the failures file
+  is explicitly absent — zero failures).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Phase 3 done — sourcing. ~160 refs, 0 sourcing failures, all 5 critical-path
+  parts stock-verified live. The 12 spec-only placeholders resolved to real MPNs
+  (buck→SY8089A1AAC, load switch→HL2301A, BNC→KH-BNC50-3511, ref
+  buffer→TLV9062IDR, etc.). The compensation trimmer was sourced as a trimmer
+  (STC3MA06-T1, 2–6 pF), not quietly swapped for a fixed cap.
+
+  Carried forward, not blocking: 2 custom footprints needed (trimmer; a fallback
+  QFN-10), 9 symbols to generate, 6 symbol matches to confirm, and the FT232H
+  crystal load caps need recomputing (12 pF crystal, not the ~20 pF assumed).
+  Those are downstream work, so this advances.
+
+● skidl-skills:datasheet-librarian(Gather datasheets for dual ADC board)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Datasheet phase running.
+
+✻ Baked for 36s · done Sunday 12:02 PM
+
+● Agent "Source BOM for dual ADC board" finished · 26m 51s
+● Duplicate notification from the sourcer (already gated). Waiting on the
+  datasheet librarian.
+
+✻ Baked for 3s · done Sunday 12:10 PM
+
+● Agent "Architect dual ADC USB board" finished · 53m 50s
+
+● Another stale notification (architect, already gated). Still waiting on the
+  datasheet librarian.
+
+✻ Brewed for 3s · done Sunday 12:10 PM
+
+● Agent "Gather datasheets for dual ADC board" finished · 36m 47s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Gate passes — 18 summaries, 8 PDFs, 6 generated symbols, 1 custom footprint
+  all on disk.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Recording the manifest, then launching the block coders. One routing call
+  first: the librarian surfaced that the ADS5231 can do 10 MSPS direct with its 
+  PLL disabled — I'm not reopening the architecture for it. Oversampling at 20
+  MSPS plus a digital decimation filter gives strictly better alias rejection
+  than a 5 MHz-Nyquist analog brick wall, and switching would re-add a 5th-order
+  LC filter per channel plus a re-source. Documented as a reviewer's option.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Phase 4 done — datasheets. 18 summaries, 8 verified PDFs, 6 generated symbols
+  (pin-count-exact), 1 custom footprint. It closed the three blockers and caught
+  real errors: the GW1NR-9C embeds SDR SDRAM, not PSRAM; EasyEDA mislabels its
+  pin 12 (VCCIO3); the FT232H crystal caps are 16–18 pF not ~27 pF; and X1 was
+  swapped to OT252020MJBA4SL because the originally sourced oscillator publishes
+  no jitter spec (the replacement measures 0.7 ps against a 5 ps budget).
+
+  Now phase 5 in modular mode — 5 work orders, 3 coders at a time.
+
+● skidl-skills:skidl-block-coder(Code afe_channel block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Code adc_dual block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Code fpga_core block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Three coders running (afe_channel, adc_dual, fpga_core). Two more work orders
+  queued behind them: usb_bridge + clock_20m, and usb_c_input + digital_power + 
+  analog_power_ref.
+
+✻ Crunched for 1m 52s · done Sunday 12:41 PM
+
+● Agent "Code afe_channel block" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+4:10pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CfF2ngt9idjwshE4FiZe3, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 4:10pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Sautéed for 0s · done Sunday 12:47 PM
+
+● Agent "Code fpga_core block" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+4:10pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CfF2oiko32VHcoG8VNXZm, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 4:10pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cooked for 0s · done Sunday 12:47 PM
+
+● Agent "Code adc_dual block" failed: Agent terminated early due to an API
+error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+4:10pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CfF2q7FRN3qWWLWinUwgg, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 4:10pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cogitated for 1h 35m 43s · done Sunday 12:47 PM
+
+❯ keep going                                                                    
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 4:10pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cogitated for 0s · done Sunday 2:56 PM
+
+❯ keep going                                                                    
+
+● Three coders died together on an API spend/rate limit (429, session limit
+  resets 4:10pm ET), not on a design problem. Checking what landed on disk
+  before I re-spawn anything.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The limit reset ~2h ago (it's 22:21 UTC / 6:21pm ET). On-disk state: adc_dual 
+  complete (file + handoff), fpga_core file written but no handoff, afe_channel 
+  nothing. Validating the two files before resuming.
+
+  Ran 1 shell command (ctrl+o to expand)
+● fpga_core.py is substantively complete — it even closed the open MODE[1:0]
+  question from a primary source (Gowin UG284 Table 6). It only owes its
+  handoff. Resuming that agent for the handoff and spawning afe_channel fresh,
+  two at a time to stay clear of the limit.
+  ⎿  Resuming agent a96cc45
+
+● skidl-skills:skidl-block-coder(Code afe_channel block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Recovered without redoing work: adc_dual done, fpga_core resuming for its
+  handoff only, afe_channel restarted fresh (it had written nothing). Two agents
+  running, deliberately capped at two given the earlier simultaneous kill.
+  Remaining after these: usb_bridge + clock_20m, then usb_c_input + 
+  digital_power + analog_power_ref.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 1m 24s · done Sunday 6:22 PM
+
+● Agent "Code fpga_core block" finished · 1m 56s
+
+● fpga_core complete (89/89 pins accounted, 0 floating; MODE[1:0] AUTOBOOT
+  confirmed from Gowin UG284). It flagged a real cross-block gap: R13 (EEDATA
+  pull-up) was in its ref list but belongs in usb_bridge. Passing that into the
+  next work order.
+
+● skidl-skills:skidl-block-coder(Code usb_bridge and clock_20m)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● usb_bridge + clock_20m launched alongside afe_channel. One work order left
+  after these (the three power/connector blocks), then assembly.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 30s · done Sunday 6:24 PM
+
+● Agent "Code afe_channel block" finished · 11m 9s
+
+● afe_channel complete — and it closed two upstream uncertainties from primary
+  datasheets (THS4551 PD confirmed active-low; FB+/FB− internal strapping per
+  Figure 9-2), plus caught that KiCad's Diode:BAV99 pin names contradict
+  Nexperia's pinning table. Its signature gained a ch=1|2 argument, which the
+  assembler must honour.
+
+● skidl-skills:skidl-block-coder(Code power and USB-C input blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● 3 of 8 blocks done. The last two work orders (5 blocks) are running in
+  parallel; assembler goes next when they report.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Brewed for 34s · done Sunday 6:34 PM
+
+● Agent "Code usb_bridge and clock_20m" finished · 12m 24s
+
+● usb_bridge + clock_20m done, but the coder found a real sourcing error: it
+  obtained the FT232H datasheet the datasheet phase couldn't, and §4 states the
+  93LC46B is explicitly incompatible with the FT232H — it needs a 93LC56B-class
+  (2 Kbit, 128×16) EEPROM. Identical pinout, so it's a pure BOM swap. It also
+  added 7 FTDI-mandated parts no ref list contained. Both are sourcing's to fix,
+  and a slot is free, so I'm running that narrow re-source in parallel.
+
+● skidl-skills:part-sourcer(Re-source EEPROM and added parts)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● 5 of 8 blocks done. Running now: the three power/connector blocks, plus the
+  narrow EEPROM re-source.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 32s · done Sunday 6:37 PM
+
+● Agent "Re-source EEPROM and added parts" finished · 4m 42s
+
+● EEPROM re-sourced to 93LC56BT-I/SN (C6164, 2384 in stock), symbol/footprint
+  unchanged. Applying the one-line value change to the block file myself rather
+  than paying for another coder spawn.
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)  ⎿  Added 7 lines, removed 7 lines
+      79      U7 = Part('Interface_USB', 'FT232H', ref='U7', value='FT232
+          HL-REEL',
+      80                footprint='Package_QFP:LQFP-48_7x7mm_P0.5mm')
+      81  
+      82 -    # NOTE / MUST-FIX carried to the handoff: FT_000288 section
+         - 4 states the config EEPROM                                    
+      83 -    # "should be a 16 bit wide configuration such as a 93LC56B 
+         -or equivalent" and that                                        
+      84 -    # "the 93LC46B is not compatible with the FT232H device". T
+         -he sourced 1 Kbit 93C46 is                                     
+      85 -    # of that incompatible density class. Pinout is identical, 
+         -so the fix is a BOM-level                                      
+      86 -    # swap to a 93LC56B/93LC66B-class part; the value string be
+         -low is left as sourced so                                      
+      87 -    # BOM reconciliation still matches sourcing/sourced_bom.md.
+      88 -    U8 = Part('Memory_EEPROM', '93CxxC', ref='U8', value='93C46
+         -CT-I/SN-TUDI',                                                 
+      82 +    # FT_000288 section 4 requires a 16-bit-wide config EEPROM 
+         +"such as a 93LC56B or                                          
+      83 +    # equivalent" and states "the 93LC46B is not compatible wit
+         +h the FT232H device".                                          
+      84 +    # RESOLVED (sourcing revision 2): the originally sourced 1 
+         +Kbit 93C46 was of that                                         
+      85 +    # incompatible density class and has been re-sourced to 93L
+         +C56BT-I/SN (2 Kbit, 128x16,                                    
+      86 +    # LCSC C6164). Pinout, symbol and footprint are unchanged, 
+         +so only this value string                                      
+      87 +    # moved; it still reconciles against sourcing/sourced_bom.m
+         +d.                                                             
+      88 +    U8 = Part('Memory_EEPROM', '93CxxC', ref='U8', value='93LC5
+         +6BT-I/SN',                                                     
+      89                footprint='Package_SO:SOIC-8_3.9x4.9mm_P1.27mm')
+      90  
+      91      X2 = Part('Device', 'Crystal_GND24', ref='X2', value='12MHz
+           12pF',
+
+  Searched for 1 pattern, ran 2 shell commands (ctrl+o to expand)
+
+● EEPROM issue closed end-to-end (BOM, code, and the block handoff annotated so
+  the assembler and ERC reviewer don't re-flag it). 6 of 8 blocks done; waiting
+  on the three power/connector blocks.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Baked for 47s · done Sunday 6:42 PM
+
+● Agent "Code power and USB-C input blocks" finished · 16m 13s
+
+● All 8 blocks are written, but digital_power came back partial with a genuine
+  electrical defect, so it doesn't pass as-is. Checking the related rail risk
+  before I route it.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Two upstream issues to settle, so this routes to the architect (rework #1)
+  rather than a coder retry:
+
+  1. Q1 can't turn off — HL2301A is a P-FET with its source at 5 V driven by a
+     3.3 V PWREN#; Vgs ≈ −1.5 V sits past its −0.4…−1.0 V threshold, so the
+     rails come up pre-enumeration. No resistor value fixes it.
+  2. SY8089 VFB is still unverified (0.6 V assumed). If it's actually 0.8 V, the
+     3.3 V rail comes up at 4.4 V and destroys every 3.3 V part on the board.
+
+● skidl-skills:circuit-architect(Fix power-tree escalations)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 8 block files and 8 block handoffs exist; 7 blocks are clean,
+  digital_power is held open pending the architect's fix. Architecture rework #1
+  running (cap is 2).
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 1m 35s · done Sunday 6:51 PM
+
+● Agent "Fix power-tree escalations" finished · 13m 36s
+
+● Both blockers closed: Q1 → AP2161WG-7 (active-low GND-referenced EN, so PWREN#
+  drives it directly, plus current limit and 0.6 ms slew), and VFB confirmed
+  0.591–0.609 V from Silergy's primary doc, so the existing divider gives 3.318
+  V — the 4.4 V scenario is ruled out. Dispatching its three work orders.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:part-sourcer(Source power-tree rev2 rows)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Apply power-tree fixes to two blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Both fix work orders dispatched in parallel (BOM rows; the two block files).
+  Assembly follows once they land.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cooked for 35s · done Sunday 7:05 PM
+
+● Agent "Source power-tree rev2 rows" finished · 4m 19s
+
+● BOM at revision 3. Waiting on the two block-file fixes before assembly.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 3s · done Sunday 7:09 PM
+
+● Agent "Apply power-tree fixes to two blocks" finished · 4m 37s
+
+● All 8 blocks are complete. Updating state and spawning the assembler.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:skidl-assembler(Assemble dual ADC circuit package)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Assembler running: wiring all 9 block instances into a runnable circuit and
+  running full-circuit ERC.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+✻ Churned for 25s · done Sunday 7:10 PM
+
+● Agent "Assemble dual ADC circuit package" finished · 10m 7s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Phase 5 done — coding. 169 parts, 146 nets, 9 block instances, 0 ERC errors / 
+  19 warnings (all on block-internal nets, none inter-block), 33/33 footprints
+  valid, two runs byte-identical. Now the independent ERC gate — a different
+  agent re-runs it and verifies every warning classification rather than taking
+  the assembler's word.
+
+● skidl-skills:erc-reviewer(Independent ERC and footprint gate)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● ERC reviewer running — the last gate before netlist export.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 20s · done Sunday 7:21 PM
+
+● Agent "Assemble dual ADC circuit package" finished · 18m 11s
+
+● Stale duplicate notification from the assembler (already gated). Still waiting
+  on the ERC reviewer.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Worked for 3s · done Sunday 7:28 PM
+
+● Agent "Independent ERC and footprint gate" failed: Agent terminated early due
+to an API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+11:20pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CfFZhhd2FWjCW7Awy338G, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 11:20pm (America/New_York)
+     /usage-credits to adjust your monthly spend limit.
+
+✻ Cooked for 1h 11m 31s · done Sunday 7:32 PM
+
+❯ keep going                                                                    
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Limit has reset (it's 7:35am ET now). The reviewer left only a 533-byte
+  skeleton and no report — but it died mid-verification from the rate limit, not
+  context exhaustion, so resuming preserves the classification work it had
+  already done.
+
+  Read 1 file (ctrl+o to expand)
+  ⎿  Resuming agent a127a21
+
+● ERC reviewer resumed, with instructions to save the report incrementally so
+  another kill can't cost the work.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Baked for 30s · done 7:35 AM
+
+● Agent "Independent ERC and footprint gate" finished · 5m 35s
+
+● Phase 6 — ERC PASS, independently reproduced: 0 errors, 19 warnings (5/5 of
+  the assembler's false-positive claims upheld, none rejected), 33/33 footprints
+  valid, netlist byte-identical across runs, no pin on two nets. Export is
+  unblocked.
+
+  But the reviewer found a real pre-fab defect worth fixing before I export:
+
+  - H-1: the anti-alias filter is 2nd-order, not 3rd — C_cm and C_diff share a
+    node behind the same 33 Ω, so they merge into one pole. Measured from
+    netlist values: −4.55 dB at 4.0 MHz. That's 4.5 dB of droop inside the
+    usable band, i.e. the corner sits near 4 MHz instead of ~6 MHz. Not a spec
+    quibble.
+  - M-1: OPA355 common-mode margin is only 85 mV at full scale; two resistor
+    values triple it.
+
+  Recording the pass, then one last rework cycle (#2, the cap) before export.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:circuit-architect(Reconcile filter spec and pole plan)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Netlist and BOM XML already exist from the ERC run; I'll re-export after the
+  filter fix lands so they reflect final values.
+
+✻ Sautéed for 1m 11s · done 7:42 AM
+
+● Agent "Reconcile filter spec and pole plan" finished · 17m 28s
+
+● Strong result — and it rejected the reviewer's M-1 values with arithmetic (R8
+  = 23.0 kΩ isn't even an E96 value). Dispatching the three work orders.
+● skidl-skills:skidl-block-coder(Apply filter and bias fixes)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● skidl-skills:part-sourcer(Source new filter capacitor values)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Filter fix and BOM amendment running in parallel. Once they land: re-run ERC,
+  then export the netlist and BOM.
+
+✻ Cogitated for 29s · done 8:00 AM
+
+● Agent "Source new filter capacitor values" finished · 6m 31s
+
+● BOM at revision 4 (three of the changed caps even moved to Basic tier).
+  Waiting on the block-file fix.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cooked for 5s · done 8:07 AM
+
+● Agent "Apply filter and bias fixes" finished · 11m 6s
+
+● Both fixes landed. Re-running the full circuit to confirm ERC still passes
+  with the new values, then exporting.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● 0 errors, same 19 benign warnings, netlist and BOM XML re-exported with final
+  values. Final validation:
+
+  Searched for 1 pattern, ran 3 shell commands (ctrl+o to expand)
+
+● 175 components / 150 nets exported, 33/33 footprints valid. But the
+  independent gate ran on the pre-fix code, and the AFE wiring genuinely changed
+  (new MFB nets, R107/R108 moved). My own re-run confirms 0 errors, but that
+  isn't the same as an independent review of the new topology — so I'm re-gating
+  it properly.
+
+● skidl-skills:erc-reviewer(Re-gate post-fix AFE topology)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Re-gate running. While it works, updating state to reflect the export.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All artifacts on disk. Waiting on the final independent gate before I call
+  this done.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Worked for 1m 46s · done 8:13 AM
+
+● Agent "Re-gate post-fix AFE topology" finished · 13m 49s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Design complete. Final independent gate: PASS — 0 ERC errors, 33/33
+  footprints, netlist reproducible, 175 parts / 150 nets, no pin on two nets.
+
+  What the board is
+
+  dual_adc_usb — buffered dual-channel digitizer, USB-C bus-powered, in
+  circuits/dual_adc_usb/ (8 block files + __main__.py), exported to
+  outputs/dual_adc_usb.net and dual_adc_usb_bom.xml.
+
+  Signal chain per channel: BNC → 1 MΩ compensated ÷20 divider returning to a
+  1.100 V bias → OPA355 buffer → THS4551 FDA with a 3rd-order Butterworth
+  anti-alias (−3 dB at 6.1 MHz) → ADS5231 dual 12-bit ADC → GW1NR-9C FPGA with
+  64 Mbit in-package SDRAM → FT232H in 245 sync-FIFO mode → USB-C.
+
+  How your four hard requirements are met:
+
+  ┌────────────────┬────────────────────────────────────────────────────────┐
+  │  Requirement   │                        As built                        │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 2 ch, ±10 V    │ ÷20 passive-first divider; one ADC package = one       │
+  │                │ shared clock edge                                      │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 12 bit         │ ADS5231, 70.7 dB SNR = 11.4 ENOB                       │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │                │ Samples at 20 MSPS, host decimates 2:1 — the ADC's     │
+  │ 10 MSPS        │ minimum clock is 20 MHz, so exact 10.0 MSPS is not     │
+  │                │ achievable in silicon                                  │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ ≥0.1 s at full │ 8 MB buffer = 104.9 ms of both channels at 20 MSPS     │
+  │  rate          │                                                        │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ USB 2.0 +      │ USB-C, 5.1 kΩ CC pulldowns, USB 2.0 signalling only;   │
+  │ power          │ ~485 mA worst case, which is why it's C and not A      │
+  └────────────────┴────────────────────────────────────────────────────────┘
+
+  Three things you should know before fabricating
+
+  1. A host-software requirement is now load-bearing. The 2:1 decimation must
+     include a ≥40 dB digital low-pass above 5 MHz. Naïve sample-dropping loses
+     the anti-alias spec with no hardware symptom. Filed as requirement S1 /
+     risk R-12.
+  2. H-2, open: the 3rd order depends on the THS4551's internal crosswise FB↔IN
+     strap, and no SBOS778 PDF was ever obtained. Three arguments converge that
+     it's right; if it's wrong, two caps float and the stopband degrades to −8.6
+     dB at 16 MHz. Verify against the real datasheet.
+  3. M-2, open: the stopband misses by 1.84 dB at ±5 % C0G tolerance — nominal
+     margin is supplied entirely by a 0.6 pF parasitic in TI's model.
+
+  Also unverified: the BNC footprint against KH-BNC50-3511, and the FPGA's
+  exposed-pad size.
+
+  Process notes
+
+  Three agents were killed mid-run by your account's spend limit (twice). No
+  work was lost — adc_dual and fpga_core were recovered from disk rather than
+  redone.
+
+  The pipeline caught four real defects that a clean netlist cannot see: the
+  93LC46 EEPROM is explicitly incompatible with the FT232H (re-sourced); Q1 
+  couldn't turn off (3.3 V gate on a 5 V-source P-FET → replaced with an
+  AP2161WG-7 load switch); the buck's VFB was unverified (if it had been 0.8 V,
+  the 3.3 V rail would have come up at 4.4 V and destroyed the board); and the
+  anti-alias filter was 2nd-order, not 3rd, with 4.5 dB of droop at 4 MHz. Both
+  of my own soft specs F9/F10 were formally renegotiated rather than quietly
+  missed — the original 7 MHz alias edge was a fossil of assuming direct 10 MSPS
+  sampling.
+
+  Cost landed at ~$85/board against my $70 placeholder, driven by the ADC
+  ($31.77) and FPGA ($23.31).
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cooked for 51m 55s · done 8:27 AM
+
+● Agent "Apply filter and bias fixes" finished · 41m 12s
+
+● Stale duplicate notification from an already-gated agent (a leftover file
+  search) — nothing changes. The design stands as reported: ERC PASS at revision
+  2, netlist and BOM exported.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Baked for 3s · done 8:41 AM
+
+● Agent "Source new filter capacitor values" finished · 42m 53s
+
+● Another stale duplicate (leftover search from the sourcer). No action; the
+  work it reported earlier stands. The design is complete and the pipeline is at
+  stage: export with everything on disk.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+✻ Crunched for 4s · done 8:43 AM

@@ -1,0 +1,143 @@
+{
+  "version": "5.0",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export",
+  "last_updated": "2026-09-11T11:33:13Z",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-09-11T11:33:13Z",
+    "errors": 0,
+    "warnings": 0,
+    "pass": true,
+    "report_path": "outputs/erc_report.md"
+  },
+  "review_status": {
+    "report": "outputs/design_review.md",
+    "high": 0,
+    "medium": 3,
+    "low": 14,
+    "fixed": 5,
+    "erc_rerun_after_fixes": "0 errors, 0 warnings, 204 parts"
+  },
+  "sourced_bom_version": 1,
+  "last_modified_circuit": "circuits/dual_adc_usb/fpga_core.py",
+  "coding_mode": "modular",
+  "use_cache": false,
+  "block_manifest": [
+    {
+      "block_id": "usb_power_in",
+      "block_name": "USB-C entry, ESD, load switch",
+      "filename": "circuits/dual_adc_usb/usb_power_in.py",
+      "function_signature": "usb_power_in(vbus_sw, usb_dp, usb_dm, gnd)",
+      "interface_nets": "VBUS_SW, USB_DP, USB_DM, GND",
+      "parts": "J1, U1, U2, D1, FB1, R1, R2, R3, R4, C1, C2, C3, C4",
+      "datasheet_summaries": "datasheets/USBLC6-2SC6_SUMMARY.md, datasheets/SMF5.0A_SUMMARY.md, datasheets/SY6280AAC_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_rails",
+      "block_name": "LDO rails 3V3D/1V8/1V2/3V3A",
+      "filename": "circuits/dual_adc_usb/power_rails.py",
+      "function_signature": "power_rails(vbus_sw, vd_3v3, vd_1v8, vd_1v2, va_3v3, gnd)",
+      "interface_nets": "VBUS_SW, VD_3V3, VD_1V8, VD_1V2, VA_3V3, GND",
+      "parts": "U3, U4, U5, U6, LED1, R5, C5\u2013C13, TP1\u2013TP6",
+      "datasheet_summaries": "datasheets/TLV1117LV33DCYR_SUMMARY.md, datasheets/TLV75512PDBVR_SUMMARY.md, datasheets/TLV75518PDBVR_SUMMARY.md, datasheets/TPS7A2033PDBVR_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "bipolar_supply",
+      "block_name": "\u00b12.5 V front-end supply",
+      "filename": "circuits/dual_adc_usb/bipolar_supply.py",
+      "function_signature": "bipolar_supply(vbus_sw, va_p2v5, va_n2v5, gnd)",
+      "interface_nets": "VBUS_SW, VA_P2V5, VA_N2V5, GND",
+      "parts": "U7, R6\u2013R9, C14\u2013C21, FB2\u2013FB4, TP7, TP8",
+      "datasheet_summaries": "datasheets/LM27762DSSR_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "analog_front_end",
+      "block_name": "2-ch BNC attenuator/buffer/driver",
+      "filename": "circuits/dual_adc_usb/analog_front_end.py",
+      "function_signature": "analog_front_end(ain_a_p, ain_a_n, ain_b_p, ain_b_n, adc_vcm, va_3v3, va_p2v5, va_n2v5, gnd)",
+      "interface_nets": "AIN_A_P, AIN_A_N, AIN_B_P, AIN_B_N, ADC_VCM, VA_3V3, VA_P2V5, VA_N2V5, GND",
+      "parts": "J2, J3, U8, U9, U10, U11, D2, D3, VC1, VC2, R10\u2013R29, C30\u2013C38, C40\u2013C48",
+      "datasheet_summaries": "datasheets/OPA354AIDBVR_SUMMARY.md, datasheets/THS4521IDGKR_SUMMARY.md, datasheets/BAV199_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "adc",
+      "block_name": "ADS5231 dual ADC",
+      "filename": "circuits/dual_adc_usb/adc.py",
+      "function_signature": "adc(ain_a_p, ain_a_n, ain_b_p, ain_b_n, adc_vcm, adc_clk, adc_da, adc_db, adc_ovra, adc_ovrb, adc_dva, adc_sel, adc_sen, adc_sclk, adc_sdata, va_3v3, gnd)",
+      "interface_nets": "AIN_A_P, AIN_A_N, AIN_B_P, AIN_B_N, ADC_VCM, ADC_CLK, ADC_DA0\u2026ADC_DA11, ADC_DB0\u2026ADC_DB11, ADC_OVRA, ADC_OVRB, ADC_DVA, ADC_SEL, ADC_SEN, ADC_SCLK, ADC_SDATA, VA_3V3, GND",
+      "parts": "U12, R50\u2013R56, RN1\u2013RN7, C50\u2013C62, FB5, FB6",
+      "datasheet_summaries": "datasheets/ADS5231IPAGT_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "sample_clock",
+      "block_name": "20 MHz sample clock",
+      "filename": "circuits/dual_adc_usb/sample_clock.py",
+      "function_signature": "sample_clock(adc_clk, adc_clk_fpga, va_3v3, gnd)",
+      "interface_nets": "ADC_CLK, ADC_CLK_FPGA, VA_3V3, GND",
+      "parts": "X1, R57, R58, C63, C64, FB7, TP9",
+      "datasheet_summaries": "datasheets/SX3M20.000B10F20TNN_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge",
+      "block_name": "FT232H USB HS bridge",
+      "filename": "circuits/dual_adc_usb/usb_bridge.py",
+      "function_signature": "usb_bridge(usb_dp, usb_dm, ft_d, ft_rxf_n, ft_txe_n, ft_rd_n, ft_wr_n, ft_oe_n, ft_siwu_n, ft_clkout, vd_3v3, gnd)",
+      "interface_nets": "USB_DP, USB_DM, FT_D0\u2026FT_D7, FT_RXF_N, FT_TXE_N, FT_RD_N, FT_WR_N, FT_OE_N, FT_SIWU_N, FT_CLKOUT, VD_3V3, GND",
+      "parts": "U13, U14, Y1, R60\u2013R67, C65\u2013C79, FB8",
+      "datasheet_summaries": "datasheets/FT232HL-REEL_SUMMARY.md, datasheets/93LC56BT-I-OT_SUMMARY.md, datasheets/X322512MSB4SI_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_core",
+      "block_name": "GW1NR-9 FPGA, config, JTAG",
+      "filename": "circuits/dual_adc_usb/fpga_core.py",
+      "function_signature": "fpga_core(adc_da, adc_db, adc_ovra, adc_ovrb, adc_dva, adc_sel, adc_sen, adc_sclk, adc_sdata, adc_clk_fpga, ft_d, ft_rxf_n, ft_txe_n, ft_rd_n, ft_wr_n, ft_oe_n, ft_siwu_n, ft_clkout, led_stat_1v8, led_act_1v8, trig_out_1v8, gpio_out_1v8, trig_in_1v8, vd_3v3, vd_1v8, vd_1v2, gnd)",
+      "interface_nets": "ADC_DA0\u2026ADC_DA11, ADC_DB0\u2026ADC_DB11, ADC_OVRA, ADC_OVRB, ADC_DVA, ADC_SEL, ADC_SEN, ADC_SCLK, ADC_SDATA, ADC_CLK_FPGA, FT_D0\u2026FT_D7, FT_RXF_N, FT_TXE_N, FT_RD_N, FT_WR_N, FT_OE_N, FT_SIWU_N, FT_CLKOUT, LED_STAT_1V8, LED_ACT_1V8, TRIG_OUT_1V8, GPIO_OUT_1V8, TRIG_IN_1V8, VD_3V3, VD_1V8, VD_1V2, GND",
+      "parts": "U15, J4, R70\u2013R74, C80\u2013C95, TP10",
+      "datasheet_summaries": "datasheets/GW1NR-LV9QN88PC6-I5_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "io_expansion",
+      "block_name": "LEDs, ext trigger, level translation",
+      "filename": "circuits/dual_adc_usb/io_expansion.py",
+      "function_signature": "io_expansion(led_stat_1v8, led_act_1v8, trig_out_1v8, gpio_out_1v8, trig_in_1v8, vd_3v3, vd_1v8, gnd)",
+      "interface_nets": "LED_STAT_1V8, LED_ACT_1V8, TRIG_OUT_1V8, GPIO_OUT_1V8, TRIG_IN_1V8, VD_3V3, VD_1V8, GND",
+      "parts": "U16, U17, LED2, LED3, R80\u2013R85, C96, C97, J5",
+      "datasheet_summaries": "datasheets/SN74LV4T125PWR_SUMMARY.md, datasheets/SN74LV1T34DCKR_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 0,
+  "architecture_rework_count": 0,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/06_erc.md"
+  },
+  "last_handoff": "handoffs/06_erc.md"
+}

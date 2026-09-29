@@ -1,0 +1,298 @@
+{
+  "version": "5.0",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export_complete",
+  "last_updated": "2026-09-09",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-09-09",
+    "scope": "full_assembled_circuit",
+    "errors": 0,
+    "warnings": 33,
+    "pass": true,
+    "report_path": "handoffs/05_coding.md",
+    "verified_independently": "re-ran python3 -m circuits.dual_adc_usb: 0 errors / 33 warnings",
+    "netlist_warnings": 488,
+    "netlist_warning_note": "all 488 are SKiDL 3.0.0 'Missing tag on R/C' notices (no tag= kwarg on passives); cosmetic/hierarchical-naming only, refs are explicit and unique"
+  },
+  "sourced_bom_version": 1,
+  "last_modified_circuit": "circuits/dual_adc_usb/__main__.py",
+  "coding_mode": "modular",
+  "block_manifest": [
+    {
+      "block_id": "usb_c_input",
+      "block_name": "USB-C Input & Protection",
+      "filename": "circuits/dual_adc_usb/usb_c_input.py",
+      "interface_nets": [
+        "VBUS",
+        "GND",
+        "USB_DP",
+        "USB_DM"
+      ],
+      "parts": [
+        "J1",
+        "F1",
+        "D1",
+        "D2",
+        "FB1",
+        "R1",
+        "R2",
+        "R3",
+        "C1",
+        "C2"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_digital",
+      "block_name": "Digital Power (3V3_D, 1V2)",
+      "filename": "circuits/dual_adc_usb/power_digital.py",
+      "interface_nets": [
+        "VBUS",
+        "GND",
+        "V3V3_D",
+        "V1V2"
+      ],
+      "parts": [
+        "U1",
+        "U2",
+        "D3",
+        "R4",
+        "C3-C7"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "power_analog",
+      "block_name": "Analog Power (gated)",
+      "filename": "circuits/dual_adc_usb/power_analog.py",
+      "interface_nets": [
+        "VBUS",
+        "GND",
+        "PWREN_N",
+        "V3V3_A",
+        "V3V3_CLK",
+        "V5_A",
+        "VN5_A",
+        "VREF_0V5_A",
+        "VREF_0V5_B"
+      ],
+      "parts": [
+        "U3",
+        "U4",
+        "U5",
+        "Q1",
+        "FB2",
+        "FB3",
+        "FB6",
+        "L1",
+        "L2",
+        "R5-R9",
+        "C8-C21"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "clock_gen",
+      "block_name": "10 MHz Low-Jitter Clock",
+      "filename": "circuits/dual_adc_usb/clock_gen.py",
+      "interface_nets": [
+        "V3V3_CLK",
+        "GND",
+        "CLK_ADC_A",
+        "CLK_ADC_B",
+        "CLK_10M"
+      ],
+      "parts": [
+        "X1",
+        "U16",
+        "U17",
+        "R10-R12",
+        "C22-C24"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_channel",
+      "block_name": "Analog Front End (x2)",
+      "filename": "circuits/dual_adc_usb/afe_channel.py",
+      "interface_nets": [
+        "BNC_<X>_SIG",
+        "GND",
+        "V5_A",
+        "VN5_A",
+        "V3V3_A",
+        "VREF_0V5_<X>",
+        "ADC_<X>_IN",
+        "ADC_<X>_VINN"
+      ],
+      "parts": [
+        "A: J2,U100,U101,D100,D101,R100-R115,C100-C112",
+        "B: J3,U200,U201,D200,D201,R200-R215,C200-C212"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "adc_channel",
+      "block_name": "12-bit 10 MSPS ADC (x2)",
+      "filename": "circuits/dual_adc_usb/adc_channel.py",
+      "interface_nets": [
+        "ADC_<X>_IN",
+        "ADC_<X>_VINN",
+        "CLK_ADC_<X>",
+        "ADC<X>_PDWN",
+        "V3V3_A",
+        "V3V3_D",
+        "GND",
+        "ADC<X>_D[11:0]",
+        "ADC<X>_OTR"
+      ],
+      "parts": [
+        "A: U110,FB10,R120-R133,C120-C132",
+        "B: U210,FB20,R220-R233,C220-C232"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "sram_buffer",
+      "block_name": "512 kB Capture SRAM",
+      "filename": "circuits/dual_adc_usb/sram_buffer.py",
+      "interface_nets": [
+        "V3V3_D",
+        "GND",
+        "SRAM_A[17:0]",
+        "SRAM_D[15:0]",
+        "SRAM_CE_N",
+        "SRAM_OE_N",
+        "SRAM_WE_N",
+        "SRAM_UB_N",
+        "SRAM_LB_N"
+      ],
+      "parts": [
+        "U8",
+        "C41-C46"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge",
+      "block_name": "FT232H USB2-HS Sync FIFO",
+      "filename": "circuits/dual_adc_usb/usb_bridge.py",
+      "interface_nets": [
+        "VBUS",
+        "V3V3_D",
+        "GND",
+        "USB_DP",
+        "USB_DM",
+        "FIFO_D[7:0]",
+        "FIFO_RXF_N",
+        "FIFO_TXE_N",
+        "FIFO_RD_N",
+        "FIFO_WR_N",
+        "FIFO_OE_N",
+        "CLK60",
+        "PWREN_N"
+      ],
+      "parts": [
+        "U6",
+        "U7",
+        "Y1",
+        "R13-R19",
+        "FB4",
+        "FB5",
+        "C25-C40"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_core",
+      "block_name": "iCE40HX4K Controller",
+      "filename": "circuits/dual_adc_usb/fpga_core.py",
+      "interface_nets": [
+        "V3V3_D",
+        "V1V2",
+        "GND",
+        "ADCA_D[11:0]",
+        "ADCA_OTR",
+        "ADCA_PDWN",
+        "ADCB_D[11:0]",
+        "ADCB_OTR",
+        "ADCB_PDWN",
+        "CLK_10M",
+        "CLK60",
+        "SRAM_A[17:0]",
+        "SRAM_D[15:0]",
+        "SRAM_CE_N",
+        "SRAM_OE_N",
+        "SRAM_WE_N",
+        "SRAM_UB_N",
+        "SRAM_LB_N",
+        "FIFO_D[7:0]",
+        "FIFO_RXF_N",
+        "FIFO_TXE_N",
+        "FIFO_RD_N",
+        "FIFO_WR_N",
+        "FIFO_OE_N",
+        "EXT_TRIG",
+        "LED_USB_N",
+        "LED_CAP_N"
+      ],
+      "parts": [
+        "U9",
+        "U18",
+        "J4",
+        "J5",
+        "D4",
+        "D5",
+        "D6",
+        "D7",
+        "R20-R26",
+        "C47-C64"
+      ],
+      "status": "complete",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 0,
+  "architecture_rework_count": 0,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/05_coding.md"
+  },
+  "last_handoff": "handoffs/05_coding.md",
+  "autonomous_mode": true,
+  "symbol_lib": "lib/dual_adc_usb.kicad_sym",
+  "outputs": {
+    "netlist": "outputs/dual_adc_usb.net",
+    "bom_xml": "outputs/dual_adc_usb_bom.xml",
+    "preassembly_erc": "outputs/erc_blocks_preassembly.md",
+    "parts": 238,
+    "nets": 200,
+    "duplicate_refs": 0,
+    "unresolved_footprints": 0
+  },
+  "open_items": [
+    "afe_channel C_trim: attenuator compensation computes ~18.9 pF nominal vs sourced 2-10 pF trimmer - part or topology wrong (ERC cannot catch component values)",
+    "afe_channel: OPA836 PD pin polarity unconfirmed against datasheet",
+    "sourced_bom.md JLCPCB stock/tier/price are UNVERIFIED estimates - pcbparts MCP was unavailable (risk R-15)",
+    "FPGA gateware not written - schematic only",
+    "USB 2.0 cannot stream 240 Mbit/s: design uses SRAM burst capture (131072 samples/ch) + decimated 5 MSPS/ch continuous"
+  ]
+}

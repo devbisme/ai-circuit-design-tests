@@ -1,0 +1,42 @@
+ERC WARNING: No drivers for net FT_EECLK.
+ERC WARNING: Insufficient drive current on net FT_EECLK for pin INPUT pin 4/CLK of 93LC56BT-I_OT/U11.
+ERC WARNING: Insufficient drive current on net FT_EECLK for pin INPUT pin 44/EECLK of FT232H/U10.
+ERC WARNING: No drivers for net FT_EECS.
+ERC WARNING: Insufficient drive current on net FT_EECS for pin INPUT pin 5/CS of 93LC56BT-I_OT/U11.
+ERC WARNING: Insufficient drive current on net FT_EECS for pin INPUT pin 45/EECS of FT232H/U10.
+ERC INFO: 6 warnings found while running ERC.
+ERC INFO: 0 errors found while running ERC.
+
+WARNING: Missing tag on  instantiated at /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-8/<frozen importlib._bootstrap>:491.
+INFO: 1 warnings found while generating netlist.
+INFO: 0 errors found while generating netlist.
+
+INFO: 1 warnings found while generating XML.
+INFO: 0 errors found while generating XML.
+
+
+=== validate-footprints.py ===
+✓ All footprint strings RESOLVE (72 checked across 10 files)
+  Resolution only: the library and the .kicad_mod exist. This check cannot
+  see which package variant the sourced MPN ships in, so a 208-mil part on
+  a 150-mil land pattern passes here with matching pad counts. Run
+  validate-bom.py for the package check — this is NOT a footprint gate pass.
+
+=== validate-bom.py ===
+15 package note(s) — not failures, confirm by hand:
+  ? J1: package 'USB-C SMD 16P' not evident in footprint 'USB_C_Receptacle_HRO_TYPE-C-31-M-12' — confirm by hand (row 2)
+  ? L1: package 'SMD 3x3mm' not evident in footprint 'L_Changjiang_FNR3015S' — confirm by hand (row 13)
+  ? L2: package 'SMD 3x3mm' not evident in footprint 'L_Changjiang_FNR3015S' — confirm by hand (row 14)
+  ? U7: package 'WSON-12-EP(2x3)' not evident in footprint 'WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65' — confirm by hand (row 28)
+  ? J2: package 'THT right-angle BNC' not evident in footprint 'BNC_Kinghelm_KH-BNC50-3511_Horizontal' — confirm by hand (row 41)
+  ? U102: package 'QFN-16-EP(3x3)' not evident in footprint 'VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm' — confirm by hand (row 43)
+  ? C104: package 'SMD 4.5x3.2mm' not evident in footprint 'C_Trimmer_Voltronics_JZ' — confirm by hand (row 55)
+  ? J3: package 'THT right-angle BNC' not evident in footprint 'BNC_Kinghelm_KH-BNC50-3511_Horizontal' — confirm by hand (row 64)
+  ? U202: package 'QFN-16-EP(3x3)' not evident in footprint 'VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm' — confirm by hand (row 66)
+  ? C204: package 'SMD 4.5x3.2mm' not evident in footprint 'C_Trimmer_Voltronics_JZ' — confirm by hand (row 78)
+  ? U8: package 'TQFP-64-208mil' not evident in footprint 'TQFP-64_10x10mm_P0.5mm' — confirm by hand (row 87)
+  ? X1: package 'SMD3225-4P' not evident in footprint 'Oscillator_SMD_SeikoEpson_SG8002CE-4Pin_3.2x2.5mm' — confirm by hand (row 101)
+  ? J4: package 'THT' not evident in footprint 'PinHeader_2x05_P2.54mm_Vertical' — confirm by hand (row 108)
+  ? J5: package 'THT' not evident in footprint 'PinHeader_1x06_P2.54mm_Vertical' — confirm by hand (row 109)
+  ? U10: package 'LQFP-48-208mil' not evident in footprint 'LQFP-48_7x7mm_P0.5mm' — confirm by hand (row 120)
+✓ BOM agrees with the circuit (170 parts, 131 BOM rows, 15 note(s))

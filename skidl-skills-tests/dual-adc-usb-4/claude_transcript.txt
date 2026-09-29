@@ -1,0 +1,762 @@
+ ▐▛███▛█   Claude Code v2.1.267
+▝▜██████▀  Opus 5 · Claude Pro
+  ▝▝ ▝▝    ~/…/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-4
+
+
+❯ create the electronic design described in dual-adc-prompt.txt.                
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Skill(skidl-skills:new-circuit)
+  ⎿  Successfully loaded skill
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Write(SPEC.md)
+  ⎿  Wrote 82 lines to SPEC.md
+      1 # SPEC — dual_adc_usb
+      2 
+      3 Source: `dual-adc-prompt.txt` (user). The user asked that open de
+      4 options and selecting a recommendation without pausing. Every ite
+        m below is tagged:
+      5 
+      6 - **[USER]** — stated in the prompt.
+        lf (options listed in § Decisions log).
+      8 
+      9 ## 1. Functional
+     … +138 lines (ctrl+o to expand)
+
+● Write(handoffs/01_requirements.md)
+  ⎿  Wrote 66 lines to handoffs/01_requirements.md
+      1 ---
+      2 phase: 01_requirements
+      3 agent: driver
+      4 circuit: dual_adc_usb
+      5 written: 2026-09-10T17:25:51Z
+      6 status: complete
+      7 revision: 1
+      8 next_phase: 02_architecture
+      9 ---
+     … +109 lines (ctrl+o to expand)
+
+● Write(pipeline_state.json)
+  ⎿  Wrote 36 lines to pipeline_state.json
+       1 {
+       2   "version": "5.0",
+       3   "circuit_name": "dual_adc_usb",
+       4   "stage": "requirements",
+       5   "last_updated": "2026-09-10T17:25:51Z",
+       6   "active_circuit_file": null,
+       7   "requirements_complete": true,
+       8   "architecture_complete": false,
+       9   "sourcing_complete": false,
+      10   "datasheets_complete": false,
+     … +26 lines (ctrl+o to expand)
+
+● skidl-skills:circuit-architect(Architecture phase for dual ADC)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Phase 1 is done. I made the requirement decisions myself as you asked; they're
+  logged in SPEC.md. The main ones:
+
+  - Inputs: BNC connectors (the only option that fits standard scope leads; SMA,
+    banana and MCX ruled out). Input impedance is 1 MΩ ∥ ~20 pF, like a scope,
+    so 10× probes can be compensated. DC coupled.
+  - USB: it has to be USB 2.0 High-Speed. Both channels together produce 240
+    Mb/s, and Full-Speed tops out at 12 Mb/s. Type-C connector.
+  - Transfer mode: the board will always capture blocks into an on-board buffer
+    of at least 16k samples per channel, then send them. Continuous streaming is
+    only a goal: it needs 30–40 MB/s, which is about the practical limit of USB
+    2.0, so it can't be promised on every host.
+  - Power: USB only, at most 450 mA. No galvanic isolation, so the input ground
+    is tied to the host's ground.
+
+  The architecture phase is now running in the background. It will pick the ADC,
+  the front-end supply topology, and the capture logic plus USB chip. I'll
+  carry on through sourcing, datasheets, coding and ERC once it reports.
+
+✻ Churned for 2m 30s · done Thursday 1:27 PM
+
+● Agent "Architecture phase for dual ADC" finished · 34m 34s
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 4:50pm (America/New_York)
+     /upgrade or /usage-credits to finish what you’re working on.
+
+✻ Cooked for 36m 59s · done Thursday 2:01 PM
+
+❯ continue the design                                                           
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● skidl-skills:part-sourcer(Sourcing phase for dual ADC)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The architecture phase is done, and I've started part sourcing in the
+  background.
+
+  The architecture has 9 functional blocks, so the circuit code will be written
+  one block at a time. It uses 17 ICs plus an oscillator. The alternatives the
+  architect considered, and why each part won, are in
+  architecture/ic_selection.md.
+
+  - ADC: TI ADS5231, a dual 12-bit part. The architect reports it's the only
+    dual 12-bit ADC stocked at JLCPCB, so I haven't checked that myself. It
+    samples at 20 MSPS and the FPGA reduces that to 10 MSPS per channel, which
+    makes the anti-alias filter easier.
+  - Input chain: 1 MΩ divider (10:1) → OPA354 buffer on ±2.5 V → THS4521
+    differential driver → ADC.
+  - FPGA: Gowin GW1NR-9, which has built-in PSRAM for the capture buffer.
+  - USB chip: FTDI FT232H in its synchronous FIFO mode, with a ceiling of about
+    40 MB/s. Continuous streaming needs 30 MB/s, so it's best effort. The
+    16k-sample-per-channel block capture is guaranteed.
+  - Power: an LM27762 makes the ±2.5 V for the input amplifiers; every other
+    rail comes from a linear regulator (LDO). Worst-case draw is about 364 mA
+    against the 450 mA limit. The FPGA and FT232H figures are estimates, good to
+    about ±30%.
+  - Cost: about $86 per board at qty 10, under the $120 target.
+
+  Things to know:
+  - Single-source parts: the ADS5231 and GW1NR-9 each have only one supplier and
+    low stock. That is the biggest sourcing risk.
+  - FPGA programming: the JTAG pins run at 1.8 V, so the programming cable must
+    follow the target voltage. A fixed 3.3 V cable would damage those pins.
+  - Gain error: uncalibrated gain error can reach 3.5% worst case, against the
+    2% target. It comes from the ADC's reference tolerance, and the software
+    calibration the spec already assumes covers it.
+
+✻ Worked for 32s · done Thursday 6:42 PM
+
+● Agent "Sourcing phase for dual ADC" finished · 12m 58s
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● skidl-skills:datasheet-librarian(Datasheet phase for dual ADC)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Sourcing passed its check: every part in the architecture now has an in-stock
+  JLCPCB part number, with no failures. The part list is in
+  sourcing/sourced_bom.md. I ran a script comparing it against the architect's
+  parts list and every reference designator carried over.
+
+  Three substitutions the sourcer made:
+  - 1.2 V regulator: the AP2112K-1.2 dropped to about 80 in stock, so it was
+    replaced with the TLV75512P, the second source the architect had already
+    picked.
+  - 3.3 V regulator: it took the genuine TI TLV1117LV33 (LCSC C15578). A clone
+    listed in JLC's catalog has a dropout spec that would break the
+    architecture's reasoning for this regulator.
+  - VBUS ferrite bead: the one originally suggested had too much resistance for
+    its own ≤0.1 Ω spec, so a lower-resistance bead replaced it.
+
+  The datasheet phase is now running in the background. Its job includes two
+  open gaps:
+  - Missing symbols: six parts have no KiCad schematic symbol yet (SY6280AAC,
+    TPS7A2033, BAV199, OPA354, ADS5231, GW1NR-9).
+  - FPGA footprint: the only QFN-88 footprint available for the FPGA is
+    third-party, and its exposed-pad size hasn't been checked against Gowin's
+    drawing.
+
+✻ Churned for 36s · done Thursday 6:56 PM
+
+● Agent "Datasheet phase for dual ADC" finished · 17m 41s
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● There's a conflict: my pin map assigns pins 68–88 to banks 1 and 3, but the
+  datasheet indicates they're Bank 0 (IOT) pins, meaning VCCIO0 (3.3 V) applies
+  rather than 1.8 V as assumed. I'll verify this against Gowin's pin table on
+  disk.
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● The pin counts in Gowin's table match the architect's map exactly, but only if
+  pins 68–77 belong to bank 1 and 79–88 to bank 3—I'll verify this against
+  Figure 3-8.
+  Read 1 file (ctrl+o to expand)
+
+● Confirmed: Figure 3-8 matches the architect's pin map, so the librarian's
+  "avoid pins 68–88" warning is a false alarm—I'll pass that ruling to the FPGA
+  coder. Since we have 9 blocks, I'll proceed with modular mode coding.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● I've split the work into 5 orders (max 3 coders at once): separate coders for
+  the analog front end, ADC, and FPGA, one covering the USB bridge plus sample
+  clock and I/O expansion, and one for the three power blocks. Launching the
+  first three now.
+
+● 3 background agents launched (↓ to manage)
+   ├ Code analog_front_end block
+   ├ Code adc block
+   └ Code fpga_core block
+
+● The datasheet phase is done, and three block coders are now running in the
+  background: the analog front end, the ADC and the FPGA.
+
+  What the datasheet phase produced:
+  - Summaries: 19 parts have summaries. 12 have the manufacturer's PDF on disk;
+    the other 6 are summary-only.
+  - Symbols: 6 KiCad symbols were generated and checked against the part data,
+    in symbols/dual_adc_usb.kicad_sym.
+  - FPGA footprint: checked against Gowin's mechanical drawing and fine, so no
+    custom footprint is needed.
+  - One pin-label error fixed: FPGA pin 12 is VCCIO3, not the label shown in the
+    JLC data.
+  - Resistor values set: R3 is 8.45 kΩ (power-switch current limit), and R6–R9
+    are 107k/100k and 105k/100k (±2.5 V regulator dividers).
+
+  The false alarm: the datasheet phase warned the FPGA coder not to use FPGA
+  pins 68–88. I checked Gowin's pin table (UG119, Table 2-6) and pinout drawing
+  (Figure 3-8). Pins 68–77 belong to bank 1 at 3.3 V and pins 79–88 to bank 3 at
+  1.8 V, which is how the architect assigned them. I told the FPGA coder to use
+  the architect's pin map as written.
+
+  Still open, carried forward:
+  - Sample-clock oscillator jitter is unknown. The only datasheet for it is a
+    2-page family catalog with no jitter data, so the ≤5 ps target can't be
+    confirmed from paperwork. This is the main remaining performance risk.
+  - The oscillator symbol is wrong. The parts list gives it a 2-pin crystal
+    symbol, but it's a 4-pin active oscillator. I'll tell the sample-clock coder
+    to use a 4-pin symbol.
+  - Some footprints are unverified. The oscillator's and the two input
+    varistors' footprints haven't been checked against drawings.
+
+  When coders finish, I'll launch the last two work orders: USB bridge with the
+  sample clock and I/O expansion, and the three power blocks.
+
+✻ Churned for 2m 29s · done Thursday 7:16 PM
+
+● Agent "Code fpga_core block" finished · 3m 37s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Code usb_bridge/clock/io blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The FPGA block is written and compiles; its handoff lists items to verify
+  later (boot-mode strap resistors and the FPGA's DONE pin). The USB bridge,
+  sample clock and I/O expansion work order is now running. The analog front end
+  and ADC coders are still running.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cooked for 18s · done Thursday 7:20 PM
+
+● Agent "Code adc block" finished · 8m 4s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Code power blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The ADC block is done: the ADC by itself passes ERC with 0 errors. The last
+  work order, the three power blocks, is now running, alongside the analog front
+  end and the USB bridge/clock/I/O coders.
+
+  The ADC coder found and worked around two problems:
+  - Resistor arrays: the parts list gave the ADC output resistor arrays a symbol
+    with one common pin. That would have joined all the ADC data lines. The
+    coder switched to the isolated 4-resistor symbol; part number and footprint
+    are unchanged.
+  - ADC pin types: the generated ADC symbol has three pin types wrong (the clock
+    pin is marked as an output, and two data-valid outputs are marked as power
+    inputs). They're corrected on the part in the circuit, but the shared symbol
+    file still has the errors.
+
+  I'm carrying two items to design review:
+  - Missing ADC capacitors: the architecture left out the 2.2 µF capacitors that
+    the ADS5231 datasheet's reference circuit shows on the reference and
+    common-mode pins. That could cost analog performance.
+  - FPGA boot straps: the FPGA's boot-mode strap resistors haven't been checked
+    against Gowin's documentation yet.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Baked for 23s · done Thursday 7:24 PM
+
+● Agent "Code analog_front_end block" finished · 9m 2s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The analog front end block is done: all 48 parts connect, and none of its pins
+  were left unconnected.
+
+  - Amplifier enable pin: the THS4521 enable pin is active low, and it's tied to
+    3.3 V so the amplifier is always on.
+  - BNC footprint replaced: the BNC footprint in the parts list was for a dual
+    connector, which would have put two jacks on each channel. The coder built a
+    correct single-BNC footprint from the maker's drawing.
+  - Trimmer footprint replaced: the coder also built the input trimmer-capacitor
+    footprint from SEHWA's drawing. That closes one of the unverified
+    footprints carried forward from sourcing.
+
+  The coder also warned that SKiDL 3.0.0 drops part-number fields passed as
+  ordinary Part() keywords, so they never reach the netlist. I haven't checked
+  that claim. Only this block sets them the safe way (part.fields), so I'll have
+  the assembler make all blocks consistent.
+
+  Two coders are still running: the USB bridge/clock/I/O work order and the
+  power work order.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 15s · done Thursday 7:25 PM
+
+● Agent "Code usb_bridge/clock/io blocks" finished · 8m 1s
+
+  Read 1 file, ran 6 shell commands (ctrl+o to expand)
+
+● Found the mismatch: per FTDI's 3.3 V reference schematic, VCORE only needs 0.1
+  µF while the 4.7 µF bulk cap belongs on VCC3V3/VCCD. Fixing this by moving
+  C76 from FT_VCORE to VD_3V3.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)
+  ⎿  Added 2 lines, removed 1 line
+      154      _cap('C73', '100nF', ft_vphy, gnd)           # VPLL (8)
+      155      _cap('C77', '4.7uF', ft_vphy, gnd)           # VPHY/VPLL b
+           ulk
+      156      _cap('C74', '100nF', ft_vcore, gnd)          # VCORE/VCCA 
+           (37/38, adjacent pins)
+      157 -    _cap('C76', '4.7uF', ft_vcore, gnd)          # VCORE LDO o
+          -utput bulk                                                    
+      157 +    # DS_FT232H v1.81 Fig 6.3 (3.3 V config): VCORE gets 0.1 u
+          +F only; the 4.7 uF bulk sits on VCCD/VCC3V3.                  
+      158 +    _cap('C76', '4.7uF', vd_3v3, gnd)            # VCCD (39) b
+          +ulk                                                           
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The USB bridge, sample clock and I/O expansion blocks are written and compile,
+  and each passed ERC when run on its own. The coder fixed three wrong
+  schematic symbols:
+
+  - X1 sample clock: switched to the 4-pin oscillator symbol, with its enable
+    pin tied on.
+  - Y1 USB crystal: the parts list's symbol would have put one crystal pin on a
+    ground pad.
+  - U14 EEPROM: the parts list's symbol used the 8-pin package pinout on a 6-pin
+    part.
+
+  I downloaded the missing FT232H datasheet. Its 3.3 V reference circuit (Figure
+  6.3) showed the coder had put the 4.7 µF bulk capacitor on the wrong supply
+  pin. I moved it (C76 now on VCCD instead of VCORE) and noted the change in the
+  block's handoff.
+
+  The power-block coder is still running. When it finishes, the assembler will
+  wire all 9 blocks together and run ERC on the full circuit.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+✻ Crunched for 1m 17s · done Thursday 7:29 PM
+
+● Agent "Code power blocks" finished · 6m 48s
+
+● All 9 blocks are written. Before launching the assembler, I'm checking the
+  analog-front-end coder's claim that SKiDL drops MPN/LCSC keywords passed to
+  Part().
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+● Confirmed that SKiDL 3.0.0 leaves MPN/LCSC as plain attributes that don't
+  reach the netlist, so I'll add a post-pass in __main__.py to copy them into
+  part.fields.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:skidl-assembler(Assemble dual_adc_usb circuit)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● All 9 blocks are written, and the assembler is now running in the background.
+  It will write __main__.py for circuits/dual_adc_usb/, wire the blocks
+  together, and run ERC on the whole circuit.
+
+  The three power blocks each passed ERC on their own. The power coder picked
+  the regulator-setting resistors (R3, R6–R9) from JLC stock. Three of them are
+  Extended-tier parts, which add a loading fee each.
+
+  The power coder flagged two small items for review:
+  - Dim power LED: LED1 will run at roughly 0.5–0.7 mA. Changing R5 to about 330
+    Ω would brighten it.
+  - Slight sag on ±2.5 V: the ferrite beads sit outside the regulator's feedback
+    loop. With the small front-end load this is probably negligible, but the
+    bead resistance wasn't checked.
+
+  SKiDL finding you may care about: in the local SKiDL 3.0.0, MPN= and LCSC=
+  passed as keywords to Part() end up as plain attributes. They don't go into
+  part.fields, so they never reach the netlist. I confirmed this with a small
+  test netlist. Only the analog front end block set them the safe way. The
+  assembler will add one pass that copies them into the fields for every part.
+
+  Cleanup side effect: the power coder's cleanup deleted four temporary ERC log
+  files that other coders had left in the project root (smoke_afe.*,
+  smoke_net.*). They can be regenerated and aren't deliverables.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 40s · done Thursday 7:31 PM
+
+● Agent "Assemble dual_adc_usb circuit" finished · 6m 21s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:erc-reviewer(Independent ERC gate review)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The assembled circuit passes ERC: 201 parts, 168 nets, 0 errors and 0
+  warnings, and the assembler's check found every footprint file. An independent
+  ERC review is now running as the final gate before I treat the netlist as
+  verified.
+
+  - Early outputs: the assembler already wrote outputs/dual_adc_usb.net and the
+    BOM XML ahead of that gate. Treat them as unverified until the review
+    passes.
+  - Gateware note: FPGA pin 72 (ADC_DVA) must be configured as an input. The ADC
+    drives that line, and ERC can't see a conflict because every FPGA I/O is
+    typed bidirectional.
+  - SKiDL items, for your repo:
+    - Netlist generation logs a "Missing tag" warning for SKiDL's own root node,
+      which circuit.py:172 creates with tag="".
+    - The BOM XML line order within nets changes between runs; the content is
+      the same. The assembler guesses unordered set iteration but didn't verify
+      that.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 18s · done Thursday 7:38 PM
+
+● Agent "Independent ERC gate review" failed: Agent terminated early due to an
+API error: You've hit your monthly spend limit · raise it at
+claude.ai/settings/usage?from=cc_cli_limit_message · your session limit resets
+11:40pm (America/New_York) (error type rate_limit, HTTP 429, request id
+req_011CeveG3bbtPVGjiKFuroyy, model sent to the API: claude-opus-5)
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 11:40pm (America/New_York)
+     /upgrade or /usage-credits to finish what you’re working on.
+
+✻ Churned for 58m 46s · done Thursday 7:41 PM
+
+❯ usage                                                                         
+  ⎿  You've hit your monthly spend limit · raise it at 
+     claude.ai/settings/usage?from=cc_cli_limit_message · your session limit 
+     resets 11:40pm (America/New_York)
+     /upgrade or /usage-credits to finish what you’re working on.
+
+✻ Cogitated for 0s · done Thursday 8:13 PM
+
+❯ complete the design                                                           
+
+● The ERC reviewer was killed by the spend limit. Checking what it left on disk
+  before resuming.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● skidl-skills:erc-reviewer(Independent ERC gate review (retry))
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The ERC reviewer I launched earlier was cut off by the API spend limit before
+  doing any real work; it left only an empty handoff file. The limit has reset,
+  so a fresh reviewer is now running in the background. After it passes, I'll
+  run a design review and then export the final netlist and BOM.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 17s · done 7:11 AM
+
+● Agent "Independent ERC gate review (retry)" finished · 15m 13s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● ERC passed, but a few design issues remain that ERC can't catch: missing
+  ADS5231 reference decoupling, unverified FPGA boot straps, and questions
+  around the DONE pin and a dim LED. I'll run the design review before
+  exporting.
+
+● Skill(skidl-skills:design-review)
+  ⎿  Successfully loaded skill
+  Ran 8 shell commands (ctrl+o to expand)
+
+● UG290 recommends 1 kΩ MODE pull-downs (design uses 4.7 kΩ), a 4.7 kΩ TCK
+  pull-down (already present), and pull-ups on DONE/RECONFIG_N (DONE is
+  currently unconnected). I'll now check which MODE code selects autoboot.
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● MODE[2:0]=000 confirms AUTO BOOT, so the strapping scheme is correct, but I
+  found two issues: MODE0/MODE1 use 4.7 kΩ resistors instead of Gowin's
+  recommended 1 kΩ, and DONE lacks a pull-up. Next I'll check the ADS5231
+  reference pins.
+
+  Read 1 file, ran 4 shell commands (ctrl+o to expand)
+
+● I confirmed that Figure 21 shows REFT and REFB each routing through 2 Ω into a
+  parallel 0.1 µF and 2.2 µF capacitor, while the code only includes the 0.1
+  µF—a real discrepancy. Now I'll gather the remaining details needed to fix it:
+  unused ref numbers, part data for the 2.2 µF capacitor and LEDs, and the
+  footprint validator.
+
+  Called pcbparts 3 times, ran 1 shell command (ctrl+o to expand)
+
+● The LED still functions as a visible indicator at ~0.6 mA, so I'll leave R5,
+  R80, and R81 unchanged and log this as a LOW finding. Next I'll edit the code
+  for the ADS5231 reference caps, Gowin MODE pull-downs, and the DONE pull-up.
+
+  Read 2 files, ran 1 shell command (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/adc.py)
+  ⎿  Added 2 lines
+      22                 MPN='CL05B104KB54PNC', LCSC='C307331')
+      23  _C_1U = dict(value='1uF', footprint='Capacitor_SMD:C_0402_1005M
+          etric',
+      24               MPN='CL05A105KA5NQNC', LCSC='C52923')
+      25 +_C_2U2 = dict(value='2.2uF', footprint='Capacitor_SMD:C_0603_16
+         +08Metric',                                                     
+      26 +              MPN='0603B225K160NT', LCSC='C43922')  # same BOM 
+         +line as C17–C19 (design review)                                
+      27  _C_10U = dict(value='10uF', footprint='Capacitor_SMD:C_0603_160
+          8Metric',
+      28                MPN='CL10A106MA8NRNC', LCSC='C96446')
+      29  _FB_600R = dict(value='600R@100MHz', footprint='Inductor_SMD:L_
+          0805_2012Metric',
+
+● Update(circuits/dual_adc_usb/adc.py)
+  ⎿  Added 3 lines
+      111      adc_refb += u12['REFB']
+      112      adc_reft & _make(r_t, 'R51', _R_REF) & adc_reft_c & _make(
+           c_t, 'C50', _C_100N) & gnd
+      113      adc_refb & _make(r_t, 'R52', _R_REF) & adc_refb_c & _make(
+           c_t, 'C51', _C_100N) & gnd
+      114 +    # SBAS295A Fig. 21: each 2-ohm node also carries 2.2 uF to
+          + GND, in parallel with the 0.1 uF.                            
+      115 +    adc_reft_c & _make(c_t, 'C98', _C_2U2) & gnd              
+      116 +    adc_refb_c & _make(c_t, 'C99', _C_2U2) & gnd              
+      117      # ISET: 56.2 k to GND.
+      118      adc_iset = Net('ADC_ISET')
+      119      adc_iset += u12['ISET']
+
+● Update(circuits/dual_adc_usb/fpga_core.py)
+  ⎿  Added 2 lines, removed 1 line
+      28  
+      29  def _res(ref, value, a, b):
+      30      """One 0402 1% resistor between nets a and b."""
+      31 -    mpn, lcsc = {'4.7k': ('0402WGF4701TCE', 'C25900'),         
+      31 +    mpn, lcsc = {'1k': ('0402WGF1001TCE', 'C11702'),           
+      32 +                 '4.7k': ('0402WGF4701TCE', 'C25900'),         
+      33                   '10k': ('0402WGF1002TCE', 'C25744')}[value]
+      34      r = Part('Device', 'R', ref=ref, value=value, footprint=_R_
+          FP, MPN=mpn, LCSC=lcsc)
+      35      a & r & b
+
+● Update(circuits/dual_adc_usb/fpga_core.py)
+  ⎿  Added 12 lines, removed 6 lines
+      145      u15[82] += gpio_out_1v8
+      146      u15[83] += trig_in_1v8
+      147  
+      148 -    # Unused bank-3 I/O (net_plan §8). Pin 10 = DONE, pin 11 =
+          - GCLKT_6.                                                     
+      149 -    for p in (3, 10, 11, 13, 14, 15, 16, 84, 85, 86):         
+      148 +    # Unused bank-3 I/O (net_plan §8). Pin 11 = GCLKT_6.      
+      149 +    for p in (3, 11, 13, 14, 15, 16, 84, 85, 86):             
+      150          u15[p] += NC
+      151  
+      152 -    # Straps                                                  
+      153 -    _res('R70', '4.7k', mode0, gnd)        # MODE0 low  } MODE
+          -[2:0]=000 auto-boot internal flash                            
+      154 -    _res('R71', '4.7k', mode1, gnd)        # MODE1 low  } [VER
+          -IFY UG290]                                                    
+      152 +    # Straps — verified against UG290 v2.9.1E (datasheets/GW1N
+          +R-9-UG290-config.pdf):                                        
+      153 +    # Table 5-1 MODE[2:0]=000 = AUTO BOOT (MODE2 unbonded, gro
+          +unded internally);                                            
+      154 +    # §"Dual-purpose Pin Configuration": 4.7 k pull-up or 1 k 
+          +pull-down on MODE pins;                                       
+      155 +    # TCK needs a 4.7 k pull-down; DONE and RECONFIG_N: pull-u
+          +p recommended.                                                
+      156 +    fpga_done = Net('FPGA_DONE')                              
+      157 +    u15[10] += fpga_done                   # DONE (IOL14A, UG8
+          +03)                                                           
+      158 +    _res('R70', '1k', mode0, gnd)          # MODE0 low  } MODE
+          +[2:0]=000 auto-boot internal flash                            
+      159 +    _res('R71', '1k', mode1, gnd)          # MODE1 low  }     
+      160      _res('R72', '10k', reconfig_n, vd_1v8)  # RECONFIG_N pull-
+           up
+      156 -    _res('R73', '4.7k', jtag_tck, gnd)     # TCK pull-down [VE
+          -RIFY UG290]                                                   
+      161 +    _res('R73', '4.7k', jtag_tck, gnd)     # TCK pull-down    
+      162      _res('R74', '10k', jtagsel_n, vd_1v8)  # JTAGSEL_N high ke
+           eps JTAG enabled
+      163 +    _res('R75', '4.7k', fpga_done, vd_1v8)  # DONE pull-up (op
+          +en-drain status)                                              
+      164  
+      165      # JTAG header J4 (1x7, 1.8 V only — programmer must follow
+            VREF)
+      166      j4 = Part('Connector_Generic', 'Conn_01x07', ref='J4', val
+           ue='JTAG_1V8',
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● All 204 parts check out, with MPN and LCSC numbers included for the new ones.
+  Now updating sourcing/sourced_bom.md to reflect the new parts, changed values,
+  and custom footprints for J2/J3 and VC1/VC2.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Write(outputs/design_review.md)
+  ⎿  Wrote 45 lines to outputs/design_review.md
+       1 # Design Review — dual_adc_usb
+       3 Reviewed 2026-09-11 by the pipeline driver. Entry point `handoff
+         s/06_erc.md`; every handoff's
+       5 
+       6 ## Summary
+         parts) | Architecture: OK, 1 accepted risk | Code: OK, minor sty
+         le
+         d/resolved)
+       9 
+         34 valid.
+     … +98 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(outputs/design_review.md)
+  ⎿  Added 1 line, removed 1 line
+      23  |---|----------|------|-------|------------------------|
+      24  | 1 | MEDIUM | adc | REFT/REFB had only 2 Ω + 0.1 µF; TI Fig. 2
+          1 also shows 2.2 µF per node | **Fixed** — C98/C99 |
+      25  | 2 | MEDIUM | fpga_core | MODE pull-downs 4.7 kΩ against inter
+          nal weak pull-ups; Gowin recommends 1 kΩ | **Fixed** — R70/R71 
+          = 1 kΩ. MODE[2:0]=000 = AUTO BOOT confirmed (UG290 Table 5-1; M
+          ODE2 unbonded → grounded) |
+      26 -| 3 | MEDIUM | analog_front_end | 2nd-order anti-alias, −3 dB 4
+         -.64 MHz, only −14.5 dB at 15 MHz. At 20 MSPS, input content at 
+         -15–20 MHz folds into 0–5 MHz and the FPGA decimator cannot remo
+         -ve it | **Accepted risk** (architect, `design_risks.md`). Optio
+         -ns: (a) accept, document that users must band-limit (recommende
+         -d for a scope-style front end); (b) 4th-order filter after the 
+         -buffer (+2 op-amps, more noise/offset); (c) run ADC at 40+ MSPS
+         - — ADS5231 max is 40 MSPS but FT232H/FPGA budget unchanged sinc
+         -e decimation is on-chip |                                      
+      26 +| 3 | MEDIUM | analog_front_end | 2nd-order anti-alias, −3 dB 4
+         +.64 MHz, only −14.5 dB at 15 MHz. At 20 MSPS, input content at 
+         +15–20 MHz folds into 0–5 MHz and the FPGA decimator cannot remo
+         +ve it | **Accepted risk** (architect, `design_risks.md`). Optio
+         +ns: (a) accept, document that users must band-limit (recommende
+         +d for a scope-style front end); (b) 4th-order filter after the 
+         +buffer (+2 op-amps, more noise/offset); (c) run the ADC at 40 M
+         +SPS (its max) with 4:1 decimation in the FPGA — first fold-in b
+         +and moves to 35 MHz (≈ −28 dB); needs a 40 MHz XO, more ADC pow
+         +er, USB rate unchanged |                                       
+      27  | 4 | LOW | fpga_core | DONE (pin 10) was NC; Gowin recommends 
+          pull-up | **Fixed** — R75 |
+      28  | 5 | LOW | fpga_core | PSRAM bank unproven (06_erc N4) | **Res
+          olved** — UG803 "Recommended Operating Conditions of QN88P": VC
+          CIO3 "connected to PSRAM", 1.71–1.89 V. Pins 68–77 = bank 1, 79
+          –88 = bank 3 (UG803 table, UG119 Fig. 3-8) |
+      29  | 6 | LOW | fpga_core | GCLK pins unproven (06_erc N5) | **Reso
+          lved** — UG803: pin 35 = IOB29A/GCLKT_4, pin 52 = IOR17A/GCLKT_
+          3 |
+
+● The review is complete—I re-ran ERC and footprint validation myself since the
+  circuit files changed post-gate, and both came back clean. Now finalizing the
+  state and checking the project root for stray files.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The dual-ADC schematic is finished: 9 blocks, 204 parts, 0 ERC errors and 0
+  warnings, all footprints valid. The netlist and BOM are written.
+
+  After the independent ERC review passed, my design review changed three
+  passive parts. I re-ran ERC and the footprint check myself afterwards, both
+  clean, but did not re-run the independent reviewer. The review edits touched
+  only passive parts.
+
+  What the board is:
+
+  ┌──────────┬──────────────────────────────────────────────────────────────┐
+  │ Function │                            Choice                            │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ Inputs   │ 2 × BNC, 1 MΩ ∥ ~20 pF like a scope input, DC coupled        │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ Front    │ 10:1 divider with overvoltage clamps → OPA354 buffer on ±2.5 │
+  │ end      │  V → THS4521 differential driver → 2nd-order anti-alias      │
+  │          │ filter                                                       │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ ADC      │ TI ADS5231, dual 12-bit, both channels on one clock. It runs │
+  │          │  at 20 MSPS and the FPGA reduces it to 10 MSPS per channel   │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ Capture  │ Gowin GW1NR-9 FPGA; its built-in PSRAM holds the capture     │
+  │          │ buffer (at least 16k samples per channel)                    │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ USB      │ FT232H, USB 2.0 High-Speed, Type-C connector                 │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │          │ USB only, about 364 mA worst case (limit 450 mA). The ±2.5 V │
+  │ Power    │  comes from an LM27762; every other rail uses a linear       │
+  │          │ regulator                                                    │
+  ├──────────┼──────────────────────────────────────────────────────────────┤
+  │ Cost     │ About $86 per board at qty 10                                │
+  └──────────┴──────────────────────────────────────────────────────────────┘
+
+  The options considered and the choice made at each decision point are in
+  SPEC.md (requirements) and architecture/ic_selection.md (parts).
+
+  Fixes made during the pipeline:
+  - ADC reference capacitors: added the two 2.2 µF capacitors (C98, C99) that
+    TI's reference circuit (Figure 21) shows and the architecture had left out.
+  - FPGA boot straps: checked against Gowin's configuration guide (UG290).
+    MODE0/MODE1 pull-downs changed from 4.7 kΩ to the recommended 1 kΩ, and a
+    4.7 kΩ pull-up (R75) added on the DONE pin.
+  - FT232H capacitor: moved the 4.7 µF bulk capacitor (C76) to the pin FTDI's
+    reference circuit shows.
+  - FPGA pins: a false warning about FPGA pins 68–88 was overruled, and the
+    PSRAM bank and clock pins were confirmed, using Gowin's pinout documents
+    (UG119, UG803).
+  - Wrong symbols and footprints caught by the coders:
+    - the ADC output resistor arrays would have shorted all the data lines
+      together;
+    - the BNC footprint in the parts list was for a dual connector;
+    - the EEPROM symbol used the wrong package pinout;
+    - the USB crystal symbol put one pin on a ground pad.
+
+  Open risks:
+  - Aliasing (medium, accepted by the architect): the anti-alias filter is only
+    2nd order. Input content at 15–20 MHz is attenuated by just 14.5 dB and
+    folds into the 0–5 MHz band. The cheapest fix is running the ADC at its 40
+    MSPS maximum. Otherwise users must band-limit their signals, as with a
+    scope.
+  - Single-source parts: the ADC and FPGA each have one supplier with low stock,
+    and only 615 of the BNC connector are in stock. Buy all prototype parts up
+    front.
+  - Clock jitter: the oscillator has no published jitter figure. The spec needs
+    about 126 ps or better, which ordinary oscillators should meet easily, but
+    measure it on the first board.
+  - Continuous streaming: it needs 30 MB/s against a practical ceiling of about
+    40 MB/s, so it may not work on every host. Block capture is guaranteed.
+  - Hand-made footprints: the BNC and trimmer-capacitor footprints were
+    generated, not taken from a library. Check them against the drawings before
+    fabrication.
+
+  For the gateware and firmware:
+  - FPGA pin 72 must be configured as an input (the ADC drives it).
+  - The FPGA's internal flash must be programmed first through the 1.8 V JTAG
+    header. The programmer must follow the header's reference voltage; a fixed
+    3.3 V cable would damage the FPGA.
+  - The FT232H's EEPROM must be set up for 245 FIFO mode.
+
+  SKiDL issues (for your repo):
+  - In SKiDL 3.0.0, MPN= and LCSC= passed as Part() keywords never reach the
+    netlist (I checked with a small test netlist). __main__.py has a workaround
+    that copies them into the part fields.
+  - gen_xml.py:67 loops over net.pins without sorting, so the order of lines in
+    the BOM XML changes between runs.
+  - The root node is created with an empty tag, which makes check_tags() log a
+    false "Missing tag" warning.
+
+  Files are in dual-adc-usb-4/:
+  - outputs/design_review.md
+  - outputs/erc_report.md
+  - outputs/dual_adc_usb.net
+  - outputs/dual_adc_usb_bom.xml
+  - circuits/dual_adc_usb/ (the SKiDL source, one file per block)
+
+✻ Brewed for 23m 4s · done 7:33 AM

@@ -1,0 +1,143 @@
+{
+  "version": "5.0",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export",
+  "last_updated": "2026-09-21T12:30:00Z",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-09-21T12:11:00Z",
+    "errors": 0,
+    "warnings": 19,
+    "pass": true,
+    "report_path": "erc_report.md"
+  },
+  "review_status": "erc_pass_rev2",
+  "sourced_bom_version": "3",
+  "last_modified_circuit": "circuits/dual_adc_usb/__main__.py",
+  "coding_mode": "modular",
+  "use_cache": false,
+  "block_manifest": [
+    {
+      "block_id": "usb_c_input",
+      "block_name": "USB-C input + protection",
+      "filename": "usb_c_input.py",
+      "interface_nets": "+5V_IN, USB_DP, USB_DM, GND",
+      "parts": "J1,R1,R2,R12,D1,D2,FB1,C1,C2,C15",
+      "datasheet_summaries": [
+        "datasheets/TYPE-C-16PIN-2MD-073_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "digital_power",
+      "block_name": "Digital power tree + load switch",
+      "filename": "digital_power.py",
+      "interface_nets": "+5V_IN, +5V_SW, PWREN_N, +3V3_D, +3V3_ADCD, +1V2_D, GND",
+      "parts": "U1,U2,Q1,L1,FB2,R3,R4,R5,R6,R7,D4,C3-C7",
+      "datasheet_summaries": [
+        "datasheets/SY8089A1AAC_SUMMARY.md",
+        "datasheets/TLV75801PDRVR_SUMMARY.md",
+        "datasheets/HL2301A_SUMMARY.md",
+        "datasheets/FNR3015S2R2MT_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "analog_power_ref",
+      "block_name": "Analog LDO + bias references",
+      "filename": "analog_power_ref.py",
+      "interface_nets": "+5V_SW, +3V3_A, VBIAS, VREF_FE, GND",
+      "parts": "U3,U4,FB3,R8,R9,R10,R11,R19,C8-C12",
+      "datasheet_summaries": [
+        "datasheets/TLV75733PDRVR_SUMMARY.md",
+        "datasheets/TLV9062IDR_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_channel",
+      "block_name": "Analog front end (x2 instances)",
+      "filename": "afe_channel.py",
+      "interface_nets": "AINn, CHn_P, CHn_N, VBIAS, VREF_FE, VOCM, +3V3_A, GND",
+      "parts": "ch1: J2,U_buf1,U_fda1,D_clamp1,R101-R110,C_top1,C_bot1,C101-C110 | ch2: J3,U_buf2,U_fda2,D_clamp2,R201-R210,C_top2,C_bot2,C201-C210",
+      "datasheet_summaries": [
+        "datasheets/KH-BNC50-3511_SUMMARY.md",
+        "datasheets/OPA355NA_3K_SUMMARY.md",
+        "datasheets/THS4551IRGTR_SUMMARY.md",
+        "datasheets/STC3MA06-T1_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0,
+      "function_signature": "afe_channel(ain, adc_in_p, adc_in_n, vbias, vref_fe, vocm, v3v3_a, gnd, ch=1)"
+    },
+    {
+      "block_id": "adc_dual",
+      "block_name": "Dual 12-bit ADC",
+      "filename": "adc_dual.py",
+      "interface_nets": "CH1_P, CH1_N, CH2_P, CH2_N, ADC_CLK, ADC_D1[11:0], ADC_D2[11:0], ADC_OE_N, ADC_PDWN, VOCM, +3V3_A, +3V3_ADCD, GND",
+      "parts": "U5,RA1-RA6,C41-C55",
+      "datasheet_summaries": [
+        "datasheets/ADS5231IPAGT_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "clock_20m",
+      "block_name": "Low-jitter sample clock",
+      "filename": "clock_20m.py",
+      "interface_nets": "ADC_CLK, FPGA_CLK, +3V3_A, GND",
+      "parts": "X1,R_s1,R_s2,FB4,C56,C57",
+      "datasheet_summaries": [
+        "datasheets/OT252020MJBA4SL_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga_core",
+      "block_name": "FPGA, JTAG, LED, trigger",
+      "filename": "fpga_core.py",
+      "interface_nets": "ADC_D1[11:0], ADC_D2[11:0], ADC_OE_N, ADC_PDWN, FPGA_CLK, FIFO_D[7:0], FIFO_RXF_N, FIFO_TXE_N, FIFO_RD_N, FIFO_WR_N, FIFO_OE_N, FIFO_SIWU, FIFO_CLK, +3V3_D, +1V2_D, GND",
+      "parts": "U6,J4,J5,D5,R13,R15,R16,R17,R18,C23-C40",
+      "datasheet_summaries": [
+        "datasheets/GW1NR-LV9QN88PC6-I5_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge",
+      "block_name": "FT232H + EEPROM + crystal",
+      "filename": "usb_bridge.py",
+      "interface_nets": "USB_DP, USB_DM, FIFO_D[7:0], FIFO_RXF_N, FIFO_TXE_N, FIFO_RD_N, FIFO_WR_N, FIFO_OE_N, FIFO_SIWU, FIFO_CLK, PWREN_N, +5V_IN, GND",
+      "parts": "U7,U8,X2,R14,C13,C14,C16,C17-C22",
+      "datasheet_summaries": [
+        "datasheets/FT232HL-REEL_SUMMARY.md",
+        "datasheets/93C46CT-I-SN-TUDI_SUMMARY.md",
+        "datasheets/SX32Y012000BC1T001_SUMMARY.md"
+      ],
+      "status": "done",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 0,
+  "architecture_rework_count": 2,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/06_erc.md"
+  },
+  "last_handoff": "handoffs/06_erc.md"
+}
