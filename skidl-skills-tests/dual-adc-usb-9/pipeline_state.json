@@ -1,0 +1,137 @@
+{
+  "version": "5.1",
+  "circuit_name": "dual_adc_usb",
+  "stage": "export",
+  "last_updated": "2026-10-01T00:00:00Z",
+  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+  "requirements_complete": true,
+  "architecture_complete": true,
+  "sourcing_complete": true,
+  "datasheets_complete": true,
+  "erc_status": {
+    "last_run": "2026-10-01",
+    "errors": 0,
+    "warnings": 0,
+    "pass": true,
+    "report_path": "outputs/erc_report.md"
+  },
+  "review_status": null,
+  "sourced_bom_version": null,
+  "last_modified_circuit": "circuits/dual_adc_usb/usb_bridge.py",
+  "coding_mode": "modular",
+  "use_cache": false,
+  "blocked_until": null,
+  "block_manifest": [
+    {
+      "block_id": "usb_power_in",
+      "block_name": "USB-C input, ESD, PTC, soft-start",
+      "filename": "circuits/dual_adc_usb/usb_power_in.py",
+      "function_signature": "usb_power_in(vbus_sw, usb_dp, usb_dm, gnd)",
+      "interface_nets": "VBUS_SW, USB_DP, USB_DM, GND",
+      "parts": "J1, U1, U2, F1, D1, R1, R2, R3, C1, C2, C3",
+      "datasheet_summaries": "datasheets/TPS22918DBVR_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "pwr_digital",
+      "block_name": "3V3D + 1V2 + 1V8 bucks",
+      "filename": "circuits/dual_adc_usb/pwr_digital.py",
+      "function_signature": "pwr_digital(vbus_sw, v3v3d, v1v2, v1v8, gnd)",
+      "interface_nets": "VBUS_SW, +3V3D, +1V2, +1V8, GND",
+      "parts": "U3, U4, U12, L1, L2, L3, R5, R6, R7, R8, R9, R14, R15, C4, C5, C6, C7, C8, C9, C17",
+      "datasheet_summaries": "datasheets/TLV62569DBVR_SUMMARY.md` (U3, U4, U12)",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "pwr_analog",
+      "block_name": "3V3A LDO + \u00b1AFE rails",
+      "filename": "circuits/dual_adc_usb/pwr_analog.py",
+      "function_signature": "pwr_analog(vbus_sw, v3v3a, vafe_p, vafe_n, gnd)",
+      "interface_nets": "VBUS_SW, +3V3A, VAFE_P, VAFE_N, GND",
+      "parts": "U5, U6, R10, R11, R12, R13, C10, C11, C12, C13, C14, C15, C16",
+      "datasheet_summaries": "datasheets/TLV75733PDBVR_SUMMARY.md`, `datasheets/LM27762DSSR_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_ch_a",
+      "block_name": "Ch A BNC\u2192attenuator\u2192buffer\u2192AAF/FDA",
+      "filename": "circuits/dual_adc_usb/afe_ch_a.py",
+      "function_signature": "afe_ch_a(ain_p, ain_n, adc_vcm, vafe_p, vafe_n, v3v3a, gnd)",
+      "interface_nets": "ADC_AINA_P, ADC_AINA_N, ADC_VCM, VAFE_P, VAFE_N, +3V3A, GND",
+      "parts": "J2, U20, U21, D20, R20-R30, C20-C31",
+      "datasheet_summaries": "datasheets/OPA810IDBVR_SUMMARY.md`, `datasheets/THS4521IDGKR_SUMMARY.md`, `datasheets/BAV199_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "afe_ch_b",
+      "block_name": "Ch B (identical, refs +20)",
+      "filename": "circuits/dual_adc_usb/afe_ch_b.py",
+      "function_signature": "afe_ch_b(ain_p, ain_n, adc_vcm, vafe_p, vafe_n, v3v3a, gnd)",
+      "interface_nets": "ADC_AINB_P, ADC_AINB_N, ADC_VCM, VAFE_P, VAFE_N, +3V3A, GND",
+      "parts": "J3, U40, U41, D40, R40-R50, C40-C51",
+      "datasheet_summaries": "datasheets/OPA810IDBVR_SUMMARY.md`, `datasheets/THS4521IDGKR_SUMMARY.md`, `datasheets/BAV199_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "adc_dual",
+      "block_name": "ADS5231 + refs/decoupling",
+      "filename": "circuits/dual_adc_usb/adc_dual.py",
+      "function_signature": "adc_dual(aina_p, aina_n, ainb_p, ainb_n, adc_vcm, adc_clk, adc_da, adc_db, adc_sel, adc_msbi_sen, adc_oea_sclk, adc_stpd_sdata, adc_oeb, v3v3a, v3v3d, gnd)",
+      "interface_nets": "ADC_AINA_P, ADC_AINA_N, ADC_AINB_P, ADC_AINB_N, ADC_VCM, ADC_CLK, ADC_DA[0..11], ADC_DB[0..11], ADC_SEL, ADC_MSBI_SEN, ADC_OEA_SCLK, ADC_STPD_SDATA, ADC_OEB, +3V3A, +3V3D, GND",
+      "parts": "U7, R60, R61, R62, C60-C73",
+      "datasheet_summaries": "datasheets/ADS5231IPAGT_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "clock_gen",
+      "block_name": "40 MHz XO + FPGA buffer",
+      "filename": "circuits/dual_adc_usb/clock_gen.py",
+      "function_signature": "clock_gen(adc_clk, fpga_clk40, v3v3d, gnd)",
+      "interface_nets": "ADC_CLK, FPGA_CLK40, +3V3D, GND",
+      "parts": "Y1, U8, R70, R71, C75, C76",
+      "datasheet_summaries": "datasheets/OT322540MJBA4SL_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "fpga",
+      "block_name": "GW1NR-9, config, JTAG, LEDs, trigger",
+      "filename": "circuits/dual_adc_usb/fpga.py",
+      "function_signature": "fpga(fpga_clk40, adc_da, adc_db, adc_sel, adc_msbi_sen, adc_oea_sclk, adc_stpd_sdata, adc_oeb, ft_d, ft_rxf_n, ft_txe_n, ft_rd_n, ft_wr_n, ft_clkout, ft_oe_n, v1v2, v1v8, v3v3d, gnd)",
+      "interface_nets": "FPGA_CLK40, ADC_DA[0..11], ADC_DB[0..11], ADC_SEL, ADC_MSBI_SEN, ADC_OEA_SCLK, ADC_STPD_SDATA, ADC_OEB, FT_D[0..7], FT_RXF_N, FT_TXE_N, FT_RD_N, FT_WR_N, FT_CLKOUT, FT_OE_N, +1V2, +1V8, +3V3D, GND",
+      "parts": "U9, R80, R81, R83-R89, D80, D81, J4, J5, C80-C93",
+      "datasheet_summaries": "datasheets/GW1NR-LV9QN88PC6_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    },
+    {
+      "block_id": "usb_bridge",
+      "block_name": "FT232H + EEPROM + 12 MHz",
+      "filename": "circuits/dual_adc_usb/usb_bridge.py",
+      "function_signature": "usb_bridge(usb_dp, usb_dm, ft_d, ft_rxf_n, ft_txe_n, ft_rd_n, ft_wr_n, ft_clkout, ft_oe_n, v3v3d, gnd)",
+      "interface_nets": "USB_DP, USB_DM, FT_D[0..7], FT_RXF_N, FT_TXE_N, FT_RD_N, FT_WR_N, FT_CLKOUT, FT_OE_N, +3V3D, GND",
+      "parts": "U10, U11, Y2, R100-R103, C100-C111",
+      "datasheet_summaries": "datasheets/FT232HL-REEL_SUMMARY.md`, `datasheets/93LC56BT-I_OT_SUMMARY.md`, `datasheets/X322512MSB4SI_SUMMARY.md",
+      "status": "done",
+      "erc_errors_attributed": 0
+    }
+  ],
+  "sourcing_escalation_count": 0,
+  "erc_iteration_count": 1,
+  "architecture_rework_count": 1,
+  "handoffs": {
+    "requirements": "handoffs/01_requirements.md",
+    "architecture": "handoffs/02_architecture.md",
+    "sourcing": "handoffs/03_sourcing.md",
+    "datasheets": "handoffs/04_datasheets.md",
+    "coding": "handoffs/05_coding.md",
+    "erc": "handoffs/06_erc.md"
+  },
+  "last_handoff": "handoffs/06_erc.md"
+}

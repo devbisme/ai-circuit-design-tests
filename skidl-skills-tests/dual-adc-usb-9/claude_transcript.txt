@@ -1,0 +1,1681 @@
+ ▐▛███▛█   Claude Code v2.1.286
+▝▜██████▀  Opus 5.5 · Claude Pro
+ ▝▝   ▝▝   ~/…/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-9
+
+▎ Your voice can help guide AI
+▎ Take 15 min to share your experiences with Anthropic Interviewer. Start now (https://clau.de/yourthoughts)
+
+❯ create the design described in dual-adc-prompt.txt                            
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Skill(skidl-skills:new-circuit)
+  ⎿  Successfully loaded skill
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Running the pipeline autonomously as the prompt directs. Phase 1
+  (requirements) — I'll fill gaps myself and mark them as my calls.
+
+● Bash(mkdir -p handoffs && cat > SPEC.md <<'EOF'
+      # SPEC — dual_adc_usb…)
+  ⎿  Created SPEC.md (+38 -0)
+       1 +# SPEC — dual_adc_usb                                          
+       2 +                                                               
+       3 +Source: `dual-adc-prompt.txt` (user). Items marked *(driver def
+         +ault)* were not specified by the                               
+       4 +user; the prompt directed the pipeline to choose without pausin
+         +g. Treat them as SOFT.                                         
+       5 +                                                               
+       6 +## Functional                                                  
+       7 +- 2 independent analog input channels, simultaneous sampling.  
+       8 +- Input range: -10 V to +10 V per channel (user).              
+       9 +- Sample rate: 10 MSPS per channel (user). Resolution: 12 bits 
+         +(user).                                                        
+      10 +- Capture depth: >= 0.1 s at max rate on both channels (user)  
+      11 +  => 2 ch x 1e6 samples x 12 bit = 24 Mbit (3 MB packed, 4 MB a
+         +t 16 bit/sample) minimum buffer.                               
+      12 +- Input impedance: 1 MOhm || ~15-25 pF so standard 1x/10x scope
+         + probes compensate correctly *(driver default)*.               
+      13 +- Input coupling: DC *(driver default)*. Overvoltage survival: 
+         ++/-50 V continuous at 1x *(driver default)*.                   
+      14 +- Analog bandwidth: >= 5 MHz (-3 dB), anti-alias filter at Nyqu
+         +ist *(driver default)*.                                        
+      15 +- Trigger: software/host-initiated capture plus optional level 
+         +trigger in logic *(driver default)*.                           
+      16 +                                                               
+      17 +## Power                                                       
+      18 +- Powered from USB VBUS (user). USB 2.0 default budget: 5 V, 50
+         +0 mA (2.5 W).                                                  
+      19 +- If estimated consumption exceeds the USB 2.0 budget, use a US
+         +B-C receptacle (5 V @ 1.5/3 A                                  
+      20 +  via Rp advertisement, CC 5.1k Rd) (user).                    
+      21 +- No battery, no sleep requirement *(driver default)*.         
+      22 +                                                               
+      23 +## Interface                                                   
+      24 +- Host link: USB 2.0 High-Speed (480 Mb/s) (user) for both powe
+         +r and data.                                                    
+      25 +  Data rate if streamed: 2 ch x 10 MSPS x 2 B = 40 MB/s — at/ab
+         +ove practical USB2 HS bulk                                     
+      26 +  throughput, hence the on-board buffer is mandatory for the 0.
+         +1 s capture.                                                   
+      27 +- Analog connectors: BNC female (mates with standard oscillosco
+         +pe probes) (user intent; BNC is the driver's interpretation).  
+      28 +- Debug/programming header for any FPGA/MCU *(driver default)*.
+      29 +                                                               
+      30 +## Physical                                                    
+      31 +- SMD preferred, 2-sided assembly allowed; 4-layer PCB *(driver
+         + default)*.                                                    
+      32 +- Size: no constraint; target < 100 x 80 mm *(driver default)*.
+      33 +- Temp: 0-70 C commercial *(driver default)*. No regulatory cer
+         +tification *(driver default)*.                                 
+      34 +                                                               
+      35 +## Production                                                  
+      36 +- Quantity: prototype, 5-10 boards *(driver default)*.         
+      37 +- Assembly: JLCPCB PCBA, prefer Basic/Preferred-extended parts 
+         +*(driver default)*.                                            
+      38 +- Cost: no hard target; minimize where it doesn't compromise sp
+         +ecs *(driver default)*.                                        
+  ⎿  Created handoffs/01_requirements.md (+48 -0)
+       1 +---                                                            
+       2 +phase: 01_requirements                                         
+       3 +agent: driver                                                  
+       4 +circuit: dual_adc_usb                                          
+       5 +written: 2026-09-30T22:05:00Z                                  
+       6 +status: complete                                               
+       7 +revision: 1                                                    
+       8 +next_phase: 02_architecture                                    
+       9 +---                                                            
+      10 +                                                               
+      11 +# Phase 1 handoff — Requirements                               
+      12 +                                                               
+      13 +## Decisions                                                   
+      14 +- [HARD] Two channels, each accepting -10 V..+10 V.            
+      15 +- [HARD] 10 MSPS per channel, 12-bit resolution, both channels 
+         +simultaneously.                                                
+      16 +- [HARD] Capture >= 0.1 s at full rate on both channels => >= 2
+         + M samples total (>= 24 Mbit buffer; 32 Mbit at 16 bit/sample).
+      17 +- [HARD] Inputs via connectors that mate with standard oscillos
+         +cope leads -> BNC female.                                      
+      18 +- [HARD] Single USB 2.0 port supplies all power and carries sam
+         +ple data to host.                                              
+      19 +- [HARD] If the power budget exceeds USB 2.0 (5 V / 500 mA), us
+         +e a USB-C receptacle instead (sink, Rd on CC).                 
+      20 +- [SOFT] 1 MOhm input impedance with ~15-25 pF so 10x probes co
+         +mpensate.                                                      
+      21 +- [SOFT] DC coupling; >= 5 MHz analog bandwidth; anti-alias fil
+         +ter.                                                           
+      22 +- [SOFT] Input protection to survive +/-50 V.                  
+      23 +- [SOFT] JLCPCB assembly; SMD; 4-layer; 0-70 C; prototype qty. 
+      24 +- use_cache = false: user demanded a blank slate; do not consul
+         +t the cross-project part cache or any sibling design directorie
+         +s.                                                             
+      25 +- User directive: at every design decision, list the options an
+         +d pick the recommended one; do not pause for user input.       
+      26 +                                                               
+      27 +## Artifacts                                                   
+      28 +| File | Contains | Read it when |                             
+      29 +|------|----------|--------------|                             
+      30 +| `SPEC.md` | Full requirements, user vs driver-default marked 
+         +| Always |                                                     
+      31 +| `dual-adc-prompt.txt` | Original user prompt | To check prove
+         +nance of a requirement |                                       
+      32 +                                                               
+      33 +## Next phase must                                             
+      34 +1. circuit-architect: derive blocks — 2x analog front end (BNC,
+         + protection, attenuation/level shift to ADC range, driver/AAF),
+         + dual 12-bit 10 MSPS ADC, buffer memory (>= 32 Mbit), capture/c
+         +ontrol logic (FPGA or capable MCU), USB 2.0 HS bridge, power (V
+         +BUS -> digital + analog rails, possibly bipolar analog), clock,
+         + USB connector.                                                
+      35 +2. Explicitly trade: FPGA+SDRAM+USB bridge (FT232H/FT2232H/FT60
+         +1-class or CY7C68013A) vs MCU with HS USB + parallel ADC interf
+         +ace + external SDRAM/PSRAM; single dual-channel ADC vs two sing
+         +le ADCs.                                                       
+      36 +3. Do a power budget; if > ~2.25 W (90% of 2.5 W), switch to US
+         +B-C per the HARD rule and state so.                            
+      37 +4. Document every choice as options list + recommendation (user
+         + directive).                                                   
+      38 +5. Prefer parts with JLCPCB stock.                             
+      39 +                                                               
+      40 +## Carried forward                                             
+     … 8 more lines (ctrl+o to expand)
+  ⎿  Created pipeline_state.json (+37 -0)
+       1 +{                                                              
+       2 +  "version": "5.1",                                            
+       3 +  "circuit_name": "dual_adc_usb",                              
+       4 +  "stage": "requirements",                                     
+       5 +  "last_updated": "2026-09-30T22:05:00Z",                      
+       6 +  "active_circuit_file": null,                                 
+       7 +  "requirements_complete": true,                               
+       8 +  "architecture_complete": false,                              
+       9 +  "sourcing_complete": false,                                  
+      10 +  "datasheets_complete": false,                                
+      11 +  "erc_status": {                                              
+      12 +    "last_run": null,                                          
+      13 +    "errors": 0,                                               
+      14 +    "warnings": 0,                                             
+      15 +    "pass": false,                                             
+      16 +    "report_path": null                                        
+      17 +  },                                                           
+      18 +  "review_status": null,                                       
+      19 +  "sourced_bom_version": null,                                 
+      20 +  "last_modified_circuit": null,                               
+      21 +  "coding_mode": null,                                         
+      22 +  "use_cache": false,                                          
+      23 +  "blocked_until": null,                                       
+      24 +  "block_manifest": [],                                        
+      25 +  "sourcing_escalation_count": 0,                              
+      26 +  "erc_iteration_count": 0,                                    
+      27 +  "architecture_rework_count": 0,                              
+      28 +  "handoffs": {                                                
+      29 +    "requirements": "handoffs/01_requirements.md",             
+      30 +    "architecture": null,                                      
+      31 +    "sourcing": null,                                          
+      32 +    "datasheets": null,                                        
+      33 +    "coding": null,                                            
+      34 +    "erc": null                                                
+      35 +  },                                                           
+      36 +  "last_handoff": "handoffs/01_requirements.md"                
+      37 +}                                                              
+      38   No newline at end of file
+
+● skidl-skills:circuit-architect(Architecture phase)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Phase 1 done (SPEC.md + handoff written; driver defaults marked SOFT).
+  Architecture agent is running.
+
+✻ Baked for 42s · done Wednesday 10:00 PM
+
+› Message from skidl-skills:circuit-architect
+  Phase 2 architecture for dual_adc_usb is finished:
+  `handoffs/02_architecture.md` is written with status: complete, revision 1,
+  next_phase: 03_sourcing.
+  - **Blocks:** 9, so phase 5 runs modular. The block manifest and
+  parts-by-block tables are in the handoff.
+  - **ICs:** 12 distinct part numbers, 15 placed. The three critical-path ICs
+  are ADS5231IPAGT (stock 235), GW1NR-LV9QN88PC6/I5 (stock 182) and
+  FT232HL-REEL. The first two are single-source with stock under 500.
+  - **ADC rate:** this ADC only runs from 20 MSPS up (with its internal PLL on),
+  so it samples at 40 MSPS and the FPGA reduces that to the required 10 MSPS. A
+  3rd-order anti-alias filter is computed from the actual values: −3 dB at 8.80
+  MHz, −0.16 dB at 5 MHz, −35.8 dB at 35 MHz.
+  - **Power:** 1.47 W, which fits USB 2.0 (≤398 mA including 25 % margin). The
+  USB-C rule was not triggered, but a USB-C connector is still used, wired USB
+  2.0-only. Micro-B is the fallback if a reviewer reads the USB-C rule
+  literally.
+  - **Phase 4 must close:** 9 unverified datasheet facts (K1–K9) and 3 missing
+  KiCad symbols (ADS5231, GW1NR-9 QN88P, TPS22918). The BAV199 clamp diode
+  matched the wrong symbol (BAV19); use a BAV99-style series-pair symbol and
+  check the pinout.
+  - **Open sourcing item:** the 40 MHz oscillator must be confirmed at ≤5 ps rms
+  jitter.
+
+  Files are in /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests
+  /dual-adc-usb-9:
+  - handoffs/02_architecture.md
+  - architecture/block_diagram.md
+  - architecture/net_plan.md
+  - architecture/ic_selection.md
+  - architecture/skeleton_bom.md
+  - architecture/design_risks.md
+
+● Bash(head -12 handoffs/02_architecture.md; for f in architecture/{block_diagra
+      m,net_plan,ic_selection,skeleton_bom,design_risks}.md; do test -f $f &&
+      echo ok $f; don…)
+  ⎿  ---
+     phase: 02_architecture
+     agent: circuit-architect
+     … +15 lines (ctrl+o to expand)
+  ⎿  Updated pipeline_state.json (+4 -4)
+       1  {
+       2    "version": "5.1",
+       3    "circuit_name": "dual_adc_usb",
+       4 -  "stage": "requirements",                                     
+       4 +  "stage": "architecture",                                     
+       5    "last_updated": "2026-09-30T22:05:00Z",
+       6    "active_circuit_file": null,
+       7    "requirements_complete": true,
+       8 -  "architecture_complete": false,                              
+       8 +  "architecture_complete": true,                               
+       9    "sourcing_complete": false,
+      10    "datasheets_complete": false,
+      11    "erc_status": {
+     ...
+      27    "architecture_rework_count": 0,
+      28    "handoffs": {
+      29      "requirements": "handoffs/01_requirements.md",
+      30 -    "architecture": null,                                      
+      30 +    "architecture": "handoffs/02_architecture.md",             
+      31      "sourcing": null,
+      32      "datasheets": null,
+      33      "coding": null,
+      34      "erc": null
+      35    },
+      36 -  "last_handoff": "handoffs/01_requirements.md"                
+      36 +  "last_handoff": "handoffs/02_architecture.md"                
+      37  }
+      38   No newline at end of file
+
+● Agent "Architecture phase" finished · 25m 35s
+
+● Gate passed. Continuing to sourcing (autonomous per prompt).
+
+● skidl-skills:part-sourcer(Sourcing phase)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The architecture phase passed its check: 9 blocks, ADS5231 ADC running at 40
+  MSPS with the FPGA reducing it to 10 MSPS, a GW1NR-9 FPGA, an FT232H USB
+  bridge, and 1.47 W estimated draw. That fits within USB 2.0's 2.5 W, so USB-C
+  isn't strictly required, though the architect kept a USB-C connector wired as
+  USB 2.0 only.
+
+  The part-sourcing phase is running now.
+
+✻ Worked for 10s · done Wednesday 10:26 PM
+
+› Message from skidl-skills:part-sourcer
+  dual_adc_usb sourcing rev 1: status complete. 163 refdes / 58 BOM rows, 0
+  failures.
+  - Tier rows: 25 Basic, 2 Preferred, 31 Extended (all ICs Extended).
+  - Marginal single-source: U7 ADS5231 (235), U9 GW1NR (182).
+  - SYMBOL NEEDED: U7, U9, U2. CUSTOM FP: J2/J3 BNC (KH-BNC50-3511). Verify land
+  pattern: U9, C21/C41, L1/L2.
+  - Y1 jitter unconfirmed (phase 4). BAV199 mapped to Diode:BAV99 (confirm
+  pinout).
+  - validate-bom.py not run (no circuit code yet). Footprint strings were
+  checked by hand against the KiCad library; validate-footprints.py checked 0
+  strings on a plain text file.
+  Files: /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-
+  adc-usb-9/handoffs/03_sourcing.md, /home/devb/projects/AI/ai-circuit-design-te
+  sts/skidl-skills-tests/dual-adc-usb-9/sourcing/sourced_bom.md,
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/sourcing/sourced_bom.csv
+
+● Bash(head -9 handoffs/03_sourcing.md; ls sourcing; grep -n '^## '
+      handoffs/03_sourcing.md; python3 - <<'EOF'
+      import json;s=json.load(open('pipeline_state.json'))…)
+  ⎿  ---
+     phase: 03_sourcing
+     agent: part-sourcer
+     … +14 lines (ctrl+o to expand)
+  ⎿  Updated pipeline_state.json (+4 -4)
+       1  {
+       2    "version": "5.1",
+       3    "circuit_name": "dual_adc_usb",
+       4 -  "stage": "architecture",                                     
+       4 +  "stage": "sourcing",                                         
+       5    "last_updated": "2026-09-30T22:05:00Z",
+       6    "active_circuit_file": null,
+       7    "requirements_complete": true,
+       8    "architecture_complete": true,
+       9 -  "sourcing_complete": false,                                  
+       9 +  "sourcing_complete": true,                                   
+      10    "datasheets_complete": false,
+      11    "erc_status": {
+      12      "last_run": null,
+     ...
+      28    "handoffs": {
+      29      "requirements": "handoffs/01_requirements.md",
+      30      "architecture": "handoffs/02_architecture.md",
+      31 -    "sourcing": null,                                          
+      31 +    "sourcing": "handoffs/03_sourcing.md",                     
+      32      "datasheets": null,
+      33      "coding": null,
+      34      "erc": null
+      35    },
+      36 -  "last_handoff": "handoffs/02_architecture.md"                
+      36 +  "last_handoff": "handoffs/03_sourcing.md"                    
+      37  }
+      38   No newline at end of file
+
+● Agent "Sourcing phase" finished · 4m 57s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Cosmetic defect (Artifacts as prose, not a section) — fixing it myself.
+
+● Bash(python3 - <<'EOF'
+      p='handoffs/03_sourcing.md';t=open(p).read()…)
+  ⎿  13:## Artifacts
+     22:## Decisions
+     33:## Next phase must
+  ⎿  Updated handoffs/03_sourcing.md (+7 -1)
+      10  
+      11  # Phase 3 handoff - Sourcing
+      12  
+      13 -Artifacts: `sourcing/sourced_bom.md`, `sourcing/sourced_bom.csv
+         -` (163 refdes, 58 rows, no duplicates, every ref from the archi
+         -tect's manifest covered).                                      
+      13 +## Artifacts                                                   
+      14 +| File | Contains | Read it when |                             
+      15 +|------|----------|--------------|                             
+      16 +| `sourcing/sourced_bom.md` | 58 rows / 163 refdes, MPN, LCSC, 
+         +stock, footprint | Always |                                    
+      17 +| `sourcing/sourced_bom.csv` | Same, machine-readable for valid
+         +ate-bom.py | Coding gate |                                     
+      18 +                                                               
+      19 +Notes: `sourcing/sourced_bom.md`, `sourcing/sourced_bom.csv` (1
+         +63 refdes, 58 rows, no duplicates, every ref from the architect
+         +'s manifest covered).                                          
+      20  Stock is from the JLCPCB mirror (jlcsearch); no lifecycle data.
+           pcbparts MCP used for passive searches. All footprint strings 
+          resolve to real .kicad_mod files except the custom BNC. validat
+          e-bom.py not run (no circuit code yet; the coding gate runs it 
+          first).
+      21  
+      22  ## Decisions
+
+● skidl-skills:datasheet-librarian(Datasheets phase)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Sourcing is done: all 163 components are sourced, none failed. The ADC and
+  FPGA are each available from only one source, with low stock (235 and 182
+  units). I fixed a formatting problem in the sourcing handoff file myself. The
+  datasheet phase is running now.
+
+✻ Brewed for 17s · done Wednesday 10:31 PM
+
+› Message from skidl-skills:datasheet-librarian
+  dual_adc_usb datasheets rev 1: status **partial**. Handoff:
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/handoffs/04_datasheets.md
+  - **The FPGA needs architect rework before `fpga`/`pwr_digital` coding.** On
+  the GW1NR-9 QN88P, VCCO3 (pin 12) feeds the in-package PSRAM and must be
+  1.71–1.89 V, but net_plan ties it to +3V3D. The fix needs a new +1V8 rail. The
+  JTAG, MODE, RECONFIG_N and JTAGSEL_N pins are all on that 1.8 V bank, so
+  their pull-ups and the J4 JTAG header must reference 1.8 V.
+  - **Only 48 FPGA I/O can run at 3.3 V**, against the 53 the plan needs. The
+  ADS5231 output supply can't go below 3.0 V, so the ADC bus can't move to the
+  1.8 V bank. Also, READY and DONE don't exist on this package, so R81/R82
+  connect to nothing.
+  - Keystone facts: K1, K2, K4, K6, K7 (soft-start is 800 µs on this package,
+  not 900 µs) and K9 are verified from the manufacturers' own documents. K3, K5,
+  K8 and the FPGA exposed-pad net are still unverified.
+  - K9 differs from net_plan: the ADS5231 datasheet puts the 2 Ω first, then 0.1
+  µF ‖ 2.2 µF. net_plan puts the 0.1 µF directly at the pin.
+  - BOM corrections: U11 symbol becomes Memory_EEPROM:93LCxxBxxOT (SOT-23
+  numbering). C110/C111 become 33 pF, not 18 pF. FT232H draws about 82 mA
+  typical, 112 mA max (net_plan assumed 70 mA).
+  - Symbols: built 3 with the kipart CLI because the kipart MCP was down. They
+  are ADS5231IPAGT (64 pins), TPS22918DBVR (6) and GW1NR-LV9QN88PC6 (88 +
+  exposed pad). All are in /home/devb/projects/AI/ai-circuit-design-tests/skidl-
+  skills-tests/dual-adc-usb-9/symbols/dual_adc_usb.kicad_sym. find-symbol
+  reports all three EXACT and all three load in SKiDL.
+  - BAV199 (the sourced part is HXY): pin 3 is the common node. Keep Diode:BAV99
+  but connect by pin number, because that symbol's pin names are ambiguous.
+  - Counts: 13 summaries in /home/devb/projects/AI/ai-circuit-design-tests/skidl
+  -skills-tests/dual-adc-usb-9/datasheets/. 11 parts have PDFs, plus 5 Gowin
+  documents; 2 parts are summary-only; 3 PDFs failed. All 9 keystone parts have
+  PDFs. 0 cache hits (use_cache=false).
+
+● Bash(sed -n '/^## Carried forward/,/^## Do not redo/p'
+      handoffs/04_datasheets.md | head -40; grep -n '^## '
+      handoffs/04_datasheets.md; python3 - <<'EOF'
+      import json;…)  ⎿  ## Carried forward
+     - No PDF: X322512MSB4SI (CL from MCP only), TLV75733PDBVR (MCP + KiCad
+     ), SMF5.0A (vendor PDF is a multi-part SMF family sheet that fetch rej
+     … +16 lines (ctrl+o to expand)
+  ⎿  Updated pipeline_state.json (+4 -4)
+      1  {
+      2    "version": "5.1",
+      3    "circuit_name": "dual_adc_usb",
+      4 -  "stage": "sourcing",                                          
+      4 +  "stage": "datasheets",                                        
+      5    "last_updated": "2026-09-30T22:05:00Z",
+      6    "active_circuit_file": null,
+      7    "requirements_complete": true,
+     ...
+      24    "block_manifest": [],
+      25    "sourcing_escalation_count": 0,
+      26    "erc_iteration_count": 0,
+      27 -  "architecture_rework_count": 0,                              
+      27 +  "architecture_rework_count": 1,                              
+      28    "handoffs": {
+      29      "requirements": "handoffs/01_requirements.md",
+      30      "architecture": "handoffs/02_architecture.md",
+      31      "sourcing": "handoffs/03_sourcing.md",
+      32 -    "datasheets": null,                                        
+      32 +    "datasheets": "handoffs/04_datasheets.md",                 
+      33      "coding": null,
+      34      "erc": null
+      35    },
+      36 -  "last_handoff": "handoffs/03_sourcing.md"                    
+      36 +  "last_handoff": "handoffs/04_datasheets.md"                  
+      37  }
+      38   No newline at end of file
+
+● Agent "Datasheets phase" finished · 18m 55s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The datasheet review surfaced an architecture conflict (FPGA bank 3 needs a
+  1.8V rail, and a 48 vs 53 3.3V I/O mismatch). I'm carrying K3, K5, and EP→GND
+  forward as named assumptions, flagging K8 (XO jitter) for a part swap, and
+  routing everything to the architect now.
+
+● skidl-skills:circuit-architect(Architecture rework rev 2)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Architecture rework (rev 2) is running.
+
+✻ Churned for 24s · done Wednesday 10:50 PM
+
+● Agent "Datasheets phase" finished · 29m 34s
+
+● That notification is a leftover from the earlier datasheet phase, which has
+  nothing new to report. The architecture revision is still running.
+
+✻ Brewed for 2s · done Wednesday 11:01 PM
+
+● Agent "Datasheets phase" finished · 29m 43s
+
+  Listed 1 directory (ctrl+o to expand)
+
+● The datasheet agent sent another notification, but its handoff file hasn't
+  changed and nothing in the pipeline moved. The architecture revision is still
+  running.
+
+✻ Cooked for 4s · done Wednesday 11:01 PM
+
+› Message from skidl-skills:circuit-architect
+  dual_adc_usb architecture rev 2 is complete: `handoffs/02_architecture.md`
+  (revision 2, next_phase 03_sourcing). All 5 `architecture/*` artifacts are
+  updated and each change is marked `<!-- revised -->`.
+  - **+1V8:** a third TLV62569DBVR (U12) runs from VBUS_SW, enabled together
+  with +1V2; +3V3D still comes up 2.0–3.2 ms later, so the UG284 sequencing
+  holds. Bank-3 pull-ups (R80, R85) and the J4 JTAG reference now sit on +1V8.
+  R82 is deleted and R81 is reused as a TCK pull-down.
+  - **FPGA I/O:** I dropped DVA/DVB and OVRA/OVRB and tied FT SIWU# high, which
+  uses all 48 of the 3.3 V I/O. The U9 pin map is now fixed in `net_plan.md`. If
+  one more 3.3 V pin is ever needed, tie ADC_OEB low to free it.
+  - **Y1:** swapped to YXC OT322540MJBA4SL, which publishes 0.7 ps rms jitter,
+  so K8 is closed. Y2 load caps C110/C111 are now 33 pF.
+  - **Power budget:** worst case is 496 mA at 4.4 V with ×1.25 margin, against
+  the 500 mA limit. That margin only holds if the FPGA core stays at or under
+  150 mA (K5) and the new 1V8 load at or under 100 mA (K10).
+  - **Sourcing changes:** only 3 rows need a new search (Y1, C110/C111, R14
+  200k). 6 new refs go onto existing rows (U12, L3, C9, C93, C17, R15), and R82
+  is removed. Rows are tagged in the `Chg` column of `skeleton_bom.md`.
+  - **Still open:** 4 named assumptions (K3, K5, K10, exposed pad = GND). The
+  JTAG programmer must support 1.8 V.
+
+
+● Architecture rev 2 is complete. The worst-case power budget is 496 mA,
+  including a 1.25× margin, against the 500 mA limit. It already uses a USB-C
+  receptacle, so the board can draw 1.5 A where the host advertises it. Next is
+  re-sourcing only the rows that changed.
+
+● skidl-skills:part-sourcer(Re-source changed rows)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Architecture rework rev 2" finished · 15m 29s
+
+● I'm re-sourcing only the parts the architecture revision changed: the new
+  low-jitter 40 MHz oscillator, the 33 pF load capacitors, the 200k resistor,
+  and the new 1.8 V rail parts.
+
+✻ Churned for 9s · done Wednesday 11:06 PM
+
+› Message from skidl-skills:part-sourcer
+  dual_adc_usb sourcing rev 2: status complete. 169 refdes / 59 rows, 0
+  failures. Files: handoffs/03_sourcing.md, sourcing/sourced_bom.md and
+  sourcing/sourced_bom.csv, all under /home/devb/projects/AI/ai-circuit-design-t
+  ests/skidl-skills-tests/dual-adc-usb-9/.
+  - Re-sourced:
+    - Y1 is now OT322540MJBA4SL (C2831396, stock 10567, Extended).
+    - C110/C111 are 33 pF C0G 50 V 0402 (0402CG330J500NT, C1562, Basic, stock
+  1.32M).
+    - R14 is 200k 1% 0402 (0402WGF2003TCE, C25764, Basic, stock 2.3M).
+  - Refs appended to existing rows: U12, L3, C9, C93, C17, R15. R82 removed, so
+  the 4.7k row is now R80, R81, R85.
+  - Symbols fixed: U2, U7 and U9 now use `dual_adc_usb:*` from
+  symbols/dual_adc_usb.kicad_sym. U11 is `Memory_EEPROM:93LCxxBxxOT`. The SYMBOL
+  NEEDED flags are cleared.
+  - Tiers: 26 Basic, 2 Preferred, 31 Extended. Refdes count is 163 + 7 added -
+  R82 = 169, with no duplicates.
+  - Still flagged: J2/J3 custom footprint. U7 (stock 235) and U9 (182) are
+  single-source with marginal stock.
+  - Footprint check: I confirmed by `ls` that the Y1, 0402 C and 0402 R
+  footprint strings exist in the KiCad library. validate-footprints.py did not
+  run, so no script check was done.
+  - Y1 land pattern: it keeps the Abracon ASE 3.2x2.5 footprint, and the pad fit
+  still needs checking at layout.
+  - validate-bom.py has not run, because there is no circuit code yet. The
+  coding gate will run it first.
+  - Datasheet phase: only `datasheets/OT322540MJBA4SL_SUMMARY.md` is new work.
+  Also confirm the U11 symbol pin names against the SOT-23-6 datasheet.
+
+● Bash(grep -m2 -E '^(status|revision):' handoffs/03_sourcing.md; grep -n '^## '
+      handoffs/03_sourcing.md; python3 - <<'EOF'
+      import json;s=json.load(open('pipeline_stat…)
+  ⎿  status: complete
+     revision: 2
+     13:## Artifacts
+     … +6 lines (ctrl+o to expand)
+  ⎿  Updated pipeline_state.json (+3 -3)
+      1  {
+      2    "version": "5.1",
+      3    "circuit_name": "dual_adc_usb",
+      4 -  "stage": "datasheets",                                        
+      4 +  "stage": "sourcing",                                          
+      5    "last_updated": "2026-09-30T22:05:00Z",
+      6    "active_circuit_file": null,
+      7    "requirements_complete": true,
+     ...
+      29      "requirements": "handoffs/01_requirements.md",
+      30      "architecture": "handoffs/02_architecture.md",
+      31      "sourcing": "handoffs/03_sourcing.md",
+      32 -    "datasheets": "handoffs/04_datasheets.md",                 
+      32 +    "datasheets": null,                                        
+      33      "coding": null,
+      34      "erc": null
+      35    },
+      36 -  "last_handoff": "handoffs/04_datasheets.md"                  
+      36 +  "last_handoff": "handoffs/03_sourcing.md"                    
+      37  }
+      38   No newline at end of file
+
+● Agent "Re-source changed rows" finished · 3m 14s
+
+● skidl-skills:datasheet-librarian(Datasheets rev 2 (narrow))
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Revision 2 of sourcing passed its check: 169 components, none failed. I've
+  started a narrow datasheet update, covering just the new oscillator summary, a
+  pin check on the EEPROM symbol, and updated notes for each block.
+
+✻ Baked for 10s · done Wednesday 11:09 PM
+
+● Agent "Re-source changed rows" finished · 4m 18s
+
+● The sourcing step sent a late completion notice, but it doesn't change
+  anything; that phase was already checked. The narrowed datasheet update is
+  still running.
+
+✻ Cooked for 1s · done Wednesday 11:10 PM
+
+› Message from skidl-skills:datasheet-librarian
+  I rewrote `handoffs/04_datasheets.md` as revision 2 with `status: complete`.
+  The only open items are the four assumptions you told me to carry (K3, K5,
+  K10, EP=GND).
+
+  1. **Y1 summary:** I wrote `datasheets/OT322540MJBA4SL_SUMMARY.md` from the
+  YXC YSO110TR PDF. The PDF is image-only, so I read it as rendered pages.
+     - **Jitter (K8):** 0.7 ps max over 12 kHz–20 MHz. K8 is now verified and
+  closed.
+     - **Pinout:** 1 Tri-state, 2 GND, 3 OUTPUT, 4 VDD. This matches KiCad
+  `Oscillator:ASE-xxxMHz`, whose names are `EN`, `GND`, `OUT`, `Vdd`. The coder
+  must write `Vdd` in that case.
+     - **Other specs:** 5 mA at 3.3 V; enable when high or floating; 0.01–0.1 µF
+  decoupling required.
+     - **Caveat:** the PDF is a series sheet and doesn't decode the full part
+  number; the 40 MHz / 3225 identity comes from the LCSC listing.
+     - **Footprint:** YXC's recommended land pattern differs from the Abracon
+  ASE footprint by up to 0.125 mm on Y. Pin order is the same and the pads still
+  cover the part, so I judged it acceptable.
+     - I marked the old SX3M40 summary SUPERSEDED.
+  2. **U11 symbol:** `Memory_EEPROM:93LCxxBxxOT` matches the datasheet
+  (DS20001794J, Table 3-1 SOT-23 column and the p.2 drawing) on all 6 pins: 1
+  DO, 2 GND, 3 DI, 4 CLK, 5 CS, 6 VCC. The datasheet calls pin 2 VSS; SKiDL must
+  use `GND`. I added this table to `datasheets/93LC56BT-I_OT_SUMMARY.md`.
+  3. **Handoff tables:** `## Summaries by block` now points `clock_gen` at the
+  Y1 summary and notes U12 under `pwr_digital`. `## Next phase must` now
+  reflects architecture rev 2:
+     - `VCCO3` (pin 12), R80, R85 and J4 VREF go to +1V8. R81 is the 4.7 kΩ TCK
+  pull-down to GND.
+     - Clocks: FPGA_CLK40 to pin 63, FT_CLKOUT to pin 52.
+     - U7 `DVA`/`DVB`/`OVRA`/`OVRB` are NC.
+     - U12 divider: R14 200 k top, R15 100 k bottom, EN = VBUS_SW. This matches
+  net_plan.
+     - U10 ACBUS4 goes to +3V3D. R82 is gone.
+     - The architecture-blocker item is removed.
+  4. **Unverified keystone facts:** the section keeps K3, K5, K10 and EP=GND,
+  labelled as assumptions the driver accepted for coding.
+
+  I did not run the part-cache `put`. `CLAUDE_PLUGIN_ROOT` isn't set here, and
+  rev 1 recorded `use_cache=false`.
+
+  Receipt:
+  - dual_adc_usb datasheets rev 2: status complete. Open items are only the 4
+  accepted assumptions (K3, K5, K10, EP=GND).
+  - New summary: Y1 OT322540MJBA4SL, with PDF. K8 verified (0.7 ps max).
+  - U11 93LCxxBxxOT: 6/6 pins verified against DS20001794J Table 3-1.
+  - Summaries: 13 current (1 superseded). With PDF 12, summary-only 2, failed
+  PDF 3 (none keystone).
+  - Keystone parts with a PDF: 10/10. Verified keystone facts: K1, K2, K4, K6,
+  K7, K8, K9.
+  - Rev 1 architecture blockers are resolved by architecture rev 2.
+  - Symbols: 0 new (3 from rev 1). Cache hits: 0 (cache disabled).
+
+  Files are in /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests
+  /dual-adc-usb-9:
+  - handoffs/04_datasheets.md
+  - datasheets/OT322540MJBA4SL_SUMMARY.md
+  - datasheets/93LC56BT-I_OT_SUMMARY.md
+  - datasheets/SX3M40.000B10F20TNN_SUMMARY.md
+  Ran 1 shell command (ctrl+o to expand)
+
+● Agent "Datasheets rev 2 (narrow)" finished · 2m 13s
+
+● Datasheets rev 2 passed gate review. With 9 design blocks, I'll run Phase 5
+  modularly via 5 work orders (AFE A+B, ADC+clock, FPGA, USB bridge, and the
+  three power blocks), dispatching them one at a time.
+
+● Bash(mkdir -p circuits/dual_adc_usb handoffs/05_blocks && python3 - <<'EOF'
+      import json,re…)
+  ⎿  9
+  ⎿  Updated pipeline_state.json (+106 -6)
+       1  {
+       2    "version": "5.1",
+       3    "circuit_name": "dual_adc_usb",
+       4 -  "stage": "sourcing",                                         
+       4 +  "stage": "coding",                                           
+       5    "last_updated": "2026-09-30T22:05:00Z",
+       6    "active_circuit_file": null,
+       7    "requirements_complete": true,
+       8    "architecture_complete": true,
+       9    "sourcing_complete": true,
+      10 -  "datasheets_complete": false,                                
+      10 +  "datasheets_complete": true,                                 
+      11    "erc_status": {
+      12      "last_run": null,
+      13      "errors": 0,
+     ...
+       18    "review_status": null,
+       19    "sourced_bom_version": null,
+       20    "last_modified_circuit": null,
+       21 -  "coding_mode": null,                                        
+       21 +  "coding_mode": "modular",                                   
+       22    "use_cache": false,
+       23    "blocked_until": null,
+       24 -  "block_manifest": [],                                       
+       24 +  "block_manifest": [                                         
+       25 +    {                                                         
+       26 +      "block_id": "usb_power_in",                             
+       27 +      "block_name": "USB-C input, ESD, PTC, soft-start",      
+       28 +      "filename": "circuits/dual_adc_usb/usb_power_in.py",    
+       29 +      "function_signature": "usb_power_in(vbus_sw, usb_dp, usb
+          +_dm, gnd)",                                                   
+       30 +      "interface_nets": "VBUS_SW, USB_DP, USB_DM, GND",       
+       31 +      "parts": "J1, U1, U2, F1, D1, R1, R2, R3, C1, C2, C3",  
+       32 +      "datasheet_summaries": "datasheets/TPS22918DBVR_SUMMARY.
+          +md",                                                          
+       33 +      "status": "pending",                                    
+       34 +      "erc_errors_attributed": 0                              
+       35 +    },                                                        
+       36 +    {                                                         
+       37 +      "block_id": "pwr_digital",                              
+       38 +      "block_name": "3V3D + 1V2 + 1V8 bucks",                 
+       39 +      "filename": "circuits/dual_adc_usb/pwr_digital.py",     
+       40 +      "function_signature": "pwr_digital(vbus_sw, v3v3d, v1v2,
+          + v1v8, gnd)",                                                 
+     … 99 more lines (ctrl+o to expand)
+
+● skidl-skills:skidl-block-coder(Code AFE ch A + ch B)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Work order 1 of 5 (the two analog front-end channels) is running.
+
+✻ Cooked for 21s · done Wednesday 11:12 PM
+
+› Message from skidl-skills:skidl-block-coder
+  Both blocks are written, and both handoffs are complete. The only thing still
+  open is the BNC footprint for J2/J3.
+
+  - **afe_ch_a:** 27 parts, 17 nets. File is
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/circuits/dual_adc_usb/afe_ch_a.py; handoff is
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/handoffs/05_blocks/afe_ch_a.md.
+  - **afe_ch_b:** 27 parts, 17 nets. File is
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/circuits/dual_adc_usb/afe_ch_b.py; handoff is
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/handoffs/05_blocks/afe_ch_b.md.
+  - **Shared helper:** /home/devb/projects/AI/ai-circuit-design-tests/skidl-skil
+  ls-tests/dual-adc-usb-9/circuits/dual_adc_usb/_afe_common.py. It is a plain
+  function, not a block, and both block files import it relatively, so it must
+  stay in that package directory.
+  - **Checks:** all three files compile. A test build of both blocks together
+  gave 54 parts and no unconnected pins. Neither signature was changed.
+  - **Open (J2/J3 footprint):** I used `my_board:KH-BNC50-3511` as listed in the
+  sourced BOM, but the footprint validator fails it because no
+  `my_board.pretty` library exists. Someone needs to create this footprint (pin
+  1 = centre, pin 2 = shell) or change the string to `ProjectLocal:<name>` once
+  a footprint is generated.
+  - **Assembler:** VAFE_P, VAFE_N, +3V3A and GND need `.drive = POWER` at the
+  top level, because these blocks only consume them.
+
+● skidl-skills:skidl-block-coder(Code ADC + clock blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Code AFE ch A + ch B" finished · 4m 1s
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Work order 2 (the ADC and clock blocks) is running. After the blocks are
+  written, I'll deal with the BNC footprint (J2 and J3) in one of two ways. The
+  first choice is to switch to an in-stock BNC connector that already has a
+  standard KiCad footprint, such as the TE 1478204 or the Amphenol 031-5539. If
+  neither is available, I'll create a custom footprint.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 17s · done Wednesday 11:16 PM
+
+› Message from skidl-skills:skidl-block-coder
+  Both blocks are written and compile (py_compile OK). Neither signature
+  changed. Status for both: complete.
+  - adc_dual: 18 parts (U7, R60-R62, C60-C73), 45 nets. REFT/REFB follow
+  datasheet Fig. 21: 2 Ω, then 0.1 µF ‖ 2.2 µF. Pins 9/22/26/39
+  (OVRB/DVB/DVA/OVRA) are left NC.
+  - clock_gen: 6 parts (Y1, U8, R70, R71, C75, C76), 6 nets. U8 pin 1 is NC.
+  - Smoke-instantiated together (24 parts): the only unconnected pins are the 5
+  intended NC pins. Footprints were not separately checked; all are standard
+  KiCad strings.
+  - Assembler note: setting KICAD9_SYMBOL_DIR did not make the dual_adc_usb
+  symbol library load in my test. The top level should call
+  `lib_search_paths[KICAD].append('<project>/symbols')`.
+  - Files: /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dua
+  l-adc-usb-9/circuits/dual_adc_usb/{adc_dual,clock_gen}.py
+  - Handoffs: /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/
+  dual-adc-usb-9/handoffs/05_blocks/{adc_dual,clock_gen}.md
+
+● skidl-skills:skidl-block-coder(Code FPGA block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Code ADC + clock blocks" finished · 1m 58s
+
+● Work orders 1–2 are done: 4 blocks are written and compile. Work order 3
+  (FPGA) is running.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cogitated for 9s · done Wednesday 11:18 PM
+
+› Message from skidl-skills:skidl-block-coder
+  The fpga block is finished: it compiles and its smoke-test ERC shows 0 errors.
+  - The function signature is unchanged from the work order. adc_da and adc_db
+  are 12-bit Buses and ft_d is an 8-bit Bus.
+  - 28 parts: U9, 11 resistors, D80/D81, J4/J5 and C80–C93. U9 is wired by pin
+  number, exactly as in the net_plan.md rev 2 pin map.
+  - The 44 ERC warnings are expected: each one is an interface net with only one
+  pin, because the block was tested on its own.
+  - 15 unused U9 pins (3, 10, 11, 13–16, 79–86) are intentionally NC.
+  - The handoff lists K3, K5, K10 and the exposed pad on GND as assumptions, not
+  facts.
+  - I don't know whether the footprint post-write hook ran, since it printed no
+  message. The footprints are the sourced BOM's strings and I did not check them
+  myself.
+
+  Files are in /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests
+  /dual-adc-usb-9:
+  - circuits/dual_adc_usb/fpga.py
+  - handoffs/05_blocks/fpga.md
+
+● skidl-skills:skidl-block-coder(Code USB bridge block)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Code FPGA block" finished · 1m 39s
+
+● The FPGA block is written and passed its standalone ERC check with 0 errors.
+  Work order 4 (the USB bridge) is running now.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Baked for 7s · done Wednesday 11:20 PM
+
+› Message from skidl-skills:skidl-block-coder
+  I finished the usb_bridge block (status: complete). It compiles, and a
+  stand-alone ERC check gives 0 errors. The function signature is unchanged.
+
+  Files:
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/circuits/dual_adc_usb/usb_bridge.py
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/handoffs/05_blocks/usb_bridge.md
+
+  Call for the assembler (`FT_D` must be `Bus('FT_D', 8)`):
+  `usb_bridge(usb_dp=USB_DP, usb_dm=USB_DM, ft_d=FT_D, ft_rxf_n=FT_RXF_N,
+  ft_txe_n=FT_TXE_N, ft_rd_n=FT_RD_N, ft_wr_n=FT_WR_N, ft_clkout=FT_CLKOUT,
+  ft_oe_n=FT_OE_N, v3v3d=V3V3D, gnd=GND, tag='usb_bridge')`
+
+  Receipt:
+  - Block usb_bridge: 19 parts (U10, U11, Y2, R100-R103, C100-C111).
+  - 27 nets: 18 interface nets (the 8 FT_D bits count separately) and 9 internal
+  ones.
+  - The file compiles with `py_compile`.
+  - I ran the block alone with ERC: 0 errors and 16 warnings. Every warning is
+  an interface net with only one pin attached, which goes away once the other
+  blocks are connected.
+  - All footprints come from sourced_bom: LQFP-48 7x7, SOT-23-6, Crystal
+  3225-4Pin, 0402 R/C and one 0603 for C108.
+  - I changed three pin types inside the block, where the KiCad symbol disagrees
+  with the FT232H datasheet:
+    - U10 VCCA is set to power input. Otherwise ERC reports two power outputs
+  (VCCA and VCCCORE) shorted on FT_VCCCORE.
+    - U10 EECS and EECLK are set to outputs. The symbol marks them as inputs,
+  although the chip drives them.
+  - ACBUS7-9 are left NC on purpose. +3V3D and GND need `.drive = POWER` at the
+  top level, because this block only draws from them.
+
+● skidl-skills:skidl-block-coder(Code three power blocks)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Code USB bridge block" finished · 1m 19s
+
+● The USB bridge block is written and passed its own ERC check with 0 errors.
+  The last work order, the three power blocks, is running now.  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Churned for 11s · done Wednesday 11:22 PM
+
+› Message from skidl-skills:skidl-block-coder
+  All 3 blocks complete; no signature changes.
+  - usb_power_in: 11 parts, 10 nets. Compiles, smoke ERC is clean. VBUS_SW is
+  driven by U2.VOUT. VBUS_F's .drive is set inside the block.
+  - pwr_digital: 20 parts, 12 nets. Compiles, smoke ERC is clean.
+  +3V3D/+1V2/+1V8 have .drive=POWER set in the block (the buck's PWROUT pin is
+  SW, which reaches the rail through the inductor). K10 is recorded as an
+  assumption.
+  - pwr_analog: 13 parts, 10 nets. Compiles, smoke ERC is clean.
+  +3V3A/VAFE_P/VAFE_N are driven by the regulator PWROUT pins.
+  - The top level only needs GND.drive = POWER.
+  - Files are in
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/circuits/dual_adc_usb/{usb_power_in,pwr_digital,pwr_analog}.py.
+  - Handoffs are in
+  /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb
+  -9/handoffs/05_blocks/{usb_power_in,pwr_digital,pwr_analog}.md.
+
+● All 9 blocks are coded. Before assembly, I'm resolving the BNC footprint for
+  J2 and J3. There are three options. I recommend the first one, and the other
+  two are fallbacks.
+  - Switch to an in-stock BNC part that matches a stock KiCad footprint. This
+    avoids hand-drawn copper and the risk that comes with it.
+  - Draw a custom footprint for the KH-BNC50-3511. This depends on a mechanical
+    drawing that hasn't been captured yet.
+  - Use a stock footprint that is "close enough." This risks the part not
+    fitting the board.
+
+● skidl-skills:part-sourcer(Resolve BNC footprint J2/J3)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● Agent "Code three power blocks" finished · 3m 12s
+
+● I'm sourcing a replacement BNC connector that matches a stock footprint. Once
+  that's settled, I'll update the front-end block code and then assemble all the
+  blocks.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Cogitated for 11s · done Wednesday 11:25 PM
+
+› Message from skidl-skills:part-sourcer
+  Sourcing rev 3 for dual_adc_usb is written, status complete. Only the J2/J3
+  row changed.
+  - **Option 1 failed:** none of the in-stock JLCPCB 50 Ω BNCs matches a KiCad
+  Connector_Coaxial footprint. The KiCad BNC footprints are 4-leg
+  TE/Amphenol/Win patterns and I could not verify any as drawing-compatible. The
+  one TE candidate, 5227161-7 (C591726, stock 455, 6.28 USD), is not a verified
+  match either.
+  - **Option 2 used:** I kept KH-BNC50-3511 (C2837587, stock 5724, Extended,
+  right-angle). I created
+  `/home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-us
+  b-9/footprints/ProjectLocal.pretty/KH-BNC50-3511.kicad_mod` from the KH
+  drawing.
+  - **Footprint string for the AFE code:** `ProjectLocal:KH-BNC50-3511`, with
+  symbol `Connector:Conn_Coaxial`. Pad 1 is the centre pin. Pad 2 is the shell
+  lead at x = -2.5 plus two 2.0 mm shell posts at (±5.05, +5.05), so pad 2
+  appears three times in the footprint. The project needs a `ProjectLocal`
+  fp-lib entry pointing at that .pretty folder.
+  - **Verify before fab:** the pad geometry is read from a drawing that is not
+  to scale. The -2.5 offset of pin 2 and the front/rear orientation of the posts
+  relative to the pins are inferred, so check them against the physical part. I
+  also did not check the footprint with validate-footprints.py.
+  - **Files:** `sourcing/sourced_bom.md`, `sourcing/sourced_bom.csv` and
+  `handoffs/03_sourcing.md` (revision: 3) are updated. validate-bom.py was not
+  run because there is no circuit code yet.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Agent "Resolve BNC footprint J2/J3" finished · 1m 26s
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/_afe_common.py)
+  ⎿  Added 2 lines, removed 2 lines
+      33      fda_outp = Net(f'FDA_OUTP_{ch}')
+      34      fda_outn = Net(f'FDA_OUTN_{ch}')
+      35  
+      36 -    # --- BNC input (custom footprint pending, see handoff) ---
+      36 +    # --- BNC input (custom footprint in footprints/ProjectLoca
+         +l.pretty; verify pads vs physical part before fab) ---         
+      37      j = Part('Connector', 'Conn_Coaxial', ref=j_ref, value='BNC
+          ',
+      38 -             footprint='my_board:KH-BNC50-3511', MPN='KH-BNC50-
+         -3511', LCSC='C2837587')                                        
+      38 +             footprint='ProjectLocal:KH-BNC50-3511', MPN='KH-BN
+         +C50-3511', LCSC='C2837587')                                    
+      39      j[1] += bnc          # In (centre)
+      40      j[2] += gnd          # Ext (shell)
+      41  
+
+● Bash(sed -i 's/my_board:KH-BNC50-3511/ProjectLocal:KH-BNC50-3511/'
+      handoffs/05_blocks/afe_ch_a.md handoffs/05_blocks/afe_ch_b.md; python3 -
+      <<'EOF'
+      import json;s=jso…)
+  ⎿  Updated handoffs/05_blocks/afe_ch_a.md (+2 -2)
+      28  - ADC_VCM is driven by U7 CM in adc_dual; THS4521 VOCM is an in
+          put, so no ERC driver comes from here.
+      29  
+      30  ## Carried forward
+      31 -- **J2 footprint `my_board:KH-BNC50-3511` does NOT exist** (foo
+         -tprint validator: library my_board.pretty not found).          
+      31 +- **J2 footprint `ProjectLocal:KH-BNC50-3511` does NOT exist** 
+         +(footprint validator: library my_board.pretty not found).      
+      32    Used verbatim from sourced_bom as instructed. Footprint phase
+           must create it from the KH-BNC50-3511 drawing
+      33    (pin 1 = centre/In, pin 2 = shell/Ext), or change the string 
+          to ProjectLocal:<name> after generating.
+      34  - C21 trimmer footprint `Capacitor_SMD:C_Trimmer_Voltronics_JZ`
+           is a stand-in; verify vs STC3MA06 land pattern at layout.
+     ...
+      39  ## Receipt
+      40  - block afe_ch_a: 27 parts (J2, U20, U21, D20, R20-R30, C20-C31
+          ), 17 nets (10 internal + 7 interface).
+      41  - py_compile OK; smoke instantiation with afe_ch_a+afe_ch_b: 54
+           parts, 0 unconnected pins.
+      42 -- Footprints: all valid except J2 my_board:KH-BNC50-3511 (flagg
+         -ed, custom FP pending). Signature changed: no.                 
+      42 +- Footprints: all valid except J2 ProjectLocal:KH-BNC50-3511 (f
+         +lagged, custom FP pending). Signature changed: no.             
+  ⎿  Updated handoffs/05_blocks/afe_ch_b.md (+2 -2)
+      28  - ADC_VCM is driven by U7 CM in adc_dual; THS4521 VOCM is an in
+          put, so no ERC driver comes from here.
+      29  
+      30  ## Carried forward
+      31 -- **J3 footprint `my_board:KH-BNC50-3511` does NOT exist** (foo
+         -tprint validator: library my_board.pretty not found).          
+      31 +- **J3 footprint `ProjectLocal:KH-BNC50-3511` does NOT exist** 
+         +(footprint validator: library my_board.pretty not found).      
+      32    Used verbatim from sourced_bom as instructed. Footprint phase
+           must create it from the KH-BNC50-3511 drawing
+      33    (pin 1 = centre/In, pin 2 = shell/Ext), or change the string 
+          to ProjectLocal:<name> after generating.
+      34  - C41 trimmer footprint `Capacitor_SMD:C_Trimmer_Voltronics_JZ`
+           is a stand-in; verify vs STC3MA06 land pattern at layout.
+     ...
+      39  ## Receipt
+      40  - block afe_ch_b: 27 parts (J3, U40, U41, D40, R40-R50, C40-C51
+          ), 17 nets (10 internal + 7 interface).
+      41  - py_compile OK; smoke instantiation with afe_ch_a+afe_ch_b: 54
+           parts, 0 unconnected pins.
+      42 -- Footprints: all valid except J3 my_board:KH-BNC50-3511 (flagg
+         -ed, custom FP pending). Signature changed: no.                 
+      42 +- Footprints: all valid except J3 ProjectLocal:KH-BNC50-3511 (f
+         +lagged, custom FP pending). Signature changed: no.             
+  ⎿  Updated pipeline_state.json (+9 -9)
+      30        "interface_nets": "VBUS_SW, USB_DP, USB_DM, GND",
+      31        "parts": "J1, U1, U2, F1, D1, R1, R2, R3, C1, C2, C3",
+      32        "datasheet_summaries": "datasheets/TPS22918DBVR_SUMMARY.m
+          d",
+      33 -      "status": "pending",                                     
+      33 +      "status": "syntax_ok",                                   
+      34        "erc_errors_attributed": 0
+      35      },
+      36      {
+     ...
+      41        "interface_nets": "VBUS_SW, +3V3D, +1V2, +1V8, GND",
+      42        "parts": "U3, U4, U12, L1, L2, L3, R5, R6, R7, R8, R9, R1
+          4, R15, C4, C5, C6, C7, C8, C9, C17",
+      43        "datasheet_summaries": "datasheets/TLV62569DBVR_SUMMARY.m
+          d` (U3, U4, U12)",
+      44 -      "status": "pending",                                     
+      44 +      "status": "syntax_ok",                                   
+      45        "erc_errors_attributed": 0
+      46      },
+      47      {
+     ...
+      52        "interface_nets": "VBUS_SW, +3V3A, VAFE_P, VAFE_N, GND",
+      53        "parts": "U5, U6, R10, R11, R12, R13, C10, C11, C12, C13,
+           C14, C15, C16",
+      54        "datasheet_summaries": "datasheets/TLV75733PDBVR_SUMMARY.
+          md`, `datasheets/LM27762DSSR_SUMMARY.md",
+      55 -      "status": "pending",                                     
+      55 +      "status": "syntax_ok",                                   
+      56        "erc_errors_attributed": 0
+      57      },
+      58      {
+     ...
+      63        "interface_nets": "ADC_AINA_P, ADC_AINA_N, ADC_VCM, VAFE_
+          P, VAFE_N, +3V3A, GND",
+      64        "parts": "J2, U20, U21, D20, R20-R30, C20-C31",
+      65        "datasheet_summaries": "datasheets/OPA810IDBVR_SUMMARY.md
+          `, `datasheets/THS4521IDGKR_SUMMARY.md`, `datasheets/BAV199_SUM
+          MARY.md",
+      66 -      "status": "pending",                                     
+      66 +      "status": "syntax_ok",                                   
+      67        "erc_errors_attributed": 0
+      68      },
+      69      {
+     ...
+      74        "interface_nets": "ADC_AINB_P, ADC_AINB_N, ADC_VCM, VAFE_
+          P, VAFE_N, +3V3A, GND",
+      75        "parts": "J3, U40, U41, D40, R40-R50, C40-C51",
+      76        "datasheet_summaries": "datasheets/OPA810IDBVR_SUMMARY.md
+          `, `datasheets/THS4521IDGKR_SUMMARY.md`, `datasheets/BAV199_SUM
+          MARY.md",
+      77 -      "status": "pending",                                     
+      77 +      "status": "syntax_ok",                                   
+      78        "erc_errors_attributed": 0
+      79      },
+      80      {
+     … 32 more lines (ctrl+o to expand)
+
+● skidl-skills:skidl-assembler(Assemble circuit + ERC)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● No in-stock BNC matched a stock KiCad footprint, so I kept the KH-BNC50-3511
+  connector. Sourcing drew a custom footprint for it from the datasheet drawing.
+  That drawing isn't to scale, so the pads need checking against a physical
+  part before fab. I changed the front-end code to use that footprint. The
+  assembler is now joining all 9 blocks and running ERC on the full circuit.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Crunched for 21s · done Wednesday 11:27 PM
+
+› Message from skidl-skills:skidl-assembler
+  I assembled all 9 blocks into dual_adc_usb and the full-circuit ERC is clean:
+  0 errors, 0 warnings, so there are no errors to attribute. The BOM gate fails,
+  though: `validate-bom.py` finds 10 value-field mismatches inside the blocks.
+  - **Size:** 169 parts (the same as the BOM refdes count) and 130 nets, with no
+  single-node nets.
+  - **Stable netlist:** two runs produce netlists that differ only in the date
+  line. One "Missing tag" warning for the unnamed root node created by `python
+  -m` shows up at netlist generation, and no random tag is generated.
+  - **BOM mismatches (value field only; refs and footprints match):**
+    - usb_power_in: J1
+    - clock_gen: U8
+    - fpga: U9, J4, J5
+    - usb_bridge: U10, U11, C110, C111, R100
+
+    These are block or sourcing issues, not wiring, so they need routing to the
+  block coders or the part-sourcer. I did not fix them.
+  - **Setup:** `__main__.py` adds the project's `symbols` folder to the symbol
+  search path and its `footprints` folder to the footprint search path. GND is
+  the only net set to `.drive = POWER` at top level.
+  - **No `.venv`:** the project has none, so I ran it with the system python
+  (SKiDL 3.0.0) instead.
+  - **Leftover file:** `outputs/run1.net` is a copy from the stability diff that
+  I could not delete because `outputs/` is protected. It can be ignored.
+
+  Files are in /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests
+  /dual-adc-usb-9:
+  - circuits/dual_adc_usb/__main__.py
+  - circuits/dual_adc_usb/__init__.py
+  - handoffs/05_coding.md (status complete, next_phase 06_erc)
+  - outputs/dual_adc_usb.net
+  - outputs/dual_adc_usb_bom.xml
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Agent "Assemble circuit + ERC" finished · 2m 18s
+
+● ERC passed clean, but the BOM check found 10 value-label mismatches
+  (parts/footprints all match). I'll treat the BOM values as authoritative and
+  update the code labels myself, since these are simple string edits.
+
+  Read 4 files, ran 1 shell command (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/clock_gen.py)
+  ⎿  Added 1 line, removed 1 line
+      26      y1[3] += xo_out     # OUT
+      27      y1[4] += v3v3d      # Vdd
+      28  
+      29 -    u8 = Part('74xGxx', '74LVC1G34', ref='U8', value='74LVC1G34
+         -',                                                             
+      29 +    u8 = Part('74xGxx', '74LVC1G34', ref='U8', value='SN74LVC1G
+         +34DCKR',                                                       
+      30                footprint='Package_TO_SOT_SMD:SOT-353_SC-70-5',
+      31                MPN='SN74LVC1G34DCKR', LCSC='C353880')
+      32      u8[1] += NC
+
+● Update(circuits/dual_adc_usb/fpga.py)
+  ⎿  Added 1 line, removed 1 line
+      39      FPGA drives adc_sel/msbi_sen/oea_sclk/stpd_sdata/oeb, ft_rd
+          _n/wr_n/oe_n;
+      40      senses adc_da/adc_db, ft_rxf_n/txe_n, ft_clkout, fpga_clk40
+          ; ft_d bidirectional.
+      41      Consumes v1v2, v1v8, v3v3d, gnd. Assumes EP (pin 89) = GND.
+          """
+      42 -    u9 = Part('dual_adc_usb', 'GW1NR-LV9QN88PC6', ref='U9', val
+         -ue='GW1NR-LV9QN88PC6',                                         
+      42 +    u9 = Part('dual_adc_usb', 'GW1NR-LV9QN88PC6', ref='U9', val
+         +ue='GW1NR-LV9QN88PC6/I5',                                      
+      43                footprint='Package_DFN_QFN:ArtInChip_QFN-88-1EP_1
+          0x10mm_P0.4mm_EP6.74x6.74mm',
+      44                MPN='GW1NR-LV9QN88PC6/I5', LCSC='C5799578')
+      45  
+
+● Update(circuits/dual_adc_usb/fpga.py)
+  ⎿  Added 1 line, removed 1 line
+      112      r89 = _r('R89', '100R', 'RC0402FR-07100RL', 'C106232')
+      113      trig_in_ext & r88 & trig_in
+      114      trig_out & r89 & trig_out_ext
+      115 -    j5 = Part('Connector_Generic', 'Conn_01x03', ref='J5', val
+          -ue='TRIG',                                                    
+      115 +    j5 = Part('Connector_Generic', 'Conn_01x03', ref='J5', val
+          +ue='1x3',                                                     
+      116                footprint='Connector_PinHeader_2.54mm:PinHeader_
+           1x03_P2.54mm_Vertical',
+      117                MPN='PZ254V-11-03P', LCSC='C2937625')
+      118      j5[1] += trig_in_ext
+
+● Update(circuits/dual_adc_usb/fpga.py)
+  ⎿  Added 1 line, removed 1 line
+      145      mode1 & r84 & gnd
+      146  
+      147      # JTAG header J4: 1 VREF(+1V8), 2 TCK, 3 TMS, 4 TDI, 5 TDO
+           , 6 GND
+      148 -    j4 = Part('Connector_Generic', 'Conn_01x06', ref='J4', val
+          -ue='JTAG',                                                    
+      148 +    j4 = Part('Connector_Generic', 'Conn_01x06', ref='J4', val
+          +ue='1x6',                                                     
+      149                footprint='Connector_PinHeader_2.54mm:PinHeader_
+           1x06_P2.54mm_Vertical',
+      150                MPN='PZ254V-11-06P', LCSC='C492405')
+      151      j4[1] += v1v8
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)  ⎿  Added 1 line, removed 1 line
+      25      ft_eedata = Net('FT_EEDATA')
+      26      ft_eedo = Net('FT_EEDO')
+      27  
+      28 -    u10 = Part('Interface_USB', 'FT232H', ref='U10', value='FT2
+         -32HL',                                                         
+      28 +    u10 = Part('Interface_USB', 'FT232H', ref='U10', value='FT2
+         +32HL-REEL',                                                    
+      29                 footprint='Package_QFP:LQFP-48_7x7mm_P0.5mm',
+      30                 MPN='FT232HL-REEL', LCSC='C51997')
+      31      # Symbol pin-type corrections (KiCad lib types vs DS_FT232H
+          ):
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)
+  ⎿  Added 1 line, removed 1 line
+      64      u10['ACBUS7', 'ACBUS8', 'ACBUS9'] += NC
+      65  
+      66      # Config EEPROM (x16, SOT-23-6)
+      67 -    u11 = Part('Memory_EEPROM', '93LCxxBxxOT', ref='U11', value
+         -='93LC56B',                                                    
+      67 +    u11 = Part('Memory_EEPROM', '93LCxxBxxOT', ref='U11', value
+         +='93LC56BT-I/OT',                                              
+      68                 footprint='Package_TO_SOT_SMD:SOT-23-6',
+      69                 MPN='93LC56BT-I/OT', LCSC='C190271')
+      70      u11['VCC'] += v3v3d
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)
+  ⎿  Added 1 line, removed 1 line
+      74      u11['DI'] += ft_eedata
+      75      u11['DO'] += ft_eedo
+      76  
+      77 -    r100 = Part('Device', 'R', ref='R100', value='12k 1%', foot
+         -print=_R, MPN='0402WGF1202TCE', LCSC='C25752')                 
+      77 +    r100 = Part('Device', 'R', ref='R100', value='12k', footpri
+         +nt=_R, MPN='0402WGF1202TCE', LCSC='C25752')                    
+      78      r101 = Part('Device', 'R', ref='R101', value='10k', footpri
+          nt=_R, MPN='0402WGF1002TCE', LCSC='C25744')
+      79      r102 = Part('Device', 'R', ref='R102', value='10k', footpri
+          nt=_R, MPN='0402WGF1002TCE', LCSC='C25744')
+      80      r103 = Part('Device', 'R', ref='R103', value='2.2k', footpr
+          int=_R, MPN='0402WGF2201TCE', LCSC='C25879')
+
+● Update(circuits/dual_adc_usb/usb_bridge.py)
+  ⎿  Added 2 lines, removed 2 lines
+      90      y2[1] += ft_xi
+      91      y2[3] += ft_xo
+      92      y2[2, 4] += gnd
+      93 -    c110 = Part('Device', 'C', ref='C110', value='33pF C0G', fo
+         -otprint=_C, MPN='0402CG330J500NT', LCSC='C1562')               
+      94 -    c111 = Part('Device', 'C', ref='C111', value='33pF C0G', fo
+         -otprint=_C, MPN='0402CG330J500NT', LCSC='C1562')               
+      93 +    c110 = Part('Device', 'C', ref='C110', value='33pF', footpr
+         +int=_C, MPN='0402CG330J500NT', LCSC='C1562')                   
+      94 +    c111 = Part('Device', 'C', ref='C111', value='33pF', footpr
+         +int=_C, MPN='0402CG330J500NT', LCSC='C1562')                   
+      95      ft_xi & c110 & gnd
+      96      ft_xo & c111 & gnd
+      97  
+
+● Update(circuits/dual_adc_usb/usb_power_in.py)
+  ⎿  Added 1 line, removed 1 line
+      25      cc1 = Net('CC1')
+      26      cc2 = Net('CC2')
+      27  
+      28 -    j1 = Part('Connector', 'USB_C_Receptacle_USB2.0_16P', ref='
+         -J1', value='USB-C',                                            
+      28 +    j1 = Part('Connector', 'USB_C_Receptacle_USB2.0_16P', ref='
+         +J1', value='USB-C 16P',                                        
+      29                footprint='Connector_USB:USB_C_Receptacle_HRO_TYP
+          E-C-31-M-12',
+      30                MPN='TYPE-C-31-M-12', LCSC='C165948')
+      31      j1['VBUS'] += vbus                    # A4, A9, B4, B9
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Value labels are updated to match the BOM, which now passes for all 169
+  parts—the 14 remaining notes are just package-to-footprint name mismatches,
+  and the footprints check out fine. Next I'll run the independent ERC and
+  footprint review.
+
+● Bash(python3 - <<'EOF'
+      import json;s=json.load(open('pipeline_state.json'))…)
+  ⎿  Updated pipeline_state.json (+12 -12)
+      3    "circuit_name": "dual_adc_usb",
+      4    "stage": "coding",
+      5    "last_updated": "2026-09-30T22:05:00Z",
+      6 -  "active_circuit_file": null,                                  
+      6 +  "active_circuit_file": "circuits/dual_adc_usb/__main__.py",   
+      7    "requirements_complete": true,
+      8    "architecture_complete": true,
+      9    "sourcing_complete": true,
+     ...
+      30        "interface_nets": "VBUS_SW, USB_DP, USB_DM, GND",
+      31        "parts": "J1, U1, U2, F1, D1, R1, R2, R3, C1, C2, C3",
+      32        "datasheet_summaries": "datasheets/TPS22918DBVR_SUMMARY.m
+          d",
+      33 -      "status": "syntax_ok",                                   
+      33 +      "status": "done",                                        
+      34        "erc_errors_attributed": 0
+      35      },
+      36      {
+     ...
+      41        "interface_nets": "VBUS_SW, +3V3D, +1V2, +1V8, GND",
+      42        "parts": "U3, U4, U12, L1, L2, L3, R5, R6, R7, R8, R9, R1
+          4, R15, C4, C5, C6, C7, C8, C9, C17",
+      43        "datasheet_summaries": "datasheets/TLV62569DBVR_SUMMARY.m
+          d` (U3, U4, U12)",
+      44 -      "status": "syntax_ok",                                   
+      44 +      "status": "done",                                        
+      45        "erc_errors_attributed": 0
+      46      },
+      47      {
+     ...
+      52        "interface_nets": "VBUS_SW, +3V3A, VAFE_P, VAFE_N, GND",
+      53        "parts": "U5, U6, R10, R11, R12, R13, C10, C11, C12, C13,
+           C14, C15, C16",
+      54        "datasheet_summaries": "datasheets/TLV75733PDBVR_SUMMARY.
+          md`, `datasheets/LM27762DSSR_SUMMARY.md",
+      55 -      "status": "syntax_ok",                                   
+      55 +      "status": "done",                                        
+      56        "erc_errors_attributed": 0
+      57      },
+      58      {
+     ...
+      63        "interface_nets": "ADC_AINA_P, ADC_AINA_N, ADC_VCM, VAFE_
+          P, VAFE_N, +3V3A, GND",
+      64        "parts": "J2, U20, U21, D20, R20-R30, C20-C31",
+      65        "datasheet_summaries": "datasheets/OPA810IDBVR_SUMMARY.md
+          `, `datasheets/THS4521IDGKR_SUMMARY.md`, `datasheets/BAV199_SUM
+          MARY.md",
+      66 -      "status": "syntax_ok",                                   
+      66 +      "status": "done",                                        
+      67        "erc_errors_attributed": 0
+      68      },
+      69      {
+     … 51 more lines (ctrl+o to expand)
+
+● skidl-skills:erc-reviewer(Independent ERC gate)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The independent ERC and footprint check is running now.
+  ⎿  Stop says: Circuit modified but ERC not verified or failed. Run 
+     /design-review before exporting netlists or ordering PCBs.
+
+✻ Sautéed for 59s · done Wednesday 11:30 PM
+
+› Message from skidl-skills:erc-reviewer
+  **PASS.** ERC: 0 errors, 0 warnings. Netlist/XML: 0 errors, plus 1 "Missing
+  tag" warning each from the root node created by `python -m` (accepted).
+  - Footprints: 27/27 resolve. J2/J3 use the custom `ProjectLocal:KH-BNC50-3511`
+  (flagged, not a failure). `validate-bom.py` is clean: 169/169 parts, 0
+  mismatches.
+  - 1 MEDIUM, non-blocking, needs a decision from `circuit-architect`: U10
+  FT232H VREGIN minimum is 3.30 V, but +3V3D tolerance puts it at 3.21–3.45 V.
+  Raising the rail runs into U7's 0.3 V abs max between AVDD and VDRV. Options
+  are listed in the handoff.
+  - 1 LOW: netlist sheet order changes from run to run with Python's hash seed
+  (components and nets do not). Export must use `PYTHONHASHSEED=0`. outputs/
+  were regenerated from a seeded run.
+  - 6 notes carried forward: J2/J3 custom footprint, U9 EP = GND unverified, U9
+  dual-purpose pins need Gowin "use as regular IO" settings, U9 VCC has no
+  ferrite bead, U7 supply sequencing is within spec, stale `outputs/run1.net`.
+  - Export is unblocked. Exact command is in `## Next phase must`.
+
+  Files:
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/handoffs/06_erc.md
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/outputs/erc_report.md
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Agent "Independent ERC gate" finished · 8m 40s
+
+● ERC passed clean, but I found a medium issue: the FT232H's 3.3V supply mode
+  can sag below its datasheet minimum under worst-case tolerance. I'm switching
+  it to 5V mode (FTDI's standard USB-powered config) to eliminate the problem
+  entirely, and will rework the USB-bridge block accordingly.
+
+● Bash(python3 - <<'EOF'
+      import json;s=json.load(open('pipeline_state.json'))…)
+  ⎿  Updated pipeline_state.json (+7 -7)
+      1  {
+      2    "version": "5.1",
+      3    "circuit_name": "dual_adc_usb",
+      4 -  "stage": "coding",                                            
+      4 +  "stage": "erc",                                               
+      5    "last_updated": "2026-09-30T22:05:00Z",
+      6    "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+      7    "requirements_complete": true,
+     ...
+       9    "sourcing_complete": true,
+      10    "datasheets_complete": true,
+      11    "erc_status": {
+      12 -    "last_run": null,                                          
+      12 +    "last_run": "2026-10-01",                                  
+      13      "errors": 0,
+      14      "warnings": 0,
+      15 -    "pass": false,                                             
+      16 -    "report_path": null                                        
+      15 +    "pass": true,                                              
+      16 +    "report_path": "outputs/erc_report.md"                     
+      17    },
+      18    "review_status": null,
+      19    "sourced_bom_version": null,
+     ...
+      123      }
+      124    ],
+      125    "sourcing_escalation_count": 0,
+      126 -  "erc_iteration_count": 0,                                   
+      126 +  "erc_iteration_count": 1,                                   
+      127    "architecture_rework_count": 1,
+      128    "handoffs": {
+      129      "requirements": "handoffs/01_requirements.md",
+     ...
+      131      "sourcing": "handoffs/03_sourcing.md",
+      132      "datasheets": "handoffs/04_datasheets.md",
+      133      "coding": "handoffs/05_coding.md",
+      134 -    "erc": null                                               
+      134 +    "erc": "handoffs/06_erc.md"                               
+      135    },
+      136 -  "last_handoff": "handoffs/05_coding.md"                     
+      136 +  "last_handoff": "handoffs/06_erc.md"                        
+      137  }
+      138   No newline at end of file
+
+● skidl-skills:skidl-block-coder(usb_bridge VREGIN 5V mode)
+  ⎿  Backgrounded agent (↓ to manage · ctrl+o to expand)
+
+● The USB bridge block is being rewired so the FT232H runs in 5 V mode (VREGIN
+  from the USB supply). After that come the assembly update and a re-run of the
+  ERC check.
+
+✻ Cooked for 32s · done Wednesday 11:39 PM
+
+› Message from skidl-skills:skidl-block-coder
+  I moved U10 to VREGIN 5 V mode (DS_FT232H Fig 6.1, §6). This closes M1, and
+  the standalone smoke test gave 0 ERC errors.
+  - **Power pins:** VREGIN now comes from VBUS_SW. VCCD is the internal 3.3 V
+  regulator output on a new internal net, FT_VCCD; it is not tied to +3V3D, and
+  the block sets the pin to POWER-OUT. Per the figure, VPLL and VPHY come from
+  VCCD. VCCIO x3 stay on +3V3D.
+  - **EEPROM:** R102 (the 10k pull-up on EEPROM data-out) and U11's VCC now go
+  to FT_VCCD, per Table 3.3.
+  - **Decoupling:** same refs, values and MPNs on new rails. C100 100 nF and
+  C108 4.7 uF (16 V) sit on VBUS_SW at VREGIN. C101 and C105–C107 are on
+  FT_VCCD; C102–C104 stay on VCCIO (+3V3D).
+  - **Signature changed:** new `vbus_sw` parameter before `v3v3d`. The assembler
+  call must now include `vbus_sw=VBUS_SW`.
+  - **BOM:** no new parts or values, so the part-sourcer has nothing to do.
+  - **Next phase:** the architect should update the VBUS_SW, +3V3D and FT_VCCD
+  rows in net_plan. U10's ~54 mA regulator current now loads VBUS_SW instead of
+  +3V3D.
+  - **Not added:** the figure's optional ferrite bead and LC filters. They are
+  noted for layout.
+  - **Unverified sequencing:** RESET# pulls up to +3V3D, so U10 should stay in
+  reset until VCCIO is up (~2–3 ms after VBUS_SW). The datasheet gives no
+  sequencing spec to check this against.
+  - **Receipt:** 19 parts, 30 nets. py_compile OK. Smoke ERC: 0 errors, 16
+  warnings, all single-pin interface nets. Footprints unchanged.
+
+  Files:
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/circuits/dual_adc_usb/usb_bridge.py
+  - /home/devb/projects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-u
+  sb-9/handoffs/05_blocks/usb_bridge.md (revision 2)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Agent "usb_bridge VREGIN 5V mode" finished · 1m 53s
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(circuits/dual_adc_usb/__main__.py)
+  ⎿  Added 1 line, removed 1 line
+      104  
+      105  usb_bridge(usb_dp=USB_DP, usb_dm=USB_DM, ft_d=FT_D, ft_rxf_n=F
+           T_RXF_N, ft_txe_n=FT_TXE_N,
+      106             ft_rd_n=FT_RD_N, ft_wr_n=FT_WR_N, ft_clkout=FT_CLKO
+           UT, ft_oe_n=FT_OE_N,
+      107 -           v3v3d=V3V3D, gnd=GND, tag='usb_bridge')            
+      107 +           vbus_sw=VBUS_SW, v3v3d=V3V3D, gnd=GND, tag='usb_bri
+          +dge')                                                         
+      108  
+      109  
+      110  def _stabilize_tags():
+
+● Bash(grep -n 'VBUS_SW *=' circuits/dual_adc_usb/__main__.py; cd /home/devb/pro
+      jects/AI/ai-circuit-design-tests/skidl-skills-tests/dual-adc-usb-9 &&
+      PYTHONHASHSEED=0…)
+  ⎿  37:VBUS_SW = Net('VBUS_SW')                    # driven by usb_power_i
+     n U2.VOUT (PWROUT)
+     ERC INFO: No errors or warnings found while running ERC.
+     … +8 lines (ctrl+o to expand)
+  ⎿  Updated skidl_REPL_sklib.py (+1 -1)
+      286              Pin(num='6',name='Pin_6',func=pin_types.PASSIVE,un
+           it=1)], 'unit_defs':[] }),
+      287          Part(**{ 'name':'FT232H', 'dest':TEMPLATE, 'tool':SKID
+           L, 'aliases':Alias({'FT232H'}), 'ref_prefix':'U', 'fplist':[''
+           ], 'footprint':'Package_QFP:LQFP-48_7x7mm_P0.5mm', 'keywords':
+           'FTDI USB Single UART FIFO', 'description':'Hi Speed Single Ch
+           annel USB UART/FIFO, LQFP/QFN-48', 'datasheet':'https://www.ft
+           dichip.com/Support/Documents/DataSheets/ICs/DS_FT232H.pdf', 'p
+           ins':[
+      288              Pin(num='40',name='VREGIN',func=pin_types.PWRIN,un
+           it=1),
+      289 -            Pin(num='39',name='VCCD',func=pin_types.PWRIN,unit
+          -=1),                                                          
+      289 +            Pin(num='39',name='VCCD',func=pin_types.PWROUT,uni
+          +t=1),                                                         
+      290              Pin(num='38',name='VCCCORE',func=pin_types.PWROUT,
+           unit=1),
+      291              Pin(num='37',name='VCCA',func=pin_types.PWRIN,unit
+           =1),
+      292              Pin(num='6',name='DM',func=pin_types.BIDIR,unit=1)
+           ,
+  ⎿  Updated outputs/dual_adc_usb_bom.xml (+70 -68)
+      2  <export version="D">
+      3    <design>
+      4      <source>/home/devb/projects/AI/ai-circuit-design-tests/skidl
+         -skills-tests/dual-adc-usb-9/circuits/dual_adc_usb/__main__.py</
+         source>
+      5 -    <date>09/30/2026 11:37 PM</date>                            
+      5 +    <date>09/30/2026 11:41 PM</date>                            
+      6      <tool>SKiDL (3.0.0)</tool>
+      7    </design>
+      8    <components>
+     ...
+      855    <nets>
+      856      <net code="0" name="GND">
+      857        <node ref="U7" pin="49"/>
+      858 +      <node ref="C108" pin="2"/>                              
+      859        <node ref="U2" pin="2"/>
+      860        <node ref="C90" pin="2"/>
+      861        <node ref="C31" pin="2"/>
+     ...
+      863        <node ref="C6" pin="2"/>
+      864        <node ref="U5" pin="2"/>
+      865        <node ref="C70" pin="2"/>
+      865 -      <node ref="C109" pin="2"/>                              
+      866        <node ref="C12" pin="2"/>
+      867        <node ref="U7" pin="58"/>
+      868        <node ref="C75" pin="2"/>
+      869        <node ref="C91" pin="2"/>
+      870        <node ref="J4" pin="6"/>
+      871 +      <node ref="C109" pin="2"/>                              
+      872        <node ref="U7" pin="59"/>
+      873        <node ref="C7" pin="2"/>
+      874        <node ref="C72" pin="2"/>
+      874 -      <node ref="U7" pin="61"/>                               
+      875        <node ref="U3" pin="2"/>
+      876 +      <node ref="U7" pin="61"/>                               
+      877        <node ref="C76" pin="2"/>
+      878        <node ref="C92" pin="2"/>
+      879        <node ref="C2" pin="2"/>
+     ...
+      899        <node ref="U21" pin="6"/>
+      900        <node ref="C44" pin="2"/>
+      901        <node ref="U9" pin="46"/>
+      901 -      <node ref="U10" pin="42"/>                              
+      902 -      <node ref="Y2" pin="2"/>                                
+      902        <node ref="R11" pin="2"/>
+     … 320 more lines (ctrl+o to expand)
+  ⎿  … 1 more file changed
+
+● The full circuit runs clean: ERC reports 0 errors and 0 warnings, and the BOM
+  matches all 169 parts. A quick check confirms the FT232H's new internal
+  regulator output isn't shorted to +3V3D:
+
+  Ran 5 shell commands (ctrl+o to expand)
+● I've set up FT_VCCD as its own net powering VPHY, VPLL, VCCD, and the EEPROM
+  per the datasheet's 5 V-mode diagram. Now I'll log this change in the ERC
+  handoff and close out the pipeline state.
+
+● Bash(cat >> handoffs/06_erc.md <<'EOF'…)
+  ⎿  circuits/dual_adc_usb:
+     adc_dual.py
+     afe_ch_a.py
+     … +18 lines (ctrl+o to expand)
+  ⎿  Updated handoffs/06_erc.md (+6 -0)
+      52  - Footprints: 27/27 resolve; J2/J3 custom (flagged). BOM: clean
+          , 169/169.
+      53  - Findings: 1 MEDIUM (M1, U10 VREGIN tolerance, to the architec
+          t, non-blocking), 1 LOW (sheet-order seed, use PYTHONHASHSEED=0
+          ), 6 notes.
+      54  - **PASS**. outputs/ regenerated (seeded run).
+      55 +                                                               
+      56 +## Driver addendum (2026-10-01)                                
+      57 +- M1 dispositioned by driver: options were accept / trim R6 / F
+         +T232H VREGIN 5 V mode; chose 5 V mode (FTDI bus-powered config,
+         + removes the tolerance issue outright).                        
+      58 +- usb_bridge rev 2 (`handoffs/05_blocks/usb_bridge.md`): VREGIN
+         + ← VBUS_SW; VCCD is internal regulator output on new net FT_VCC
+         +D feeding VPLL, VPHY, U11 VCC, R102. VCCIO stays +3V3D. No BOM 
+         +change.                                                        
+      59 +- `__main__.py` call updated with `vbus_sw=VBUS_SW`. Re-run (PY
+         +THONHASHSEED=0): ERC 0 errors / 0 warnings; validate-bom 169/16
+         +9 agree. outputs/ regenerated from this run.                   
+      60 +- Not re-reviewed by erc-reviewer (localized change; driver che
+         +cked FT_VCCD net membership in the netlist). architecture/net_p
+         +lan.md not updated for FT_VCCD / U10 load moving from +3V3D to 
+         +VBUS_SW — doc drift, TODO.                                     
+  ⎿  Updated pipeline_state.json (+3 -3)
+      1  {
+      2    "version": "5.1",
+      3    "circuit_name": "dual_adc_usb",
+      4 -  "stage": "erc",                                               
+      5 -  "last_updated": "2026-09-30T22:05:00Z",                       
+      4 +  "stage": "export",                                            
+      5 +  "last_updated": "2026-10-01T00:00:00Z",                       
+      6    "active_circuit_file": "circuits/dual_adc_usb/__main__.py",
+      7    "requirements_complete": true,
+      8    "architecture_complete": true,
+     ...
+      17    },
+      18    "review_status": null,
+      19    "sourced_bom_version": null,
+      20 -  "last_modified_circuit": null,                               
+      20 +  "last_modified_circuit": "circuits/dual_adc_usb/usb_bridge.py
+         +",                                                             
+      21    "coding_mode": "modular",
+      22    "use_cache": false,
+      23    "blocked_until": null,
+
+● I've finished the design, but nothing has been built or tested on hardware
+  yet. Several parts still rest on unverified assumptions, listed below. The
+  SKiDL design is in circuits/dual_adc_usb/. The full circuit passes ERC with 0
+  errors and 0 warnings, all 169 parts agree with the sourced BOM, and the
+  netlist and BOM XML are in outputs/.
+
+  What it is:
+  - Inputs: two BNC inputs with 1 MΩ input impedance so scope probes work. Each
+    channel has an attenuator, a buffer and a 3rd-order anti-alias filter (about
+    8.8 MHz, −3 dB).
+  - ADC: one ADS5231 dual 12-bit ADC. It won't run below 20 MSPS, so it samples
+    at 40 MSPS and the FPGA reduces that to 10 MSPS.
+  - FPGA and memory: a Gowin GW1NR-9 FPGA. Its built-in PSRAM holds the 0.1 s
+    capture, which is 32 Mbit at 16 bits per sample.
+  - USB: an FT232H high-speed USB 2.0 bridge on a USB-C receptacle, wired for
+    USB 2.0 only. Streaming both channels at full rate would need 40 MB/s, which
+    is at or above what USB 2.0 can sustain, so the board captures to the
+    buffer first and then sends it to the host.
+  - Power: estimated at 1.47 W. The worst case, with a 1.25× margin, is 496 mA,
+    just under the 500 mA USB 2.0 limit. A switch to USB-C wasn't strictly
+    needed, but the USB-C connector is there anyway.
+
+  Decisions I made without asking, as the prompt directed (options and reasoning
+  are in the handoffs):
+  - FPGA I/O bank 3 needs a 1.8 V supply, so I added a +1V8 regulator. The JTAG
+    header now references 1.8 V, so your programmer must support 1.8 V.
+  - The FPGA had too few 3.3 V-capable pins, so I dropped the ADC's data-valid
+    and overrange outputs.
+  - The 40 MHz oscillator didn't publish its jitter, so I swapped it for one
+    rated at 0.7 ps.
+  - The FT232H runs in its 5 V supply mode. In 3.3 V mode the worst-case rail
+    (3.21 V) fell below the chip's 3.30 V minimum. The ERC reviewer didn't
+    re-check this change; I checked the new net in the netlist myself.
+
+  Still open:
+  - BNC footprint (J2/J3): no stock footprint matched, so I drew a custom one
+    from a datasheet drawing that isn't to scale. Check it against a physical
+    connector before fab.
+  - Unverified FPGA facts:
+    - The exposed pad goes to GND.
+    - Core current is at most 150 mA and the 1.8 V load at most 100 mA. The
+      power budget only holds if both are true.
+    - The PSRAM can sustain the 40 MB/s needed. The raw rate is 664 MB/s, so
+      this is likely, but the throughput of Gowin's PSRAM controller IP isn't
+      confirmed.
+  - Missing filtering: Gowin recommends a ferrite bead and 4.7 µF on the FPGA
+    core supply, and the design has neither.
+  - Supply risk: the ADC and the FPGA each come from a single supplier with low
+    stock (235 and 182 units).
+  - Firmware: some of the FPGA's dual-purpose pins have to be set to "use as
+    regular IO" in the Gowin project.
+  - Export: always run it with PYTHONHASHSEED=0 so the netlist comes out the
+    same each time.
+  - Stale documentation: architecture/net_plan.md doesn't reflect the FT232H 5
+    V-mode change.
+  - Leftover files: outputs/run1.net and outputs/run*.log are stale. A hook
+    blocks deletion, so remove them yourself with ! rm outputs/run1.net 
+    outputs/run*.log.
+
+  I haven't run the optional /design-review or committed anything.
+
+  Most decisions and open items are in handoffs/02_architecture.md and
+  handoffs/06_erc.md; the full ERC findings are in outputs/erc_report.md.
+
+✻ Cogitated for 1h 42m 41s · done Wednesday 11:42 PM
