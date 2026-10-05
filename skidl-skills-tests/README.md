@@ -2,7 +2,7 @@
 
 ## Tool under test
 
-The [SKiDL Skills](https://github.com/devbisme/skidl) plugin for Claude Code is a
+The [SKiDL Skills](https://github.com/devbisme/skidl-skills) plugin for Claude Code is a
 multi-agent pipeline that takes a plain-English board description to a KiCad netlist, with
 SKiDL Python code as the intermediate representation.
 
@@ -27,6 +27,33 @@ SKiDL Python code as the intermediate representation.
   hooks, validated PDF fetching, and a part cache with an off switch. Runs 4–7 ran the
   revised plugin, and runs 6–8 show pipeline state v5.1. Runs 1–3 and 4–8 are therefore
   not strictly comparable, and run 8 also changed model and SKiDL version at once.
+
+## Why this tool
+
+1. It's very easy to use (it's just a skill that can be run in Claude Code).
+2. It uses SKiDL and I'm interested in how that performs.
+
+## Quick look
+
+I've run eight trials of `skidl-skills` in an attempt to reduce the cost and time required
+to produce a design.
+The fastest, cheapest, and most interesting is the last run: `dual-adc-usb-8`.
+That result could arise from:
+* Optimization of the skill.
+* Using the new Opus 5.5 (earlier runs used older models; see **Model** above).
+* Pure luck.
+
+You can make a quick assessment of the [`dual-adc-usb-8`](dual-adc-usb-8/) run using these files:
+* The prompt that initiates the design flow: `dual-adc-prompt.txt`.
+* An executive summary describing the design phases: `executive_summary.md`.
+* A more detailed description: `README.md`.
+* An even more detailed sequence of Claude's operations: `claude_transcript.txt`.
+* An executable Jupyter design doc: `dual_adc_usb.ipynb`.
+
+I have not validated any of these designs for correctness.
+That will be my next task now that I have been able to generate a design
+within a reasonable time with a reasonable cost.
+I will report the results of my validation here when I'm done.
 
 ## The design problem
 
