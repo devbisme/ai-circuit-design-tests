@@ -2,6 +2,12 @@
 
 Append-only, newest first. One entry per committed copperhead run.
 
+## 2026-10-06 — create pipeline stage: part-selection
+
+- Change: part-selection-bom
+- Files: docs/BOM.md, docs/DECISIONS.md
+- Verification: ERC not required
+
 ## 2026-10-06 — create pipeline stage: architecture
 
 - Change: architecture-subsystems
