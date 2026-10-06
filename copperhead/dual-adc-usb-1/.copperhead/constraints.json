@@ -207,5 +207,29 @@
       "ADC input driver",
       "calibration storage"
     ]
+  },
+  "power.aon_suspend_allocation_mA": {
+    "max": 1.75,
+    "value": "<=1.75 mA architecture allocation cap for everything on VBUS in suspend (FT232H <=1.2 mA, D+ pull-up 0.2 mA, 3V3_AON LDO Iq <=0.1 mA, bus switch <=0.02 mA, 93LC56 <=0.01 mA, load-switch/converter off-leakage <=0.01 mA, ESD/TVS/cap leakage <=0.05 mA); no LED, divider or conducting pull on 3V3_AON",
+    "source": "docs/SUBSYSTEMS.md §2.4 (derived from power.suspend_current_mA <=2.5 mA)",
+    "affects": [
+      "USB bridge selection",
+      "3V3_AON LDO selection",
+      "bus switch selection",
+      "input power path / load switch"
+    ]
+  },
+  "power.rail_allocation_mA": {
+    "value": "Per-rail load allocations (sum to ~342 mA at VBUS=4.4 V, <=450 mA): 3V3_AON 61 mA (FT232H <=60 mA max operating current); 3V3_D 205 mA total (FPGA I/O 25, SDRAM avg 70, flash 2, LEDs 3, 1V2_FPGA LDO 30, 1V8_A LDO 60, 1V8_D LDO 15); 3V3_CLK 15 mA; +5V_A 20 mA, -5V_A 15 mA via +/-6 V converter (eta>=75 %); buck eta>=88 %; contingency 25 mA. Pre-config only 3V3_AON live (~61 mA <=100 mA). Ungated capacitance <=9 uF (<=2.2 uF on VBUS + <=6.8 uF on 3V3_AON); gated bulk <=100 uF behind >=3 ms soft start.",
+    "source": "docs/SUBSYSTEMS.md §2.1-§2.5 (derived from power.vbus_current_mA, power.preconfig_current_mA, power.vbus_capacitance_uF)",
+    "affects": [
+      "ADC selection",
+      "FPGA selection",
+      "buffer memory selection",
+      "front-end op amp selection",
+      "bipolar rail generation",
+      "digital rail regulators",
+      "USB bridge selection"
+    ]
   }
 }

@@ -171,6 +171,9 @@ Options:
 
 ## 6. Open items for later stages
 
-- Select the ADC, front-end op amps, bipolar rail generation, FPGA, SDRAM, and clock oscillator. Each must be checked against the §3 budgets, especially `power.vbus_current_mA`, `power.preconfig_current_mA`, `power.suspend_current_mA`, and `clock.jitter_ps_rms`.
-- Confirm the FT232H suspend current.
-- Define the power-gating sequence: USB bridge only before configuration, then the remaining rails are enabled.
+The stage 2 architecture is in docs/SUBSYSTEMS.md. It defines the rails, per-rail current allocations, the power-gating sequence (§2.6), the jitter allocation (§6) and the per-part selection limits (§4, §7, §8).
+
+- Select the ADC, front-end op amps, bipolar rail generation, FPGA, SDRAM, and clock oscillator. Check each against the SUBSYSTEMS.md allocations, which sum to the §3 budgets.
+- Confirm the FT232H suspend current (allocated ≤1.2 mA) and its maximum operating current (allocated ≤60 mA). See SUBSYSTEMS.md §2.3 and §2.4.
+- ~~Define the power-gating sequence~~: done in SUBSYSTEMS.md §2.6. FT232H `PWREN_N` gates `VBUS_SW`, and the FPGA `AFE_EN` gates the ±5V_A rails.
+- **AT RISK:** the `analog.dc_accuracy` offset budget leaves no margin. It needs an ADC offset ≤0.9 mV (SUBSYSTEMS.md §7.6). If no part meets this, revise the ASSUMED limit through a recorded decision.
