@@ -13,14 +13,14 @@ Status: stage 3 (part selection). Derived from docs/SPEC.md and docs/SUBSYSTEMS.
 
 ## Open issues raised by this stage (must be resolved by recorded decision, not silently accepted)
 
-1. **BLOCKER: `analog.dc_accuracy` vs the only installed dual 12-bit ≥10 MSPS ADC symbol.**
+1. **RESOLVED 2026-10-06 (user decision, option a; see DECISIONS.md): `analog.dc_accuracy` vs the only installed dual 12-bit ≥10 MSPS ADC symbol.** The limit now applies after calibration; uncalibrated ≤3 % / ±150 mV RTI. LTC2290 accepted.
    - **Why the LTC2290 is the choice.** The AD9238 has no installed symbol. The installed alternatives (AD9280/AD9283, ADC122Sxxx, ADC1283) are 8-bit or ≤1 MSPS. That leaves the LTC2290, symbol `Analog_ADC:LTC2290xUP`.
    - **Offset.** The LTC2290 datasheet offset is expected to be about ±2 mV typ and ±12 mV max. That is above the ≤0.9 mV ADC allocation in SUBSYSTEMS §7.6, and gives up to about 126 mV referred to input (RTI).
    - **Gain error.** Its internal-reference gain error is expected to be about ±1.5 % FS. That is above the ≤0.5 % allocation (UNVERIFIED).
    - **What this means.** The *uncalibrated* ≤1 % / ±20 mV ASSUMED limit cannot be met. On-board calibration constants (SUBSYSTEMS §10) would correct it after calibration. The user must decide between two options:
      - (a) Revise the ASSUMED `analog.dc_accuracy` so it applies after calibration.
      - (b) Install a different ADC symbol library.
-   - No stage may proceed on dc_accuracy until that decision is recorded.
+   - Decision recorded 2026-10-06: option (a). Later stages may proceed.
 2. **Rail change (SUBSYSTEMS §2.1 and §8 need updating).** The LTC2290 runs from VDD = 2.7–3.4 V, so `1V8_A` is replaced by `3V3_ADC`, a low-noise LDO from VBUS_SW.
    - **Load allocation.** About 45 mA at 10 MSPS (UNVERIFIED). Moving this load from 3V3_D (LDO input, 60 mA) to VBUS_SW (linear, 45 mA) lowers the VBUS total.
    - **`1V8_D` is kept.** It feeds LTC2290 OVDD (0.5–3.6 V) and FPGA bank VCCIO, so the ADC↔FPGA bank stays at 1.8 V as before.
@@ -47,7 +47,7 @@ Status: stage 3 (part selection). Derived from docs/SPEC.md and docs/SUBSYSTEMS.
 | U7 | iCE40HX4K-TQ144 | Package_QFP:TQFP-144_20x20mm_P0.5mm | ICE40HX4K-TQ144 (UNVERIFIED: 107 user I/O, 1.2 V core, VCCIO per bank) | SYM✓ FPGA_Lattice:ICE40HX4K-TQ144 (5 units). Capture/control, no MCU (SUBSYSTEMS §4). Bank for ADC on 1V8_D, others on 3V3_D. Gated, 0 µA in suspend. |
 | U8 | MT48LC16M16A2P-6A | Package_SO:TSOP-II-54_22.2x10.16mm_P0.8mm | MT48LC16M16A2P-6A:G (UNVERIFIED: 256 Mbit x16, 3.3 V, IDD avg vs 70 mA allocation) | SYM✓ Memory_RAM:MT48LC16M16A2P. 32 MB buffer ≥4 MB, ~0.84 s/ch ≥0.1 s. On 3V3_D (gated). |
 | U9 | W25Q32JV | Package_SO:SOIC-8_5.23x5.23mm_P1.27mm | W25Q32JVSSIQ (UNVERIFIED: 32 Mbit ≥ iCE40HX4K bitstream, 3.3 V, standby ≤50 µA) | SYM? Memory_Flash:W25Q32JVSS. FPGA config flash on 3V3_D (gated, so standby is irrelevant to suspend). |
-| U10 | LTC2290 | Package_DFN_QFN:QFN-64-1EP_9x9mm_P0.5mm_EP7.15x7.15mm | LTC2290CUP#PBF (UNVERIFIED: dual 12-bit 10 MSPS, VDD 2.7-3.4 V, OVDD 0.5-3.6 V, offset/gain error, SNR ~71 dB, aperture jitter) | SYM✓ Analog_ADC:LTC2290xUP. The only installed dual simultaneous 12-bit ≥10 MSPS symbol. 2 Vpp diff (SENSE=VDD), VCMA 1.5 V → FDA VOCM. Offset/gain likely violate the §7.6 allocation: BLOCKER, see Open issue 1. |
+| U10 | LTC2290 | Package_DFN_QFN:QFN-64-1EP_9x9mm_P0.5mm_EP7.15x7.15mm | LTC2290CUP#PBF (UNVERIFIED: dual 12-bit 10 MSPS, VDD 2.7-3.4 V, OVDD 0.5-3.6 V, offset/gain error, SNR ~71 dB, aperture jitter) | SYM✓ Analog_ADC:LTC2290xUP. The only installed dual simultaneous 12-bit ≥10 MSPS symbol. 2 Vpp diff (SENSE=VDD), VCMA 1.5 V → FDA VOCM. Offset/gain exceed the raw §7.6 allocation; accepted under the post-calibration dc_accuracy limit (Open issue 1, resolved). |
 | U11 | TLV62084 | Package_SON:WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm | TLV62084ADSGR (UNVERIFIED: VIN 2.5-6 V, 2 A, η ≥88 % at 200 mA, Iq ~17 µA) | SYM? Regulator_Switching:TLV62084ADSGx (seen in search, pins not checked). 3V3_D buck from VBUS_SW. Gated, so its Iq does not count in suspend. |
 | U12 | MCP1700-1202E | Package_TO_SOT_SMD:SOT-23 | MCP1700T-1202E/TT (UNVERIFIED: 1.2 V, VIN 2.3-6 V, 250 mA) | SYM? Regulator_Linear:MCP1700x-120xxTT (family confirmed). 1V2_FPGA from 3V3_D, 30 mA allocation. |
 | U13 | MCP1700-1802E | Package_TO_SOT_SMD:SOT-23 | MCP1700T-1802E/TT (UNVERIFIED: 1.8 V, 250 mA) | SYM? Regulator_Linear:MCP1700x-180xxTT (family confirmed). 1V8_D for LTC2290 OVDD and FPGA ADC bank, 15 mA. |
@@ -175,4 +175,4 @@ Status: stage 3 (part selection). Derived from docs/SPEC.md and docs/SUBSYSTEMS.
 | Preconfig ≤100 mA | FT232H ≤60 + U2 + U3/U4 + U5 Iq | ≈61 mA ✓ |
 | Ungated capacitance ≤10 µF | VBUS 2.0 µF (C1, C2) + 3V3_AON ≈4.6 µF (C3-C8, C10-C16) | ≈6.6 µF ✓ |
 | Steady state ≤450 mA | SUBSYSTEMS §2.2 with 1V8_A (60 mA via buck ≈51 mA VBUS) replaced by 3V3_ADC linear ≈45 mA | ≈336 mA ✓ (SUBSYSTEMS update pending) |
-| dc_accuracy (uncalibrated) | LTC2290 offset/gain expected above allocation | ✗ BLOCKER, Open issue 1 |
+| dc_accuracy (post-calibration) | Uncalibrated LTC2290 error is within the ≤3 % / ±150 mV RTI calibration range (UNVERIFIED); corrected by on-board constants | ✓ by decision, Open issue 1 resolved |

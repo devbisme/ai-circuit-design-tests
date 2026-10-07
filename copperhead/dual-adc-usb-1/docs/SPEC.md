@@ -49,7 +49,7 @@ This is a bus-powered USB data-acquisition board with two analog inputs.
 | `input.overvoltage_V` | Survive ±30 V continuous at the connector with no damage | **ASSUMED**: protects against a probe set to the wrong range |
 | `analog.bandwidth_MHz` | -3 dB ≥ 3 MHz; anti-alias filter attenuates ≥ 40 dB at ≥ 7.5 MHz (folds to 2.5 MHz) | **ASSUMED**: the brief gives no bandwidth; this is chosen for 10 MSPS Nyquist |
 | `analog.enob_bits` | ≥ 10.5 ENOB at f_in = 1 MHz, end to end | **ASSUMED** |
-| `analog.dc_accuracy` | Uncalibrated gain error ≤ 1 %, offset ≤ ±20 mV referred to input. Host-side calibration constants are stored on the board | **ASSUMED** |
+| `analog.dc_accuracy` | Post-calibration gain error ≤ 1 %, offset ≤ ±20 mV referred to input, using per-channel constants stored on the board (93LC56). Uncalibrated: gain error ≤ 3 %, offset ≤ ±150 mV RTI (sets the calibration range only) | **DECIDED** (user, 2026-10-06, option (a)) |
 
 ### 3.1 Preliminary power estimate (to be refined in part selection)
 
@@ -176,4 +176,4 @@ The stage 2 architecture is in docs/SUBSYSTEMS.md. It defines the rails, per-rai
 - Select the ADC, front-end op amps, bipolar rail generation, FPGA, SDRAM, and clock oscillator. Check each against the SUBSYSTEMS.md allocations, which sum to the §3 budgets.
 - Confirm the FT232H suspend current (allocated ≤1.2 mA) and its maximum operating current (allocated ≤60 mA). See SUBSYSTEMS.md §2.3 and §2.4.
 - ~~Define the power-gating sequence~~: done in SUBSYSTEMS.md §2.6. FT232H `PWREN_N` gates `VBUS_SW`, and the FPGA `AFE_EN` gates the ±5V_A rails.
-- **AT RISK:** the `analog.dc_accuracy` offset budget leaves no margin. It needs an ADC offset ≤0.9 mV (SUBSYSTEMS.md §7.6). If no part meets this, revise the ASSUMED limit through a recorded decision.
+- ~~**AT RISK:** the `analog.dc_accuracy` offset budget~~: resolved 2026-10-06 by user decision (option a). The limit now applies after calibration; the uncalibrated limit is relaxed to ≤3 % / ±150 mV RTI. The SUBSYSTEMS.md §7.6 ADC allocations (≤0.5 % / ≤0.9 mV) now apply post-calibration residuals, not raw ADC error. Verify LTC2290 offset/gain against its datasheet.
