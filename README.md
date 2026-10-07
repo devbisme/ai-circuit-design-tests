@@ -19,6 +19,7 @@ Please feel free to report any of your own evaluations here as an issue on this 
 |---|---|
 | [`skidl-skills-tests/`](skidl-skills-tests/) | [skidl-skills](https://github.com/devbisme/skidl-skills) |
 | [`konnect-tests/`](konnect-tests/) | [Konnect](https://github.com/mixelpixx/Konnect) |
+| [`copperhead-tests/`](copperhead-tests/) | [Copperhead](https://github.com/copperheadhq/copperhead) |
 
 Each tool's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.
