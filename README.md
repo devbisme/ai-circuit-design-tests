@@ -4,10 +4,22 @@ There are now many [AI tools](https://devbisme.github.io/RepoRecon/?topic=kicad_
 Some may work, many may not; it's hard to tell since example designs are either non-existent, show only partial results, or
 are very simple (e.g. resistor dividers).
 
-I'm going to try some of these AI design tools to see how they perform.
+I'm going to try some of these AI tools to see how they perform.
 This repo is the test bench. Each top-level subdirectory holds the artifacts of one tool
 being exercised on a real design problem, plus an evaluation of what came out and what it
 cost.
+
+The tools fall into two classes, and both are tested here:
+
+- **Generators** take a design prompt and produce a design: specs, BOM, schematics,
+  netlists, and sometimes a board.
+- **Analyzers** take an existing KiCad design and produce a report: design review findings,
+  ERC/DRC/DFM checks, simulations, sourcing, etc. They don't create a design of their own,
+  so they are run on a design produced by one of the generators tested here.
+
+Because of this, the results and the directory layout differ between the two classes.
+A generator's output is judged by whether the design is correct and complete; an analyzer's
+output is judged by whether its findings are real, relevant, and not missing anything important.
 
 Note that I have not validated any of these designs for correctness.
 I will report the results of my validation in each tool's directory when I'm done.
@@ -15,16 +27,23 @@ Please feel free to report any of your own evaluations here as an issue on this 
 
 ## Tools tested
 
-| Directory | Tool |
-|---|---|
-| [`skidl-skills-tests/`](skidl-skills-tests/) | [skidl-skills](https://github.com/devbisme/skidl-skills) |
-| [`konnect-tests/`](konnect-tests/) | [Konnect](https://github.com/mixelpixx/Konnect) |
-| [`copperhead-tests/`](copperhead-tests/) | [Copperhead](https://github.com/copperheadhq/copperhead) |
+| Directory | Tool | Class |
+|---|---|---|
+| [`skidl-skills-tests/`](skidl-skills-tests/) | [skidl-skills](https://github.com/devbisme/skidl-skills) | Generator |
+| [`konnect-tests/`](konnect-tests/) | [Konnect](https://github.com/mixelpixx/Konnect) | Generator |
+| [`copperhead-tests/`](copperhead-tests/) | [Copperhead](https://github.com/copperheadhq/copperhead) | Generator |
+| [`kicad-happy-tests/`](kicad-happy-tests/) | [kicad-happy](https://github.com/aklofas/kicad-happy) | Analyzer |
 
-Each tool's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
+Each generator's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.
+Each analyzer's directory holds a copy of the design it analyzed (and notes where it came from),
+the reports the tool produced, and an evaluation of the findings, cost and runtime.
 
 ## Layout
+
+This is the layout for generators. Analyzers follow it loosely: the KiCad files in their
+directories are inputs copied from a generator's run, not outputs, and the main output is
+the analysis report.
 
 ```
 ai-circuit-design-tests/
