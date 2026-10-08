@@ -25,6 +25,13 @@ Note that I have not validated any of these designs for correctness.
 I will report the results of my validation in each tool's directory when I'm done.
 Please feel free to report any of your own evaluations here as an issue on this repo.
 
+**If you are interested in trying any of these tools,**
+the most important files to read are:
+
+* `setup.md` which describes how to install the tool,
+
+* `transcript.txt` which shows the interactions between the user and Claude when using the tool.
+
 ## Tools tested
 
 | Directory | Tool | Class |
@@ -54,8 +61,9 @@ ai-circuit-design-tests/
     └── <design>-<run#>/      <- one directory per run
         ├── README.md         <- what was run, what came out, evaluation, cost
         ├── *-prompt.txt          <- the verbatim prompt given to the tool
-        ├── claude_transcript.txt <- exported session transcript
+        ├── claude_transcript.txt <- transcript of interactions between the user and Claude
         ├── claude_cost.txt       <- token usage and equivalent API cost
+        ├── executive_summary.md  <- overall description of the design process, results, risks.
         └── ...                   <- everything the tool produced
 ```
 
