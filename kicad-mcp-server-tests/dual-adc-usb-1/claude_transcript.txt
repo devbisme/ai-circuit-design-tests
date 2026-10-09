@@ -1,0 +1,427 @@
+ ▐▛███▛█   Claude Code v2.1.295
+▝▜██████▀  Opus 5.5 · Claude Pro
+ ▝▝   ▝▝   ~/projects/AI/ai-circuit-design-tests/kicad-mcp-server-tests
+
+
+❯ /plugin                                                                       
+
+❯ determine the function of the kicad design in this directory.                 
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● The board is a 2-channel, 12-bit, 10 MSPS USB digitizer, which is basically a
+  small USB oscilloscope or data-acquisition front end. It takes scope-probe
+  inputs and streams the samples to a PC over USB 2.0 High-Speed.
+
+  Stage: Inputs (AFE_A, AFE_B, two identical channels)
+  Parts: BNC, 953k/49.9k divider with a trimmer cap, ADA4817 buffer, THS4521
+  differential driver, BAV199 clamps
+  What it does: 1 MΩ input that works with scope probes, DC coupled. Takes ±10
+  V,
+  divides by 20, then gain of 1.91 into the ADC with about 5% headroom.
+  Anti-alias filtering around 7.3–7.6 MHz.
+  ────────────────────────────────────────
+  Stage: ADC
+  Parts: LTC2290 (dual 12-bit, 10 MSPS), 10 MHz SiT8008 oscillator
+  What it does: Digitizes both channels. The same 10 MHz clock also drives the
+  FPGA.
+  ────────────────────────────────────────
+  Stage: FPGA and memory
+  Parts: iCE40HX4K, W9812G6KH 16 MB SDRAM, W25Q32 flash
+  What it does: Stores the captures in SDRAM: 0.1 s needs 4 MB, so it can hold
+  about 0.4 s. There's a trigger input on the expansion header.
+  ────────────────────────────────────────
+  Stage: USB
+  Parts: FT2232H, 93LC56 EEPROM, USBLC6 protection, USB-B
+  What it does: Channel A streams data at about 35–40 MB/s. Channel B programs
+  the FPGA's flash (iceprog -I B).
+  ────────────────────────────────────────
+  Stage: Power
+  Parts: TPS62160 (3.3 V), TLV755 (1.2 V), LP5907 (3.0 V), LM27762 (±4 V)
+  What it does: Runs from USB power, estimated at about 370 mA. The analog and
+  ADC supplies switch on only after the PC recognizes the device, which keeps
+  startup draw under 100 mA.
+
+  Where this comes from: the designer's notes on each schematic sheet, plus the
+  part values. Those notes are very explicit. I didn't trace the wiring to
+  confirm the circuit matches the notes, so what I've confirmed is what the
+  design says it does, not that it's wired correctly. I also didn't open
+  dual-adc-prompt.txt, so I wasn't just reading back the original spec.
+
+  Open items the notes themselves point out:
+  - power.kicad_sch has a TODO: the LM27762 feedback divider and charge-pump
+    capacitor values haven't been checked against the datasheet.
+  - The FT2232H's second channel can't be used while the first is streaming. So
+    the FPGA's flash has to be programmed before streaming starts, not during.
+  - The PCB has about 2,500 track segments, so it has at least been routed. I
+    didn't run DRC or ERC.
+
+  Next I can check the wiring against the notes with the kicad MCP tools, or run
+  ERC and DRC.
+
+✻ Sautéed for 28s · done 7:54 AM
+
+❯ check the wiring against the notes with the MCP tools                         
+
+  Called kicad 2 times (ctrl+o to expand)
+
+● Netlist pulled. Most connections match the datasheets I know, but I want to
+  check the KiCad symbol pin names for the parts where I'm unsure.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● I checked the wiring against the schematic notes and found two real problems.
+  Everything else in the notes holds up.
+
+  Method: I generated the netlist with mcp__kicad__generate_netlist and went
+  through it pin by pin with get_netlist_components. For the ADA4817, LTC2290,
+  LM27762, TPS62160 and iCE40 I also pulled the pin names from the KiCad
+  symbols. All other pinouts I checked against my memory of the datasheets, not
+  the actual PDFs, so treat those as moderately confident.
+
+  Mismatches
+
+  1. The input capacitance is about 2 pF, not the ~12 pF the note claims (AFE_A
+     and AFE_B).
+     - The input divider's capacitor is 2.2 pF (C101), in series with C102 +
+       C103. Balancing the divider needs C103 ≈ 15 pF, so that series
+       combination is 2.2 pF against 42 pF, which comes to about 2.1 pF. Board
+       traces and the BNC add a few pF.
+     - The divider itself is wired correctly. The trim range (31.5–47 pF) covers
+       the 42 pF it needs.
+     - Why it matters: the note says the input works with scope probes. 10x
+       probes expect a scope input of roughly 10–25 pF, and a ~2–5 pF input may
+       be outside their adjustment range. That part is my inference, not
+       something I verified.
+  2. The iCE40's PLL ground pins are tied straight to board ground (U601 pins 53
+     and 127).
+     - The note says the PLL filtering follows Lattice's iCE40 hardware
+       checklist. As I remember that checklist, those pins should connect only
+       through the filter capacitors and not to board ground.
+     - I'm about 75% sure of this. Check Lattice's iCE40 hardware checklist
+       (TN1252) before changing anything.
+
+  Still unresolved
+
+  - The LM27762 negative-feedback divider (R407/R408): the existing TODO in
+    power.kicad_sch still stands. The wiring follows the same layout as the
+    positive side, which gives about −3.97 V if the negative feedback pin
+    regulates to −1.2 V. I can't confirm that without the datasheet.
+  - ADA4817 feedback pin: the buffer's feedback resistor (R103, 200 Ω) goes to
+    the dedicated feedback pin (pin 1), and nothing ties that pin to the output
+    pin (pin 6). That's correct only if the chip connects the two internally. I
+    believe it does, and 200 Ω is the value Analog Devices recommends for a
+    unity-gain buffer, but I haven't confirmed it.
+
+  Minor concern (not a note mismatch)
+
+  - The ADC's 3.0 V supply stays off until the PC recognizes the board, but the
+    FPGA is powered from the start. If the FPGA's internal pull-ups are on for
+    the ADC data pins, they can leak current into the unpowered ADC. That's
+    harmless at these levels, but it's simple to disable those pull-ups in the
+    FPGA's pin constraints.
+
+  Matches the notes
+
+  - Input path:
+    - The 953k/49.9k divider gives a ratio of 0.0498 and a total input
+      resistance of 1.003 MΩ.
+    - The clamp diode connects to the divider node and both ±4 V rails, and its
+      unused half is left open.
+    - The differential amplifier's gain is 953/499 = 1.91. Its feedback is
+      crossed correctly (inverting input to positive output), its shutdown pin
+      is tied high, and its output common-mode follows the ADC's 1.5 V
+      reference.
+    - The anti-alias filter poles come out at 7.59 MHz and 7.25 MHz. The
+      amplifier input and output voltages stay inside the THS4521's ranges.
+  - ADC (LTC2290):
+    - The reference-select, mux and supply pins go to 3.0 V, and the
+      output-enable and shutdown pins go to ground, both as the note says.
+    - MODE sits at 2/3 of the supply, which selects two's-complement output with
+      the clock duty-cycle stabilizer on.
+    - The reference capacitor arrangement looks right, and the 10 MHz oscillator
+      feeds both ADC channels and the FPGA's global clock input (GBIN6) through
+      33 Ω resistors.
+  - FPGA and memory:
+    - The bank assignments match the note. FT_CLK goes to GBIN0 and TRIG_IN to
+      GBIN5.
+    - The FPGA's SPI output pin goes to the flash's data-in and to FTDI pin BD1,
+      so iceprog -I B will program it.
+    - All 54 SDRAM pins match the standard TSOP-54 x16 pinout. The PLL supply
+      filters (100 Ω, 10 µF, 100 nF) are present.
+  - USB (FT2232H):
+    - All 64 pins match the FT2232HL pinout, including sync FIFO on channel A,
+      the iceprog pinout on channel B, and the 12k reference resistor.
+    - The 93LC56C configuration EEPROM is wired the way FTDI recommends (ORG
+      tied to supply, 2.2k between DO and DI). The USB protection and shield
+      network also match the note.
+  - Power:
+    - The 3.3 V buck feedback gives 3.33 V. The +4 V feedback gives 3.97 V.
+    - The power-enable inverter (Q401) works as described: the 3.0 V and ±4 V
+      supplies stay off until the PC recognizes the board.
+    - Total capacitance on the USB 5 V input is about 8.0 µF, under the 10 µF
+      USB limit.
+
+  I haven't run ERC or DRC yet. I can do that next.
+
+✻ Baked for 2m 33s · done 7:58 AM
+
+❯ identify any risks in this design that may cause it to malfunction.           
+
+  Called kicad 3 times (ctrl+o to expand)
+
+● ERC is clean, and DRC shows only cosmetic and library-mismatch warnings. I'll
+  check the PCB in a few places where layout could cause failures: the planes,
+  USB D+/D-, and the SDRAM and clock routing.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The design has no obvious fatal wiring errors. The serious risks are clocking,
+  analog noise from the board layout, and specs that were never verified
+  against datasheets. ERC is clean. DRC shows 343 warnings and no errors, all
+  cosmetic or library-mismatch. The 170 library mismatches mean the board
+  footprints differ from the current KiCad library versions; that's probably
+  harmless, but it's worth checking that no pads went stale.
+
+  Could stop the board working
+
+  1. The FPGA has no clock when it powers up. The 10 MHz oscillator runs on the
+     switched 3.0 V rail, so it stays off until the PC recognizes the board. The
+     FT2232H's 60 MHz clock only exists once the host puts it in sync-FIFO
+     mode. The iCE40HX4K has no internal oscillator, so the FPGA configures and
+     then sits with no clock. Any PLL locked to the 10 MHz clock also has to be
+     reset after that clock appears.
+     - Fix: power X301 from the always-on 3.3 V rail, or add a small always-on
+       clock, or write the FPGA logic to expect late clocks. I'm confident about
+       this one.
+  2. The −4 V supply (VEE) is unverified. The LM27762 negative-feedback TODO is
+     still open, and VEE powers both input buffers. If the formula is wrong, VEE
+     lands at some other voltage, and the buffers either clip or run out of
+     headroom. Checking the datasheet takes ten minutes.
+  3. The iCE40 PLL ground pins are tied to board ground (U601 pins 53 and 127).
+     If my memory of Lattice's checklist (TN1252) is right, this degrades PLL
+     jitter or lock. That matters most for the 100 MHz SDRAM clock. I'm about
+     75% confident.
+  4. The FT2232H's EEPROM ships blank. Sync-FIFO mode only works after the
+     EEPROM is programmed (e.g., with FT_PROG). This is a bring-up procedure
+     step, not a hardware fault, but until it's done the board looks dead.
+
+  Could make it miss its specs
+
+  5. Analog noise from the PCB layout:
+     - The LM27762 charge pump (U404, at 85,92) sits between the two input
+       channels and about 30 mm from the ADC.
+     - The USB connector (J501) and FT2232H sit right next to channel A's input
+       circuitry.
+     - The ADC's differential inputs drop to the bottom layer through vias. The
+       plane next to the bottom layer is the +3.3 V digital supply (In2), not
+       ground.
+     - The divider node /AFE_A/DIV is a ~50 kΩ node with a 39 mm trace. It will
+       pick up digital noise, and the trace capacitance shifts the trimmer
+       setting.
+     - Expect the noise floor to be noticeably worse than the ADC alone would
+       give.
+  6. Scope-probe compatibility: the input capacitance is about 2 pF plus stray,
+     not about 12 pF. 10x probes expect a scope input of roughly 10–25 pF, so
+     they may not compensate. Matching a typical probe needs a larger C101 and a
+     matching change to C102/C103.
+  7. USB High-Speed signal quality:
+     - D+ and D− change width along their length (0.2–0.28 mm), so the impedance
+       isn't controlled.
+     - D+ has a via and D− doesn't.
+     - The two traces differ in length by 2.5 mm.
+     - The runs are short (about 20 mm), so this probably works. If it doesn't,
+       the board falls back to 12 Mb/s Full-Speed. Low to medium risk.
+  8. SDRAM at 100 MHz is ambitious for an iCE40 HX. Trace lengths range from 15
+     to 62 mm, and the SDRAM clock comes from an ordinary I/O pin. There's a lot
+     of bandwidth margin, though: running the SDRAM at 50–66 MHz still beats
+     the 40 MB/s requirement by 2–3 times. So this is a risk to timing closure,
+     not to function.
+  9. Streaming throughput: two channels × 10 MSPS × 2 bytes is 40 MB/s, and the
+     FT2232H manages about 35–40 MB/s. Capture to SDRAM then upload works fine.
+     Continuous streaming would overrun. Packing samples into 3 bytes per pair
+     gets it to 30 MB/s.
+
+  Could damage the board or work only intermittently
+
+  10. The ADC inputs can be overdriven. The THS4521 runs from 0 to +4 V, but the
+      ADC's absolute maximum input is about 3.3 V (its 3.0 V supply plus 0.3
+      V). An input beyond roughly ±38 V would drive an amplifier output past
+      that limit, and the input clamps don't engage until about ±80 V. The 49.9
+      Ω series resistors limit the current, so this is probably survivable but
+      out of spec.
+  11. Power-up sequencing: the ±4 V and 3.0 V supplies share one enable, but
+      nothing guarantees which comes up first. The amplifier could drive the ADC
+      inputs before the ADC is powered. This is the same exposure as item 10,
+      only brief.
+  12. USB power budget: the ~370 mA total and the under-100 mA draw before the
+      PC recognizes the board are both estimates. Before recognition, the FPGA
+      is configuring and the FT2232H and SDRAM are idle on 3.3 V. That's
+      plausible but unmeasured. Measure it on the first board.
+  13. Back-powering the ADC: the iCE40's default pull-ups can leak current into
+      the unpowered ADC's data pins. Disable them in the FPGA's pin constraints.
+
+  The cheap fixes to make before fabrication are items 1–3 and 6. Item 5 is the
+  expensive one, since it means re-placing parts. It's worth doing if analog
+  noise performance matters for your use.
+
+  Sources: the netlist and DRC from the kicad MCP tools, trace lengths and
+  placement pulled from dual_adc_usb.kicad_pcb, and pinouts and limits from my
+  memory of the datasheets. I didn't check this time against the actual LM27762,
+  ADA4817, iCE40 TN1252 or LTC2290 documents, so items 2, 3 and 10 are the ones
+  to verify first.
+
+✻ Crunched for 1m 34s · done 8:16 AM
+
+❯ generate gerbers to submit to JLCPCB for fabrication.                         
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● The installed kicad-cli is 9.0.9, but the board was saved in KiCad 10 format.
+  I'll check which binary the MCP server uses, since its DRC run worked.
+
+  Read 1 file, ran 2 shell commands (ctrl+o to expand)
+
+● I'll export using the KiCad 10.0.4 instance at ~/bin/kicad10-root, applying
+  JLCPCB's recommended settings: Protel extensions, X2 off, separate
+  plated/non-plated drill files, and metric decimal units.
+
+● Bash(K=/home/devb/bin/kicad10-root/bin/kicad-cli && rm -rf gerbers && mkdir
+      gerbers && \
+      $K pcb export gerbers -o gerbers/ -l
+      F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste…)
+  ⎿  Plotted to 'gerbers/dual_adc_usb-F_Mask.gts'.
+     Plotted to 'gerbers/dual_adc_usb-B_Mask.gbs'.
+     Plotted to 'gerbers/dual_adc_usb-Edge_Cuts.gm1'.
+     … +23 lines (ctrl+o to expand)
+  ⎿  1 file changed (binary, mode only or too large to show)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The Gerber and drill files are ready for JLCPCB in
+  dual_adc_usb_jlcpcb_gerbers.zip (in kicad-mcp-server-tests/). Nothing has been
+  uploaded; ordering is your call. The individual files are in gerbers/.
+
+  What I did:
+  - The system kicad-cli is version 9.0.9 and can't open this board, which was
+    saved in KiCad 10 format. I used the KiCad 10.0.4 kicad-cli in
+    ~/bin/kicad10-root, the same one the MCP server uses.
+  - I used JLCPCB's recommended settings:
+    - Protel file extensions.
+    - X2 Gerber extensions and embedded netlist turned off.
+    - Silkscreen trimmed where it overlaps solder-mask openings.
+    - Excellon drill files in mm, decimal format, with plated and non-plated
+      holes in separate files.
+  - The zip contains all 11 layers: 4 copper, both paste, silkscreen and
+    solder-mask layers, and the board outline. It also has the two drill files,
+    drill maps, and a job file.
+
+  Checks on the output:
+  - The board is 140 × 90 mm, 4 layers, 1.6 mm thick.
+  - There are 520 plated holes and 4 non-plated holes. The smallest drill is 0.3
+    mm with a 0.15 mm annular ring, both within JLCPCB's standard 4-layer
+    limits.
+  - The inner ground and 3.3 V planes are filled in the board file, so the inner
+    layers aren't blank.
+  - Nothing is placed on the bottom side, which is why the bottom paste, mask
+    and silkscreen files are nearly empty.
+
+  Upload the zip and select 4 layers. For the stackup, JLC's JLC04161H-7628 is
+  their default, but the USB traces weren't designed for a particular stackup,
+  so the choice doesn't matter much.
+
+  Before you order: none of the issues from the risk review have been fixed, so
+  these files reproduce them as-is. The ones worth settling first, because they
+  could cost a respin:
+  - No FPGA clock at power-up. The FPGA has no clock until the PC recognizes the
+    board, because the 10 MHz oscillator is on the switched 3.0 V rail.
+  - Unverified −4 V supply. The LM27762's negative-feedback divider was never
+    checked against the datasheet (the TODO is still open).
+  - PLL ground pins. The iCE40's PLL ground pins (U601 pins 53 and 127) are tied
+    directly to board ground. This is unconfirmed until you check Lattice's
+    iCE40 hardware checklist (TN1252).
+  - Input capacitance. It's about 2 pF instead of the ~12 pF in the notes, which
+    may keep scope probes from compensating.
+
+  If the board is a bring-up prototype, ordering now is reasonable. Most of
+  these can be patched with bodge wires or part swaps, but the clock problem
+  needs a wire to fix and the input capacitance needs different capacitor
+  values.
+
+✻ Brewed for 2m 48s · done 8:21 AM
+
+❯ create a png image of the pcb showing the top and bottom layer wiring,        
+  footprints, and silkscreen along with the board outline.                      
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/kicad-mcp-server-tests
+      && K=/home/devb/bin/kicad10-root/bin/kicad-cli; $K pcb export svg
+      --mode-single -o dual…)
+  ⎿  Plotted to 'dual_adc_usb_layers.svg'.
+     Done.
+     dual_adc_usb_layers.png: PNG image data, 2204 x 1417, 8-bit/color RGBA
+     , non-interlaced
+  ⎿  2 files changed (binary, mode only or too large to show)
+
+  Read 1 file (ctrl+o to expand)
+
+● I made the PNG: dual_adc_usb_layers.png, 2204 × 1417 px at 400 dpi on a white
+  background. It's in the project directory. I opened the image and checked that
+  all the layers came through.
+
+  The layers shown are:
+  - Copper: top-layer wiring in red, bottom-layer wiring in blue.
+  - Silkscreen: top and bottom.
+  - Footprint outlines: from the fabrication layers (F.Fab/B.Fab), in grey.
+  - Board outline: the rounded rectangle with the four mounting holes.
+
+  The inner ground and 3.3 V planes are left out on purpose, because they would
+  cover everything else. The vector source, dual_adc_usb_layers.svg, is saved
+  next to the PNG.
+
+  I exported with the KiCad 10 kicad-cli and rendered with Inkscape. The command
+  is below if you want to rerun it after layout changes:
+  ~/bin/kicad10-root/bin/kicad-cli pcb export svg --mode-single -o 
+  dual_adc_usb_layers.svg \
+    -l B.Cu,F.Cu,B.Silkscreen,F.Silkscreen,F.Fab,B.Fab,Edge.Cuts 
+  --page-size-mode 2 --exclude-drawing-sheet dual_adc_usb.kicad_pcb
+  inkscape dual_adc_usb_layers.svg --export-dpi=400 --export-background=white 
+  --export-background-opacity=1 --export-filename=dual_adc_usb_layers.png
+
+  Two things show up clearly in the image:
+  - The BNC connectors hang past the left board edge. That's expected for
+    edge-mount BNCs, and it's the source of the 8 DRC warnings about silkscreen
+    clipped by the board edge.
+  - The layout risks from the earlier review are visible.
+    - The LM27762 charge pump (U404) sits between the two input channels.
+    - The USB connector (J501) and FT2232H sit right next to channel A's input
+      circuitry.
+    - The traces from the FPGA's left side to the ADC (U301) and the analog
+      section cross the bottom layer near the analog circuitry.
+
+  The silkscreen is light yellow on white and hard to read. If you want better
+  contrast, I can re-render with a dark background or a darker silkscreen color.
+
+✻ Baked for 22s · done 8:25 AM
+
+❯ change the white background of the image to dark gray.                        
+
+● Bash(inkscape dual_adc_usb_layers.svg --export-type=png --export-dpi=400
+      --export-background='#303030' --export-background-opacity=1
+      --export-filename=dual_adc_usb_l…)
+  ⎿  dual_adc_usb_layers.png: PNG image data, 2204 x 1417, 8-bit/color RGBA
+     , non-interlaced
+  ⎿  1 file changed (binary, mode only or too large to show)
+  Read 1 file (ctrl+o to expand)
+
+● I re-rendered dual_adc_usb_layers.png on a dark gray background (#303030), at
+  the same size (2204 × 1417 px). I opened the result and checked it. The
+  silkscreen labels are now easy to read, and the red and blue copper layers
+  stand out clearly.
+
+  The mounting holes and drill holes still render in black. You can see them
+  against the gray, but if you'd like more contrast I can lighten the background
+  or color the holes.
+
+✻ Worked for 9s · done 8:26 AM
