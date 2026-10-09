@@ -40,6 +40,7 @@ the most important files to read are:
 | [`konnect-tests/`](konnect-tests/) | [Konnect](https://github.com/mixelpixx/Konnect) | Generator |
 | [`copperhead-tests/`](copperhead-tests/) | [Copperhead](https://github.com/copperheadhq/copperhead) | Generator |
 | [`kicad-happy-tests/`](kicad-happy-tests/) | [kicad-happy](https://github.com/aklofas/kicad-happy) | Analyzer |
+| [`kicad-mcp-server-tests/`](kicad-mcp-server-tests/) | [kicad-mcp-server](https://github.com/Seeed-Studio/kicad-mcp-server) | Analyzer |
 
 Each generator's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.

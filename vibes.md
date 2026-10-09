@@ -39,3 +39,7 @@ Here I'll record various thoughts about the tools I'm testing.
   The improvement in cost may have been due to using Opus 5.5 to optimize the skills
   in `skidl-skills`. `konnect` and `copperhead` may not have been tuned for Opus 5.5
   so they may have suffered a performance hit.
+  
+* Installing some of these tools is the most onerous part in many respects.
+  So I tried installing `kicad-mcp-server` just by asking Claude to do it based on the instructions
+  included in its repo. It worked; big time saver! So obvious in retrospect.
