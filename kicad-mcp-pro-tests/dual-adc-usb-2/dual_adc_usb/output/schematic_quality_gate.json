@@ -1,0 +1,119 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-10T09:48:01",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.4",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692",
+            "violations": []
+        },
+        {
+            "path": "/Power/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/6ecf6c30-1435-4452-9121-66b19d6c0477",
+            "violations": []
+        },
+        {
+            "path": "/FPGA/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/180ece19-e3f9-4573-befc-715370ce6442",
+            "violations": [
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U502 Pin 3 [~{WP}/IO_{2}, Bidirectional, Line]",
+                            "pos": {
+                                "x": 2.9083,
+                                "y": 0.7239
+                            },
+                            "uuid": "dc263bf4-7af4-4225-a726-93b3206377a4"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "d0726bff-2802-4104-8bb2-d59cd90b32be"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U502 Pin 7 [~{HOLD}/~{RESET}/IO_{3}, Bidirectional, Line]",
+                            "pos": {
+                                "x": 2.9083,
+                                "y": 0.7493
+                            },
+                            "uuid": "412ac2e5-6eeb-4831-b55b-bcfe99c7179e"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "d0726bff-2802-4104-8bb2-d59cd90b32be"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/AFE_A/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/a692322b-2ffb-4108-bbfa-baf2cdc99a73",
+            "violations": []
+        },
+        {
+            "path": "/Memory/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/a563abec-6741-4c9d-a89c-d76998c1b96a",
+            "violations": []
+        },
+        {
+            "path": "/AFE_B/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/28c99962-21b9-4ed7-ab6c-133637379f30",
+            "violations": []
+        },
+        {
+            "path": "/USB/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/00c1312a-0b37-4749-9905-42d28b1316b5",
+            "violations": []
+        },
+        {
+            "path": "/ADC/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/cfdc7d0c-208c-4610-9f0e-6de6ca434cfe",
+            "violations": []
+        }
+    ],
+    "source": "dual_adc_usb.kicad_sch"
+}

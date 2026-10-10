@@ -1,0 +1,16 @@
+DUAL-CHANNEL 12-BIT 10 MS/s USB ADC  (see DESIGN.md for options and rationale)
+Signal path (per channel): BNC -> 1 Mohm || ~19 pF input, compensated /10.06 divider (2 x 453k + 100k)
+  -> BAV99 clamp to +/-3.3 V -> OPA810 FET-input unity buffer -> THS4521 FDA (G = 1, VOCM = ADC VCM 1.5 V)
+  -> 49.9R/33pF RC -> LTC2290 dual 12-bit ADC (2 Vpp diff span, SENSE = VDD).
+  +/-10 V at BNC = +/-0.994 V differential at ADC (full scale +/-10.06 V). Trim C104/C204 for flat step response.
+Clock: 10.000 MHz Abracon ASE oscillator on the clean +3.0 V rail, star-fed (33R each) to CLKA, CLKB and FPGA GBIN5.
+Capture: iCE40HX4K writes both channels (16 bit/sample, 40 MB/s) to a 32 MB MT48LC16M16A2 SDRAM.
+  0.1 s x 2 ch x 10 MS/s x 2 B = 4 MB required; 32 MB holds 0.8 s.
+Host link: FT2232H, USB 2.0 High Speed. Ch A = 245 synchronous FIFO (60 MHz, ~35-40 MB/s) to the FPGA.
+  Ch B = MPSSE: programs the W25Q32 config flash and drives CRESET/reads CDONE (iceprog -I B).
+  93LC56 EEPROM sets ch A to 245 FIFO mode; host enables sync FIFO with SetBitMode(0x40).
+Power: USB-C receptacle wired as USB 2.0 device (5.1k Rd on CC1/CC2), 500 mA default USB budget.
+  Estimated draw ~300 mA at 5 V (see DESIGN.md), so USB 2.0 power is sufficient.
+  TPS62162 buck 3.3 V digital; AP2112 1.2 V core; LP5907 3.3 V and 3.0 V analog LDOs; LM27761 -3.3 V.
+Unverified items to check against datasheets before fab: LM27761 FB reference, LTC2290 REF bypass network,
+  iCE40 GNDPLL handling, FT2232H ch B MPSSE use while ch A is in 245 FIFO mode, crystal load caps.

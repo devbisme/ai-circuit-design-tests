@@ -1,0 +1,562 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-10T09:34:11",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.4",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692",
+            "violations": []
+        },
+        {
+            "path": "/Power/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/6ecf6c30-1435-4452-9121-66b19d6c0477",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR1039 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 1.778
+                            },
+                            "uuid": "50a95bc3-3a20-4951-829a-643935c5c877"
+                        },
+                        {
+                            "description": "Symbol #PWR7055 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 2.4765
+                            },
+                            "uuid": "5fa2c7d6-8be4-434b-8f28-f3461dd2b078"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR1040 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 1.778
+                            },
+                            "uuid": "6af1ddfa-0f6f-41bc-be7a-148709a0dc95"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/FPGA/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/180ece19-e3f9-4573-befc-715370ce6442",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR5082 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 2.1336
+                            },
+                            "uuid": "29c85ea2-a96e-4ec1-914d-0f1d3154b0fc"
+                        },
+                        {
+                            "description": "Symbol U102 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 2.2987,
+                                "y": 0.5715
+                            },
+                            "uuid": "9200c562-d166-49bf-8e5b-79119b5c0c88"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR5083 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 2.1336
+                            },
+                            "uuid": "eaca9a6d-37a8-4d36-852d-11951fabc2b8"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "ecb8a3f6-c460-4b37-93ea-c80dc3e01929"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR5084 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 2.1336
+                            },
+                            "uuid": "c1800cc3-b106-4992-9ada-d95a55bc2aee"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U502 Pin 3 [~{WP}/IO_{2}, Bidirectional, Line]",
+                            "pos": {
+                                "x": 2.9083,
+                                "y": 0.7239
+                            },
+                            "uuid": "eb8a7003-6711-4b2d-8778-3fcdd27665d4"
+                        },
+                        {
+                            "description": "Symbol #PWR5083 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 2.1336
+                            },
+                            "uuid": "eaca9a6d-37a8-4d36-852d-11951fabc2b8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U502 Pin 7 [~{HOLD}/~{RESET}/IO_{3}, Bidirectional, Line]",
+                            "pos": {
+                                "x": 2.9083,
+                                "y": 0.7493
+                            },
+                            "uuid": "b6796361-39b6-4f3a-9705-17bcffbcece8"
+                        },
+                        {
+                            "description": "Symbol #PWR5083 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 2.1336
+                            },
+                            "uuid": "eaca9a6d-37a8-4d36-852d-11951fabc2b8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/AFE_A/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/a692322b-2ffb-4108-bbfa-baf2cdc99a73",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR2015 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 1.8415
+                            },
+                            "uuid": "6ce80704-85f0-413b-8640-a3c4dcf8cb6b"
+                        },
+                        {
+                            "description": "Symbol U103 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 2.6797,
+                                "y": 0.5715
+                            },
+                            "uuid": "4153db4e-7bc4-4b69-8810-588ae2b0e922"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR2016 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 1.8415
+                            },
+                            "uuid": "905545f0-ee8a-4612-805e-d5876aad6ae3"
+                        },
+                        {
+                            "description": "Symbol U104 Pin 11 [OUT+, Power output, Line]",
+                            "pos": {
+                                "x": 1.2319,
+                                "y": 0.5715
+                            },
+                            "uuid": "01dd38df-4c81-465e-a98f-04ea35aad53d"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR2017 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 1.8415
+                            },
+                            "uuid": "28677e38-7e7c-469a-bc57-bf106a8eeaf4"
+                        },
+                        {
+                            "description": "Symbol U104 Pin 6 [OUT-, Power output, Line]",
+                            "pos": {
+                                "x": 1.2319,
+                                "y": 0.7239
+                            },
+                            "uuid": "64177f75-3856-452b-917f-80ee9c34c95e"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR2018 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 1.8415
+                            },
+                            "uuid": "63b508c9-316d-45cc-976f-5de19f23bb35"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/Memory/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/a563abec-6741-4c9d-a89c-d76998c1b96a",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR6031 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 1.6891
+                            },
+                            "uuid": "a7cc25f6-3958-4ce8-a81b-597713076b32"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "ecb8a3f6-c460-4b37-93ea-c80dc3e01929"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR6032 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 1.6891
+                            },
+                            "uuid": "2914c65f-5bdb-4e1e-9b07-f7831ac2e848"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/AFE_B/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/28c99962-21b9-4ed7-ab6c-133637379f30",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR3015 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 1.8415
+                            },
+                            "uuid": "b7bf5739-f421-414a-9f39-00a473a99b27"
+                        },
+                        {
+                            "description": "Symbol U103 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 2.6797,
+                                "y": 0.5715
+                            },
+                            "uuid": "4153db4e-7bc4-4b69-8810-588ae2b0e922"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR3016 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 1.8415
+                            },
+                            "uuid": "87ec3ade-ca73-40ea-8024-979824199898"
+                        },
+                        {
+                            "description": "Symbol U104 Pin 11 [OUT+, Power output, Line]",
+                            "pos": {
+                                "x": 1.2319,
+                                "y": 0.5715
+                            },
+                            "uuid": "01dd38df-4c81-465e-a98f-04ea35aad53d"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR3017 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 1.8415
+                            },
+                            "uuid": "4ce6bda4-45d8-45ec-a9b5-c923da61e9fd"
+                        },
+                        {
+                            "description": "Symbol U104 Pin 6 [OUT-, Power output, Line]",
+                            "pos": {
+                                "x": 1.2319,
+                                "y": 0.7239
+                            },
+                            "uuid": "64177f75-3856-452b-917f-80ee9c34c95e"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR3018 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 1.8415
+                            },
+                            "uuid": "5f93c83b-afe8-4653-90a6-1a92ac52869b"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/USB/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/00c1312a-0b37-4749-9905-42d28b1316b5",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR7054 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 2.4765
+                            },
+                            "uuid": "883ac05f-30f0-4d43-ae0a-205271f3ae69"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "ecb8a3f6-c460-4b37-93ea-c80dc3e01929"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        },
+        {
+            "path": "/ADC/",
+            "uuid_path": "/b56ac9c7-fac2-4d49-ba8b-f08463dfa692/cfdc7d0c-208c-4610-9f0e-6de6ca434cfe",
+            "violations": [
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR4050 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.508,
+                                "y": 2.5019
+                            },
+                            "uuid": "9c3b3ba4-dcef-4f73-b75f-8e0fc83d91cc"
+                        },
+                        {
+                            "description": "Symbol U103 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 2.6797,
+                                "y": 0.5715
+                            },
+                            "uuid": "4153db4e-7bc4-4b69-8810-588ae2b0e922"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR4051 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 2.5019
+                            },
+                            "uuid": "6aca2998-a66b-4fc3-af65-c15f1dec57df"
+                        },
+                        {
+                            "description": "Symbol U101 Pin 5 [OUT, Power output, Line]",
+                            "pos": {
+                                "x": 1.9177,
+                                "y": 0.5715
+                            },
+                            "uuid": "ecb8a3f6-c460-4b37-93ea-c80dc3e01929"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Power output and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR4052 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 2.5019
+                            },
+                            "uuid": "eee3351d-537c-4447-8316-224ee9c1b300"
+                        },
+                        {
+                            "description": "Symbol J701 Pin 4 [GND, Power output, Line]",
+                            "pos": {
+                                "x": 1.7907,
+                                "y": 0.7239
+                            },
+                            "uuid": "10926b00-a97d-4f40-a3cd-e93440c97f56"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                }
+            ]
+        }
+    ],
+    "source": "dual_adc_usb.kicad_sch"
+}

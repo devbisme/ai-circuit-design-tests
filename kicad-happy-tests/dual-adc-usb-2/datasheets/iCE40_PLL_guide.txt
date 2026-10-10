@@ -1,0 +1,1622 @@
+ iCE40 sysCLOCK PLL Design and User Guide
+
+
+
+
+Technical Note
+
+
+
+FPGA-TN-02052-1.4
+
+
+April 2022
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+Disclaimers
+Lattice makes no warranty, representation, or guarantee regarding the accuracy of information contained in this document or the suitability of its
+products for any particular purpose. All information herein is provided AS IS, with all faults and associated risk the responsibility entirely of the Buyer.
+Buyer shall not rely on any data and performance specifications or parameters provided herein. Products sold by Lattice have been subject to limited
+testing and it is the Buyer's responsibility to independently determine the suitability of any products and to test and verify the same. No Lattice
+products should be used in conjunction with mission- or safety-critical or any other application in which the failure of Lattice’s product could create a
+situation where personal injury, death, severe property or environmental damage may occur. The information provided in this document is
+proprietary to Lattice Semiconductor, and Lattice reserves the right to make any changes to the information in this document or to any products at
+any time without notice.
+
+
+
+
+                   © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+2                                                                                                                                                                     FPGA-TN-02052-1.4
+                                                                                                                                   iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                             Technical Note
+
+
+
+Contents
+Acronyms in This Document ................................................................................................................................................. 5
+1. Introduction .................................................................................................................................................................. 6
+2. Global Routing Resources ............................................................................................................................................. 7
+  2.1.     Verilog Instantiation (for iCEcube2 only) ............................................................................................................ 7
+  2.2.     VHDL Instantiation (for iCEcube2 only) ............................................................................................................... 8
+3. iCE40 sysCLOCK PLL ...................................................................................................................................................... 9
+  3.1.     iCE40 sysCLOCK PLL Features .............................................................................................................................. 9
+  3.2.     Signals ............................................................................................................................................................... 10
+  3.3.     Clock Input Requirements ................................................................................................................................. 12
+  3.4.     PLL Output Requirements ................................................................................................................................. 12
+  3.5.     Functional Description ...................................................................................................................................... 12
+     3.5.1. PLLOUT Frequency for FEEDBACK_PATH = DELAY or PHASE_AND_DELAY .................................................. 12
+     3.5.2. PLLOUT Frequency for FEEDBACK_PATH = SIMPLE ...................................................................................... 12
+     3.5.3. PLLOUT Frequency for FEEDBACK_PATH = EXTERNAL.................................................................................. 13
+     3.5.4. Fixed Quadrant Phase Shift........................................................................................................................... 13
+     3.5.5. Fine Delay Adjustment (FDA) ........................................................................................................................ 13
+     3.5.6. Phase Angle Equivalent................................................................................................................................. 14
+     3.5.7. Low Power Mode .......................................................................................................................................... 14
+4. Module Generation .................................................................................................................................................... 15
+  4.1.     Using Lattice Radiant Software IP Catalog ........................................................................................................ 15
+     4.1.1. Module Generator Output............................................................................................................................ 20
+     4.1.2. Device Constraints ........................................................................................................................................ 21
+     4.1.3. Utilization...................................................................................................................................................... 22
+  4.2.     Using iCEcube2 Design Software’s PLL Module Generator ............................................................................... 23
+     4.2.1. PLL Module Generator Output ..................................................................................................................... 29
+     4.2.2. iCEcube2 Design Software Report File .......................................................................................................... 30
+5. Hardware Design Considerations ............................................................................................................................... 31
+  5.1.     PLL Placement Rules.......................................................................................................................................... 31
+     5.1.1. Lattice Radiant Software............................................................................................................................... 31
+     5.1.2. iCEcube2 Software ........................................................................................................................................ 31
+  5.2.     Analog Power Supply Filter for PLL ................................................................................................................... 32
+Technical Support Assistance ............................................................................................................................................. 34
+Revision History .................................................................................................................................................................. 35
+
+
+
+
+                    © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                              3
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+Figures
+Figure 2.1. High-drive, Low-skew, High-fanout Global Buffer Routing Resources................................................................7
+Figure 3.1. iCE40 UltraPlus Phase-Locked Loop (sysCLOCK PLL) Block Diagram ...................................................................9
+Figure 3.2. Fixed Quadrant Phase Shift Control ..................................................................................................................13
+Figure 3.3. Fine Delay Adjust Control .................................................................................................................................14
+Figure 4.1. Lattice Radiant Software Start Page .................................................................................................................15
+Figure 4.2. Device Family Selection ....................................................................................................................................16
+Figure 4.3. Synthesis Tool Selection....................................................................................................................................16
+Figure 4.4. IP Catalog ..........................................................................................................................................................17
+Figure 4.5. PLL Module Generator User Interface ..............................................................................................................17
+Figure 4.6. Post Synthesis Timing Report............................................................................................................................21
+Figure 4.7. Map Report .......................................................................................................................................................22
+Figure 4.8. iceCube2 Design Software ................................................................................................................................23
+Figure 4.9. PLL Module Generator/Modify Existing PLL Configuration ..............................................................................23
+Figure 4.10. Settings Window 1 ..........................................................................................................................................24
+Figure 4.11. Settings Window 2 ..........................................................................................................................................25
+Figure 4.12. Settings Window 3 ..........................................................................................................................................26
+Figure 4.13. PLL Configuration – Final Settings ...................................................................................................................27
+Figure 4.14. Report File Showing the Use of PLLs and Global Buffers ................................................................................30
+Figure 5.1. Device Constraint Editor of Lattice Radiant Software.......................................................................................31
+Figure 5.2. Floor Planner View showing the specific I/O Cell that Contains the PLL ..........................................................32
+Figure 5.3. I/O Cell Contents ...............................................................................................................................................32
+Figure 5.4. Power Supply Filter for VCCPLL and GNDPLL ....................................................................................................33
+
+
+
+
+Tables
+Table 1.1. Number of PLLs in the iCE40 Device Family .........................................................................................................6
+Table 2.1. Global Buffer Connections to a Programmable Logic Block .................................................................................8
+Table 2.2. Global Buffer Connections to Programmable I/O Pair .........................................................................................8
+Table 3.1. PLL Signals ..........................................................................................................................................................10
+Table 3.2. PLL Attributes and Settings in PLL Macro...........................................................................................................11
+Table 3.3. PLL Phase Shift Options ......................................................................................................................................13
+Table 3.4. PLL LATCHINPUTVALUE Control .........................................................................................................................14
+Table 4.1. PLL Configuration User Parameters ...................................................................................................................18
+
+
+
+
+                    © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+4                                                                                                                                                                      FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+Acronyms in This Document
+A list of acronyms used in this document.
+ Acronym                               Definition
+ CHF                                   High Frequency Capacitor
+ CLF                                   Low Frequency Capacitor
+ FPGA                                  Field-Programmable Gate Array
+ GUI                                   Graphical User Interface
+ LSE                                   Lattice Synthesis Engine
+ PIO                                   Programmable Input/Output
+ PLB                                   Programmable Logic Block
+ PLL                                   Phase Locked Loop
+ RS                                    Series Resistor
+ RTL                                   Register-Transfer Level
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            5
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+1. Introduction
+This technical note discusses the clock resources available in the Lattice Semiconductor (iCE40LP/HX, iCE40LM, iCE40
+Ultra™, iCE40 UltraLite™, and iCE40 UltraPlus™). Details are provided for global buffers and sysCLOCK™ PLLs.
+The iCE40 devices include an ultra-low power Phase-Locked Loop (PLL) to support a variety of display, imaging and
+memory interface applications. Table 1.1 shows the number of PLLs in each of the devices in the iCE40 family. For the
+performance of the PLLs, refer to the device family data sheet.
+Table 1.1. Number of PLLs in the iCE40 Device Family
+    Package                                                         HX1K                                              HX4K                                              HX8K
+    VQ100 100-ball VQFP                                              0                                                 —                                                 —
+    CB132 132-ball csBGA                                             1                                                 2                                                 2
+    TQ144 144-ball TQFP                                              1                                                 2                                                 —
+    CM225 225-ball ucBGA                                             —                                                 —                                                 2
+    CT256 256-ball caBGA                                             —                                                 —                                                 2
+
+    Package                                               LP384                         LP640                         LP1K                          LP4K                          LP8K
+    SQG16 16-ball WLCSP                                     —                             0                            —                             —                             —
+    SG32 32-ball QFN                                        0                            —                             —                             —                             —
+    CM36 36-ball ucBGA                                      0                            —                             0                             —                             —
+    CM49 49-ball ucBGA                                      0                            —                             1                             —                             —
+    CM81 81-ball ucBGA                                      —                            —                             1                             1                             1
+    CB81 81-ball csBGA                                      —                            —                             0                             —                             —
+    QN84 84-ball QFN                                        —                            —                             0                             —                             —
+    CM121 121-ball ucBGA                                    —                            —                             1                             2                             2
+    CB121 121-ball csBGA                                    —                            —                             1                             —                             —
+    CM225 225-ball ucBGA                                    —                             —                             —                             2                             2
+
+    Package                                                         LM1K                                              LM2K                                              LM4K
+    SWG25 25-ball WLCSP                                               0                                                0                                                 0
+    CM36 36-ball ucBGA                                                1                                                1                                                 1
+    CM49 49-ball ucBGA                                                1                                                1                                                 1
+
+    Package                                                       Ultra 1K                                          Ultra 2K                                          Ultra 4K
+    SWG25 25-ball WLCSP                                               1                                                1                                                 1
+
+    Package                                                                            UltraLite 640                                                       UltraLite 1K
+    SWG16 16-ball WLCSP                                                                      1                                                                  1
+    CM36 36-ball ucBGA                                                                       1                                                                  1
+
+    Package                                                                             UltraPlus 3K                                                      UltraPlus 5K
+    UWG30 30-ball WLCSP                                                                      1                                                                 1
+    SG48 48-pin QFN                                                                          1                                                                 1
+
+
+
+
+                    © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+6                                                                                                                                                                      FPGA-TN-02052-1.4
+                                                                                                                                  iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                            Technical Note
+
+
+
+2. Global Routing Resources
+The iCE40 device has eight high drive buffers called global buffers (GBUFx). These are connected to eight low-skew
+global lines, designed primarily for clock distribution, but also useful for other high-fanout signals such as set/reset and
+enable signals.
+
+
+                                                                                                                               iCE40LM/iCE40 Ultra/
+                                              iCE40LP/HX                                                                   iCE40 UltraLite/iCE40 UltraPlus
+                                      GBIN0
+
+
+
+
+                                                                    GBIN1
+                                                I/O Bank 0                                                                                   I/O Bank 0
+
+
+
+
+                                                                                                                                     G2
+
+
+
+
+                                                                                                                                                            G7
+                                                                                                           HSSG                                                                 LPSG
+                                              GBUF0
+                                              Buffer
+                                              Global
+
+
+                                                         GBUF1
+                                                         Buffer
+                                                         Global
+
+
+                                                                                                                   GBUF5           GBUF2                  GBUF7         GBUF4
+
+
+
+
+        GBIN7                                                                          GBIN2
+                        Global                                                Global
+                        Buffer                                                Buffer
+                        GBUF71                                                GBUF2
+           I/O Bank 3
+
+
+
+
+                                                                                         I/O Bank 1
+                        Global                                                Global
+                        Buffer                                                Buffer
+                        GBUF6                                                 GBUF3
+
+        GBIN6                                                                          GBIN3
+                                                         GBUF4
+                                              GBUF5
+                                              Global
+
+
+
+
+                                                         Global
+
+
+
+
+                                                                                                                                                                        GBUF6
+                                              Buffer
+
+
+
+
+                                                         Buffer
+
+
+
+
+                                                                                                                   GBUF0             GBUF1                 GBUF3
+
+
+
+
+                                                                                                                   G0
+
+
+
+
+                                                                                                                                                                       G6
+                                                                                                                                    G1
+
+
+
+
+                                                                                                                                                           G3
+                                                                                                                                           I/O Bank 2
+                                                                     GBIN4
+                                      GBIN5
+
+
+
+
+                                                I/O Bank 2
+
+     1. GBUF7 and its associated PIO are best for direct differential clock inputs.
+
+
+
+                                   Figure 2.1. High-drive, Low-skew, High-fanout Global Buffer Routing Resources
+
+The input (sources) to the GBUFx can be:
+• Global buffer inputs (GBINx, Gx)1
+• Programmable interconnect2
+• PLL output2
+• Programmable input/output block (PIO)2
+• Strobe Generators (HSSG, LPSG on iCE40LM devices)
+• On-chip Oscillator (LFOSC, HFOSC on UltraPlus devices)
+Notes:
+1.   The associated GBINx/Gx pin represents the best pin to drive a global buffer from an external source. To determine
+     which GBIN pin can be used as a PLL Reference Clock Input, refer to the Hardware Design Considerations section.
+2.   In iCEcube2, to use a global buffer along with a user interface or PIO, use the SB_GB primitive if it is not inferred
+     automatically.
+
+
+2.1.             Verilog Instantiation (for iCEcube2 only)
+SB_GB My_Global_Buffer_i (// required for a user’s internally generated FPGA signal that is
+heavily loaded and requires global buffering. For example, a user’s logic-generated clock.
+.USER_SIGNAL_TO_GLOBAL_BUFFER (Users_internal_Clk),
+.GLOBAL_BUFFER_OUTPUT ( Global_Buffered_User_Signal) );
+
+
+
+
+                   © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                             7
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+2.2.         VHDL Instantiation (for iCEcube2 only)
+component SB_GB
+port (
+USER_SIGNAL_TO_GLOBAL_BUFFER:input std_logic;
+GLOBAL_BUFFER_OUTPUT:output std_logic);
+end component;
+My_Global_Buffer_i: SB_GB
+port map (
+USER_SIGNAL_TO_GLOBAL_BUFFER=>Users_internal_Clk,
+BUFFER=>Global_Buffered_User_Signal);
+
+
+When using iCEcube2, you may refer to the iCE Technology Library document for more details on device primitives.
+SB_GB primitive is not available in the Lattice Radiant® software but Global Buffers are automatically inferred when
+GBIN ports are used as a clock input. Non-direct access ports can be forced to use a primary clock spine through
+general routing by using the Use Primary Net option in the Device Constraint Editor tool in the Lattice Radiant software.
+If not used in an application, individual global buffers are turned off to save power.
+Table 2.1 lists the connections between a specific global buffer and the inputs on a Programmable Logic Block (PLB).
+Refer to the Architecture section of iCE40 Family data sheets for more information on PLBs. All global buffers optionally
+connect to all clock inputs. Any four of the eight global buffers can drive logic inputs to a PLB. Even-numbered global
+buffers optionally drive the reset input to a PLB. Similarly, odd-numbered buffers optionally drive the PLB clock-enabled
+input.
+Table 2.1. Global Buffer Connections to a Programmable Logic Block
+    Global Buffer                       LUT Inputs                                      Clock                               Clock Enable                                   Reset
+    GBUF0                                                                               Yes                                      —                                          —
+    GBUF1                                                                               Yes                                     Yes                                         Yes
+    GBUF2                                                                               Yes                                      —                                          —
+    GBUF3                           Yes, any 4 of 8                                      Yes                                       Yes                                      Yes
+    GBUF4                            GBUF Inputs                                         Yes                                       —                                        —
+    GBUF5                                                                                Yes                                       Yes                                      Yes
+    GBUF6                                                                                Yes                                       —                                        —
+    GBUF7                                                                                Yes                                       Yes                                      Yes
+
+
+Table 2.2 lists the connections between a specific global buffer and the inputs on a Programmable I/O (PIO) pins.
+Although there is no direct connection between a global buffer and a PIO output, such a connection is possible by first
+connecting through a PLB LUT4 function. Again, all global buffers optionally drive all clock inputs. However,
+even-numbered global buffers optionally drive the clock-enable input on a PIO pair.
+Table 2.2. Global Buffer Connections to Programmable I/O Pair
+    Global Buffer                Output Connections                                Input Clock                              Output Clock                              Clock Enable
+    GBUF0                                                                             Yes                                       Yes                                       Yes
+    GBUF1                                                                             Yes                                       Yes                                        —
+    GBUF2                                                                             Yes                                       Yes                                       Yes
+    GBUF3                            None                                             Yes                                       Yes                                        —
+    GBUF4                  (connect through PLB LUT)                                  Yes                                       Yes                                       Yes
+    GBUF5                                                                             Yes                                       Yes                                        —
+    GBUF6                                                                             Yes                                       Yes                                       Yes
+    GBUF7                                                                             Yes                                       Yes                                        —
+
+
+
+
+                    © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+8                                                                                                                                                                      FPGA-TN-02052-1.4
+                                                                                                                                  iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                            Technical Note
+
+
+
+3. iCE40 sysCLOCK PLL
+The iCE40 Phase-Locked Loop (PLL) provides two sets of outputs and a variety of user-synthesizable clock frequencies,
+along with custom phase delays. The PLL in the iCE40 device can be configured and utilized with the help of software
+macros or the PLL Module Generation utilities available in iCEcube2 and Lattice Radiant software (see the Module
+Generation section). These utilities help you to quickly configure the desired settings with the help of a graphical user
+interface (GUI) and generate Verilog code which configures the PLL macros. Figure 3.1 shows the iCE40 sys-CLOCK PLL
+block diagram.
+
+
+3.1.       iCE40 sysCLOCK PLL Features
+The PLL provides the following functions in iCE40 applications:
+• Generates a new output clock frequency
+    • Clock multiplication
+    • Clock division
+• De-skews or phase-aligns an output clock to the input reference clock
+    • Faster input set-up time
+    • Faster clock-to-output time
+• Corrects output clock to have nearly a 50% duty cycle, which is important for Double Data Rate (DDR) applications
+• Optionally phase shifts the output clock relative to the input reference clock
+    • Optimal data sampling within the available bit period
+    • Fixed quadrant phase shifting at 0°, 90°
+    • Optional fine delay adjustments of up to 2.5 ns (typical) in 150 ps increments (typical)
+
+
+                      RESET
+                    BYPAS S
+
+                                                                     BYPAS S
+                                                                                       GNDPLL     VCCPLL
+                                                      Phase
+                                                      Detector                                                          DIVQ
+                                        DIVR                            RANGE               Vol tage
+          REFERENCECLK                                                                     Control led                   VCO
+                                       In put                          Lo w-Pass
+                                       Divider                            Filter           Oscill ator                  Divider
+                                                                                             (VCO)
+
+                                                                                                               SIMPLE
+                                                                   DIVF
+                                                                                                                                                                          PLLOUTCORE
+                                                                 Feed back                                                                             Fine Delay
+                                                                   Divider
+                                                                                             Fine Delay                                                Adjustment
+                                                                                             Adjustment                       Phase                    Output Port        PLLOUTGLOBAL
+                                                                                                                              Shifter
+                                                                                             Feed back
+
+                                                           Feed back_Path
+       DYNAMICDELAY[7:0]                                                                                                                                                  LOCK
+
+            EXTFEEDBACK                                                                             EXTERNAL
+
+       LATCHINPUTVALUE                 Lo w Power mode
+                                       (iCEgate enabled)
+
+
+
+                              Figure 3.1. iCE40 UltraPlus Phase-Locked Loop (sysCLOCK PLL) Block Diagram
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            9
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+3.2.       Signals
+Table 3.1 lists the signal names, direction, and function of each connection to the PLL. Some of the signals have an
+associated attribute or property. Table 3.1. lists these attributes or properties, and the allowable settings for each
+attribute.
+Note: Signals and attribute settings of PLL primitives are for reference only. It is recommended to generate a PLL
+module with the user interface-based PLL Module Generator or the IP Catalog as explained in the Module Generation
+section.
+Table 3.1. PLL Signals
+ Signal Name (iCEcube2)                   Signal Name (Lattice Radiant) Direction                             Description
+ REFERENCECLK                             ref_clk_i                       Input                               Input reference clock
+ RESET                                    rst_n_i                         Input                               Active LOW reset
+ BYPASS                                   bypass_i                        Input                               When FEEDBACK_PATH is set to SIMPLE, the BYPASS
+                                                                                                              control selects which clock signal connects to the
+                                                                                                              PLLOUT output.
+                                                                                                              0 = PLL generated signal
+                                                                                                              1 = ref_clk_i
+ EXTFEEDBACK                               feedback_i                                         Input           External feedback input to PLL
+                                                                                                              Enabled when the EXTERNAL_DIVIDE_FACTOR
+                                                                                                              attribute is set to an integer.
+ DYNAMICDELAY[3:0]                         dynamic_delay_i[3:0]                               Input           Fine delay adjustment control inputs
+                                                                                                              Enabled when
+                                                                                                              DELAY_ADJUSTMENT_MODE_FEEDBACK is set to
+                                                                                                              DYNAMIC.
+ DYNAMICDELAY[7:4]/[3:0]                   dynamic_delay_i[7:4]/[3:0]                         Input           Fine delay adjustment control inputs
+                                                                                                              Enabled when DELAY_ADJUSTMENT_MODE_RELATIVE
+                                                                                                              is set to DYNAMIC.
+
+                                                                                                              Note:
+                                                                                                              Index is [3:0] when
+                                                                                                              DELAY_ADJUSTMENT_MODE_FEEDBACK is set to
+                                                                                                              FIXED.
+ LATCHINPUTVALUE                           latch_i                                            Input           When enabled, forces the PLL into low-power mode
+                                                                                                              PLL output is held static at the last input clock value.
+                                                                                                              Set ENABLE ICEGATE_PORTA or PORTB to 1 to enable.
+ PLLOUTGLOBALA                             outglobal_o                                      Output            Output from the Phase-Locked Loop (PLL) Port A
+                                                                                                              Drives a global clock network on the FPGA. The port
+                                                                                                              has optimal connections to global clock buffers GBUF4
+                                                                                                              and GBUF5.
+ PLLOUTCOREA                               outcore_o                                        Output            Output clock generated by the PLL Port A
+                                                                                                              Drives regular FPGA routing. The frequency generated
+                                                                                                              on this output is the same as the frequency of the
+                                                                                                              clock signal generated on the outglobal_o port.
+ PLLOUTGLOBALB                             outglobalb_o                                     Output            Output from the Phase-Locked Loop (PLL) Port B
+                                                                                                              Drives a global clock network on the FPGA. The port
+                                                                                                              has optimal connections to global clock buffers GBUF4
+                                                                                                              and GBUF5.
+ PLLOUTCOREB                               outcoreb_o                                       Output            Output clock generated by the PLL Port B
+                                                                                                              Drives regular FPGA routing. The frequency generated
+                                                                                                              on this output is the same as the frequency of the
+                                                                                                              clock signal generated on the outglobalb_o port.
+ LOCK                                      lock_o                                           Output            When High, indicates that the PLL output is phase
+                                                                                                              aligned or locked to the input reference clock.
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+10                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+Table 3.2. PLL Attributes and Settings in PLL Macro1
+Parameter Name                                      Description                       Parameter Value                    Description
+FEEDBACK_PATH                                       Selects the                       SIMPLE                             Feedback is internal to the PLL directly from
+                                                    feedback path to                                                     VCO.
+                                                    the PLL.                           DELAY                             Feedback is internal to the PLL through the
+                                                                                                                         Fine Delay Adjust Block.
+                                                                                       PHASE_AND_DELAY                   Feedback is internal to the PLL through the
+                                                                                                                         Phase Shifter and the Fine Delay Adjust Block.
+ DELAY_ADJUSTMENT                                   Selects the mode                   FIXED                             Delay of the Fine Delay Adjust Block is fixed.
+ _MODE_FEEDBACK                                     for the Fine Delay                                                   The value is specified by the FDA_FEEDBACK
+                                                    Adjust block in the                                                  parameter setting.
+                                                    feedback path.                     DYNAMIC                           Delay of Fine Delay Adjust Block is determined
+                                                                                                                         by the signal value at the dynamic_delay_i[3:0]
+                                                                                                                         pins.
+ FDA_FEEDBACK                                       Sets a constant                    0, 1, … , 15                      The PLLOUTGLOBAL and PLLOUTCORE signals
+                                                    value for the Fine                                                   are delay compensated by (n+1)*150 ps, where
+                                                    Delay Adjust Block                                                   n = FDA_FEEDBACK only if
+                                                    in the feedback                                                      DELAY_ADJUSTMENT_MODE_
+                                                    path                                                                 FEEDBACK is set to FIXED.
+ DELAY_ADJUSTMENT                                   Selects the mode                   FIXED                             Delay of the Fine Delay Adjust Block is fixed.
+ _MODE_RELATIVE                                     for the Fine Delay                                                   The value is specified by the FDA_RELATIVE
+                                                    Adjust block                                                         parameter setting.
+                                                                                       DYNAMIC                           Delay of the Fine Delay Adjust Block is
+                                                                                                                         determined by the signal value at the
+                                                                                                                         dynamic_delay_i[7:4]/[3:0] pins.
+ FDA_RELATIVE                                       Sets a constant                    0, 1, … , 15                      The PLLOUTGLOBALA and PLLOUTCOREA
+                                                    value for the Fine                                                   signals are additionally delayed by (n+1)*150
+                                                    Delay Adjust Block.                                                  ps, where n = FDA_RELATIVE. Used if
+                                                                                                                         DELAY_ADJUSTMENT_MODE_
+                                                                                                                         RELATIVE is set to FIXED.
+ SHIFTREG_DIV_MODE                                  Selects shift register             0, 1                              Used when FEEDBACK_PATH is set to
+                                                    configuration                                                        PHASE_AND_DELAY.
+                                                                                                                         0 = Divide by 4
+                                                                                                                         1 = Divide by 7
+ PLLOUT_SELECT                                      Selects the signal to              SHIFTREG_0deg                     0o phase shift only if the setting of
+                                                    be output at the                                                     FEEDBACK_PATH is set to PHASE_AND_DELAY.
+                                                    PLLOUTCORE and                     SHIFTREG_90deg                    90o phase shift only if the setting of
+                                                    PLLOUTGLOBAL                                                         FEEDBACK_PATH is PHASE_AND_DELAY and
+                                                    ports                                                                SHIFTREG_DIV_MODE = 0.
+                                                                                       GENCLK                            The internally generated PLL frequency is
+                                                                                                                         outputted without any phase shift.
+                                                                                       GENCLK_HALF                       The internally generated PLL frequency is
+                                                                                                                         divided by two and then outputted. No phase
+                                                                                                                         shift.
+ DIVR                                               REFERENCECLK                       0, 1, 2, … , 15                   These parameters are used to control the
+                                                    divider                                                              output frequency, depending on the
+ DIVF                                               Feedback divider                   0, 1, … , 127                     FEEDBACK_PATH setting.
+ DIVQ                                               VCO divider                        0, 1, … , 7
+ FILTER_RANGE                                       PLL filter range                   0, 1, … , 7
+ EXTERNAL_DIVIDE _FACTOR                            Divide-by factor of                User specified                    Specified only when there is a user-
+                                                    a divider in external              value.                            implemented divider in the external feedback
+                                                    feedback path                      Default = NONE                    path. FEEDBACK_PATH is overridden when
+                                                                                                                         value is set to any integer value.
+ ENABLE_ICEGATE_PORTA                                                                  0                                 Power-down control disabled
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            11
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+Parameter Name                                      Description                       Parameter Value                    Description
+                                                    Enables the PLL                   1                                  Power-down controlled by the LATCH input
+                                                    powerdown control
+                                                    for Port A
+ ENABLE_ICEGATE_PORTB                               Enables the PLL                    0                                 Power-down control disabled
+                                                    powerdown control                  1                                 Power-down controlled by the LATCH input
+                                                    for Port B
+ FREQUENCY_PIN_REFERENCECLK                         Reference clock pin                User specified                    Value is extracted from the input frequency
+                                                    constraint                         value.                            setting.
+                                                                                       Default = NONE
+Note:
+1. The attributes are automatically configured through the PLL Module Generator.
+
+
+3.3.       Clock Input Requirements
+Proper operation requires the following considerations:
+• A stable monotonic (single frequency) reference clock input
+• The reference clock input must be within the input clock frequency range (FREF), specified in the data sheet.
+• The reference clock must have a duty cycle that meets the requirement specified in the data sheet.
+• The jitter on the reference input clock must not exceed the limits specified in the data sheet.
+
+
+3.4.       PLL Output Requirements
+The PLL output clock, PLLOUT, has the following restrictions:
+• The PLLOUT output frequency must be within the limits specified in the data sheet.
+• The PLLOUT output is not valid or stable until the PLL LOCK output remains high.
+
+
+3.5.       Functional Description
+The PLL optionally multiplies and/or divides the input reference clock to generate a PLLOUT output clock of another
+frequency. The output frequency depends on the frequency of the REFERENCLK input clock and the settings for the
+DIVR, DIVF, DIVQ, RANGE, and FEEDBACK_PATH attributes settings, as indicated in Figure 3.1.
+The PLL’s phase detector and Voltage Controlled Oscillator (VCO) synthesize a new output clock frequency based on
+the attribute settings. The VCO is an analog circuit and has independent voltage supply and ground connections labeled
+VCCPLL and GNDPLL.
+
+
+3.5.1. PLLOUT Frequency for FEEDBACK_PATH = DELAY or PHASE_AND_DELAY
+For FEEDBACK_PATH modes DELAY and PHASE_AND_DELAY, the PLLOUT frequency is calculated as per the equation
+below.
+
+                                                                                   FREFENCECLK  ( DIVF + 1)
+                                                                    FPLLOUT =
+                                                                                           DIVR + 1
+
+
+3.5.2. PLLOUT Frequency for FEEDBACK_PATH = SIMPLE
+In the SIMPLE feedback mode, the PLL feedback signal taps directly from the output of the VCO, before the final divider
+stage. Consequently, the PLL output frequency has an additional divider step, DIVQ, contributed by the final divider
+step as shown in equation below. (DIVF, DIVQ and DIVR are binary).
+
+                                                                              FREFERENCECLK  ( DIVF + 1)
+                                                             FPLLOUT =
+                                                                                 2( DIVQ)  ( DIVR + 1)
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+12                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+3.5.3. PLLOUT Frequency for FEEDBACK_PATH = EXTERNAL
+For EXTERNAL FEEDBACK_PATH mode, the PLLOUT frequency calculated as per the equation below.
+
+
+                                                                          FREFENCECLK  ( DIVF + 1)  EXTDIV
+                                                           FPLLOUT =
+                                                                                        DIVR + 1
+
+
+3.5.4. Fixed Quadrant Phase Shift
+The PLL optional phase feature shifts the PLLOUT output by a specified quadrant or quarter clock cycle as shown in
+Table 3.3 and Figure 3.2. The quadrant phase shift option is only available when the FEEDBACK_PATH attribute is set to
+PHASE_AND_DELAY.
+Table 3.3. PLL Phase Shift Options
+         PLLOUT_SELECT                                Duty Cycle Correction                                    Phase Shift                                Fraction Clock Cycle
+         SHIFTREG_0deg                                              Yes                                               0o                                             None
+        SHIFTREG_90deg                                              Yes                                              90o                                       Quarter Cycle
+
+
+                                                                                 0°         90°       180°
+
+
+
+
+                                                 REFERENCECLK
+
+                                                                                                          Duty cycle correction
+                                                           PLLOUT
+                            PLLOUT_SELECT = “SHIFTREG_0deg”
+
+
+                                                           PLLOUT                     90°
+                          PLLOUT_SELECT = “SHIFTREG_90deg”
+
+
+
+                                                        Figure 3.2. Fixed Quadrant Phase Shift Control
+
+Unlike the Fine Delay Adjustment, the quadrant phase shifter always shifts by a fixed phase angle. The resulting phase
+shift, measured in delay, depends on the clock period and the PLLOUT_PHASE phase shift setting, as shown in the
+equation below.
+
+                                                                               PhaseShift
+                                                                 Delay =                   Clock _ Period
+                                                                                 360
+
+
+3.5.5. Fine Delay Adjustment (FDA)
+The PLL provides two optional fine delay adjustment blocks that control the delay of the PLLOUT output relative to the
+input reference clock, to an external feedback signal, or relative to the selected quadrant phase shifted clock. One FDA
+is placed in the feedback path, while the other FDA provides delay on the output port directly. If a two-port PLL is used,
+this additional delay is applied only on Port A. Unlike the Feedback FDA, the output port FDA is not dependent on
+FEEDBACK_PATH, and can be used even if FEEDBACK_PATH = Simple. The PLL Module Generation utilities provide easy
+selection of the two fine delay adjust blocks. Figure 3.3 shows the typical first fine delay adjust control block.
+The delay is adjusted by selecting one or more of the 16 delay taps inside the fine delay adjustment block. Each tap is
+approximately 150 ps.
+Fine Delay Adjustment (nominal) = (n+1)* 150ps; 0 ≤ n ≤ 15, where n is the number of delay taps.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            13
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+The number of taps can be selected statically (by providing the value within the PLL Module Generation utility), or
+dynamically by setting the values in DYNAMICDELAY [7:0]. DYNAMICDELAY [3:0] sets the tap numbers for the feedback
+path fine delay adjustment block while DYNAMICDELAY [7:4] sets values for the output port FDA. Refer to parameters
+DELAY_ADJUSTMENT_MODE_FEEDBACK and DELAY_ADJUSTMENT_MODE_RELATIVE in Table 3.2 for more details.
+
+                                                       Cl ock R efer en ce
+                                                     = “DE LAY”                                                       B uffer delay = ~150 ps
+                               PLLOUT
+                                                 = “E XT ER NAL”
+                        EXTF EE DBACK
+                                        = “PHASE_A ND_DE LAY”
+
+
+           Quadrant Phase
+                                                           FE EDBACK_DE LAY
+  = “SH IFTRE G_0deg”
+
+ = “SH IFTRE G_90deg”                                                                                                                                                                      PLLOUT
+
+
+
+
+                    PLLOUT_SE LECT
+                                                                                                                                   Delay Ad jus tmen t
+                                                                                           FI XE D_DE LAY_ADJUST ME   NT
+                                                                                                                              = “FI XE D”
+                                                                                                                                                         Fine Dela y Adj ustment Control
+
+                                                                                                                           = “DY NAMIC”
+                                                                                            DY NAMICDE LAY[3:0]
+
+
+                                                                                                                           DE LAY_ADJUST ME     NT_MO DE_FE EDBACK
+
+
+                                                                         Figure 3.3. Fine Delay Adjust Control
+
+
+3.5.6. Phase Angle Equivalent
+The fine delay adjustment feature injects an actual delay value, rather than a fixed phase angle like the Fixed Quadrant
+Phase Shift feature. Use the equation below to convert the fine adjustment delay to a resulting phase angle.
+
+                                                                                  Fine _ Delay _ Adjustment
+                                                                  PhaseShift =                               360
+                                                                                         ClockPeriod
+
+
+3.5.7. Low Power Mode
+The iCE40 sysCLOCK PLL has low operating power by default. The PLL can be dynamically disabled to further reduce
+power. The low-power mode must first be enabled by setting the ENABLE_ICEGATE attribute to 1. Once enabled, use
+the LATCHINPUTVALUE to control the PLL’s operation, as shown in Table 3.4. The PLL must reacquire the input clock
+and LOCK when the LATCHINPUTVALUE returns from 1 to 0, external feedback is used, and path goes out into the
+fabric.
+Table 3.4. PLL LATCHINPUTVALUE Control
+   ENABLE_ICEGATE Attribute                            LATCHINPUTVALUE Input                       Function
+             0                                               Don’t Care                            PLL is always enabled.
+                                                                 0                                 PLL is enabled and operating.
+                           1
+                                                                 1                                 PLL is in low-power mode; PLLOUT output holds last clock state.
+
+
+
+
+                     © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+        All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+14                                                                                                                                                                                FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+4. Module Generation
+A graphical user interface-based PLL configuration tool is provided in both iCEcube2 and Lattice Radiant Software.
+Using these tools, you can configure the iCE40 PLL software macros based on the inputs in the user interface. The
+resultant HDL code can be used for synthesis. This document uses the Lattice Radiant software version 2.1 and
+iCEcube2 version 2017-08.
+
+
+4.1.       Using Lattice Radiant Software IP Catalog
+Figure 4.1 shows the Start Page of the Lattice Radiant software.
+
+
+
+
+                                                        Figure 4.1. Lattice Radiant Software Start Page
+
+To generate the PLL module:
+1.   Select New Project from the Start Page and click Next.
+2.   Provide the project name and directory. Click Next.
+3.   Add the source files if necessary, otherwise, click Next to skip this step.
+4.   In Select Device as shown in Figure 4.2, select iCE40UP in Family and the targeted device in Device. Click Next.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            15
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+
+                                                                  Figure 4.2. Device Family Selection
+
+5.   In Select Synthesis Tool, shown in Figure 4.3, select the synthesis tool to use. Click Next.
+
+
+
+
+                                                                 Figure 4.3. Synthesis Tool Selection
+
+6.   The project information summary is displayed. If everything is correct, click Finish to load the project.
+7.   In IP Information, shown in Figure 4.4, click IP Catalog on the lower left corner of the window.
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+16                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+8.   Double-click PLL under Architecture Module to open the PLL module generator.
+
+
+
+
+                                                                             Figure 4.4. IP Catalog
+
+     Figure 4.5 shows the PLL configuration interface.
+
+
+
+
+                                                      Figure 4.5. PLL Module Generator User Interface
+
+9.   Click the Generate button if the desired PLL setting is set. A summary of the generated result is shown.
+10. If no other changes are needed, click Finish to complete the procedure.
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            17
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+Table 4.1. PLL Configuration User Parameters
+ User Parameter                                    Description                                      Value                  Description
+ General
+                                   Setting the value to 1 generates a                                  1                  —
+                                   PLL which drives a single global
+                                   clock network, as well as regular
+ Number of Output                  routing. Setting the value to 2
+                                   generates a PLL which drives two                                    2                  —
+                                   global clock networks as well as
+                                   two regular routing resources.
+ Clock Input Setting
+ Input Frequency
+                                   PLL reference clock                                           [10,133]                 —
+ (MHz)
+                                   Computed reference clock
+ DIVR                                                                                              [0,15]                 —
+                                   divider value
+ RANGE                             Computed PLL filter range                                        [0,7]                 —
+ Clock Feedback Setting
+                                                                                          No compensation
+                                                                                                                          FEEDBACK_PATH = SIMPLE
+                                                                                          mode
+                                                                                          Delay
+                                                                                          compensation
+                                                                                          using only the                  FEEDBACK_PATH = DELAY
+                                                                                          Fine Delay
+ Feedback Mode                     Feedback path to the PLL                               Adjustment Block
+                                                                                          Delay
+                                                                                          compensation
+                                                                                          using Phase
+                                                                                                                          FEEDBACK_PATH = PHASE_AND_DELAY
+                                                                                          Shifter and Fine
+                                                                                          Delay Adjustment
+                                                                                          Block
+                                   Feedback path to the PLL is
+ Enable External
+                                   external. This overrides Feedback                        Enable, Disable               —
+ Divider
+                                   Mode setting.
+                                   Specifies which PLL output port is
+                                                                                                                          In this scenario, if Port A/B is using either
+                                   linked to external divider circuit.
+ External Feedback                                                                                                        GENLCK or GENCLK_HALF, the inherent divide
+                                   This is only applicable when                               Port A, Port B
+ Port Select                                                                                                              factor is included in the computation of
+                                   Enable External Divider is
+                                                                                                                          Effective External Divide Factor.
+                                   enabled.
+ External Divide
+                                   External divider value                                           [0,∞]                 —
+ Factor
+ Effective External                Actual external divide factor used
+                                                                                                    [0,∞]                 —
+ Divide Factor                     by PLL
+ DIVF                              Computed feedback divider value                                [0,127]                 —
+ VCO(MHz)                          Computed VCO frequency                                       [533,1066]                —
+ Delay Adjustment                  Mode of adjustment for the
+                                                                                          [FIXED, DYNAMIC]                —
+ Mode                              feedback path
+ Fine Delay                        Static delay value when Delay
+                                                                                                   [0,15]                 —
+ Adjustment Setting                Adjustment Mode is FIXED
+ Shift Register                                                                                 DIV4                      4:1 using GENCLK or 2:1 using GENCLK_HALF
+                                   Shift register configuration
+ Configuration                                                                                  DIV7                      7:1 using GENCLK or 3.5:1 using GENCLK_HALF
+                                                                                               GENCLK,
+                                                                                            GENCLK_HALF,                  Valid selection depends on FEEDBACK_PATH
+ Phase Shift for Port A            PLL output selection for Port A
+                                                                                           SHIFTREG_0deg,                 value.
+                                                                                           SHIFTREG_90deg
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+18                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+ User Parameter                                    Description                                  Value                      Description
+                                                                                               GENCLK,
+                                                                                            GENCLK_HALF,                  Valid selection depends on FEEDBACK_PATH
+ Phase Shift for Port B            PLL output selection for Port B
+                                                                                           SHIFTREG_0deg,                 value.
+                                                                                           SHIFTREG_90deg
+ PLL Output Setting
+ Output Frequency
+                                   Desired PLL output frequency                                  [16,275]                 —
+ (MHz)
+ Actual PLLOUTA                                                                                  [16,275]                 —
+                                   Computed PLL Port A frequency
+ Frequency(MHz)
+ Actual PLLOUTA                                                                                  [16,275]                 —
+                                   Computed PLL Port B frequency
+ Frequency(MHz)
+ Internal PLL                      Computed PLL frequency before                                 [16,275]                 —
+ Frequency(MHz)                    output divider
+                                                                                           [0%, 0.1%, 0.2%,               —
+                                   Accepted deviation from desired
+ PLLOUT Tolerance %                                                                       0.5%, 1%, 2%, 5%,
+                                   PLL output frequency
+                                                                                                 10%]
+ Actual PLLOUT                     Computed deviation from                                                                —
+                                                                                                    [0,5]
+ Tolerance %                       desired PLL output frequency
+ Additional Delay                  Mode of adjustment for the fine
+                                                                                          [FIXED, DYNAMIC]                —
+ Adjustment Mode                   delay adjust block
+                                   Static delay value when
+ Additional Delay
+                                   Additional Delay Adjustment                                     [0,15]                 —
+ Adjustment Setting
+                                   Mode is FIXED
+ DIVQ                              Computed VCO divider value                                       [0,7]                 —
+ Misc
+ Enable Lock Port                  Enable lock signal                                       Enable, Disable               —
+ Enable Bypass Port                Enable bypass control                                    Enable, Disable               —
+ Enable ICEGATE Port               Enable power-down control for                            Enable, Disable               —
+ A                                 Port A
+ Enable ICEGATE Port               Enable power-down control for                            Enable, Disable               —
+ B                                 Port B
+ Message
+                                   Indicates possible parameters                           Failed, Successful             —
+ Status                            needed for adjustment to fix
+                                   flagged DRC errors
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            19
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+4.1.1. Module Generator Output
+The PLL module generator generates two HDL files:
+• <module_name>
+    • < module _name>.cfg
+    • < module _name>.ipx
+    • < module _name>_tmpl.v
+    • [rtl]
+           < module _name>.v
+           < module _name>_bb.v
+
+<module_name>.cfg
+• user configurations file
+
+<module_name>.ipx
+• record of generated files
+
+<module_name>_tmpl.v
+• instantiation template file
+
+<module_name>.v
+• customized generated soft IP
+
+<module_name>_bb.v
+• prototype declaration of the instance
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+20                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+4.1.2. Device Constraints
+Lattice Radiant software supports automatic device constraint generation for PLL module. Whenever PLL module is
+instantiated in a design, the tool generates timing constraints based on the set parameters of the device. Reference
+clock, which is user-defined, is then extracted by the tool to define the PLL reference clock pin. Frequency and phase of
+generated clocks are obtained automatically from the device. If feedback is internal, the tool uses the delay provided
+by the device to compute the delay through the PLL. For external feedback, phase difference between reference clock
+and feedback clock are computed and compensates by subtracting delay.
+Consider as an example a PLL module generated with a 10 MHz reference clock frequency and a 40 MHz output. Figure
+4.6 shows the synthesis report using Lattice Synthesis Engine (LSE). The automatically generated constraints are shown
+under SDC_Constraints.
+
+
+
+
+                                                             Figure 4.6. Post Synthesis Timing Report
+
+Reference clock constraint with 100 ns period:
+create_clock -name {lscc_pll_inst/ref_clk_i_c} -period 100 [get_nets ref_clk_i_c]
+PLLOUTA is GENCLK for x4 reference clock multiplier:
+create_generated_clock -name {outglobal_o_c} -source [get_pins
+{lscc_pll_inst/u_PLL_B/REFERENCECLK}] -multiply_by 4 [get_pins
+{lscc_pll_inst/u_PLL_B/OUTGLOBAL }]
+
+create_generated_clock -name {outcore_o_c} -source [get_pins
+{lscc_pll_inst/u_PLL_B/REFERENCECLK}] -multiply_by 4 [get_pins {lscc_pll_inst/u_PLL_B/OUTCORE
+}]
+PLLOUTB is GENCLK_HALF for x2 reference clock multiplier:
+create_generated_clock -name {outglobalb_o_c} -source [get_pins
+{lscc_pll_inst/u_PLL_B/REFERENCECLK}] -multiply_by 2 [get_pins
+{lscc_pll_inst/u_PLL_B/OUTGLOBALB }]
+
+create_generated_clock -name {outcoreb_o_c} -source [get_pins
+{lscc_pll_inst/u_PLL_B/REFERENCECLK}] -multiply_by 2 [get_pins
+{lscc_pll_inst/u_PLL_B/OUTCOREB }]
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            21
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+4.1.3. Utilization
+The Map Report shows the use of PLL along with other design elements of iCE40 UltraPlus device.
+
+
+
+
+                                                                            Figure 4.7. Map Report
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+22                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+4.2.       Using iCEcube2 Design Software’s PLL Module Generator
+Figure 4.8 shows the iceCube2 design software. The PLL module generator user interface can be invoked from the Tool
+menu.
+
+
+
+
+                                                                Figure 4.8. iceCube2 Design Software
+
+Figure 4.9 shows the PLL configuration user interface. Select the device (iCE40 in this case) and other desired
+operations.
+
+
+
+
+                                     Figure 4.9. PLL Module Generator/Modify Existing PLL Configuration
+
+Click OK and the PLL frequency settings window opens, as shown in Figure 4.10.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            23
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+
+                                                                     Figure 4.10. Settings Window 1
+
+Refer to Table 4.12 for details on user options. Select desired settings which are self-explanatory. Note that some of
+the options are only activated when other required selections are made. These settings directly modify the PLL signals
+and attributes of the PLL software macro, as explained in Table 3.1 and Table 3.2.
+Figure 4.11 shows the next setting window.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+24                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+
+                                                                     Figure 4.11. Settings Window 2
+
+Select desired values and click Next. The last of the settings windows opens, as shown in Figure 4.12.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            25
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+
+                                                                     Figure 4.12. Settings Window 3
+
+After selecting the desired values, the final window the PLL Module Generator opens, as shown in Figure 4.13. This
+window shows all the values of the attributes and parameters that were discussed in the previous sections and in Table
+3.1 and Table 3.2. It also shows which PLL Macro type has been selected. The PLL Macro Type used in this example is
+SB_PLL40_Core.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+26                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+
+                                                         Figure 4.13. PLL Configuration – Final Settings
+
+Table 4.2. PLL Configuration Tool User Parameters
+User Parameter                                          Description                                  Range              Description
+PLL Type
+                                      Setting the value to 1 generates a                                1              —
+                                      PLL which drives a single global
+ Select the number of
+                                      clock network, as well as regular
+ global networks to be
+                                      routing. Setting the value to 2
+ driven by the PLL                                                                                      2              —
+                                      generates a PLL which drives two
+ outputs.
+                                      global clock networks as well as
+                                      two regular routing resources.
+                                                                                                                       In this scenario, the PLL input (source clock) is
+                                                                                                  General
+                                                                                                                       driven by a signal from the FPGA fabric. This
+                                                                                                Purpose I/O
+                                      —                                                                                signal can either be generated on the FPGA core,
+                                                                                                Pad or Core
+                                                                                                                       or it can be an external signal that was brought
+                                                                                                   Logic
+                                                                                                                       onto the FPGA using a General Purpose I/O pad.
+                                                                                                                       The PLL input clock (source) is driven by a
+ How is the PLL Source                                                                                                 dedicated clock pad located in I/O Bank 2
+ Clock driven?                                                                                                         (bottom bank) or I/O Bank 0 (top bank). If the
+                                                                                                                       number of global networks is two, the source
+                                      —                                                           Clock Pad            clock of the PLL can be used as is (that is.
+                                                                                                                       without any frequency, delay compensation or
+                                                                                                                       phase adjustments). It is recommended that if
+                                                                                                                       the source clock is required on-chip, this option
+                                                                                                                       should not be selected.
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            27
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+Table 4.2. PLL Configuration Tool User Parameters (continued)
+User Parameter                                          Description                                  Range              Description
+PLL Operation Modes
+                                                                                                                       This option is related to the phase delay
+                                                                                                                       introduced in the feedback path. The options
+                                                                                                                       are:
+                                                                                                                       No Compensation mode – There is no phase
+                                                                                                                       delay in the feedback path.
+                                                                                                                       Delay compensation using only the Fine Delay
+                                                                                                                       Adjustment (FDA) Block – The feedback path
+                                                                                                                       traverses through the FDA block, as explained in
+                                                                                                   Using a             the Fine Delay Adjustment (FDA) section.
+                                                                                                  feedback             Delay compensation using the phase shifter and
+                                      The PLL can be configured to                                  path               the Fine Delay Adjustment (FDA) Block – For
+                                      operate in one of multiple modes.                          internal to           single-port PLL types, the Phase Shifter provides
+                                      An Operation Mode determines the                             the PLL
+ How is the PLL output                                                                                                 two outputs corresponding to a phase shift of 0°
+                                      feedback path of the PLL and
+ generated?                                                                                                            and 90°. For two-port PLL types, the Phase
+                                      enables phase alignment of the
+                                                                                                                       Shifter has two modes: Divide-by-4 mode and
+                                      generated clock with regard to the
+                                                                                                                       Divide-by-7 mode. In Divide-by-4 mode, the
+                                      source clock.
+                                                                                                                       output of the B port can be shifted either 0° or
+                                                                                                                       90° with regard to A port outputs. In Divide-by-7
+                                                                                                                       mode, the B port output frequency can be set to
+                                                                                                                       have a frequency ratio of 3.5:1 or 7:1 with
+                                                                                                                       regard to the port A output frequency.
+                                                                                                   Using a             The feedback path traverses through FPGA
+                                                                                                  feedback             routing (external to the PLL) followed by the FDA
+                                                                                                    path               block. In effect, two delay controls are available
+                                                                                                 external to           – the external path for coarse adjustment and
+                                                                                                   the PLL             the FDA block for fine delay adjustment.
+ Fine Delay Adjustment Settings
+                           Enabled only when Compensation                                              Yes             —
+                           mode or external Feedback mode is
+                           selected. The delay contributed by
+                           the FDA block can be fixed or
+ Do you want to
+                           controlled dynamically during FPGA
+ dynamically control the
+                           operation. If fixed, it is necessary to
+ delay of the Fine Delay                                                                               No              Enter a value in the range 0–15.
+                           provide a number (n) in the range
+ Adjustment block?
+                           of 0-15 to specify the delay
+                           contributed to the feedback path.
+                           For further details, see Fine Delay
+                           Adjustment (FDA).
+ Phase Shift Specification
+                           Enabled only when delay                                                      0°             —
+                           compensation using the phase
+ Specify the phase shift
+                           shifter is selected. Gives a phase
+ for the PLL output                                                                                    90°             —
+                           shift of 0° and 90° to the output
+                           clock.
+ Target Application1
+                           Two different frequencies can be                                           3.5:1            The frequency of port B is 3.5x of Port A.
+ LVDS Display Panel        observed on different ports (A and
+                           B).                                                                         7:1             The frequency of Port B is 7x of Port A.
+                           The signal on Port B can be phase                                            0°             —
+ DDR Application           shifted by 90° with respect to signal
+                           A.                                                                          90°             —
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+28                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+Table 4.2. PLL Configuration Tool User Parameters (continued)
+User Parameter                                          Description                                  Range              Description
+Additional Delay Settings
+                                                                                                                       The delay contributed by the delay block can be
+                                                                                                                       fixed or controlled dynamically during FPGA
+                                                                                                       Yes             operation. If fixed, it is necessary to provide a
+                                      In addition to Fine Delay                                                        number (n) in the range 0–15 to specify the
+ Do you wish to specify
+                                      Adjustment in the feedback path,                                                 delay contributed to the feedback path. The
+ additional delay on the
+                                      you can specify additional delay on                                              delay for a setting n is calculated as follows: FDA
+ PLL outputs?
+                                      the PLL output ports.                                                            delay = (n+1)*0.15 ps, range of n = 0 to 15.
+                                                                                                       No              Note: This additional delay is applied on the
+                                                                                                                       output of single-port PLL and port A of two-port
+                                                                                                                       PLL Types.
+ PLL Input/output Frequency
+                         Specify input frequency. Refer to
+ Input Frequency (MHz)   the iCE40 Family Data Sheet for the                                            —              —
+                         input range.
+                         Specify desired output frequency.
+ Output Frequency
+                         Refer the iCE40 Family Data Sheet                                              —              —
+ (MHz)
+                         for the output frequency range.
+ Others
+                         A lock signal is provided to indicate
+                         that the PLL has locked on to the
+ Create a LOCK output    incoming signal. Lock asserts High
+                                                                                                        —              —
+ port                    to indicate that the PLL has
+                         achieved frequency lock with a
+                         good phase lock.
+                         A BYPASS signal is provided which
+ Create a BYPASS port
+                         both powers-down the PLL core
+ that bypasses the PLL
+                         and bypasses it such that the PLL                                              —              —
+ reference clock to the
+                         output tracks the input reference
+ PLL output port
+                         frequency.
+                                                                                                Enable
+                                                                                                                       Dynamically controls power by enabling the
+                                      A control is provided to dynamically                      latching of
+                                                                                                                       signal LATCHINPUTVALUE. Refer to the Low
+                                      put the PLL into a lower power                            PLL clock
+                                                                                                                       Power Mode section.
+                                      mode through the iCEGate feature.                         (iCEGate)
+ Low Power Mode
+                                      The iCEGate feature latches the PLL                       Enable
+                                      output signal and prevents                                latching of
+                                      unnecessary toggling.                                                            Default setting
+                                                                                                PLL source
+                                                                                                clock
+Note:
+1. Enabled when the Number of Global Networks to be Driven by the PLL Outputs option is set to 2.
+
+
+4.2.1. PLL Module Generator Output
+The PLL module generator generates two HDL files:
+• <module_name>_inst.v
+• <module_name>.v
+The <module_name>_inst.v is the instantiation template to be used in the custom top level design. The
+<module_name>.v contains the PLL software macro with the required attributes and signal values, calculated based on
+the inputs to the user interface.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            29
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+4.2.2. iCEcube2 Design Software Report File
+The placer.log file (Final Design Statistics section) shows the use of PLLs and GBUFs (global buffers) along with other
+design elements of the iCE40 device. Note that when GBUF is instantiated in the RTL to connect to a PIO, an extra slice
+is utilized for connection.
+
+
+
+
+                                      Figure 4.14. Report File Showing the Use of PLLs and Global Buffers
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+30                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                 iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                           Technical Note
+
+
+
+5. Hardware Design Considerations
+
+5.1.       PLL Placement Rules
+There are minor differences in how iCEcube2 and Lattice Radiant software label the I/O site in iCE40 devices. The
+hardware limitations below should be considered by the designer to determine which pin qualifies as a PLL input and if
+it incur a limitation when a PLL is utilized in the design. Figure 5.1 shows an iCE40 UltraPlus device viewed in the Device
+Constraint Editor of the Lattice Radiant software. Figure 5.2 and Figure 5.3 shows the same device viewed in the Floor
+Planner of the iCEcube2 software.
+
+
+5.1.1. Lattice Radiant Software
+If the PLL requires an external reference clock source driven through the Global Buffer Input (GBIN), use any GBIN for
+the PLL reference clock input. When PLL is instantiated, the GPLL pin cannot be used as other input connection - For
+example, setting "rstn" in the design to pin 35; it can only drive the PLL Reference clock. However, the GPLL pin can still
+be set as output. Therefore, since, there is no other purpose for GPLL when the PLL is instantiated, the GPLL pin can be
+used as the PLL input pin for the reference clock.
+
+
+5.1.2. iCEcube2 Software
+•   If any instance of PLL is placed in the location of the I/O cell, then, an instance of SB_GB_IO cannot be placed in
+    that particular I/O cell.
+•   If an instance of ice40_PLL_CORE or ice40_PLL_2F_CORE is placed, an instance of SB_IO in output-only mode can
+    be placed in the associated I/O cell location.
+•   If an instance of ice40_PLL_PAD, ice40_PLL_2F_PAD, ice40_PLL_2_PAD is placed, the associated I/O cell cannot be
+    used by any SB_IO or SB_GB_IO.
+•   If an instance of ice40_PLL_2F_CORE, ice40_PLL_2F_PAD, ice40_PLL_2_PAD is placed, an instance of SB_IO in
+    output-only mode can be placed in the right neighboring I/O cell.
+
+
+
+
+                                          Figure 5.1. Device Constraint Editor of Lattice Radiant Software
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                            31
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+
+                           Figure 5.2. Floor Planner View showing the specific I/O Cell that Contains the PLL
+
+
+
+
+                                                                       Figure 5.3. I/O Cell Contents
+
+
+5.2.       Analog Power Supply Filter for PLL
+The iCE40 sysCLOCK PLL contains some analog blocks. On some devices, the PLL requires a separate power and ground
+that is quiet and stable, to reduce the output clock jitter of the PLL. On some devices with low pin count, the PLL is not
+available.
+On devices with external power and ground for the PLL, an R-C filter as shown in Figure 5.4 is used as a power supply
+filter on the PLL power and ground pins. The series resistor (RS) limits the voltage drop across the filter. A high
+frequency non-electrolytic capacitor (CHF) is placed in parallel with a lower frequency electrolytic capacitor (CLF). CHF
+is used to attenuate high frequency components while CLF is used for low frequency cut-off.
+Board layout around the high frequency capacitor and the path to the pads is critical. The PLL power (VCCPLL) path
+must be a single wire from the FPGA pin to the high frequency capacitor (CHF), then to the low frequency capacitor
+(CLF), through the series resistor (RS) and then to board power VCC. The distance from the FPGA pin to the high
+frequency capacitor should be as short as possible. Similarly, the PLL Ground (GNDPLL) path should be from the FPGA
+pin to the high frequency capacitor (CHF) and then to the low frequency capacitor (CLF), with the distance from the
+FPGA pin to the CHF being as short as possible.
+The sysCLOCK PLL has the DC ground connection made on the FPGA, so the external PLL ground connection (GNDPLL)
+must NOT be connected to the board’s ground except when a particular iCE40 device does not have a dedicated
+GNDPLL ball. Figure 5.4 also includes sample values for the components that make up the PLL power supply filter.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+32                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                          Technical Note
+
+
+
+
+                                                       RS
+                                                                                                                   VCCPLL
+                                                    100 Ω              10 μF                         100 nF
+                                                                                                                                   iCE40
+                                                                         C LF                         C HF
+                                                                                                                   GNDPLL*
+
+
+
+
+                               *Note: GND PLL should not be connected to the board s ground
+                               except when a particular iC E40 device does not have a dedic ated
+                               GND PLL ball. This filter requirement should be applied ev en if the
+                               PLL is not utilized in the design.
+
+
+
+                                                Figure 5.4. Power Supply Filter for VCCPLL and GNDPLL
+
+
+
+
+                 © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                           33
+iCE40 sysCLOCK PLL Design and User Guide
+Technical Note
+
+
+
+Technical Support Assistance
+Submit a technical support case through www.latticesemi.com/techsupport.
+
+
+
+
+                  © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+34                                                                                                                                                                   FPGA-TN-02052-1.4
+                                                                                                                                   iCE40 sysCLOCK PLL Design and User Guide
+                                                                                                                                                             Technical Note
+
+
+
+Revision History
+Revision 1.4, April 2022
+ Section                                               Change Summary
+ All                                                   Changed the document title from iCE40 sysCLOCK PLL Design and Usage Guide to iCE40
+                                                            sysCLOCK PLL Design and User Guide
+ Hardware Design Considerations                        Explained the use of the GPLL Pin.
+
+Revision 1.3, July 2021
+ Section                                               Change Summary
+ Hardware Design Considerations                        •       Updated Analog Power Supply Filter for PLL.
+                                                       •       Updated the note in Figure 5.4.
+
+
+Revision 1.2, August 2020
+ Section                                               Change Summary
+ All                                                   •   Changed document title to iCE40 sysCLOCK PLL Design and Usage Guide.
+                                                       •   Merged contents with iCE40 sysCLOCK PLL Design and Usage Guide (TN1251).
+ Disclaimers                                           Added this section.
+
+
+Revision 1.1, March 2019
+ Section                                               Change Summary
+ Module Generation                                     Removed error in step 9 of the PLL module generation procedure.
+ —                                                     Minor adjustments in style and formatting.
+
+
+Revision 1.0, February 2018
+ Section                                               Change Summary
+ —                                                     Initial release.
+
+
+
+
+                    © 2018-2022 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02052-1.4                                                                                                                                                                              35
+www.latticesemi.com
+

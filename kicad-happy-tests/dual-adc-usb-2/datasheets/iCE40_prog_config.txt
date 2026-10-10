@@ -1,0 +1,2082 @@
+iCE40 Programming and Configuration
+
+
+
+
+Technical Note
+
+
+
+FPGA-TN-02001-3.5
+
+August 2026
+iCE40 Programming and Configuration
+Technical Note
+
+
+Disclaimers
+Lattice makes no warranty, representation, or guarantee regarding the accuracy of information contained in this document or the suitability of its
+products for any particular purpose. All information herein is provided AS IS, with all faults and associated risk the responsibility entirely of the Buyer.
+Buyer shall not rely on any data and performance specifications or parameters provided herein. Products sold by Lattice have been subject to limited
+testing and it is the Buyer's responsibility to independently determine the suitability of any products and to test and verify the same. No Lattice
+products should be used in conjunction with mission- or safety-critical or any other application in which the failure of Lattice’s product could create a
+situation where personal injury, death, severe property or environmental damage may occur. The information provided in this document is
+proprietary to Lattice Semiconductor, and Lattice reserves the right to make any changes to the information in this document or to any products at
+any time without notice.
+
+
+
+
+                   © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+2                                                                                                                                                                     FPGA-TN-02001-3.5
+                                                                                                                                          iCE40 Programming and Configuration
+                                                                                                                                                               Technical Note
+
+
+
+Contents
+Acronyms in This Document ................................................................................................................................................. 6
+1. Introduction .................................................................................................................................................................. 7
+2. Configuration Overview ................................................................................................................................................ 8
+3. Configuration Mode Selection ..................................................................................................................................... 10
+  3.1.     Mode Selection for iCE40 LP/HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus Devices ............................. 10
+  3.2.     Mode Selection for iCE40 LM ............................................................................................................................ 11
+4. Non-Volatile Configuration Memory ........................................................................................................................... 13
+  4.1.     NVCM Programming ......................................................................................................................................... 13
+5. Configuration Control Signals ...................................................................................................................................... 14
+6. Internal Oscillator........................................................................................................................................................ 16
+7. Internal Device Reset .................................................................................................................................................. 17
+  7.1.     Power-On Reset ................................................................................................................................................ 17
+  7.2.     CRESET_B Pin .................................................................................................................................................... 17
+8. sysCONFIG Port ........................................................................................................................................................... 18
+  8.1.     sysCONFIG Pins .................................................................................................................................................. 18
+9. SPI Master Configuration Interface ............................................................................................................................. 19
+  9.1.     SPI Master Configuration Mode Timing Considerations ................................................................................... 19
+  9.2.     SPI PROM Requirements ................................................................................................................................... 20
+  9.3.     Enabling SPI Configuration Interface ................................................................................................................ 21
+  9.4.     SPI Master Configuration Process ..................................................................................................................... 21
+10. Cold Boot Configuration Option .................................................................................................................................. 24
+11. Warm Boot Configuration Option ............................................................................................................................... 27
+12. Time-Out and Retry ..................................................................................................................................................... 28
+13. SPI Slave Configuration Interface ................................................................................................................................ 29
+  13.1. Enabling SPI Configuration Interface ................................................................................................................ 30
+  13.2. SPI Slave Configuration Process......................................................................................................................... 30
+  13.3. Voltage Compatibility ........................................................................................................................................ 33
+Appendix A. SPI Slave Configuration Procedure ................................................................................................................. 34
+  A.1. CPU Configuration Procedure ................................................................................................................................. 34
+  A.2. Configuration Waveforms ........................................................................................................................................ 34
+  A.3. Pseudo Code ............................................................................................................................................................ 36
+Appendix B. Configuration Data Format ............................................................................................................................. 38
+References .......................................................................................................................................................................... 39
+Technical Support Assistance............................................................................................................................................... 40
+Revision History .................................................................................................................................................................. 41
+
+
+
+
+                    © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                              3
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+Figures
+Figure 2.1. Configuring and Programming the iCE40 Device .................................................................................................8
+Figure 3.1. iCE40 Device Configuration Control Flow ..........................................................................................................11
+Figure 3.2. iCE40 LM Device Configuration Control Flow ....................................................................................................12
+Figure 5.1. iCE40 Configuration Control Pins ......................................................................................................................14
+Figure 7.1. iCE40 Internal Reset Circuitry ...........................................................................................................................17
+Figure 9.1. iCE40 SPI Master Configuration Interface ..........................................................................................................19
+Figure 9.2. SPI Master Configuration Timing .......................................................................................................................20
+Figure 9.3. SPI Release from Deep Power-down Command ................................................................................................22
+Figure 9.4. SPI Fast Read Command ....................................................................................................................................22
+Figure 9.5. Final Configuration Data, SPI Deep Power-down Command .............................................................................23
+Figure 10.1. Cold Boot and Warm Boot Configuration ........................................................................................................24
+Figure 10.2. Diamond Deployment Tool – Advanced SPI Flash Options ..............................................................................25
+Figure 11.1. Enable Warm Boot Option...............................................................................................................................27
+Figure 13.1. iCE40 SPI Slave Configuration Interface ..........................................................................................................29
+Figure 13.2. Application Processor Waveforms for SPI Peripheral Mode Configuration Process ........................................31
+Figure 13.3. SPI Slave Configuration Process.......................................................................................................................32
+
+
+
+
+                    © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+4                                                                                                                                                                      FPGA-TN-02001-3.5
+                                                                                                                                          iCE40 Programming and Configuration
+                                                                                                                                                               Technical Note
+
+
+
+Tables
+Table 1.1. iCE40 Devices Configuration Features Comparison ............................................................................................. 7
+Table 2.1. Configuration Modes ........................................................................................................................................... 8
+Table 5.1. iCE40 Configuration Control Signals ................................................................................................................... 14
+Table 7.1. Power-On Reset Voltage Resources .................................................................................................................... 17
+Table 8.1. sysCONFIG Ports ................................................................................................................................................. 18
+Table 8.2. sysCONFIG Pins................................................................................................................................................... 18
+Table 9.1. SPI Master Configuration Interface Pins (SPI_SS High Before Configuration) ..................................................... 19
+Table 9.2. Bitstream Sizes for Different iCE40 FPGA Densities Used to Select a SPI Flash................................................... 21
+Table 10.1. CBSEL[1:0] Vector Address ............................................................................................................................... 25
+Table 13.1. SPI Slave Configuration Interface Pins (SPI_SS Low when CRESET_B Released)................................................ 30
+Table 13.2. SPI Peripheral Mode Supply Voltages ............................................................................................................... 33
+Table 13.3. CRESET_B and CDONE Voltage Compatibility ................................................................................................... 33
+Table A.1. iCE40 SRAM Configuration Sequence................................................................................................................. 34
+Table B.1. Configuration Data ............................................................................................................................................. 38
+
+
+
+
+                    © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                              5
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+Acronyms in This Document
+A list of acronyms used in this document.
+    Acronym                              Definition
+    AP                                   Application Processor
+    DSP                                  Digital Signal Processor
+    ECC                                  Error Checking and Correction
+    FPGA                                 Field-Programmable Gate Array
+    NVCM                                 Non-Volatile Configuration Memory
+    PIO                                  Parallel Input/Output
+    PLB                                  Programmable Logic Block
+    POR                                  Power On Reset
+    PROM                                 Programmable Read-Only Memory
+    SPI                                  Serial Peripheral Interface
+    SRAM                                 Static Random-Access Memory
+
+
+
+
+                    © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+6                                                                                                                                                                      FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+1. Introduction
+The Lattice iCE40™ devices are SRAM-based FPGAs. The iCE40 LP, iCE40 HX, iCE40 Ultra™, iCE40 UltraLite™, and iCE40
+UltraPlus™ devices also have an on-chip, one-time programmable NVCM (Non-Volatile Configuration Memory) to store
+configuration data. The SRAM memory cells are volatile, meaning that once power is removed from the device, its
+configuration is lost, and must be reloaded on the next power-up. This behavior has the advantage of being
+re-programmable in the field which provides flexibility for products already deployed to the field. But it also requires
+that the configuration information be stored in a non-volatile device and loaded each time power is applied to the
+device. The on-chip NVCM allows the device to configure instantly and greatly enhances the design security by
+eliminating the need to use an external memory device. The configuration data can also be stored in an external SPI
+Flash from which the FPGA can configure itself upon power-up. This is useful for prototyping the FPGA or in situations
+where reconfigurability is required. Additionally, the device can be configured by a processor in an embedded
+environment.
+Table 1.1. iCE40 Devices Configuration Features Comparison
+Features                                                             iCE40 LM                  iCE40 LP/iCE40 HX/iCE40 Ultra/iCE40 UltraLite/iCE40 UltraPlus
+NVCM (one time programmable)                                             —                                                                  Yes
+Multiple Configuration Image                                             —                                                                  Yes
+Master SPI Configuration Mode                                            Yes                                                                Yes
+Slave SPI Configuration Mode                                             Yes                                                                Yes
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            7
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+2. Configuration Overview
+The iCE40 devices contain two types of memory, SRAM and NVCM (one-time programmable). The iCE40 LM devices,
+however, contain only one type of memory, which is SRAM. The SRAM memory contains the active configuration. The
+NVCM and the external SPI Flash provide non-volatile storage for the configuration data. Additionally, the iCE40
+configuration data can be downloaded from an external processor, microcontroller, or Digital Signal Processor (DSP)
+processor using the SPI interface. In this document, the term programming refers to the programming of the NVCM
+and the term configuration refers to the configuration of SRAM memory. For either programming or configuration, the
+iCE40 FPGA uses the SPI configuration interface.
+As described in Table 2.1, iCE40 components are configured for a specific application by loading a binary configuration
+bitstream image, generated by the Lattice development system. For high-volume applications, the bitstream image is
+usually permanently programmed in the on-chip Non-volatile Configuration Memory. However, the bitstream image
+can also be stored externally in a standard, low-cost commodity SPI serial Flash PROM. The iCE40 component can
+automatically load the image using the SPI Master Configuration Interface. Similarly, the iCE40 configuration data can
+be downloaded from an external processor, microcontroller, or DSP using an SPI-like serial interface.
+Table 2.1. Configuration Modes
+Mode                  Analogy                           Configuration Data Source
+NVCM1                 ASIC                              Internal, lowest-cost, secure, one-time programmable NVCM.
+Master SPI            Microprocessor                    External, low-cost, commodity, SPI serial Flash PROM.
+Slave SPI             Processor Peripheral              Configured by external device, such as a processor, microcontroller, or DSP using practically
+                                                        any data source, such as system Flash, a disk image, or over a network connection.
+Note:
+1. iCE40 LP, iCE40 HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus devices only.
+Figure 2.1 provides an overview of the configuration and programming of the iCE40 FPGA. For configuration and
+programming, the device can be accessed using the SPI interface/protocol described in later sections of this technical
+note. The SRAM can configure itself (device in master mode) from the on-chip NVCM (iCE40 LP, ICE40 HX, iCE40 Ultra,
+iCE40 UltraLite, and iCE40 UltraPlus devices only), external SPI Flash or Lattice programming hardware. An external
+processor or programming hardware can also configure the SRAM with the FPGA in slave SPI mode. The NVCM can be
+programmed using the Lattice Diamond™ Programmer (version 2.2 or later) or an external processor.
+
+
+                                                                                                                               Third-Party USB-to-Serial
+                                                                                                                                       Convertor/
+                                                                                                                               Lattice Programming Tool
+
+
+
+
+                                                              Lattice Programming Tool/
+                                                               Application Processor/μC                                                     SPI Flash
+
+
+                            SPI Port
+
+
+
+
+                                    NVCM
+                             (iCE40 LP, ICE40 HX,
+                          iCE40 Ultra, iCE40 UltraLite                                             SRAM Memory Space
+                           and iCE40 UltraPlus only)
+
+                                              Figure 2.1. Configuring and Programming the iCE40 Device
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+8                                                                                                                                                                    FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+Below is a standard configuration procedure:
+1.   At the beginning of the configuration, all the SRAM has been cleared to 0, so pullup is enabled by SRAM bit 0 and
+     I/O HiZ is enabled by configuration controller.
+2.   In the process of bitstream downloading, all the SRAM bits are replaced with the fresh SRAM bits gradually. And
+     the new SRAM bits take effect immediately.
+3.   At the end of configuration, configuration controller releases I/O (except configuration SPI pins) tristate and I/O
+     becomes active after CDONE goes high (17 clocks), only 4 configuration SPI pins become user I/O after 49 clocks.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            9
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+3. Configuration Mode Selection
+
+3.1.         Mode Selection for iCE40 LP/HX, iCE40 Ultra, iCE40 UltraLite, and iCE40
+             UltraPlus Devices
+The iCE40 LP/HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus device configuration mode is selected according to
+the following priority described below and illustrated in Figure 3.1.
+• After exiting the Power-On Reset state or when CRESET_B returns High after being held Low, the iCE40 device
+     samples the logical value on its SPI_SS pin. Like other programmable I/O pins, the SPI_SS pin has an internal pullup
+     resistor. Refer to iCE40 LP/HX Family Data Sheet (FPGA-DS-02029) for the minimum pulse width requirement of
+     CRESET_B.
+• If the SPI_SS pin is sampled as a logic ‘1’ (High), then …
+     Check if the device is enabled to configure from the NVCM. If the NVCM is programmed, the device configures
+     from NVCM.
+     • If enabled to configure from NVCM, the device configures itself using the NVCM.
+     • If not enabled to configure from NVCM, then the device configures using the SPI Master Configuration
+          Interface.
+• If the SPI_SS pin is sampled as a logic ‘0’ (Low), then the device waits to be configured from an external controller
+     or from another device in SPI Master Configuration Mode using an SPI-like interface.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+10                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+                                                                      Power-Up
+
+
+
+                                                                     CDON E = 0
+
+
+
+                                                                                                   iCE40 ch ecks that all
+                                                  No                Is Power-On                    required supp ly voltages
+                                                                    Reset (POR)                    are within acceptable
+                                                                     Released?                     range.
+
+                                                                              Yes
+
+                                                  No                                               Holding CRESET_B Low
+                                                                CRESET_B = High?                   delays the start of
+                                                                                                   co nfiguration.
+
+                                                                                       State of SPI_SS
+                                                                              Yes
+                                                                                       pin sampled
+
+                                                                                                 No         Con figure as SPI
+                                                                   SPI_SS = High?
+                                                                                                              Peripheral
+
+                                                                                                   A d evice with an
+                                                                               Yes                 unp rogrammed NVCM is not
+                                                                                                   enabled for configuration.
+                                                                NVCM Enabled for                  Yes       Con figure from
+                                                                 Con figuration?                                 NVCM
+
+
+                                                                                No
+
+                                                                  Configure from
+                                                                  SPI Flash PROM
+
+
+
+                                                                     CDON E = 1
+
+
+                                                                                                  After configuration ends, toggle
+                                                  No                                              (High-Low-High) the CRESET_B pin
+                                                                 CRESET_B = Low?                  to res tart configuration proces s o r
+                                                                                                  cycle the power.
+
+                                                                                 Yes
+
+                                                    Figure 3.1. iCE40 Device Configuration Control Flow
+
+
+3.2.         Mode Selection for iCE40 LM
+The iCE40 LM configuration mode is selected according to the following priority described below and illustrated in
+Figure 3.2.
+• After exiting the Power-On Reset (POR) state or when CRESET_B returns High after being held Low, the device
+    samples the logical value on its SPI_SS pin. Like other programmable I/O pins, the SPI_SS pin has an internal pullup
+    resistor. Refer to iCE40 LM Family Data Sheet (FPGA-DS-02043) for the minimum pulse width requirement of
+    CRESET_B.
+• If the SPI_SS pin is sampled as a logic ‘1’ (High), then the device configures using the SPI Master Configuration
+    Interface.
+• If the SPI_SS pin is sampled as a logic ‘0’ (Low), then the device waits to be configured from an external controller
+    or from another device in SPI Master Configuration Mode using an SPI-like interface.
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            11
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+                                                                    Power-Up
+
+
+
+                                                                   CDON E = 0
+
+
+
+                                                                                                      iCE40 checks that all
+                                            No                    Is Power-On                         required supply voltages
+                                                                  Reset (POR)                         are within acceptable
+                                                                   Released?                          range.
+
+                                                                              Yes
+                                                                                                       Holding CRESET_B Low
+                                            No                                                         delays the start of
+                                                              CRESET_B = High?                         configuration.
+
+
+                                                                              Yes State of SPI_SS
+                                                                                  pin sampled
+
+                                                                                                   No         Configure as SPI
+                                                                 SPI_SS = High?
+                                                                                                                Peripheral
+
+
+
+
+                                                               Configure from
+                                                               SPI Flash PROM
+
+
+
+                                                                  CDON E = 1
+
+
+
+                                                                                                    After configuration ends, toggle
+                                            No                                                      (High-Low-High) the CRESET_B pin
+                                                               CRESET_B = Low?
+                                                                                                    to res tart configuration proces s o r
+                                                                                                    cycle the power.
+
+                                                                              Yes
+
+                                                 Figure 3.2. iCE40 LM Device Configuration Control Flow
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+12                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+4. Non-Volatile Configuration Memory
+This section applies to iCE40 LP, iCE40 HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus devices only.
+All standard iCE40 devices have an internal NVCM. The NVCM is large enough to program a complete iCE40 device,
+including initializing all Embedded Block RAM. The NVCM memory also has very high programming yield due to
+extensive error checking and correction (ECC) circuitry.
+The NVCM is ideal for cost-sensitive, high-volume production applications, saving the cost and board space associated
+with an external configuration PROM. Furthermore, the NVCM provides exceptional design security, protecting critical
+intellectual property (IP). The NVCM contents are entirely contained within the iCE40 device and are not readable once
+protected by the one-time programmable Security bits. Furthermore, there is no observable difference between a
+programmed or unprogrammed memory cell using optical or electron microscopy.
+The NVCM memory has a programming interface similar to a 25-series SPI serial Flash PROM. Consequently, it can be
+programmed using Diamond Programmer (version 2.2 or later) before or after circuit board assembly or programmed
+in-system from a microprocessor or other intelligent controller. The NVCM can also be pre-programmed at the factory.
+Contact Lattice Technical Support or your local Lattice sales office for assistance.
+
+
+4.1.         NVCM Programming
+The NVCM can be programmed in the following ways:
+• Diamond Programmer
+    • Programming using the Diamond Programmer (Diamond 2.0.1 or later) is recommended for prototyping.
+    • Programming is supported using the Lattice programming cable. For more information refer to the Diamond
+       Programmer Online Help and the Programming Cables User Guide (FPGA-UG-02042).
+• Factory Programming
+    • The Lattice factory offers NVCM programming. For more information, contact your local Lattice sales office.
+• Embedded Programming
+The NVCM can be programmed using a processor. For more information, contact your local Lattice sales office.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            13
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+5. Configuration Control Signals
+The iCE40 configuration process is self-timed and controlled by a few internal signals and device I/O pins, as
+described in Table 5.1.
+Table 5.1. iCE40 Configuration Control Signals
+Signal Name                Direction                            Description
+POR                        Internal Control                     Internal Power-On Reset circuit.
+OSC                        Internal Control                     Internal configuration oscillator.
+CRESET_B2,3,4              Input                                Configuration Reset input. Active-Low. No internal pullup resistor.
+CDONE1,2,3,4               Open-drain Output                    Configuration Done output. With weak pullup resistor to VCCIO_X.
+Notes:
+1. The iCE40LP1K package CDONE pin can be used as a user output. Refer to iCE40 LP/HX Family Data Sheet (FPGA-DS-02029) for
+    details.
+2. Refer to Device Pin out to identify designated VCCIO bank.
+3. For ICELP CM36A package, VCCIO_1 and VCCIO_2 should have the same voltage source if CDONE is going to be used as General
+    Purpose I/O after configuration.
+The Power-On Reset circuit automatically resets the iCE40 component to a known state during power-up (cold boot).
+The POR circuit monitors the relevant voltage supply inputs, as shown in Figure 5.1. Once all supplies exceed their
+minimum thresholds, the configuration controller can start the configuration process.
+The configuration controller begins configuring the iCE40 device, clocked by the Internal Oscillator, OSC. The OSC
+oscillator continues controlling configuration unless the iCE40 device is configured using the SPI Peripheral
+Configuration Interface.
+
+            Optional Pullup:                                                                                                   Optional Pullup:
+            Required if driven by                                                                                              Required if driven by
+            open-drain output. Refer to the                                                                                    open-drain output. Refer to the
+            respective device pinout file for                                                                                  respective device pinout file for
+                                                                                       iCE40
+            the correct VCCIO source.                                                                                          the correct VCCIO source.
+                                                 VCCIO_X                                                             VCCIO_X
+
+                                                                                     I/O Bank 2
+                                          10 k                                                                               R k (Refer to calculation bel ow)
+
+                                                              CRESET_B                                     CDONE
+                                                         Rising edge starts
+                                                         configuration process                                                Configured
+                                                                                                                                                   PIOs activat e 49
+             Pulse                                                                                                                                 configuration clock
+             CRESET_B                                                                                                                              cycles after CDONE
+             Low                    Low resets iCE40                                                  Unconfigured
+                                                                                                                                                   goes High.
+                                                            Figure 5.1. iCE40 Configuration Control Pins
+
+Figure 5.1 shows the two iCE40 configuration control pins — CRESET_B and CDONE. When driven Low, the dedicated
+Configuration Reset input, CRESET_B, resets the iCE40 device. When CRESET_B returns High, the iCE40 FPGA restarts
+the configuration process from its power-on conditions (Cold Boot). The CRESET_B pin is a pure input with no internal
+pullup resistor. If driven by open-drain driver or un-driven, then connect the CRESET_B pin to a 10 kΩ pullup resistor
+connected to the designated VCCIO supply.
+
+
+
+
+                   © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+14                                                                                                                                                                    FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+The iCE40 device signals the end of the configuration process by actively turning off the internal pulldown transistor on
+the Configuration Done output pin, CDONE. The pin has a permanent, weak internal pullup resistor to the designated
+VCCIO rail. However, for iCE40 LX/HX devices depending on the system capacitance and configuration frequency, the
+CDONE pin must be tied to an external pullup resistor connected to the VCCIO_2 supply. The maximum resistor size can
+be calculated knowing the configuration clock frequency (SCLK or MCLK) and the CDONE trace capacitance with the
+following formula:
+                                                      Rpullup=1/(2*ConfigFrequency*CDONETraceCap)
+The PIO pins activate according to their configured function after 49 configuration clock cycles. The internal oscillator is
+the configuration clock source for the SPI Master Configuration Interface and when configuring from NVCM. When
+using the SPI Peripheral Configuration Interface, the configuration clock source is the SPI_SCK clock input pin.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            15
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+6. Internal Oscillator
+During SPI Master or NVCM (iCE40 LP, iCE40 HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus only) configuration
+mode, the controlling clock signal is generated from an internal oscillator. The oscillator starts operating at the default
+frequency. During the configuration process, however, bit settings within the configuration bitstream can specify a
+higher-frequency mode in order to maximize SPI bandwidth and reduce overall configuration time. Refer to the data
+sheet for the specified oscillator frequency range.
+Using the SPI Master Configuration Interface, internal oscillator controls all the interface timing and clocks the SPI serial
+Flash PROM via the SPI_SCK clock output pin.
+The oscillator output, which also supplies the SPI SCK clock output during the SPI Flash configuration process, has a 50%
+duty cycle.
+The Oscillator settings can be found in the iCEcube™ software by selecting the Tools > Tool Options pulldown menu and
+then the Bitstream tab.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+16                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                         iCE40 Programming and Configuration
+                                                                                                                                                              Technical Note
+
+
+
+7. Internal Device Reset
+Figure 7.1 presents the various signals that internally reset the iCE40 internal logic.
+• Power-On Reset (POR)
+• CRESET_B Pin
+
+                                                                   Internal
+                                          Device Pins                                                                           Power-on
+                                                                   Voltage
+                                                                                                                                Reset (POR)
+                                                                  Thresholds
+                                           VCC_SPI
+                                                                  SPI_VCCT
+
+                                             VCC
+                                                                     VCCT
+                                                                                                                                                    Time-out
+                                          VCCIO_0*
+                                                                                                                                                      Delay
+                                                                  VCCIO_2T
+
+                                          VCCIO_2
+                                                                   VCCIO_2T
+
+                                          VPP_2V5
+                                                                                                                                                        Internal Reset
+                                                                  VPP_2V5T
+
+
+
+                                          CRESET_B                Glitch Filter
+
+
+                      *Note: Applicable for iCE40LM only.
+
+                                                              Figure 7.1. iCE40 Internal Reset Circuitry
+
+
+7.1.          Power-On Reset
+The Power-On Reset circuit monitors specific voltage supply inputs and holds the device in reset until all the relevant
+supplies exceed the internal voltage thresholds. The VCC_SPI supply also has an additional time-out delay to allow an
+attached SPI serial PROM to power up properly. Table 7.1 lists the POR supply inputs. The Non-Volatile Configuration
+Memory requires that the VPP_2V5 supply be connected, even if the application does not use the NVCM.
+Notes:
+• It is recommended that Bank1 should be powered before the last supply gating POR.
+• All banks must be powered prior to configuration.
+Table 7.1. Power-On Reset Voltage Resources
+Signal Name                                                                                                                    Description
+VCC                                                                                                                                  Yes
+VCC_SPI                                                                                                                              Yes
+VCCIO_02                                                                                                                             Yes
+VCCIO_2                                                                                                                              Yes
+VPP_2V51                                                                                                                             Yes
+Notes:
+1. Only needed for iCE40 LP, iCE40 HX, iCE40 Ultra, iCE40 UltraLite, and iCE40 UltraPlus devices.
+2. Only needed for iCE40 LM device.
+
+
+7.2.          CRESET_B Pin
+The CRESET_B pin resets the iCE40 internal logic when Low.
+
+
+
+
+                   © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                             17
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+8. sysCONFIG Port
+The sysCONFIG port is used to program and configure the iCE40 FPGA. The device has a SPI configuration interface as
+the sysCONFIG port which can be used to configure the device.
+Table 8.1. sysCONFIG Ports
+Interface               Port                                        Description
+sysCONFIG               SPI Master Configuration                    In this mode, the FPGA configures itself from an external SPI Flash. The FPGA
+                        interface                                   behaves as master, generates internal clock and drives the clock to the external SPI
+                                                                    Flash.
+                        SPI Slave Configuration                     In this mode, the FPGA behaves as a Slave device. An external Application
+                        interface                                   Processor, µC, or Diamond Programmer (version 2.2 or later) configures or
+                                                                    programs the device.
+
+
+
+
+8.1.         sysCONFIG Pins
+The iCE40 FPGA has a set of sysCONFIG pins that are used to program and configure the device. The sysCONFIG pins are
+grouped together to create the sysCONFIG port, as discussed above. The sysCONFIG pins are dual function, meaning
+they can be recovered as user I/O after configuration is complete. Table 8.2 lists the sysCONFIG pins.
+Table 8.2. sysCONFIG Pins
+Pin Name             Associated sysCONFIG Port                     Pin Direction                  Description
+CRESET_B             —                                             Input                          Configuration Reset input, active-low. No internal pullup
+                                                                                                  resistor.
+CDONE                —                                             Output                         Configuration Done output. The pin has a permanent, weak
+                                                                                                  internal pullup resistor to the VCCIO_2 rail. Depending on the
+                                                                                                  frequency of configuration and the capacitance on CDONE
+                                                                                                  node, then CDONE pin must be tied to an external pullup
+                                                                                                  resistor connected to the VCCIO_2 supply. The resistor size can
+                                                                                                  be calculated knowing the configuration clock frequency (SCLK
+                                                                                                  or MCLK) and the CDONE trace capacitance with the following
+                                                                                                  formula: Rpullup=1/(2*ConfigFrequency*CDONETraceCap)
+                                                                                                  The iCE40-1KLP SWG16 package CDONE pin can be used as a
+                                                                                                  user output.
+SPI_SS               SPI Master/Slave                              Input/Output                   An important dual-function, active-low slave select pin. After
+                     configuration interface                                                      the device exits POR or CRESET_B is toggled (High-Low-High), it
+                                                                                                  samples the SPI_SS to select the configuration mode (an output
+                                                                                                  in Master mode and an input in Slave mode). iCE40 LM devices
+                                                                                                  have this pin shared with hardened SPI IP SPI1_CSN pin.
+SPI_SI               SPI Master/Slave                              Input/Output                   A dual-function, serial input pin in both configuration modes.
+                     configuration interface                                                      iCE40 LM devices have this pin shared with hardened SPI IP
+                                                                                                  SPI_MOSI pin. Setting the SPI_SI pin as GPIO allows the pin to
+                                                                                                  be used as Input and/or Output.
+SPI_SO               SPI Master/Slave                              Output/Input                   A dual-function, serial output pin in both configuration modes.
+                     configuration interface                                                      iCE40 LM devices have this pin shared with hardened SPI IP
+                                                                                                  SPI_MISO pin. Setting the SPI_SO pin as GPIO allows the pin to
+                                                                                                  be used as Input and/or Output.
+SPI_SCK              SPI Master/Slave                              Input/Output                   A dual-function clock signal. An output in Master mode and
+                     configuration interface                                                      input in Slave mode. iCE40 LM devices have this pin shared with
+                                                                                                  hardened SPI IP SPI_SCK pin.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+18                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+9. SPI Master Configuration Interface
+All iCE40 devices can be configured from an external, commodity SPI serial Flash PROM, as shown in Figure 9.1. The SPI
+configuration interface is essentially its own independent I/O bank, powered by the VCC_SPI supply input. Presently,
+most commercially available SPI serial Flash PROMs require a 3.3 V supply.
+
+                                                                                                                                       +3.3 V
+                                                                                                 VCC_SPI
+
+                                                                                           10 k
+                                                                                              SPI_SO
+
+                                            iCE40                                              SPI_SI
+                                          (SPI bank)
+                                                                                                                                Commodity SPI
+                                                                                               SPI_SS                             Serial Flash
+                                                                                                                                    PROM
+
+                                                                                               SPI_SCK
+
+
+                                                    Figure 9.1. iCE40 SPI Master Configuration Interface
+
+The SPI configuration interface is used primarily during development before mass production, where the configuration
+is then permanently programmed in the NVCM configuration memory (only available in iCE40 LP, iCE40 HX, iCE40 Ultra,
+iCE40 UltraLite, and iCE40 UltraPlus devices). However, the SPI interface can also be the primary configuration interface
+allowing easy in-system upgrades and support for multiple configuration images.
+The SPI control signals are defined in Table 9.1.
+Table 9.1. SPI Master Configuration Interface Pins (SPI_SS High Before Configuration)
+Signal Name                    Direction                Description
+VCC_SPI                        Supply                   SPI Flash PROM voltage supply input.
+SPI_SO                         Output                   SPI Serial Output from the iCE40 device.
+SPI_SI                         Input                    SPI Serial Input to the iCE40 device, driven by the select SPI serial Flash PROM.
+SPI_SS                         Output                   SPI Slave Select output from the iCE40 device. Active Low.
+SPI_SCK                        Output                   SPI Slave Clock output from the iCE40 device.
+
+
+After configuration, the SPI port pins are available to the user-application as additional PIO pins, supplied by the
+VCC_SPI input voltage.
+
+
+9.1.         SPI Master Configuration Mode Timing Considerations
+In SPI Master mode, the iCE40 device outputs the SPI_SCK. This clock is used to time the external SPI Flash PROM. The
+data from the external SPI Flash is input to the iCE40 device on the SPI_SI pin. This data needs to meet the t SU and tHD
+referenced to the SPI_SCK output clock, as shown in Figure 9.2. The Flight Time shown in the figure represents the time
+when the SPI_SCK outputs, through the signal trace, to the external SPI Flash PROM. It also includes the time to clock
+SPI Flash data out (usually it is the tCO of SPI Flash), plus the data signal trace routed back from the external SPI Flash
+PROM to the input of SPI_SI pin. To ensure that the data is clocked into the iCE40 correctly within an SPI_SCK cycle, this
+Flight Time plus tSU, shown in Figure 9.2, cannot exceed the cycle time of SPI_SCK. Different techniques can be applied
+to run a faster SPI_SCK clock rate, such as pipeline data from external SPI Flash PROM output. Under such condition,
+the Flight Time is measured as the delay with clock-to-out of the pipeline register.
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            19
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+                                                                                    Flight Time
+
+
+
+
+          SPI_SCK (output)
+
+                                           tSU                                                                                         tSU
+                                                         tHD                                                                                         tHD
+
+
+           SPI_SI (input)
+
+
+
+
+                                                           Figure 9.2. SPI Master Configuration Timing
+
+
+9.2.         SPI PROM Requirements
+The iCE40 SPI Flash configuration interface supports a variety of SPI Flash memory vendors and product families.
+However, Lattice does not specifically test, qualify, or otherwise endorse any specific SPI Flash vendor or product
+family. The iCE40 SPI interface supports SPI PROMs that meet the following requirements.
+• The PROM must operate between 1.8 V to 3.3 V in order to trigger the iCE40 FPGA power-on reset circuit.
+• The PROM must support the 0x0B Fast Read command with a 24-bit start address and 8 dummy bits before
+    providing the first data byte (see Figure 9.4).
+• The PROM must have enough bits to program the iCE40 device.
+• The PROM must support data operations at the upper frequency range for the selected iCE40 internal oscillator
+    frequency (refer to the data sheet). The oscillator frequency is selectable when creating the FPGA bitstream image.
+• For lowest possible power consumption after configuration, the PROM should also support the 0xB9 Deep Power
+    Down command and the 0xAB Release from Deep Power-down Command (see Figure 9.3 and Figure 9.5). The
+    low-power mode is optional. The PROM must be powered and ready to be accessed following iCE40 POR.
+• The PROM must be ready to accept commands 10 µs after meeting its power-on conditions. In the PROM data
+    sheet, this may be specified as tVSL or tVCSL. It is possible to use slower PROMs by holding the CRESET_B input
+    Low until the PROM is ready, then releasing CRESET_B, either under program control or using an external
+    power-on reset circuit.
+The iCEblink40™ development board and associated programming software use an ST Micro/Numonyx M25Pxx SPI
+serial Flash PROM. Table 9.2 lists the bitstream sizes for different densities of the iCE40 FPGA that can be used to select
+a SPI Flash.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+20                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                         iCE40 Programming and Configuration
+                                                                                                                                                              Technical Note
+
+
+Table 9.2. Bitstream Sizes for Different iCE40 FPGA Densities Used to Select a SPI Flash
+Device                                                        Bytes                                                               Bits
+iCE40-LP 384                                                  7417                                                                59336
+iCE40-LP 640                                                  32306                                                               258448
+iCE40-LP/HX 1K                                                32303                                                               258424
+iCE40-LP/HX 4K                                                135183                                                              1081464
+iCE40-LP/HX 8K                                                135183                                                              1081464
+iCE40LM 1K                                                    68177                                                               545416
+iCE40LM 2K                                                    68177                                                               545416
+iCE40LM 4K                                                    68176                                                               545408
+iCE5LP 1K                                                     71342                                                               570736
+iCE5LP 2K                                                     71342                                                               570736
+iCE5LP 4K                                                     71342                                                               570736
+iCE40UL 640                                                   30942                                                               247536
+iCE40UL 1K                                                    30942                                                               247536
+iCE40UP 3K                                                    104161                                                              833288
+iCE40UP 5K                                                    104161                                                              833288
+
+
+
+
+9.3.         Enabling SPI Configuration Interface
+To enable the SPI configuration mode, the SPI_SS pin must be allowed to float High. The SPI_SS pin has an internal
+pullup resistor. If SPI_SS is Low, then the iCE40 component defaults to the SPI Slave configuration mode.
+
+
+9.4.         SPI Master Configuration Process
+The iCE40 SPI Master Configuration Interface supports a variety of modern, high-density, low-cost SPI serial Flash
+PROMs. Most modern SPI PROMs include a power-saving Deep Power-down mode. The iCE40 component exploits this
+mode for additional system power savings.
+The iCE40 SPI interface starts by driving SPI_SS Low, and then sends a Release from Power-down command to the SPI
+PROM, hexadecimal command code 0xAB. Figure 9.3 provides an example waveform. This initial command wakes up
+the SPI PROM if it is already in Deep Power-down mode. If the PROM is not in Deep Power-down mode, the extra
+command has no adverse effect other than that it requires a few additional microseconds during the configuration
+process. The iCE40 device transmits data on the SPI_SO output, on the falling edge of the SPI_SCK output. The SPI
+PROM does not provide any data to the iCE40 device SPI_SI input. After sending the last command bit, the iCE40 device
+de-asserts SPI_SS High, completing the command. The iCE40 device then waits a minimum of 10 µs before sending the
+next SPI PROM command.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            21
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+
+                                                         SPI_SCK
+
+
+
+
+                                                         SPI_SS
+
+
+
+
+                                                         SPI_SO                       1      0     1 0         1     0      1      1
+
+                                                                                                           0xAB
+                                                                                          Re lea se from De ep Power-down
+
+                                               Figure 9.3. SPI Release from Deep Power-down Command
+
+Figure 9.4 illustrates the next command issued by the iCE40 device. The iCE40 SPI interface again drives SPI_SS Low,
+followed by a Fast Read command, hexadecimal command code 0x0B, followed by a 24-bit start address, transmitted
+on the SPI_SO output. The iCE40 device provides data on the falling edge of SPI_SS. Upon initial power-up, the start
+address is always 0x00_0000. After waiting eight additional clock cycles, the iCE40 device begins reading serial data
+from the SPI PROM. Before presenting data, the SPI PROM serial data output is high-impedance. The SPI_SI input pin
+has an internal pullup resistor and sees high-impedance as logic 1.
+
+
+ SPI_SCK
+
+
+ SPI_SS
+
+SPI_SO
+                                         A18
+                                         A23
+                                         A22
+                                         A21
+                                         A20
+                                         A19
+
+                                         A17
+                                         A16
+                                         A15
+                                         A14
+                                         A13
+                                         A12
+                                         A11
+                                         A10
+
+                                         A8
+
+                                         A6
+
+                                         A4
+                                         A3
+                                         A2
+                                         A1
+                                         A9
+
+                                         A7
+
+                                         A5
+
+
+
+
+             0 0 0 0 1 0 1 1                                                                                                     X X X X X X X X
+                                                                                                                            A0
+
+
+
+
+                      0x0B                                               24-bit Start Address                                          Do not care
+                    Fast Read                                                                                                          Dummy Byte
+                                        PROM output is Hi-Z. Pulled High in SPI_SI pin via internal pullup resistor.
+SPI_SI
+                                                                                                                                                             D7
+
+                                                                                                                                                             D5
+
+                                                                                                                                                             D3
+
+
+
+                                                                                                                                                             D7
+                                                                                                                                                             D6
+
+                                                                                                                                                             D4
+
+                                                                                                                                                             D2
+                                                                                                                                                             D1
+                                                                                                                                                             D0
+
+                                                                                                                                                             D6
+                                                                                                                                                                     Data Byte 0
+
+                                                                  Figure 9.4. SPI Fast Read Command
+
+The external SPI PROM supplies data on the falling edge of the iCE40 device SPI_SCK clock output. The iCE40 device
+captures each PROM data value on the SPI_SI input, using the rising edge of the SPI_SCK clock signal. The SPI PROM
+data starts at the 24-bit address presented by the iCE40 device. PROM data is serially output, byte by byte, with the
+most-significant bit, D7, presented first. The PROM automatically increments an internal byte counter as long as the
+PROM is selected and clocked.
+After transferring the required number of configuration data bits, the iCE40 device ends the Fast Read command by
+de-asserting its SPI_SS PROM select output, as shown in Figure 9.5. To conserve power, the iCE40 device then
+optionally issues a final Deep Power-down command, hexadecimal command code 0xB9. After de-asserting the SPI_SS
+output, the SPI PROM enters its Deep Power-down mode. The final power-down step is optional; the application may
+wish to use the SPI PROM and can skip this step, controlled by a configuration option.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+22                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                       iCE40 Programming and Configuration
+                                                                                                                                                            Technical Note
+
+
+
+
+                   SPI_SCK
+
+
+                   SPI_SS
+
+
+
+                   SPI_SO                                                                                              1 0 1 1 1 0 0 1
+
+                                                                                                                                     0xB9
+                                                                                                                               Deep Power-down
+                                                 D7
+
+                                                 D5
+                                                 D4
+                                                 D3
+                                                 D2
+                                                 D1
+                                                 D0
+                                                 D6
+
+                   SPI_SI
+
+                                                          Last Data Byte
+                                                          Fast Read Data
+                                    Figure 9.5. Final Configuration Data, SPI Deep Power-down Command
+
+
+
+
+                 © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                           23
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+10. Cold Boot Configuration Option
+This section applies to iCE40 LP and iCE40 HX devices only.
+By default, the iCE40 FPGA is programmed with a single configuration image, either from internal NVCM memory, from
+an external SPI Flash PROM, or externally from a processor or microcontroller.
+
+                                              At power-up or
+                                                after reset
+                             CBSEL1                                             Jump based
+                                                                                 on settings                                            Enable/Disable Cold Boot
+                                                                                                       Cold/Warm Boot
+                             CBSEL0                                                                                                     Enable/Disable Warm Boot
+                                                 Cold Boot                                                  Applet
+                                                  Control                                                                               Jump Vector Addresses (4)
+               CRESET_B
+                                                                                                                                  Vector Address 0
+
+                                                                                                         Configuration
+                     Power-On                                                                              Image 0
+                       Reset                                                             (0, 0)
+                                            SB_WARMBOOT
+
+                                    S1                                                                                             Vector Address 1
+
+                                    S0                                                                   Configuration
+                                                  Warm                                                     Image 1
+                                                                                         (0, 1)
+                                                   Boot
+                                 BOOT             Control
+                                                                                                                                   Vector Address 2
+
+                                             Controlled by                                              Configuration
+                                            currently loaded                             (1, 0)           Image 2
+                                           iCE40 application
+
+
+                                                                                                                                   Vector Address 3
+
+                                                                                                       Configuration
+                                                                                         (1, 1)          Image 3
+
+
+                                                                                                          SPI PROM
+
+                                                   Figure 10.1. Cold Boot and Warm Boot Configuration
+
+When self-loading from an SPI Flash PROM, the FPGA supports an additional configuration option called Cold Boot
+mode. This option can be implemented by creating an applet from Deployment Tool as shown in Figure 10.2. When this
+option is enabled in the applet, the iCE40 FPGA boots normally from power-on or a master reset (CRESET_B = Low
+pulse), but monitors the value on two PIO pins that are borrowed during configuration, as shown in Figure 10.1. These
+pins, labeled PIO2/CBSEL0 and PIO2/CBSEL1, tell the FPGA which of the four possible SPI configurations to load into the
+device.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+24                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                       iCE40 Programming and Configuration
+                                                                                                                                                            Technical Note
+
+
+
+
+                                    Figure 10.2. Diamond Deployment Tool – Advanced SPI Flash Options
+
+•   For Cold Boot or Warm Boot applications, the initial configuration image must be stored at SPI Flash PROM and the
+    cold boot/warm boot applet must be stored at SPI Flash PROM address 0.
+•   Check if Cold Boot configuration feature is enabled in the applet.
+    • If Cold Boot is not enabled, the FPGA configuration starts from the default location (image 0) defined in the
+         Warm Boot applet.
+    • If Cold Boot is enabled, the FPGA reads the logic values on pins CBSEL[1:0]. The FPGA uses the value as a vector
+         and then reads from the indicated vector address.
+    • At the selected CBSEL[1:0] vector address, there is a starting address for the selected configuration image.
+    • For SPI Flash PROMs, the new address is a 24-bit start address in Flash.
+Table 10.1. CBSEL[1:0] Vector Address
+                                    CBSEL[1:0]                                                                                      Vector Address
+                                           00                                                                                                  0
+                                           01                                                                                                  1
+                                           10                                                                                                  2
+                                           11                                                                                                  3
+
+
+Using the new start address, the FPGA restarts reading configuration memory from the new location.
+
+
+                 © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                           25
+iCE40 Programming and Configuration
+Technical Note
+
+
+When creating the initial configuration image, the Lattice development software loads the start address for up to four
+configuration images in the multiple combined bitstreams. The multiple combined bitstreams are stored in the SPI
+flash. The value on the CBSEL[1:0] pins tells the configuration controller to read a specific start address, then to load
+the configuration image stored at the selected address.
+After configuration, the CBSEL[1:0] pins become normal PIO pins available to the application.
+The Cold Boot feature allows the iCE40 to be reprogrammed for special application requirements such as the following.
+• A normal operating mode and a self-test or diagnostics mode.
+• Different applications based on switch settings.
+• Different applications based on a card-slot ID number. Use external SPI Flash PROMs only.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+26                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+11. Warm Boot Configuration Option
+The Warm Boot configuration is similar to the Cold Boot feature, but is completely under the control of the FPGA
+application. To enable Warm Boot, set Enable warm boot in Tool Options in Lattice iCEcube. Upon power up, the
+default image points to Image 0 stored in the SPI flash.
+
+
+
+
+                                                               Figure 11.1. Enable Warm Boot Option
+
+A special design primitive, SB_WARMBOOT, allows an FPGA application to choose between four configuration images
+using two internal signal ports, S1 and S0, as shown in Figure 10.1. These internal signal ports connect to
+programmable interconnect, which in turn can connect to Programmable Logic Block (PLB) and/or PIO pins. S1 and S0
+are used in the same way as CBSEL[1:0] as of the vector address indicators. The Warm Boot applet is created in the
+same way as shown in Figure 10.2.
+After selecting the desired configuration image, the application then asserts the internal signal BOOT port High to force
+the FPGA to restart the configuration process from the specified vector address stored in PROM.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            27
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+12. Time-Out and Retry
+When configuring from external SPI Flash, the iCE40 device looks for a synchronization word. If the device does not find
+a synchronization word within its timeout period, the device automatically attempts to restart the configuration
+process from the very beginning. This feature is designed to address any potential power-sequencing issues that may
+occur between the iCE40 device and the external PROM.
+The iCE40 device attempts to reconfigure six times. If not successful after six attempts, the iCE40 FPGA automatically
+goes into low-power mode.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+28                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+13. SPI Slave Configuration Interface
+Using the SPI slave configuration interface, an application processor (AP) serially writes a configuration image to an
+iCE40 FPGA using the iCE40 SPI interface, as shown in Figure 13.1. The iCE40 SPI configuration interface is a separate,
+independent I/O bank, powered by the VCC_SPI supply input. Typically, VCC_SPI is the same voltage as the application
+processor I/O. The configuration control signals, CDONE and CRESET_B, are supplied by the separate I/O Bank 2 voltage
+input, VCCIO_2.
+This same SPI slave interface supports the programming of the Non-Volatile Configuration Memory of the iCE40.
+
+                                                                           AP_VCCIO           VCCIO_2
+
+
+                                                                     10 k                            10 k (Refer to calculation below)                               VCCIO_2
+                AP_VCCIO
+                                                                                                        CDONE
+                                                                                                                                     iCE40
+                                                                                                      CRESET_B                   (I/O Bank 2)
+
+
+                                                                                                                                                                     VCC_SPI
+                                               Application
+                                                Processor
+                                                                                                       SPI_SI
+
+                                                                                                      SPI_SO
+                                                                                                                                    iCE40
+                                                                                                                                  (SPI Bank)
+                                                                                                       SPI_SS
+
+                                                                                                       SPI_SCK
+
+
+                                                                                                       10 k
+
+
+
+                                                    Figure 13.1. iCE40 SPI Slave Configuration Interface
+
+The SPI control signals are defined in Table 13.1.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            29
+iCE40 Programming and Configuration
+Technical Note
+
+
+Table 13.1. SPI Slave Configuration Interface Pins (SPI_SS Low when CRESET_B Released)
+Signal Name              Direction                       iCE40 I/O Supply                  Description
+                                                                                           Configuration Done output from iCE40. Connect to an external
+                                                                                           pullup resistor to the application processor I/O voltage, AP_VCC.
+                                                                                           The resistor size can be calculated knowing the configuration clock
+                                                                                           frequency (SCLK or MCLK) and the CDONE trace capacitance with
+CDONE                    Output
+                                                                                           the following formula:
+                                                         VCCIO_2                           Rpullup=1/(2*ConfigFrequency*CDONETraceCap)
+                                                                                           The iCE40-1KLP SWG16 package CDONE pin can be used as a user
+                                                                                           output.
+                                                                                           Configuration Reset input on iCE40. Typically driven by AP using an
+CRESET_B                 Input                                                             open-drain driver, which also requires a 10 kΩ pullup resistor to
+                                                                                           VCCIO_2.
+VCC_SPI                  Supply                                                            SPI Flash PROM voltage supply input.
+                                                                                           SPI Serial Input to the iCE40 FPGA, driven by the application
+SPI_SI                   Input
+                                                                                           processor.
+                                                                                           SPI Serial Output from iCE40 device to the application processor.
+SPI_SO                   Output                                                            Not actually used during SPI peripheral mode configuration but
+                                                         VCC_SPI
+                                                                                           required if the SPI interface is also used to program the NVCM.
+                                                                                           SPI Slave Select output from the application processor. Active Low.
+SPI_SS                   Input                                                             Optionally hold Low prior to configuration using a 10 kΩ pulldown
+                                                                                           resistor to ground.
+SPI_SCK                  Input                                                             SPI Slave Clock output from the application processor.
+
+
+After configuration, the SPI port pins are available to the user-application as additional PIO pins, supplied by the
+VCC_SPI input voltage.
+
+
+13.1. Enabling SPI Configuration Interface
+The optional 10 kΩ pulldown resistor on the SPI_SS signal ensures that the iCE40 FPGA powers up in the SPI peripheral
+mode. Optionally, the application processor drives the SPI_SS pin Low when CRESET_B is released, forcing the iCE40
+FPGA into SPI peripheral mode. SPI Configuration interface requires CRESET held low for reconfiguration and SPI_SS to
+be held on POR for at least 200 ns to activate SSPI.
+
+
+13.2. SPI Slave Configuration Process
+Figure 13.2 illustrates the interface timing for the SPI slave mode and Figure 13.3 outlines the resulting configuration
+process. The actual timing specifications appear in the data sheet. The application processor (AP) begins by driving the
+iCE40 CRESET_B pin Low, resetting the iCE40 FPGA. Similarly, the AP holds the iCE40 SPI_SS pin Low. The AP must hold
+the CRESET_B pin Low for at least 200 ns. Ultimately, the AP either releases the CRESET_B pin and allows it to float High
+via the 10 kΩ pullup resistor to VCCIO_2 or drives CRESET_B High. The iCE40 FPGA enters SPI peripheral mode when
+the CRESET_B pin returns High while the SPI_SS pin is Low.
+After driving CRESET_B High or allowing it to float High, the AP must wait a minimum of 1,200 µs, allowing the iCE40
+FPGA to clear its internal configuration memory.
+After waiting for the configuration memory to clear, the AP sends the configuration image generated by the Diamond
+Programmer (version 2.2 or later). Once the iCE40 clears its internal configuration memory, the SPI_SS goes to High,
+waits eight clock cycles, then goes back to Low and the AP sends the configuration image generated by the Diamond
+Programmer. An SPI slave mode configuration image must not use the Cold Boot or Warm Boot options. Send the
+entire configuration image, without interruption, serially to the iCE40 SPI_SI input on the falling edge of the SPI_SCK
+clock input. Once the AP sends the 0x7EAA997E synchronization pattern, the generated SPI_SCK clock frequency must
+be within the range specified in the data sheet while sending the configuration image.
+Send each byte of the configuration image with most-significant bit (msb) first. The AP sends data to the iCE40 FPGA on
+the falling edge of the SPI_SCK clock. The iCE40 FPGA internally captures each incoming SPI_SI data bit on the rising
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+30                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                                                     iCE40 Programming and Configuration
+                                                                                                                                                                                          Technical Note
+
+
+edge of the SPI_SCK clock. The SPI_SO output pin in the iCE40 is not used during SPI slave mode but must connect to
+the AP if the AP also programs the NVCM of the iCE40 device.
+After sending the entire image, the iCE40 FPGA releases the CDONE output allowing it to float High via the external
+pullup resistor to AP_VCC. If the CDONE pin remains Low, then an error occurred during configuration and the AP
+should handle the error accordingly for the application.
+After the CDONE output pin goes High, send at least 49 additional dummy bits, effectively 49 additional SPI_SCK clock
+cycles measured from rising-edge to rising-edge.
+After the additional SPI_CLK cycles, the SPI interface pins then become available to the user-application loaded in
+FPGA. In the iCE40-1KLP SWG16 package, the CDONE pin can be used as a user output.
+To reconfigure the iCE40 FPGA or to load a different configuration image, merely restart the configuration process by
+pulsing CRESET_B Low or power-cycling the FPGA.
+
+  CDONE                                                                                                                                                                                  49 SPI_SCK Cycles
+                                                                                                                                                                                         Rising edge to rising edge
+
+                200 ns
+CRESET_B                                1200 us                                                                                                                               Max 100 clock cycles
+                                                                   8 dummy clocks
+                                  iCE40 clears internal
+                                  configuration memory.
+
+ SPI_SCK                   iCE40 enters SPI Peripheral
+                           mode with SPI_SS = Low on
+
+
+
+
+                                                                                                                                                                                                                      SPI Interface pins available
+                           rising edge of CRESET_B.
+
+
+
+
+                                                                                                                                                                                                                       as user-defined I/O pins
+                                                                                              iCE40 captures SPI_SI data on SPI_SCK rising edge.
+
+  SPI_SS                                                       SPI_SS goes to High,
+                                                               waits 8 clock cycle, then                                                                                SPI_SS = High, wait 100 SPI_SCK
+                                                               goes back to Low.                                                                                        to allow CDONE to go h igh.
+                                                                                           D7
+                                                                                           D6
+                                                                                           D5
+                                                                                           D4
+                                                                                           D3
+                                                                                           D2
+                                                                                           D1
+                                                                                           D0
+
+
+                                                                                                                                         D7
+                                                                                                                                         D6
+                                                                                                                                         D5
+                                                                                                                                         D4
+                                                                                                                                         D3
+                                                                                                                                         D2
+                                                                                                                                         D1
+                                                                                                                                         D0
+   SPI_SI                                                                                                                                                              x x x                          x x x x
+                                                                                                                                                                                        Don t Care
+                                                                                                                   Entire Configuration Images                                          dummy bits
+                                                                                                             Send most-significant bit of each byte first
+
+               Tristated before           High indicates
+  SPI_SO        housekeeping.             housekeeping done.                               SO pin will still be driving but would be High or Low before going to user mode.
+
+
+                  Figure 13.2. Application Processor Waveforms for SPI Peripheral Mode Configuration Process
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                                                                                    31
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+                                                                           SPI Slave Configuration
+
+
+
+
+                                                                              Drive CRESET_B = 0.
+
+
+
+                                                                      Drive SPI_SS = 0, SPI_SCK = 1.
+
+
+
+                                                                       Wait a minimum of 200 ns.
+
+
+                                                                           Release CRESET_B or
+                                                                           drive CRESET_B = 1.
+
+
+                                                                 Wait a minimum of 1200 µs to clear
+                                                                  intern al configuration memory.
+
+
+                                                                              Set SPI_SS = 1,
+                                                                           Send 8 dummy clocks.
+
+
+
+                                                                 Send configuration image serially on
+                                                                 SPI_SI to iCE40, most-significant bit
+                                                                first, on falling edge of SPI_SCK. Send
+                                                               the entire image, without interruption.
+                                                                   Ensure that SPI_SCK frequency is
+                                                                     between 1 MHz and 25 MHz.
+
+
+                                                                        Wait for 100 clocks cycles
+                                                                         for CDONE to go high.
+
+
+
+                                                                                                        No
+                                                                                  CDON E = 1?                         ERROR !
+
+
+                                                                                           Yes
+                                                                          Send a minimum of 49
+                                                                     additional dummy bits and 49
+                                                                     addition SP I_SCK clock cycles
+                                                                     (rising-edge to rising-edge) to
+                                                                         active the user-I/O pins.
+
+
+                                                                     SPI interface pins available as
+                                                                  user-defined I/O pins in application.
+
+
+
+
+                                                                                                         No
+                                                                                 Reconfigure?
+
+
+                                                                               Yes
+                                        Note: The configuration flow is the same for a bitstream with and without a header.
+                                                           Figure 13.3. SPI Slave Configuration Process
+
+Refer to Appendix A. SPI Slave Configuration Procedure for the SPI peripheral configuration procedure.
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+32                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+13.3. Voltage Compatibility
+As shown in Figure 13.1, there are potentially three different supply voltages involved in the SPI Peripheral interface,
+described in Table 13.2.
+Table 13.2. SPI Peripheral Mode Supply Voltages
+Supply Voltage                                   Description
+AP_VCCIO                                         I/O supply to the Application Processor (AP)
+VCC_SPI                                          Voltage supply for the iCE40 SPI interface
+VCCIO_2                                          Supply voltage for the iCE40 I/O Bank 2
+
+
+Table 13.3 describes how to maintain voltage compatibility for two interface scenarios. The easiest interface is when
+the Application Processor (AP) I/O supply rail and the iCE40 SPI and VCCIO_2 bank supply rails all connect to the same
+voltage. The second scenario is when the AP I/O supply voltage is greater than the iCE40 VCCIO_2 supply voltage.
+Table 13.3. CRESET_B and CDONE Voltage Compatibility
+Condition                             CRESET_B                                                          CDONE                    Requirement
+                                      Direct          Open-Drain            Pullup                      Pullup
+
+AP_VCCIO = VCC_SPI                    OK              OK with               Required if using Recommended AP can directly drive CRESET_B High and
+AP_VCCIO = VCCIO_2                                    pullup                open-drain                    Low although an open-drain output is
+                                                                            output                        recommended if multiple devices control
+                                                                                                          CRESET_B. If using an open-drain driver,
+                                                                                                          the CRESET_B input must include a 10 kΩ
+                                                                                                          pullup resistor to VCCIO_2. The 10 kΩ
+                                                                                                          pullup resistor to AP_VCCIO is also
+AP_VCCIO > VCCIO_2                    N/A             Required,             Required          Required    recommended.
+                                                                                                          The AP must control CRESET_B with an
+                                                      requires                                                                   open-drain output, which requires a 10
+                                                      pullup                                                                     kΩ pullup resistor to VCCIO_2. The 10 kΩ
+                                                                                                                                 pullup resistor to AP_VCCIO is required.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            33
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+Appendix A. SPI Slave Configuration Procedure
+
+A.1. CPU Configuration Procedure
+The sequence for configuring the iCE40 SRAM follows.
+Table A.1. iCE40 SRAM Configuration Sequence
+Index          Step                                                                  Action                                         Description
+     1         Power up the iCE40 FPGA or toggle its                                 Hold SPI_SS =0 and toggle                      See Figure A.1.
+               CRESET signal low for minimum 200 ns and                              CRESET
+               toggle back to high with SPI_SS = 0, forcing
+               the device to enter Slave mode.
+
+     2         Wait ≥ 1,200 µs until the iCE40 FPGA                                  Toggle SPI_SS high                             —
+               completes internal housekeeping work and                              Send eight dummy clocks
+               is ready to receive CPU bitmap data and                               Toggle SPI_SS low
+               instructions. Then toggle SPI_SS to high,
+               send 8 dummy clocks, then toggle it back to
+               low.
+     3         From this point on, the iCE40 FPGA requires                           Feed clock to the SPI_CLK pin —
+               the CPU to provide operation clock through
+               the SPI_SCK pin of the iCE40 FPGA until
+               configuration is complete.
+     4         Read and start sending the FPGA bitmap to                             Tx bitmap data from user                       Each clock shifts one bit of data at the
+               the iCE40 device. Data goes to the SPI_SDI                            memory                                         clock falling edge. Hold previous SPI_SS
+               pin.                                                                                                                 state, no toggle.
+                                                                                                                                    Complete sending all bits in bitmap file.
+                                                                                                                                    Important: Continuous clock is required.
+     5         Wait for 100 clocks.                                                  Shifting 100 clocks                            Configuration complete after 100 clocks.
+     6         Monitor the CDONE pin. It should go to high. Check CDONE Hi                                                          Device in operation when CDONE = 1;
+               Otherwise, the configuration fails and stops.                                                                        device fails when CDONE = 0.
+     7         Wait for 49 additional cycles for the SPI pins —                                                                     —
+               to become user I/O
+
+
+
+
+A.2. Configuration Waveforms
+iCE40 Reset Waveforms
+The reset timing waveforms for initiating NVCM programming are shown below.
+
+
+
+
+                      © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+         All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+34                                                                                                                                                                       FPGA-TN-02001-3.5
+                                                                                                                                         iCE40 Programming and Configuration
+                                                                                                                                                              Technical Note
+
+
+
+          CDONE                                                                                                                                          49 SPI_SCK Cycles Rising
+                                                                                                                                                         edge to rising edge
+
+
+
+
+                                                                                                                                                                                     Device I/O pin available f or user.
+          CRESET_B                                200 ns                   800 µs for LP384, LP/HX1K, 1200 µs for LP/HX4K, LP/HX8K
+                                                                        iCE40 clears internal
+                                                                       configuration memory.
+
+          SPI_SCK
+
+
+
+          SPI_SS
+
+
+
+
+          SPI_SDI
+
+
+                                                                       Figure A.1. iCE40 Reset Waveform 1
+
+
+
+
+   SPI_SCK
+
+
+
+
+                                                                                       8 (or 13000)
+   SPI_SS
+                                                                                       clock cycles
+
+                                                                                                                     *
+
+   SPI_SDI                5       4       3        2       1       0                                                  7       6    5      4      3       2       1       0
+
+
+                                                                                                                          Following Command
+                                                                                                                     *= MSB
+                                                                       Figure A.2. iCE40 Reset Waveform 2
+
+
+
+
+   SPI_SCK
+
+
+
+
+     SPI_SS
+
+
+                                                                                       *                                       *
+
+    SPI_SDI                   1       0       0        0       0       0     1    1   23 22       21 20          1       0     7     6      5        4       3       2       1   0
+
+
+                                                       0x83                                                                  00 00 26 11 /
+                                                                                       * = MSB                               00 00 27 21
+                                                                       Figure A.3. iCE40 Reset Waveform 3
+
+
+                 © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                                                          35
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+
+                                                    SPI_SCK
+
+
+
+
+                                                     SPI_SS
+
+
+
+
+                                                     SPI_SDI                      1     0     0     0       0     0    0     1
+
+
+                                                                                                     0x81
+                                                                                                  Instruction
+
+                                                                 Figure A.4. iCE40 Reset Waveform 4
+
+
+A.3. Pseudo Code
+Configuration
+The pseudo code included below configures an iCE40 device. It assumes a raw binary file generated from iCEcube is
+used (*.bin). Alternatively, a hex file is also generated from iCEcube and can be used as well. The implementation
+should only make the necessary text-to-binary conversions.
+//
+//     iCE40 Configuration Pseudo-code
+//
+void Config_iCE40 (type, file)
+{
+//
+// Open Hex File early to avoid clock delay later
+//
+file_pointer = fopen(file);// Open bin file
+
+//
+// Reset the iCE40 Device
+//
+Set_Port(SPI_SS, false);// Set SPI_SS low Set_Port(CRESET, false);// Set CRESET low
+Set_Port(SPI_CLK, true);// Set SPI_CLK high nSec_Delay(200);// Delay minimum 200 nsec
+Set_Port(CRESET, true);// Set CRESET high
+if (type == L1K or L4K)
+uSec_Delay(800);// Delay 800 usec if L1K,L4K else if (type == L8K)
+uSec_Delay(1200);// Delay 1200 usec for L8K Set_Port(SPI_SS, true);// Set SPI_SS high
+Send_Clocks (8);// Send 8 clocks
+Set_Port(SPI_SS, false); // Set SPI_SS low
+//
+// Send data from bin file
+//
+Send_File(file_pointer);// Send bin file Send_Clocks (100);// Send 100 clocks
+//
+// Verify successful configuration
+//
+set_Port(SPI_SS,true); // Set SPI_SS high
+if (Get_Port(CDONE))
+Return PASS;// PASS if CDONE is true else
+Return FAIL;// FAIL if CDONE is false
+}
+
+//
+//     Clock Generation 10MHz
+//
+void Send_Clocks(num_clocks)
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+36                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                       iCE40 Programming and Configuration
+                                                                                                                                                            Technical Note
+
+
+{
+for {i = 0; i < num_clocks; i++}
+{
+Set_Port(SPI_CLOCK, false);// Set SPI_CLK low nSec_Delay(50);// Delay 50 nsec
+Set_Port(SPI_CLOCK, true);// Set SPI_CLK high nSec_Delay(50);// Delay 50 nsec
+}
+}
+
+//
+//     Send Data from file
+//
+void Send_File(file_pointer)
+{
+byte = getc(file_pointer);// Read first byte from file while (byte != EOF)
+{
+Send_Byte (byte);// Send data byte
+byte = getc(file_pointer);// read next byte from file
+}
+}
+
+
+
+
+                 © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                           37
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+Appendix B. Configuration Data Format
+The base binary file format is the same for all configuration modes. Different file types (hex, binary, ASCII, and others)
+may ultimately be used to configure the device, but the data in the file is the same. Table B.1 shows the format of a
+bitstream. The bitstream consists of a comment field, a header, the preamble, and the configuration setup and data.
+Table B.1. Configuration Data
+Frame                                          Contents                                         Description
+Comments                                       start with ff 00                                 Comments including company name, software name, parts
+                                                                                                name etc.
+—                                              7e aa 99 7e                                      32 bits Preamble
+config frequency                               —                                                32 bits
+reset CRC                                      —                                                16 bits
+boot mode                                      —                                                48 bits
+frame size                                     —                                                96 bits
+start to write frame                           —                                                48 bits
+data 0                                         —                                                64 bits
+—                                              —                                                —
+—                                              —                                                —
+dummy bits                                     00 00                                            16 bits
+data 1                                                                                          64 bits
+—                                              —                                                —
+—                                              —                                                —
+dummy bits                                     00 00                                            16 bits
+data 2                                         —                                                64 bits
+—                                              —                                                —
+—                                              —                                                —
+dummy bits                                     00 00                                            16 bits
+data 3                                         —                                                64 bits
+—                                              —                                                —
+—                                              —                                                —
+dummy bits                                     00 00                                            16 bits
+frame size                                     —                                                96 bits
+bank address                                   —                                                32 bits
+start to write frame                           —                                                48 bits
+ebr write command                              —                                                32 bits
+ebr data                                       —                                                —
+dummy bits                                     00 00                                            16 bits
+CRC check                                      —                                                24 bits
+wake up                                        01 06                                            16 bits
+Note: The data in this table is intended for reference only.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+38                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                       iCE40 Programming and Configuration
+                                                                                                                                                            Technical Note
+
+
+
+References
+For more information, refer to the following documents:
+• iCE40 LP/HX Family Data Sheet (FPGA-DS-02029)
+• iCE40 LM Family Data Sheet (FPGA-DS-02043)
+• Programming Cables User Guide (FPGA-UG-02042)
+
+
+
+
+                 © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                           39
+iCE40 Programming and Configuration
+Technical Note
+
+
+
+Technical Support Assistance
+Submit a technical support case via www.latticesemi.com/techsupport.
+For frequently asked questions, refer to the Lattice Answer Database at
+www.latticesemi.com/en/Support/AnswerDatabase.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+40                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+
+Revision History
+Revision 3.5, August 2026
+ Section                                             Change Summary
+ All                                                 Made minor editorial changes.
+ Configuration Overview                              Updated Table 2.1. Configuration Modes title.
+ Appendix B. Configuration Data                      In Table B.1. Configuration Data:
+ Format                                              •    Updated description of dummy bits to 16 bits.
+                                                     •    Updated CRC check description to 24 bits.
+                                                     •    Updated wake up description to 16 bits.
+
+
+Revision 3.4, December 2022
+ Section                                             Change Summary
+ All                                                 •   Changed all instances of “pull-up” to “pullup”.
+                                                     •   Changed all instances of “pull-down” to “pulldown”.
+                                                     •   Updated all instances of “SPI_SS_B” to “SPI_SS” in all the figures.
+ sysCONFIG Port                                      Updated the description for SPI_SI and SPI_SO in Table 8.2. sysCONFIG Pins.
+ SPI Slave Configuration Interface                   •       Updated the description for SPI_SO in Table 13.1. SPI Slave Configuration Interface Pins
+                                                             (SPI_SS Low when CRESET_B Released), indicating that this signal is from “iCE40 device”
+                                                             instead of “CE65 device”.
+                                                     •       Added information of SPI configuration requirements in the Enabling SPI Configuration
+                                                             Interface section.
+
+
+Revision 3.3, October 2021
+ Section                                             Change Summary
+ SPI Slave Configuration Interface                   •       Changed 200 µs to 200 ns on CRESET_B waveform in Figure 13.2
+                                                     •       Added “Once the iCE40 clears its internal configuration memory, the SPI_SS goes to
+                                                             High, waits 8 clock cycles, then goes back to Low and the AP sends the configuration
+                                                             image generated by the Diamond Programmer.” in SPI Slave Configuration Process
+                                                             section.
+
+
+Revision 3.2, March 2020
+ Section                                             Change Summary
+ Configuration Control Signals                       •       Updated content and table note in Table 5.1.
+                                                     •       Updated Figure 5.1.
+ Disclaimers                                         Added this section.
+
+
+Revision 3.1, February 2020
+ Section                                             Change Summary
+ All                                                 •       Changed all instances of SPI_SS_B to SPI_SS.
+                                                     •       Updated referenced document IDs.
+ SPI Slave Configuration Interface                   Updated Figure 13.2. Application Processor Waveforms for SPI Peripheral Mode
+                                                     Configuration Process.
+ Appendix B. Configuration Data                      Removed Header frame row from Table B.1. Configuration Data
+ Format
+
+
+Revision 3.0, January 2018
+ Section                                             Change Summary
+ All                                                 •       Changed document number from TN1248 to FPGA-TN-02001.
+                                                     •       Updated document template.
+ Configuration Control Signals                       Added notes to Table 5.1. iCE40 Configuration Control Signals.
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            41
+iCE40 Programming and Configuration
+Technical Note
+
+
+ Section                                             Change Summary
+ Internal Device Reset                               Updated Figure 7.1. iCE40 Internal Reset Circuitry.
+ SPI Master Configuration                            Updated Table 9.2. Bitstream Sizes for Different iCE40 FPGA Densities Used to Select a SPI
+ Interface                                           Flash.
+ SPI Slave Configuration Process                     •   Changed “300 µs” to “1200 µs” in second paragraph.
+                                                     •   Updated Figure 13.2. Application Processor Waveforms for SPI Peripheral Mode
+                                                         Configuration Process.
+                                                     •   Updated Figure 13.3. SPI Slave Configuration Process.
+ Appendix A. SPI Slave                               Updated Table A.1. iCE40 SRAM Configuration Sequence.
+ Configuration Procedure
+ Configuration                                       Updated this section.
+
+
+Revision 2.9, May 2016
+ Section                                             Change Summary
+ SPI Master Configuration Mode                       Added this section.
+ Timing Considerations
+
+
+Revision 2.8, October 2015
+ Section                                             Change Summary
+ SPI Master Configuration Mode                       Added support for iCE40 UltraPlus.
+ Timing Considerations
+ sysCONFIG Pins                                      •    Revised Table 8.2. sysCONFIG Pins.
+                                                     •    Changed SPI_SI and SPI_SO Pin Direction.
+ Appendix B. Configuration Data                      Revised Table B.1. Configuration Data.
+ Format
+
+
+Revision 2.7, April 2015
+ Section                                             Change Summary
+ sysCONFIG Pins                                      •   Revised Table 8.2. sysCONFIG Pins.
+                                                     •   Changed SPI_SI and SPI_SO Pin Direction.
+ Technical Support Assistance                        Updated this section.
+
+
+Revision 2.6, December 2014
+ Section                                             Change Summary
+ Internal Device Reset                               •   Revised Figure 7.1. iCE40 Internal Reset Circuitry. Added VCCIO_0 device pin.
+                                                     •   Revised Table 8.2. sysCONFIG Pins. Added VCCIO_0 in Supply Rail.
+ sysCONFIG Port                                      Updated Table 8.2. sysCONFIG Pins.
+                                                     •   Changed SPI_SI and SPI_SO Pin Direction.
+                                                     •   Changed SPI_CSN pin to SPI_CSN1 in the SPI_SS description.
+ SPI PROM Requirements                               Corrected device in last row of Table 9.2. Bitstream Sizes for Different iCE40 FPGA Densities
+                                                     Used to Select a SPI Flash.
+ Cold Boot Configuration Option                      General revision.
+ Warm Boot Configuration Option                      Added information on enabling warm boot.
+
+
+Revision 2.5, July 2014
+ Section                                             Change Summary
+ SPI Master Configuration Mode                       Updated Figure 13.2. Application Processor Waveforms for SPI Peripheral Mode
+ Timing Considerations                               Configuration Process. Removed “...always starts with 0x7EAA997E synchronization word.”
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+42                                                                                                                                                                   FPGA-TN-02001-3.5
+                                                                                                                                        iCE40 Programming and Configuration
+                                                                                                                                                             Technical Note
+
+
+Revision 2.4, June 2014
+ Section                                             Change Summary
+ All                                                 Added support for iCE40 Ultra.
+
+
+Revision 2.3, January 2014
+ Section                                             Change Summary
+ Configuration Mode Selection                        Added contents to this section.
+ Appendix B. Configuration Data                      Added this section.
+ Format
+
+
+Revision 2.2, October 2013
+ Section                                             Change Summary
+ All                                                 Updated for iCE40LM support.
+
+
+Revision 2.1, January 2014
+ Section                                             Change Summary
+ Configuration Mode Selection                        Added contents to this section.
+ Appendix B. Configuration Data                      Added this section.
+ Format
+
+
+Revision 2.0, January 2014
+ Section                                             Change Summary
+ SPI PROM Requirements                               Updated the section.
+ Technical Support Assistance                        Updated information.
+
+
+Revision 1.9, June 2013
+ Section                                             Change Summary
+ Cold Boot Configuration Option                      Updated this section to provide more accurate information regarding the Cold Boot mode
+                                                     and the storage of multiple bitstreams.
+ SPI Slave Configuration Process                     Changed VCCIO_AP to AP_VCCIO in Table 13.3. CRESET_B and CDONE Voltage Compatibility.
+
+
+Revision 1.8, April 2013
+ Section                                             Change Summary
+ SPI Peripheral Configuration                        Updated this section.
+ Process
+
+
+Revision 1.7, April 2013
+ Section                                             Change Summary
+ Appendix A. SPI Slave                               Updated the Pseudo Code for configuring an iCE40 device.
+ Configuration Procedure
+ Internal Oscillator                                 Added information on how to access the Oscillator settings.
+
+
+Revision 1.6, April 2013
+ Section                                             Change Summary
+ SPI Master Configuration                            Updated Table 9.2. Bitstream Sizes for Different iCE40 FPGA Densities Used to Select a SPI
+ Interface                                           Flash.
+
+
+
+
+                  © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02001-3.5                                                                                                                                                                            43
+iCE40 Programming and Configuration
+Technical Note
+
+
+Revision 1.5, April 2013
+ Section                                               Change Summary
+ Multiple                                              Updated based on latest iCE40 information:
+                                                       •   Included configuration and programming information.
+                                                       •   Updated bit file sizes.
+                                                       •   Removed JTAG references.
+ Internal Device Reset                                 Updated Table 7.1. Power-On Reset Voltage Resources.
+ Appendix A. SPI Slave                                 Included configuration algorithm.
+ Configuration Procedure
+
+
+Revision 1.4, June 2012
+ Section                                               Change Summary
+ All                                                   Updated document with new corporate style.
+
+
+Revision 1.3, March 2012
+ Section                                               Change Summary
+ All                                                   Initial release
+
+
+
+
+                    © 2018-2026 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+44                                                                                                                                                                     FPGA-TN-02001-3.5
+www.latticesemi.com
+
