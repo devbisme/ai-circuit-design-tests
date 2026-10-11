@@ -1,0 +1,513 @@
+ ▐▛███▛█   Claude Code v2.1.296
+▝▜██████▀  Opus 5.5 · Claude Pro
+ ▝▝   ▝▝   ~/…/AI/ai-circuit-design-tests/eda-agent-tests/dual-adc-usb-1
+
+
+❯ execute the instructions in analysis_prompt.txt.                              
+
+  Ran 5 shell commands (ctrl+o to expand)
+
+● The prompt now says to use eda-agent, so I'm checking how its KiCad tools
+  connect before running the review.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Another session's pcbnew (dual-adc-usb-2) holds the IPC socket. I'll open a
+  separate pcbnew on this board, point api.sock at it for this run, and put the
+  link back at the end.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Bash(for k in 1 2 3; do for w in $(xdotool search --name "^Information$"
+      2>/dev/null); do xdotool windowactivate --sync $w key Return 2>/dev/null;
+      done; sleep 3; don…)
+  ⎿  total 152
+     drwxrwxr-x  2 devb devb   4096 Oct 11 11:46 .
+     drwxrwxrwt 39 root root 147456 Oct 11 11:46 ..
+     … +5 lines (ctrl+o to expand)
+  ⎿  Created ~dual_adc_usb.kicad_pcb.lck (+1 -0)
+      1 +{"hostname":"X7","username":"devb"}                             
+      2   No newline at end of file
+  ⎿  Created ~dual_adc_usb.kicad_pro.lck (+1 -0)
+      1 +{"hostname":"X7","username":"devb"}                             
+      2   No newline at end of file
+
+● The new pcbnew took over api.sock directly (it replaced the symlink). I'll
+  restore the link to the other session's socket when I'm done.
+
+  Called eda-kicad 2 times (ctrl+o to expand)
+
+● Connected to the right board. Running the full review and board queries.
+
+  Called eda-kicad 7 times, ran 3 shell commands (ctrl+o to expand)
+
+● The eda-agent review truncates DRC/ERC results to 200 rows and shows some ERC
+  warnings that look like environment artifacts, so I'll pull the full reports
+  via its kicad_cli passthrough to confirm.
+
+  Called eda-kicad 4 times, ran 1 shell command (ctrl+o to expand)
+
+● Full ERC/DRC reports and the netlist are saved. Now tallying them and checking
+  the circuit.
+
+  Listed 1 directory, ran 5 shell commands (ctrl+o to expand)
+
+● The netlist checks out on pinning. Next I'm verifying a few datasheet claims
+  (FT2232H, LM27762, LTC2290) in the background while I analyze the PCB geometry
+  with eda-agent's track and pad queries.
+
+● web-fetch(Verify datasheet claims)
+  ⎿  Received 148 bytes
+
+  Called eda-kicad 3 times (ctrl+o to expand)
+
+› Message from web-fetch
+  I couldn't answer any of the questions. None of the four datasheets gave me
+  readable text, so I have nothing to quote, no page numbers, and I haven't
+  filled anything in from memory.
+
+  - **FT2232H**
+  (https://ftdichip.com/wp-content/uploads/2020/07/DS_FT2232H.pdf): the server
+  returned HTTP 403 Forbidden. That is a permanent failure, so I didn't retry.
+  Questions 1a–1c are unanswered.
+  - **LM27762** (https://www.ti.com/lit/ds/symlink/lm27762.pdf): the fetch
+  worked (HTTP 200, application/pdf, document ID SNVSAF7C, about 1.1 MB). The
+  PDF was saved to a local file for you, but the text inside it is compressed,
+  so I couldn't read it. The table of contents points to where the answers
+  should be:
+    - max output current and the reference voltages: likely §5.5 Electrical
+  Characteristics (p. 5) and possibly §6.1 Overview (p. 8)
+    - feedback resistor minimums and PGOOD handling: likely §6.3 Feature
+  Description (p. 10) and §7.2 Typical Application (p. 12)
+
+    Running `pdftotext -layout` on the saved file should give you the text.
+  Question 2 is unanswered.
+  - **LTC2290** (https://www.analog.com/media/en/technical-documentation/data-sh
+  eets/229098fa.pdf): timed out after 60 s twice (the first try plus one retry).
+  Question 3 is unanswered.
+  - **ADA4817-1/-2** (https://www.analog.com/media/en/technical-documentation/da
+  ta-sheets/ADA4817-1_4817-2.pdf): also timed out after 60 s twice. Question 4
+  is unanswered.
+
+  Fetching again from here probably won't help: the analog.com host timed out on
+  every attempt and FTDI refuses the request. You'll need to download the PDFs
+  yourself, for example with `curl -L -A "Mozilla/5.0" -o <file> <url>`, then
+  run `pdftotext -layout` on them and read the result. The LM27762 PDF is
+  already saved locally.
+
+● The datasheet fetch mostly failed (FTDI returned 403; analog.com timed out).
+  I'll download the PDFs with curl into a fresh directory and extract the text.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Only the LM27762 datasheet is obtainable; analog.com times out and FTDI blocks
+  scripted downloads. Claims about the other parts will be marked as from
+  memory.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● LM27762 confirmed: R2/R4 must be at least 50 kΩ (49.9 kΩ is used), and unused
+  PGOOD should go to GND (it's left NC). Now pulling tracks and pads through
+  eda-agent for the layout analysis.
+
+  Called eda-kicad 3 times, ran 1 shell command (ctrl+o to expand)
+
+● eda-agent's pad list has no component references, so per-IC decoupling
+  distances can't be computed from it. I'll use KiCad's bundled pcbnew Python,
+  read-only, for that geometry.
+
+  Listed 1 directory, ran 1 shell command (ctrl+o to expand)
+
+● Found that anti-alias caps are 16–18 mm from the ADC pins, decoupling is
+  placed far from the FPGA and ADC, and USB D+/D− aren't routed as a
+  differential pair. Now I'll compute the USB impedance using eda-agent's
+  calculators.
+
+  Searched for 1 pattern, called eda-kicad 7 times (ctrl+o to expand)
+
+● eda-agent exported every layer (adhesive, courtyard, fab, user too) with no
+  JLCPCB options. Checking the drill and Gerber settings before assembling the
+  JLC zip.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The Gerbers are JLC-compatible: Protel extensions, metric Excellon with PTH
+  and NPTH merged, inner planes filled. I'll zip only the fab layers.
+
+● Bash(cd ..; rm -f dual_adc_usb_gerbers_JLCPCB.zip; (cd gerbers && zip -q
+      ../dual_adc_usb_gerbers_JLCPCB.zip dual_adc_usb-F_Cu.gtl
+      dual_adc_usb-In1_Cu.g1 dual_adc_usb…)
+  ⎿  Archive:  dual_adc_usb_gerbers_JLCPCB.zip
+       Length      Date    Time    Name
+     ---------  ---------- -----   ----
+     … +30 lines (ctrl+o to expand)
+  ⎿  1 file changed (binary, mode only or too large to show)
+
+● The eda-agent's BOM lacks JLC columns and its position file is in ASCII/inches
+  format. I'll regenerate the position file as mm CSV via kicad_cli, then
+  convert both files to JLC format.
+
+  Searched for 1 pattern, called eda-kicad (ctrl+o to expand)
+● Bash(mkdir -p jlcpcb/assembly; python3 - <<'E'
+      import csv,collections,re…)
+  ⎿  56 BOM lines, 170 parts
+     dict_keys(['Ref', 'Val', 'Package', 'PosX', 'PosY', 'Rot', 'Side'])
+     170 placements Counter({'top': 174})
+     … +11 lines (ctrl+o to expand)
+  ⎿  Created jlcpcb/assembly/dual_adc_usb_BOM_JLCPCB.csv (+57 -0)
+       1 +Comment,Designator,Footprint,LCSC Part #,Quantity              
+       2 +2.2pF C0G,"C101,C201",C_0603_1608Metric,,2                     
+       3 +27pF C0G,"C102,C202",C_0603_1608Metric,,2                      
+       4 +4.5-20pF,"C103,C203",C_Trimmer_Murata_TZB4-A,,2                
+       5 +22pF C0G,"C104,C105,C204,C205",C_0603_1608Metric,,4            
+       6 +220pF C0G,"C106,C206",C_0603_1608Metric,,2                     
+       7 +100nF,"C107,C109,C111,C207,C209,C211,C304,C305,C306,C308,C309,C
+         +310,C311,C312,C313,C314,C316,C317,C318,C504,C506,C507,C508,C510
+         +,C511,C512,C513,C514,C515,C601,C602,C603,C604,C606,C607,C608,C6
+         +09,C610,C611,C613,C614,C615,C616,C617,C618,C619,C620,C621,C623,
+         +C625,C627",C_0402_1005Metric,,51                               
+       8 +1uF,"C108,C110,C112,C208,C210,C212,C403,C404,C406,C410,C411",C_
+         +0603_1608Metric,,11                                            
+       9 +2.2uF,"C301,C302,C303,C307,C405,C408,C409",C_0603_1608Metric,,7
+      10 +10uF,"C315,C605,C612,C622,C624,C626",C_0805_2012Metric,,6      
+      11 +4.7uF,C401,C_0805_2012Metric,,1                                
+      12 +22uF,C402,C_0805_2012Metric,,1                                 
+      13 +4.7uF,"C407,C505,C509",C_0603_1608Metric,,3                    
+      14 +4.7nF,C501,C_0603_1608Metric,,1                                
+      15 +18pF,"C502,C503",C_0402_1005Metric,,2                          
+      16 +BAV199DW,"D101,D201",SOT-363_SC-70-6,,2                        
+      17 +GREEN,"D401,D601",LED_0603_1608Metric,,2                       
+      18 +RED,D602,LED_0603_1608Metric,,1                                
+      19 +600R@100MHz,FB501,L_0805_2012Metric,,1                         
+      20 +BNC,"J101,J201",BNC_Amphenol_B6252HB-NPP3G-50_Horizontal,,2    
+      21 +USB_B,J501,USB_B_OST_USB-B1HSxx_Horizontal,,1                  
+      22 +EXP,J601,PinHeader_2x05_P2.54mm_Vertical,,1                    
+      23 +2.2uH,L401,L_Taiyo-Yuden_NR-30xx,,1                            
+      24 +2N7002,Q401,SOT-23,,1                                          
+      25 +953k 0.1%,"R101,R201",R_1206_3216Metric,,2                     
+      26 +49.9k 0.1%,"R102,R202",R_0603_1608Metric,,2                    
+      27 +200,"R103,R203",R_0603_1608Metric,,2                           
+      28 +499 0.1%,"R104,R105,R204,R205",R_0603_1608Metric,,4            
+      29 +953 0.1%,"R106,R107,R206,R207",R_0603_1608Metric,,4            
+      30 +49.9,"R108,R109,R208,R209",R_0603_1608Metric,,4                
+      31 +10k,"R301,R410,R503,R505,R506,R507,R602,R603,R604",R_0402_1005M
+         +etric,,9                                                       
+      32 +20k,R302,R_0402_1005Metric,,1                                  
+      33 +33,"R303,R304,R601",R_0402_1005Metric,,3                       
+      34 +316k,R401,R_0402_1005Metric,,1                                 
+      35 +100k,"R402,R409",R_0402_1005Metric,,2                          
+      36 +115k,"R405,R407",R_0402_1005Metric,,2                          
+      37 +49.9k,"R406,R408",R_0402_1005Metric,,2                         
+      38 +1k,"R411,R607,R608",R_0402_1005Metric,,3                       
+      39 +1M,R501,R_0603_1608Metric,,1                                   
+      40 +12k 1%,R502,R_0402_1005Metric,,1                               
+     … 17 more lines (ctrl+o to expand)
+  ⎿  Created jlcpcb/assembly/dual_adc_usb_CPL_JLCPCB.csv (+171 -0)
+        1 +Designator,Mid X,Mid Y,Layer,Rotation                         
+        2 +C101,72.000000mm,-64.000000mm,Top,0.000000                    
+        3 +C102,79.000000mm,-73.000000mm,Top,90.000000                   
+        4 +C103,79.000000mm,-78.000000mm,Top,0.000000                    
+        5 +C104,104.000000mm,-64.000000mm,Top,0.000000                   
+        6 +C105,104.000000mm,-76.000000mm,Top,0.000000                   
+        7 +C106,112.500000mm,-70.000000mm,Top,90.000000                  
+        8 +C107,88.500000mm,-65.500000mm,Top,0.000000                    
+        9 +C108,91.500000mm,-65.500000mm,Top,0.000000                    
+       10 +C109,87.500000mm,-76.500000mm,Top,0.000000                    
+       11 +C110,91.500000mm,-76.500000mm,Top,0.000000                    
+       12 +C111,100.500000mm,-64.000000mm,Top,0.000000                   
+       13 +C112,100.000000mm,-76.500000mm,Top,0.000000                   
+       14 +C201,72.000000mm,-106.000000mm,Top,0.000000                   
+       15 +C202,79.000000mm,-115.000000mm,Top,90.000000                  
+       16 +C203,79.000000mm,-120.000000mm,Top,0.000000                   
+       17 +C204,104.000000mm,-106.000000mm,Top,0.000000                  
+       18 +C205,104.000000mm,-118.000000mm,Top,0.000000                  
+       19 +C206,112.500000mm,-112.000000mm,Top,90.000000                 
+       20 +C207,88.500000mm,-107.500000mm,Top,0.000000                   
+       21 +C208,91.500000mm,-107.500000mm,Top,0.000000                   
+       22 +C209,87.500000mm,-118.500000mm,Top,0.000000                   
+       23 +C210,91.500000mm,-118.500000mm,Top,0.000000                   
+       24 +C211,100.500000mm,-106.000000mm,Top,0.000000                  
+       25 +C212,100.000000mm,-118.500000mm,Top,0.000000                  
+       26 +C301,108.300000mm,-86.500000mm,Top,0.000000                   
+       27 +C302,104.800000mm,-99.100000mm,Top,0.000000                   
+       28 +C303,108.300000mm,-88.300000mm,Top,0.000000                   
+       29 +C304,108.300000mm,-90.100000mm,Top,0.000000                   
+       30 +C305,108.300000mm,-91.900000mm,Top,0.000000                   
+       31 +C306,108.300000mm,-93.700000mm,Top,0.000000                   
+       32 +C307,108.300000mm,-95.500000mm,Top,0.000000                   
+       33 +C308,108.300000mm,-97.300000mm,Top,0.000000                   
+       34 +C309,110.300000mm,-99.100000mm,Top,0.000000                   
+       35 +C310,108.300000mm,-99.100000mm,Top,0.000000                   
+       36 +C311,112.000000mm,-81.000000mm,Top,0.000000                   
+       37 +C312,114.000000mm,-81.000000mm,Top,0.000000                   
+       38 +C313,116.000000mm,-81.000000mm,Top,0.000000                   
+       39 +C314,118.000000mm,-81.000000mm,Top,0.000000                   
+       40 +C315,124.800000mm,-81.000000mm,Top,0.000000                   
+     … 131 more lines (ctrl+o to expand)
+
+● Fab files are done. Now the PNG: I'll plot an SVG through eda-agent's
+  kicad_cli and rasterize it on a dark-gray background.
+
+  Searched for 1 pattern, called eda-kicad 2 times, ran 1 shell command (ctrl+o to expand)
+
+● Bash(S=/tmp/claude-1000/-home-devb-projects-AI-ai-circuit-design-tests-eda-age
+      nt-tests-dual-adc-usb-1/3f6bf1c1-e04c-4767-859a-e906b4b379cf/scratchpad;
+      inkscape $S/bo…)
+  ⎿  dual_adc_usb_pcb.png PNG 2530x1430 2530x1430+0+0 8-bit sRGB 901259B 0.
+     000u 0:00.000
+  ⎿  1 file changed (binary, mode only or too large to show)
+
+  Read 1 file (ctrl+o to expand)
+
+● The PNG checks out—copper, silk, fab outlines, edge, and BNC overhang all look
+  right. The remaining question is the D101/D201 clamp: the KiCad pin names put
+  DIV at the junction of the unused diode pair, so I'll check the Diodes
+  datasheet to confirm.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Got the Diodes datasheet. The pinout diagram didn't survive text extraction,
+  so I'm rendering it as an image to read the pins.
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● Confirmed the BAV199DW clamp pinout is correct—pins 1, 6, and 2 match the
+  Diodes top-view diagram despite KiCad's misleading pin names. Next, I'll
+  compare the embedded IC symbols against the stock libraries.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 34 embedded symbols match the stock KiCad libraries pin for pin. The board
+  file is unchanged, so I'm closing my pcbnew and restoring the IPC link for
+  the other session's pcbnew.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Bash(S=/tmp/claude-1000/-home-devb-projects-AI-ai-circuit-design-tests-eda-age
+      nt-tests-dual-adc-usb-1/3f6bf1c1-e04c-4767-859a-e906b4b379cf; cp
+      $S/tool-results/mcp-ed…)
+  ⎿  jlcpcb:
+     assembly
+     dual_adc_usb_gerbers_JLCPCB.zip
+     … +16 lines (ctrl+o to expand)
+  ⎿  Created reports/pcb_geometry.txt (+94 -0)
+       1 +== nearest bypass cap to each IC supply pin (mm)               
+       2 +U101 max (6.5, '9', '', 'VEE', 'C110') | min 3.1 | >5mm: 1 / 4 
+       3 +U102 max (17.7, '2', '', '/ADC/VCMA', 'C301') | min 6.6 | >5mm:
+         + 3 / 3                                                         
+       4 +U201 max (6.5, '9', '', 'VEE', 'C210') | min 3.1 | >5mm: 1 / 4 
+       5 +U202 max (12.8, '2', '', '/ADC/VCMB', 'C302') | min 6.6 | >5mm:
+         + 3 / 3                                                         
+       6 +U301 max (10.8, '10', '', '+3V0', 'C311') | min 2.7 | >5mm: 11 
+         +/ 19                                                           
+       7 +U401 max (9.4, '6', '', '+3V3', 'C402') | min 3.0 | >5mm: 1 / 3
+       8 +U402 max (4.3, '5', '', '+1V2', 'C404') | min 3.4 | >5mm: 0 / 3
+       9 +U403 max (3.7, '1', '', '+5V', 'C410') | min 2.6 | >5mm: 0 / 2 
+      10 +U404 max (9.8, '6', '', 'VEE', 'C409') | min 4.1 | >5mm: 2 / 3 
+      11 +U502 max (16.2, '12', '', '/USB/V1V8_FT', 'C508') | min 2.8 | >
+         +5mm: 6 / 11                                                    
+      12 +U503 max (6.9, '8', '', '+3V3', 'C504') | min 4.4 | >5mm: 1 / 2
+      13 +U601 max (22.2, '6', '', '+3V3', 'C610') | min 2.9 | >5mm: 14 /
+         + 16                                                            
+      14 +U602 max (14.1, '14', '', '+3V3', 'C614') | min 3.8 | >5mm: 5 /
+         + 7                                                             
+      15 +U603 max (5.4, '3', '', '+3V3', 'C623') | min 1.9 | >5mm: 1 / 3
+      16 +X301 max (5.2, '4', '', '+3V0', 'C318') | min 5.2 | >5mm: 2 / 2
+      17 +== crystal / caps                                              
+      18 +C502 18pF /USB/OSCI nearest IC pad 3.5 mm Y501.1               
+      19 +C503 18pF /USB/OSCO nearest IC pad 2.7 mm Y501.3               
+      20 +C401 4.7uF +5V nearest IC pad 3.0 mm U401.3                    
+      21 +C402 22uF +3V3 nearest IC pad 9.4 mm U401.6                    
+      22 +C403 1uF +3V3 nearest IC pad 3.4 mm U402.3                     
+      23 +C404 1uF +1V2 nearest IC pad 4.3 mm U402.5                     
+      24 +C405 2.2uF +5V nearest IC pad 4.1 mm U404.3                    
+      25 +C406 1uF /Power/CFLY_P nearest IC pad 6.2 mm U404.10           
+      26 +C406 1uF /Power/CFLY_N nearest IC pad 5.5 mm U404.9            
+      27 +C407 4.7uF /Power/CP_NEG nearest IC pad 4.8 mm U404.5          
+      28 +C408 2.2uF +4V nearest IC pad 7.9 mm U404.11                   
+      29 +C409 2.2uF VEE nearest IC pad 9.8 mm U404.6                    
+      30 +C410 1uF +5V nearest IC pad 3.7 mm U403.1                      
+      31 +C411 1uF +3V0 nearest IC pad 2.6 mm U403.5                     
+      32 +C103 4.5-20pF /AFE_A/DIV nearest IC pad 13.1 mm U101.3         
+      33 +C203 4.5-20pF /AFE_B/DIV nearest IC pad 13.1 mm U201.3         
+      34 +C106 220pF C0G /ADC/AINA_P nearest IC pad 16.5 mm U301.1       
+      35 +C106 220pF C0G /ADC/AINA_N nearest IC pad 18.5 mm U301.2       
+      36 +C206 220pF C0G /ADC/AINB_P nearest IC pad 18.0 mm U301.16      
+      37 +C206 220pF C0G /ADC/AINB_N nearest IC pad 17.0 mm U301.15      
+      38 +== per-net routing                                             
+      39 +/USB/USB_DP {'F.Cu': 17.5, 'B.Cu': 4.5} vias 1 w [0.2, 0.25, 0.
+         +28]                                                            
+      40 +/USB/USB_DM {'F.Cu': 19.5} vias 0 w [0.2, 0.25, 0.28]          
+     … 54 more lines (ctrl+o to expand)
+  ⎿  Created reports/scripts/pcb_an.py (+49 -0)
+       1 +import pcbnew, math, collections, sys                          
+       2 +b=pcbnew.LoadBoard(sys.argv[1]); mm=pcbnew.ToMM                
+       3 +pads=[]                                                        
+       4 +for f in b.GetFootprints():                                    
+       5 +    for p in f.Pads():                                         
+       6 +        if not p.IsOnCopperLayer(): continue                   
+       7 +        pos=p.GetPosition(); pads.append((f.GetReference(),p.Ge
+         +tNumber(),p.GetNetname(),mm(pos.x),mm(pos.y),p.GetPinFunction()
+         +))                                                             
+       8 +caps=collections.defaultdict(list)                             
+       9 +for r,n,net,x,y,fn in pads:                                    
+      10 +    if r.startswith('C'): caps[net].append((r,x,y))            
+      11 +print('== nearest bypass cap to each IC supply pin (mm)')      
+      12 +rails={'+3V3','+3V0','+1V2','+4V','VEE','+5V','/USB/V1V8_FT','/
+         +FPGA_SDRAM/VCCPLL0','/FPGA_SDRAM/VCCPLL1','/ADC/REFHA','/ADC/RE
+         +FLA','/ADC/REFHB','/ADC/REFLB','/ADC/VCMA','/ADC/VCMB'}        
+      13 +worst=collections.defaultdict(list)                            
+      14 +for r,n,net,x,y,fn in pads:                                    
+      15 +    if r[0] in 'UX' and net in rails:                          
+      16 +        d=min(((math.hypot(x-cx,y-cy),cr) for cr,cx,cy in caps[
+         +net]),default=(99,'-'))                                        
+      17 +        worst[r].append((round(d[0],1),n,fn,net,d[1]))         
+      18 +for r in sorted(worst):                                        
+      19 +    w=sorted(worst[r],reverse=True)                            
+      20 +    print(r, 'max',w[0], '| min',w[-1][0], '| >5mm:',sum(1 for 
+         +a in w if a[0]>5),'/',len(w))                                  
+      21 +print('== crystal / caps')                                     
+      22 +for ref in ['C502','C503','C401','C402','C403','C404','C405','C
+         +406','C407','C408','C409','C410','C411','C103','C203','C106','C
+         +206']:                                                         
+      23 +    f=b.FindFootprintByReference(ref);                         
+      24 +    for p in f.Pads():                                         
+      25 +        net=p.GetNetname()                                     
+      26 +        if net=='GND': continue                                
+      27 +        # nearest non-cap pad on same net                      
+      28 +        ds=[(math.hypot(mm(p.GetPosition().x)-x,mm(p.GetPositio
+         +n().y)-y),rr+'.'+nn) for rr,nn,nt,x,y,fn in pads if nt==net and
+         + rr[0] in 'UXYJ']                                              
+      29 +        if ds: print(ref,f.GetValue(),net,'nearest IC pad %.1f 
+         +mm'%min(ds)[0],min(ds)[1])                                     
+      30 +print('== per-net routing')                                    
+      31 +tr=collections.defaultdict(lambda:collections.defaultdict(float
+         +)); vias=collections.Counter(); widths=collections.defaultdict(
+         +set)                                                           
+      32 +for t in b.GetTracks():                                        
+      33 +    n=t.GetNetname()                                           
+      34 +    if t.Type()==pcbnew.PCB_VIA_T: vias[n]+=1                  
+      35 +    else: tr[n][t.GetLayerName()]+=mm(t.GetLength()); widths[n]
+         +.add(round(mm(t.GetWidth()),3))                                
+      36 +for n in ['/USB/USB_DP','/USB/USB_DM','/ADC/AINA_P','/ADC/AINA_
+         +N','/ADC/AINB_P','/ADC/AINB_N','/AFE_A/FDA_OUTP','/AFE_A/FDA_OU
+         +TN','/AFE_B/FDA_OUTP','/AFE_B/FDA_OUTN','/AFE_A/DIV','/AFE_B/DI
+         +V','/ADC/VCMA','/ADC/VCMB','/ADC/ADC_CLK','/ADC/OSC_OUT','CLK_1
+         +0M','FT_CLK','/FPGA_SDRAM/SD_CLK','/FPGA_SDRAM/SD_CLK_SRC','/US
+         +B/OSCI','/USB/OSCO','/Power/SW','+5V','+4V','VEE','+3V0','+1V2'
+         +,'/USB/VBUS']:                                                 
+      37 +    print(n,{k:round(v,1) for k,v in tr[n].items()},'vias',vias
+         +[n],'w',sorted(widths[n]))                                     
+      38 +print('== min track width count', collections.Counter(round(mm(
+         +t.GetWidth()),3) for t in b.GetTracks() if t.Type()!=pcbnew.PCB
+         +_VIA_T))                                                       
+      39 +print('== silk line widths', collections.Counter(round(mm(g.Get
+         +Width()),3) for f in b.GetFootprints() for g in f.GraphicalItem
+         +s() if g.GetLayerName() in ('F.Silkscreen','B.Silkscreen') and 
+         +g.Type()==pcbnew.PCB_SHAPE_T))                                 
+      40 +th=collections.Counter()                                       
+     … 9 more lines (ctrl+o to expand)
+  ⎿  Created reports/scripts/net.py (+19 -0)
+       1 +import re,sys,collections                                      
+       2 +def parse(t):                                                  
+       3 +    toks=re.findall(r'\(|\)|"(?:[^"\\]|\\.)*"|[^\s()]+',t); st=
+         +[[]]                                                           
+       4 +    for k in toks:                                             
+       5 +        if k=='(': st.append([])                               
+       6 +        elif k==')': x=st.pop(); st[-1].append(x)              
+       7 +        else: st[-1].append(k.strip('"'))                      
+       8 +    return st[0][0]                                            
+       9 +def get(n,key): return [c for c in n if isinstance(c,list) and 
+         +c and c[0]==key]                                               
+      10 +def val(n,key):                                                
+      11 +    g=get(n,key); return g[0][1] if g and len(g[0])>1 else ''  
+      12 +T=parse(open(sys.argv[1]).read())                              
+      13 +comps={val(c,'ref'):(val(c,'value'),val(c,'footprint')) for c i
+         +n get(get(T,'components')[0],'comp')}                          
+      14 +pins=collections.defaultdict(dict)  # ref -> pin -> (net, pinfu
+         +nction)                                                        
+      15 +nets={}                                                        
+      16 +for n in get(get(T,'nets')[0],'net'):                          
+      17 +    name=val(n,'name'); nets[name]=[]                          
+      18 +    for nd in get(n,'node'):                                   
+      19 +        r,p,f=val(nd,'ref'),val(nd,'pin'),val(nd,'pinfunction')
+         +; pins[r][p]=(name,f); nets[name].append((r,p,f))              
+  ⎿  … 1 more file changed
+
+● Write(executive_summary.md)
+  ⎿  Wrote 167 lines to executive_summary.md
+       1 # dual_adc_usb — Design Review & Fab Output Summary (eda-agent)
+       3 **Date:** 2026-10-11  **Tool:** eda-agent 0.6.1 KiCad backend (`
+         mcp__eda-kicad__*`) driving KiCad 10.0.4 (`~/bin/kicad10-root`)
+       4 **Design files were not modified.** The `.kicad_pcb` md5 (`1319d
+       5 
+       6 ## What the design is
+       8 A two-channel, 12-bit, 10 MS/s USB acquisition board. It is 140 
+         × 90 mm, has 4 layers, and holds 170 schematic parts plus 4 moun
+         ting holes, all on the top side.
+      10 | Block | Parts | Function |
+     … +297 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● I've finished the review using eda-agent, generated the JLCPCB Gerbers, BOM,
+  pick-and-place file and PNG, and written executive_summary.md. The design
+  files weren't modified (the board's checksum is unchanged).
+
+  Checks: No ERC or DRC errors and no unconnected items. There are 343 DRC
+  warnings and 203 ERC warnings, all cosmetic, library-related or caused by the
+  environment.
+
+  Most serious problems (19 ranked in the summary):
+  1. FPGA clock is switched off until USB enumerates. The 10 MHz oscillator runs
+     from the 3.0 V analog rail, which stays off until then. The ADC's output
+     supply is on the same rail, so the powered FPGA may back-power the
+     unpowered ADC through its data lines.
+  2. ADC inputs can be overdriven. The differential driver runs from 0/+4 V into
+     a 3.0 V ADC, so roughly ±38 V at a BNC exceeds the ADC's input limit. That
+     limit is from memory, not checked against the datasheet.
+  3. Decoupling caps are far from the pins. On the FPGA, 14 of 16 supply pins
+     are more than 5 mm from a cap (worst 22 mm); on the ADC, 11 of 19 (worst
+     10.8 mm). eda-agent's review missed this because it only checks that caps
+     exist.
+  4. Anti-alias caps are 16–18 mm from the ADC. The ADC input traces run beyond
+     them over the 3.3 V digital plane rather than ground.
+  5. Two LM27762 datasheet deviations (checked against the datasheet): the 49.9
+     kΩ feedback resistors are below the required 50 kΩ minimum, and the unused
+     PGOOD pin is left unconnected instead of grounded.
+  6. The BOM can't be ordered as is. The schematic has no part-number or LCSC
+     fields. Silkscreen strokes are 0.12 mm, below JLC's 0.15 mm minimum as I
+     recall it.
+
+  I checked the BNC input clamp diodes because KiCad's pin names make them look
+  miswired. The Diodes datasheet diagram shows the wiring is correct.
+
+  Where eda-agent fell short (I filled the gaps):
+  - Its full review cuts DRC and ERC lists off at 200 rows, so I reran both
+    through its kicad_cli passthrough.
+  - Its pad list has no component references, so I measured decoupling distances
+    with KiCad's bundled Python instead.
+  - Its exports aren't in JLC format. Gerbers include every layer, the BOM has
+    one ungrouped row per part, and the position file is in inches. I zipped
+    only the fabrication layers and converted the BOM and placement file myself.
+
+  Unverified claims: I couldn't download the FT2232H datasheet (FTDI returned
+  403) or the LTC2290 and ADA4817 datasheets (analog.com timed out). Claims that
+  rest on them are marked "from memory" in the summary, including the USB
+  bandwidth margin and FT2232H channel B being unavailable during streaming.
+
+  KiCad sessions: Another session's KiCad was holding the connection eda-agent
+  uses. I opened a second KiCad on this board, then closed it and pointed the
+  connection back at the other session's KiCad, so that session should be
+  unaffected.
+
+  Everything is in dual-adc-usb-1/:
+  - executive_summary.md
+  - dual_adc_usb_pcb.png
+  - jlcpcb/dual_adc_usb_gerbers_JLCPCB.zip
+  - jlcpcb/assembly/dual_adc_usb_BOM_JLCPCB.csv
+  - jlcpcb/assembly/dual_adc_usb_CPL_JLCPCB.csv
+  - reports/ (ERC/DRC reports, netlist, raw exports, geometry output and
+    scripts)
+
+✻ Churned for 14m 22s · done 12:00 PM

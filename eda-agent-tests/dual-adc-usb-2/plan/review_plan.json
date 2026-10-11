@@ -1,0 +1,412 @@
+{
+ "ok": true,
+ "passed": true,
+ "stats": {
+  "part_count": 178,
+  "net_count": 184,
+  "parts_by_kind": {
+   "C": 93,
+   "D": 5,
+   "F": 1,
+   "FB": 3,
+   "H": 4,
+   "J": 4,
+   "R": 52,
+   "U": 14,
+   "Y": 2
+  },
+  "ic_count": 25,
+  "passive_count": 138,
+  "power_rails": [
+   "+1V2",
+   "+3V3",
+   "+3V3A",
+   "+4V",
+   "+5V",
+   "-4V",
+   "VBUS",
+   "VBUS_F"
+  ],
+  "ground_nets": [
+   "GND"
+  ],
+  "avg_net_degree": 3.47,
+  "highest_fanout_signal": [
+   "FT_VPHY",
+   5
+  ]
+ },
+ "erc": {
+  "passed": true,
+  "errors": [],
+  "warnings": [
+   {
+    "code": "unconnected_part",
+    "message": "part H1 is not connected to any net",
+    "refs": [
+     "H1"
+    ]
+   },
+   {
+    "code": "unconnected_part",
+    "message": "part H2 is not connected to any net",
+    "refs": [
+     "H2"
+    ]
+   },
+   {
+    "code": "unconnected_part",
+    "message": "part H3 is not connected to any net",
+    "refs": [
+     "H3"
+    ]
+   },
+   {
+    "code": "unconnected_part",
+    "message": "part H4 is not connected to any net",
+    "refs": [
+     "H4"
+    ]
+   },
+   {
+    "code": "missing_decoupling",
+    "message": "IC J1 power rail 'VBUS' has no decoupling capacitor",
+    "refs": [
+     "J1",
+     "VBUS"
+    ]
+   }
+  ]
+ },
+ "circuits": [
+  {
+   "motif": "crystal_load",
+   "parts": [
+    "Y1",
+    "C16",
+    "C17"
+   ],
+   "summary": "crystal load: CL = 18.5pF (per-cap 27pF, stray 5pF)",
+   "params": {
+    "c_load_f": 1.85e-11
+   }
+  },
+  {
+   "motif": "fb_divider",
+   "parts": [
+    "R1",
+    "R2"
+   ],
+   "summary": "feedback divider: Vout = Vref x 3.320",
+   "params": {
+    "gain": 3.32
+   }
+  },
+  {
+   "motif": "fb_divider",
+   "parts": [
+    "R3",
+    "R4"
+   ],
+   "summary": "feedback divider: Vout = Vref x 3.260",
+   "params": {
+    "gain": 3.26
+   }
+  },
+  {
+   "motif": "fb_divider",
+   "parts": [
+    "R32",
+    "R33"
+   ],
+   "summary": "feedback divider: Vout = Vref x 1.500",
+   "params": {
+    "gain": 1.5
+   }
+  },
+  {
+   "motif": "rc_highpass",
+   "parts": [
+    "R15",
+    "C32"
+   ],
+   "summary": "RC high-pass: fc = 648.474kHz",
+   "params": {
+    "f_cutoff_hz": 648473.8747989052
+   }
+  },
+  {
+   "motif": "rc_highpass",
+   "parts": [
+    "R19",
+    "C35"
+   ],
+   "summary": "RC high-pass: fc = 4.82288MHz",
+   "params": {
+    "f_cutoff_hz": 4822877.063390768
+   }
+  },
+  {
+   "motif": "rc_highpass",
+   "parts": [
+    "R24",
+    "C40"
+   ],
+   "summary": "RC high-pass: fc = 648.474kHz",
+   "params": {
+    "f_cutoff_hz": 648473.8747989052
+   }
+  },
+  {
+   "motif": "rc_highpass",
+   "parts": [
+    "R28",
+    "C43"
+   ],
+   "summary": "RC high-pass: fc = 4.82288MHz",
+   "params": {
+    "f_cutoff_hz": 4822877.063390768
+   }
+  },
+  {
+   "motif": "rc_lowpass",
+   "parts": [
+    "R14",
+    "C31"
+   ],
+   "summary": "RC low-pass: fc = 14.5907kHz",
+   "params": {
+    "f_cutoff_hz": 14590.662182975371
+   }
+  },
+  {
+   "motif": "rc_lowpass",
+   "parts": [
+    "R16",
+    "C33"
+   ],
+   "summary": "RC low-pass: fc = 7.23432MHz",
+   "params": {
+    "f_cutoff_hz": 7234315.595086153
+   }
+  },
+  {
+   "motif": "rc_lowpass",
+   "parts": [
+    "R23",
+    "C39"
+   ],
+   "summary": "RC low-pass: fc = 14.5907kHz",
+   "params": {
+    "f_cutoff_hz": 14590.662182975371
+   }
+  },
+  {
+   "motif": "rc_lowpass",
+   "parts": [
+    "R25",
+    "C41"
+   ],
+   "summary": "RC low-pass: fc = 7.23432MHz",
+   "params": {
+    "f_cutoff_hz": 7234315.595086153
+   }
+  }
+ ],
+ "placement_constraints": {
+  "match_groups": {},
+  "keepout_groups": {}
+ },
+ "net_classes": {
+  "ground": [
+   "GND"
+  ],
+  "power": [
+   "+1V2",
+   "+3V3",
+   "+3V3A",
+   "+4V",
+   "+5V",
+   "-4V",
+   "VBUS",
+   "VBUS_F"
+  ],
+  "signal": [
+   "ADC_CLKA",
+   "ADC_CLKB",
+   "ADC_DA0",
+   "ADC_DA0_R",
+   "ADC_DA1",
+   "ADC_DA10",
+   "ADC_DA10_R",
+   "ADC_DA11",
+   "ADC_DA11_R",
+   "ADC_DA1_R",
+   "ADC_DA2",
+   "ADC_DA2_R",
+   "ADC_DA3",
+   "ADC_DA3_R",
+   "ADC_DA4",
+   "ADC_DA4_R",
+   "ADC_DA5",
+   "ADC_DA5_R",
+   "ADC_DA6",
+   "ADC_DA6_R",
+   "ADC_DA7",
+   "ADC_DA7_R",
+   "ADC_DA8",
+   "ADC_DA8_R",
+   "ADC_DA9",
+   "ADC_DA9_R",
+   "ADC_DB0",
+   "ADC_DB0_R",
+   "ADC_DB1",
+   "ADC_DB10",
+   "ADC_DB10_R",
+   "ADC_DB11",
+   "ADC_DB11_R",
+   "ADC_DB1_R",
+   "ADC_DB2",
+   "ADC_DB2_R",
+   "ADC_DB3",
+   "ADC_DB3_R",
+   "ADC_DB4",
+   "ADC_DB4_R",
+   "ADC_DB5",
+   "ADC_DB5_R",
+   "ADC_DB6",
+   "ADC_DB6_R",
+   "ADC_DB7",
+   "ADC_DB7_R",
+   "ADC_DB8",
+   "ADC_DB8_R",
+   "ADC_DB9",
+   "ADC_DB9_R",
+   "ADC_MODE",
+   "ADC_OFA",
+   "ADC_OFA_R",
+   "ADC_OFB",
+   "ADC_OFB_R",
+   "AINA_N",
+   "AINA_P",
+   "AINB_N",
+   "AINB_P",
+   "CDONE",
+   "CFG_SCK",
+   "CFG_SI",
+   "CFG_SO",
+   "CFG_SS_N",
+   "CLK10",
+   "CRESET_N",
+   "FDAA_ON",
+   "FDAA_OP",
+   "FDAA_SN",
+   "FDAA_SP",
+   "FDAB_ON",
+   "FDAB_OP",
+   "FDAB_SN",
+   "FDAB_SP",
+   "FLASH_HOLD_N",
+   "FLASH_WP_N",
+   "FPGA_CLK10",
+   "FT_ACBUS8",
+   "FT_ACBUS9",
+   "FT_CLKOUT",
+   "FT_D0",
+   "FT_D1",
+   "FT_D2",
+   "FT_D3",
+   "FT_D4",
+   "FT_D5",
+   "FT_D6",
+   "FT_D7",
+   "FT_EECLK",
+   "FT_EECS",
+   "FT_EEDATA",
+   "FT_EEDO",
+   "FT_OE_N",
+   "FT_PWRSAV_N",
+   "FT_RD_N",
+   "FT_REF",
+   "FT_RESET_N",
+   "FT_RXF_N",
+   "FT_SIWU_N",
+   "FT_TXE_N",
+   "FT_VCCA",
+   "FT_VCORE",
+   "FT_VPHY",
+   "FT_WR_N",
+   "FT_XI",
+   "FT_XO",
+   "INA_BUF",
+   "INA_CLAMP",
+   "INA_DIV",
+   "INA_RAW",
+   "INB_BUF",
+   "INB_CLAMP",
+   "INB_DIV",
+   "INB_RAW",
+   "LED1_A",
+   "LED1_N",
+   "LED2_A",
+   "LED2_N",
+   "LED_PWR",
+   "LM_CN",
+   "LM_CP",
+   "LM_CPF",
+   "LM_FBN",
+   "LM_FBP",
+   "OSC_VDD",
+   "REFHA",
+   "REFHB",
+   "REFLA",
+   "REFLB",
+   "SD_A0",
+   "SD_A1",
+   "SD_A10",
+   "SD_A11",
+   "SD_A12",
+   "SD_A2",
+   "SD_A3",
+   "SD_A4",
+   "SD_A5",
+   "SD_A6",
+   "SD_A7",
+   "SD_A8",
+   "SD_A9",
+   "SD_BA0",
+   "SD_BA1",
+   "SD_CAS_N",
+   "SD_CKE",
+   "SD_CLK",
+   "SD_CS_N",
+   "SD_DQ0",
+   "SD_DQ1",
+   "SD_DQ10",
+   "SD_DQ11",
+   "SD_DQ12",
+   "SD_DQ13",
+   "SD_DQ14",
+   "SD_DQ15",
+   "SD_DQ2",
+   "SD_DQ3",
+   "SD_DQ4",
+   "SD_DQ5",
+   "SD_DQ6",
+   "SD_DQ7",
+   "SD_DQ8",
+   "SD_DQ9",
+   "SD_DQMH",
+   "SD_DQML",
+   "SD_RAS_N",
+   "SD_WE_N",
+   "USB_DM",
+   "USB_DP",
+   "USB_SHIELD",
+   "VCCPLL0",
+   "VCCPLL1",
+   "VCMA",
+   "VCMB"
+  ]
+ }
+}

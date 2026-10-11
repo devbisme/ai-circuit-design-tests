@@ -1,0 +1,94 @@
+== nearest bypass cap to each IC supply pin (mm)
+U101 max (6.5, '9', '', 'VEE', 'C110') | min 3.1 | >5mm: 1 / 4
+U102 max (17.7, '2', '', '/ADC/VCMA', 'C301') | min 6.6 | >5mm: 3 / 3
+U201 max (6.5, '9', '', 'VEE', 'C210') | min 3.1 | >5mm: 1 / 4
+U202 max (12.8, '2', '', '/ADC/VCMB', 'C302') | min 6.6 | >5mm: 3 / 3
+U301 max (10.8, '10', '', '+3V0', 'C311') | min 2.7 | >5mm: 11 / 19
+U401 max (9.4, '6', '', '+3V3', 'C402') | min 3.0 | >5mm: 1 / 3
+U402 max (4.3, '5', '', '+1V2', 'C404') | min 3.4 | >5mm: 0 / 3
+U403 max (3.7, '1', '', '+5V', 'C410') | min 2.6 | >5mm: 0 / 2
+U404 max (9.8, '6', '', 'VEE', 'C409') | min 4.1 | >5mm: 2 / 3
+U502 max (16.2, '12', '', '/USB/V1V8_FT', 'C508') | min 2.8 | >5mm: 6 / 11
+U503 max (6.9, '8', '', '+3V3', 'C504') | min 4.4 | >5mm: 1 / 2
+U601 max (22.2, '6', '', '+3V3', 'C610') | min 2.9 | >5mm: 14 / 16
+U602 max (14.1, '14', '', '+3V3', 'C614') | min 3.8 | >5mm: 5 / 7
+U603 max (5.4, '3', '', '+3V3', 'C623') | min 1.9 | >5mm: 1 / 3
+X301 max (5.2, '4', '', '+3V0', 'C318') | min 5.2 | >5mm: 2 / 2
+== crystal / caps
+C502 18pF /USB/OSCI nearest IC pad 3.5 mm Y501.1
+C503 18pF /USB/OSCO nearest IC pad 2.7 mm Y501.3
+C401 4.7uF +5V nearest IC pad 3.0 mm U401.3
+C402 22uF +3V3 nearest IC pad 9.4 mm U401.6
+C403 1uF +3V3 nearest IC pad 3.4 mm U402.3
+C404 1uF +1V2 nearest IC pad 4.3 mm U402.5
+C405 2.2uF +5V nearest IC pad 4.1 mm U404.3
+C406 1uF /Power/CFLY_P nearest IC pad 6.2 mm U404.10
+C406 1uF /Power/CFLY_N nearest IC pad 5.5 mm U404.9
+C407 4.7uF /Power/CP_NEG nearest IC pad 4.8 mm U404.5
+C408 2.2uF +4V nearest IC pad 7.9 mm U404.11
+C409 2.2uF VEE nearest IC pad 9.8 mm U404.6
+C410 1uF +5V nearest IC pad 3.7 mm U403.1
+C411 1uF +3V0 nearest IC pad 2.6 mm U403.5
+C103 4.5-20pF /AFE_A/DIV nearest IC pad 13.1 mm U101.3
+C203 4.5-20pF /AFE_B/DIV nearest IC pad 13.1 mm U201.3
+C106 220pF C0G /ADC/AINA_P nearest IC pad 16.5 mm U301.1
+C106 220pF C0G /ADC/AINA_N nearest IC pad 18.5 mm U301.2
+C206 220pF C0G /ADC/AINB_P nearest IC pad 18.0 mm U301.16
+C206 220pF C0G /ADC/AINB_N nearest IC pad 17.0 mm U301.15
+== per-net routing
+/USB/USB_DP {'F.Cu': 17.5, 'B.Cu': 4.5} vias 1 w [0.2, 0.25, 0.28]
+/USB/USB_DM {'F.Cu': 19.5} vias 0 w [0.2, 0.25, 0.28]
+/ADC/AINA_P {'F.Cu': 5.8, 'B.Cu': 15.7} vias 2 w [0.2]
+/ADC/AINA_N {'F.Cu': 6.7, 'B.Cu': 15.5} vias 2 w [0.2]
+/ADC/AINB_P {'F.Cu': 4.6, 'B.Cu': 14.5} vias 2 w [0.2]
+/ADC/AINB_N {'F.Cu': 8.4, 'B.Cu': 14.6} vias 2 w [0.2]
+/AFE_A/FDA_OUTP {'F.Cu': 10.1, 'B.Cu': 5.3} vias 2 w [0.2]
+/AFE_A/FDA_OUTN {'F.Cu': 8.6} vias 0 w [0.2]
+/AFE_B/FDA_OUTP {'F.Cu': 11.6, 'B.Cu': 4.3} vias 2 w [0.2]
+/AFE_B/FDA_OUTN {'F.Cu': 8.6} vias 0 w [0.2]
+/AFE_A/DIV {'F.Cu': 39.1} vias 0 w [0.2]
+/AFE_B/DIV {'F.Cu': 25.5, 'B.Cu': 10.8} vias 3 w [0.2]
+/ADC/VCMA {'F.Cu': 8.7, 'B.Cu': 31.6} vias 3 w [0.2]
+/ADC/VCMB {'F.Cu': 6.1, 'B.Cu': 36.6} vias 3 w [0.2]
+/ADC/ADC_CLK {'F.Cu': 2.3, 'B.Cu': 8.6} vias 2 w [0.2]
+/ADC/OSC_OUT {'F.Cu': 13.4} vias 0 w [0.15, 0.2]
+CLK_10M {'F.Cu': 2.5, 'B.Cu': 22.1} vias 2 w [0.2]
+FT_CLK {'F.Cu': 2.9, 'B.Cu': 22.3} vias 2 w [0.2]
+/FPGA_SDRAM/SD_CLK {'F.Cu': 4.7, 'B.Cu': 15.6} vias 2 w [0.2]
+/FPGA_SDRAM/SD_CLK_SRC {'F.Cu': 25.9, 'B.Cu': 8.1} vias 2 w [0.2]
+/USB/OSCI {'F.Cu': 15.0} vias 0 w [0.15, 0.2]
+/USB/OSCO {'F.Cu': 16.4} vias 0 w [0.2]
+/Power/SW {'F.Cu': 4.1} vias 0 w [0.3, 0.4]
++5V {'F.Cu': 77.3, 'B.Cu': 60.6} vias 2 w [0.4]
++4V {'F.Cu': 121.1, 'B.Cu': 51.6} vias 5 w [0.3, 0.4]
+VEE {'F.Cu': 109.5} vias 0 w [0.25, 0.3, 0.4]
++3V0 {'F.Cu': 85.3, 'B.Cu': 29.7} vias 5 w [0.25, 0.3, 0.4]
++1V2 {'F.Cu': 133.3, 'B.Cu': 65.3} vias 9 w [0.3, 0.4]
+/USB/VBUS {'F.Cu': 21.9, 'B.Cu': 2.4} vias 2 w [0.25, 0.4]
+== min track width count Counter({0.2: 2111, 0.4: 317, 0.3: 32, 0.28: 16, 0.15: 14, 0.25: 11})
+== silk line widths Counter({0.12: 463})
+== ref text Counter({(1.0, 0.0, True, 'F.Silkscreen'): 174})
+edge 49.975 49.975 190.025 140.025
+J101 BNC pos 62.7 70.0 rot 90.0 side F crtyd x 28.9 65.4 y 62.1 77.9 attr 0
+J201 BNC pos 62.7 112.0 rot 90.0 side F crtyd x 28.9 65.4 y 104.1 119.9 attr 0
+J501 USB_B pos 125.0 65.6 rot 90.0 side F crtyd x 117.9 134.6 y 50.0 67.6 attr 0
+J601 EXP pos 120.0 136.0 rot 90.0 side F crtyd x 118.2 132.0 y 131.6 137.8 attr 0
+H1 MountingHole_3.2mm_M3 pos 54.0 54.0 rot 0.0 side F crtyd x 50.5 57.5 y 50.5 57.5 attr 0
+H2 MountingHole_3.2mm_M3 pos 186.0 54.0 rot 0.0 side F crtyd x 182.5 189.5 y 50.5 57.5 attr 0
+H3 MountingHole_3.2mm_M3 pos 54.0 136.0 rot 0.0 side F crtyd x 50.5 57.5 y 132.5 139.5 attr 0
+H4 MountingHole_3.2mm_M3 pos 186.0 136.0 rot 0.0 side F crtyd x 182.5 189.5 y 132.5 139.5 attr 0
+U301 LTC2290CUP pos 116.0 91.0 rot 0.0 side F crtyd x 110.8 121.2 y 85.8 96.2 attr 0
+U601 ICE40HX4K-TQ144 pos 142.0 92.0 rot 0.0 side F crtyd x 130.3 153.7 y 80.3 103.7 attr 0
+U602 W9812G6KH-6 pos 169.0 93.0 rot 0.0 side F crtyd x 162.2 175.8 y 81.6 104.4 attr 0
+U502 FT2232HL pos 152.0 67.0 rot 0.0 side F crtyd x 145.3 158.7 y 60.3 73.7 attr 0
+U101 ADA4817-1ARD pos 90.0 70.0 rot 0.0 side F crtyd x 86.3 93.7 y 67.3 72.7 attr 0
+U201 ADA4817-1ARD pos 90.0 112.0 rot 0.0 side F crtyd x 86.3 93.7 y 109.3 114.7 attr 0
+U102 THS4521IDGK pos 104.0 70.0 rot 0.0 side F crtyd x 100.8 107.2 y 68.2 71.8 attr 0
+U202 THS4521IDGK pos 104.0 112.0 rot 0.0 side F crtyd x 100.8 107.2 y 110.2 113.8 attr 0
+X301 SiT8008BI-22-30E-10.000000 pos 117.0 101.0 rot 0.0 side F crtyd x 114.9 119.1 y 99.2 102.8 attr 0
+Y501 12MHz pos 141.0 57.0 rot 0.0 side F crtyd x 138.9 143.1 y 55.2 58.8 attr 0
+U401 TPS62160DGK pos 167.0 122.0 rot 0.0 side F crtyd x 163.8 170.2 y 120.2 123.8 attr 0
+U404 LM27762DSSR pos 85.0 92.0 rot 0.0 side F crtyd x 83.5 86.5 y 90.2 93.8 attr 0
+U403 LP5907MFX-3.0 pos 100.0 88.0 rot 0.0 side F crtyd x 97.9 102.1 y 86.3 89.7 attr 0
+U402 TLV75512PDBV pos 167.0 129.0 rot 0.0 side F crtyd x 164.9 169.1 y 127.3 130.7 attr 0
+mask exp 0.05 min web 0.0

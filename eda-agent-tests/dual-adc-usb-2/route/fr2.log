@@ -1,0 +1,48 @@
+2026-10-11 10:09:30.083 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+2026-10-11 10:09:31.180 INFO   Opening 'dual_adc.dsn'...
+2026-10-11 10:09:31.538 INFO   [4521DB\916613] Loading board file 'dual_adc.dsn'...
+2026-10-11 10:09:31.733 WARN   Power-plane validation failed:
+- Dedicated power layer 'In1.GND' has no conduction areas defined.
+- Dedicated power layer 'In2.PWR' has no conduction areas defined.
+
+Proper Definition and Best Practices for Power Planes:
+1. What Belongs on a Power Plane:
+   - Solid Copper Pours: A single, uninterrupted sheet of copper assigned to one voltage (e.g., +3.3V).
+   - Split Planes: Multiple distinct voltage zones divided by thin isolation gaps (puzzle pieces).
+   - Vias and Anti-Pads: Plated holes passing through the board, surrounded by circular voids (anti-pads) to prevent shorting.
+   - Thermal Reliefs: Spoked connections for vias or pins that connect to the plane, facilitating soldering.
+2. Why Signal Wires/Traces are Banned:
+   - Destroyed Return Paths: High-speed signals on adjacent layers couple to the solid plane below/above as return paths. Crossing a trace gap detours return currents, causing severe EMI and signal integrity issues.
+   - Compromised Power Delivery: Power planes should provide the lowest impedance path. Routing traces chops up the copper, creating bottleneck restrictions and voltage drops.
+
+2026-10-11 10:09:31.766 INFO   New version available: v2.5.0
+2026-10-11 10:09:36.985 INFO   [4521DB\916613] Starting routing of 'dual_adc' on 1 thread...
+2026-10-11 10:09:37.075 INFO   [4521DB\916613] Fanout stage started on board '1edbe7dbe80a3c37c5d80904aeeccc35' with 473 of 747 SMD pins needing fanout (0 already connected, 274 netless).
+2026-10-11 10:09:40.922 INFO   [4521DB\916613] Fanout pass #1 on board 'ecf9677c17aaf09c11dac348aa0cd7ce' completed in 3.76 seconds with 129 SMD pins fanouted, 309 not routed, 0 insert errors, +4 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-10-11 10:09:44.322 INFO   [4521DB\916613] Fanout pass #2 on board '95b598b3d03dec7cc82fa8f86000f155' completed in 3.38 seconds with 18 SMD pins fanouted, 345 not routed, 0 insert errors, +1 extra via (0 SMD pins still to check in pass, ripup costs=200).
+2026-10-11 10:09:47.619 INFO   [4521DB\916613] Fanout pass #3 on board 'ee7c100ab24d10d33cd4b6d06cbbc293' completed in 3.28 seconds with 7 SMD pins fanouted, 354 not routed, 0 insert errors, +1 extra via (0 SMD pins still to check in pass, ripup costs=300).
+2026-10-11 10:09:50.855 INFO   [4521DB\916613] Fanout pass #4 on board '28f13e422033bbee514cede62f9f861b' completed in 3.22 seconds with 8 SMD pins fanouted, 351 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-10-11 10:09:53.953 INFO   [4521DB\916613] Fanout pass #5 on board 'a1e782474771d5b1d54ae843bed4bd95' completed in 3.08 seconds with 2 SMD pins fanouted, 350 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-10-11 10:09:57.040 INFO   [4521DB\916613] Fanout pass #6 on board '51a0f555d208f8c62a8a5d0f294ae1ec' completed in 3.07 seconds with 2 SMD pins fanouted, 350 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-10-11 10:10:00.126 INFO   [4521DB\916613] Fanout pass #7 on board '2fdb3ce5f04d953bb744035ac596f9c2' completed in 3.07 seconds with 2 SMD pins fanouted, 350 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=700).
+2026-10-11 10:10:03.208 INFO   [4521DB\916613] Fanout pass #8 on board 'bdfa2dc1e1ae65f56e32a8730dfbcea4' completed in 3.06 seconds with 2 SMD pins fanouted, 350 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=800).
+2026-10-11 10:10:03.208 INFO   Fanout stopped after 8 passes: no progress for 3 consecutive passes.
+2026-10-11 10:10:03.250 INFO   [4521DB\916613] Fanout stage completed: started with 473 total SMD pins, completed in 26.11 seconds, escaped pins: 196/473 (41.4%), using 25.88 total CPU seconds, 104.90 GB total allocated, and 525.3 MB peak heap usage.
+2026-10-11 10:10:03.267 INFO   [4521DB\916613] Auto-routing stage started on board 'bdfa2dc1e1ae65f56e32a8730dfbcea4' for 175 unrouted items.
+2026-10-11 10:10:36.708 WARN   BasicBoard.normalizeTraces: reached 2000 iterations for net 'GND' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-10-11 10:12:49.668 INFO   [4521DB\916613] Auto-routing pass #1 on board 'bdfa2dc1e1ae65f56e32a8730dfbcea4' was completed in 166.24 seconds with score 369.41 (139 unrouted and 254 violations), using 189.11 CPU seconds and the job allocated 831.42 GB of memory so far.
+2026-10-11 10:14:43.106 INFO   [4521DB\916613] Auto-routing pass #2 on board 'b7662ac6e296253bf0e81c70a7c5c4d3' was completed in 113.14 seconds with score 412.60 (126 unrouted and 254 violations), using 301.07 CPU seconds and the job allocated 1311.71 GB of memory so far.
+2026-10-11 10:15:45.963 INFO   [4521DB\916613] Auto-routing pass #3 on board '8a5ba497696112b6c497e22c9ee5fcaf' was completed in 62.53 seconds with score 460.44 (112 unrouted and 252 violations), using 362.22 CPU seconds and the job allocated 1597.47 GB of memory so far.
+2026-10-11 10:16:54.309 INFO   [4521DB\916613] Auto-routing pass #4 on board 'e447e7e93fe3bcc2744df9f8a64637bc' was completed in 68.01 seconds with score 505.62 (98 unrouted and 254 violations), using 430.07 CPU seconds and the job allocated 1900.61 GB of memory so far.
+2026-10-11 10:18:05.062 INFO   [4521DB\916613] Auto-routing pass #5 on board 'd459f7cb4db1cc2e5e36855d921917b9' was completed in 70.40 seconds with score 543.49 (87 unrouted and 252 violations), using 498.89 CPU seconds and the job allocated 2191.90 GB of memory so far.
+2026-10-11 10:19:18.110 INFO   [4521DB\916613] Auto-routing pass #6 on board '54a56c1e17a8ec5c69744d563ec57026' was completed in 72.68 seconds with score 570.07 (79 unrouted and 252 violations), using 570.75 CPU seconds and the job allocated 2489.66 GB of memory so far.
+2026-10-11 10:20:41.179 INFO   [4521DB\916613] Auto-routing pass #7 on board '0349f4eb1877c579cf89a59edd26ecf4' was completed in 82.68 seconds with score 563.43 (81 unrouted and 252 violations), using 652.38 CPU seconds and the job allocated 2814.90 GB of memory so far.
+2026-10-11 10:22:02.399 INFO   [4521DB\916613] Auto-routing pass #8 on board '0349f4eb1877c579cf89a59edd26ecf4' was completed in 0.00 seconds with score 570.07 (79 unrouted and 252 violations), using 733.08 CPU seconds and the job allocated 3143.75 GB of memory so far.
+2026-10-11 10:23:11.362 WARN   BasicBoard.normalizeTraces: reached 2000 iterations for net 'GND' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-10-11 10:24:30.661 INFO   [4521DB\916613] Auto-routing pass #9 on board '0349f4eb1877c579cf89a59edd26ecf4' was completed in 148.06 seconds with score 570.07 (79 unrouted and 252 violations), using 879.22 CPU seconds and the job allocated 3880.15 GB of memory so far.
+2026-10-11 10:25:58.028 INFO   [4521DB\916613] Auto-routing pass #10 on board 'c058778cc05aca143909d74b60d36b7d' was completed in 87.00 seconds with score 580.04 (76 unrouted and 252 violations), using 964.73 CPU seconds and the job allocated 4216.33 GB of memory so far.
+2026-10-11 10:27:21.132 INFO   [4521DB\916613] Auto-routing pass #11 on board '7e5663d8a65f00b3780201258a650c28' was completed in 82.73 seconds with score 586.68 (74 unrouted and 252 violations), using 1046.12 CPU seconds and the job allocated 4536.90 GB of memory so far.
+2026-10-11 10:28:56.974 INFO   [4521DB\916613] Auto-routing pass #12 on board 'ad38fe9dfc74fedf9c6c1931d5d2e8de' was completed in 95.47 seconds with score 606.61 (68 unrouted and 252 violations), using 1140.26 CPU seconds and the job allocated 4898.20 GB of memory so far.
+2026-10-11 10:30:18.162 INFO   [4521DB\916613] Auto-routing pass #13 on board '00eac2844e596f1e0c427bbdffdd5f15' was completed in 80.81 seconds with score 623.22 (63 unrouted and 252 violations), using 1219.83 CPU seconds and the job allocated 5205.48 GB of memory so far.
+2026-10-11 10:31:46.016 INFO   [4521DB\916613] Auto-routing pass #14 on board 'e98c353880a3809307a0a07aa4b2e983' was completed in 87.46 seconds with score 619.90 (64 unrouted and 252 violations), using 1306.14 CPU seconds and the job allocated 5529.97 GB of memory so far.
+2026-10-11 10:33:28.269 INFO   [4521DB\916613] Auto-routing pass #15 on board 'b03b68231ad4262fd08b82e5fc1f8ce4' was completed in 101.86 seconds with score 609.94 (67 unrouted and 252 violations), using 1406.07 CPU seconds and the job allocated 5898.66 GB of memory so far.
