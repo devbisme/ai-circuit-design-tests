@@ -1,0 +1,60 @@
+{
+  "source": "/home/devb/projects/AI/ai-circuit-design-tests/kicad-harness-tests/generate-1/dual_adc/dual_adc.kicad_sch",
+  "clean": false,
+  "violations": {
+    "total": 3,
+    "by_type": [
+      {
+        "type": "pin_not_driven",
+        "count": 2,
+        "truncated": false,
+        "samples": [
+          {
+            "description": "Input pin not driven by any Output pins",
+            "severity": "error",
+            "at": [
+              {
+                "desc": "Symbol U14 Pin 45 [EECS, Input, Line]",
+                "x": 0.3429,
+                "y": 0.7366
+              }
+            ]
+          },
+          {
+            "description": "Input pin not driven by any Output pins",
+            "severity": "error",
+            "at": [
+              {
+                "desc": "Symbol U14 Pin 44 [EECLK, Input, Line]",
+                "x": 0.3429,
+                "y": 0.762
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "power_pin_not_driven",
+        "count": 1,
+        "truncated": false,
+        "samples": [
+          {
+            "description": "Input Power pin not driven by any Output Power pins",
+            "severity": "error",
+            "at": [
+              {
+                "desc": "Symbol U14 Pin 3 [VPHY, Power input, Line]",
+                "x": 0.5207,
+                "y": 0.3302
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "excluded": {
+    "total": 0,
+    "by_type": []
+  }
+}
