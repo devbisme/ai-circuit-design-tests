@@ -49,6 +49,7 @@ For a quick look at what a run produced, start with its `executive_summary.md`.
 | [`kicad-mcp-pro-tests/`](kicad-mcp-pro-tests/) | [kicad-mcp-pro](https://github.com/oaslananka/kicad-mcp-pro) | Hybrid |
 | [`eda-agent-tests/`](eda-agent-tests/) | [eda-agent](https://github.com/salitronic/eda-agent) | Hybrid |
 | [`kicad-ai-assistant-tests/`](kicad-ai-assistant-tests/) | [KiCad-AI-Assistant](https://github.com/paul356/KiCad-AI-Assistant) | Hybrid |
+| [`kicad-harness-tests/`](kicad-harness-tests/) | [kicad-harness](https://github.com/zxkmm/kicad-harness) | Hybrid |
 
 Each generator's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.
@@ -72,8 +73,9 @@ slate.
 | [kicad-mcp-pro 2](kicad-mcp-pro-tests/dual-adc-usb-2/) | Design tool, gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $19.42 |
 | [eda-agent 2](eda-agent-tests/dual-adc-usb-2/) | Design tool (KiCad backend), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $18.47 |
 | [KiCad-AI-Assistant 2](kicad-ai-assistant-tests/dual-adc-usb-2/) | Design tool (kcaa MCP server), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $19.38 |
+| [kicad-harness 2](kicad-harness-tests/generate-1/) | Checks, lookups and renders (`kh` CLI); Claude's scripts wrote the schematic, placed and finished routing | Routed 4-layer board, 0 ERC/DRC errors | $10.87 |
 
-These six runs used the prompt with an added line giving the KiCad 10 executable's path.
+These seven runs used the prompt with an added line giving the KiCad 10 executable's path.
 The version without that line was used for SKiDL Skills runs 5–9, Konnect run 1 and
 Copperhead run 1.
 
@@ -86,6 +88,7 @@ Copperhead run 1.
 | [kicad-mcp-pro 1](kicad-mcp-pro-tests/dual-adc-usb-1/) | $2.24 |
 | [eda-agent 1](eda-agent-tests/dual-adc-usb-1/) | $3.43 |
 | [KiCad-AI-Assistant 1](kicad-ai-assistant-tests/dual-adc-usb-1/) | $3.71 |
+| [kicad-harness 1](kicad-harness-tests/analyze-1/) | $3.02 |
 
 The prompts differed between these runs, so they did not ask for exactly the same things.
 Each tool's `README.md` lists its prompts and findings.
