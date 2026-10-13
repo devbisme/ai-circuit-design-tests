@@ -1,0 +1,58 @@
+Qty,Value,Footprint,References,Description
+1,4.7n,Capacitor_SMD:C_0603_1608Metric,C1,shield RF tie (250 V)
+6,4.7u,Capacitor_SMD:C_0805_2012Metric,C2 C4 C15 C16 C502 C504,+5V bulk (keep total VBUS C ~10 uF)
+1,22p,Capacitor_SMD:C_0603_1608Metric,C3,FB feed-forward
+2,22u,Capacitor_SMD:C_0805_2012Metric,C5 C6,buck output
+6,1u,Capacitor_SMD:C_0603_1608Metric,C7 C8 C9 C10 C13 C14,LDO in
+7,10u,Capacitor_SMD:C_0805_2012Metric,C11 C204 C304 C313 C316 C318 C407,
+58,100n,Capacitor_SMD:C_0603_1608Metric,C12 C17 C103 C104 C108 C109 C123 C124 C128 C129 C200 C201 C202 C203 C205 C206 C209 C210 C211 C214 C215 C216 C217 C300 C301 C302 C303 C305 C306 C307 C308 C309 C310 C311 C312 C314 C315 C317 C319 C320 C321 C400 C401 C402 C403 C404 C405 C406 C503 C505 C506 C507 C508 C509 C510 C511 C512 C513,
+2,15p C0G 100V,Capacitor_SMD:C_0805_2012Metric,C100 C120,attenuator top comp
+2,120p C0G,Capacitor_SMD:C_0603_1608Metric,C101 C121,attenuator bottom comp
+2,5-30p,Capacitor_SMD:C_Trimmer_Murata_TZC3,C102 C122,compensation trim (adjust for flat 1 kHz square wave)
+4,47p C0G,Capacitor_SMD:C_0603_1608Metric,C105 C106 C125 C126,MFB C2 (signal leg)
+2,220p C0G,Capacitor_SMD:C_0603_1608Metric,C107 C127,MFB C1 (differential)
+2,470p C0G,Capacitor_SMD:C_0603_1608Metric,C110 C130,"differential RC pole, ~3.4 MHz"
+4,2.2u,Capacitor_SMD:C_0603_1608Metric,C207 C208 C212 C213,VCM bypass
+2,18p,Capacitor_SMD:C_0603_1608Metric,C500 C501,crystal load
+2,green,LED_SMD:LED_0603_1608Metric,D1 D4,power LED
+2,BAV99,Package_TO_SOT_SMD:SOT-23,D2 D3,input clamp to analog rails
+1,yellow,LED_SMD:LED_0603_1608Metric,D5,status LED 2
+1,0.5A hold,Fuse:Fuse_1206_3216Metric,F1,"resettable fuse, 500 mA hold"
+2,BLM18PG221,Inductor_SMD:L_0603_1608Metric,FB1 FB2,analog +5 V filter
+1,USB-B,Connector_USB:USB_B_OST_USB-B1HSxx_Horizontal,J1,USB 2.0 type-B receptacle
+2,BNC,Connector_Coaxial:BNC_Amphenol_B6252HB-NPP3G-50_Horizontal,J2 J3,channel A input (scope-probe compatible)
+1,PROG,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,J4,SPI flash programming header (iceprog-style)
+1,2.2u XFL4020-222,Inductor_SMD:L_Coilcraft_XxL4020,L1,buck inductor
+1,1M,Resistor_SMD:R_0603_1608Metric,R1,shield bleed
+1,453k,Resistor_SMD:R_0603_1608Metric,R2,FB top: Vout = 0.6*(1+453k/100k) = 3.32 V
+1,100k,Resistor_SMD:R_0603_1608Metric,R3,FB bottom
+5,1k,Resistor_SMD:R_0603_1608Metric,R4 R12 R32 R57 R58,
+2,909k 0.1%,Resistor_SMD:R_1206_3216Metric,R10 R30,attenuator top
+2,100k 0.1%,Resistor_SMD:R_0603_1608Metric,R11 R31,attenuator bottom
+4,806,Resistor_SMD:R_0603_1608Metric,R13 R16 R33 R36,MFB R1 (signal leg)
+4,768,Resistor_SMD:R_0603_1608Metric,R14 R17 R34 R37,MFB R2 (signal leg)
+4,147,Resistor_SMD:R_0603_1608Metric,R15 R18 R35 R38,MFB R3 (signal leg)
+4,49.9,Resistor_SMD:R_0603_1608Metric,R19 R20 R39 R40,ADC drive / RC pole
+2,100,Resistor_SMD:R_0603_1608Metric,R50 R51,PLL supply filter
+9,10k,Resistor_SMD:R_0603_1608Metric,R52 R53 R54 R61 R63 R64 R65 R71 R72,SS_B high at reset -> SPI master boot
+3,33,Resistor_SMD:R_0603_1608Metric,R55 R73 R74,
+1,22,Resistor_SMD:R_0603_1608Metric,R56,SDRAM clock series term
+1,12k 1%,Resistor_SMD:R_0603_1608Metric,R60,FT232H PHY reference
+1,2.2k,Resistor_SMD:R_0603_1608Metric,R62,EEPROM DO -> EEDATA
+1,20k,Resistor_SMD:R_0603_1608Metric,R70,"MODE = VDD/3: offset binary, DCS on"
+1,USBLC6-2SC6,Package_TO_SOT_SMD:SOT-23-6,U1,USB ESD protection
+1,TLV62569DBV,Package_TO_SOT_SMD:SOT-23-5,U2,5V->3.3V 2 A buck
+1,TLV73312PDBV,Package_TO_SOT_SMD:SOT-23-5,U3,FPGA core 1.2 V LDO
+1,LP5907MFX-3.3,Package_TO_SOT_SMD:SOT-23-5,U4,low-noise ADC supply
+1,TPS60403DBV,Package_TO_SOT_SMD:SOT-23-5,U5,"inverting charge pump, 60 mA"
+2,OPA810IDBVR,Package_TO_SOT_SMD:SOT-23-5,U10 U11,FET-input unity-gain buffer
+2,THS4521IDGK,Package_SO:VSSOP-8_3x3mm_P0.65mm,U12 U13,fully-differential ADC driver / 2-pole MFB
+1,LTC2290CUP,Package_DFN_QFN:QFN-64-1EP_9x9mm_P0.5mm_EP7.15x7.15mm,U20,dual 12-bit 10 Msps ADC
+1,ICE40HX4K-TQ144,Package_QFP:TQFP-144_20x20mm_P0.5mm,U30,"FPGA: capture, SDRAM, USB FIFO"
+1,W25Q32JVSSIQ,Package_SO:SOIC-8_5.3x5.3mm_P1.27mm,U31,FPGA configuration flash (32 Mbit)
+1,MT48LC16M16A2P-6A,Package_SO:TSOP-II-54_22.2x10.16mm_P0.8mm,U40,256 Mbit SDR SDRAM capture buffer
+1,FT232HL,Package_QFP:LQFP-48_7x7mm_P0.5mm,U50,USB 2.0 HS to sync FIFO bridge
+1,93LC56BT-I/OT,Package_TO_SOT_SMD:SOT-23-6,U51,FT232H config EEPROM (sets 245 sync FIFO mode)
+1,ASE-10.000MHZ,Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm,X1,"10 MHz sample clock (dedicated, low jitter)"
+1,ASE-50.000MHZ,Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm,X2,50 MHz system clock
+1,12MHz 10pF,Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm,Y1,FT232H crystal

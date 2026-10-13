@@ -48,6 +48,7 @@ For a quick look at what a run produced, start with its `executive_summary.md`.
 | [`kicad-mcp-server-tests/`](kicad-mcp-server-tests/) | [kicad-mcp-server](https://github.com/Seeed-Studio/kicad-mcp-server) | Hybrid |
 | [`kicad-mcp-pro-tests/`](kicad-mcp-pro-tests/) | [kicad-mcp-pro](https://github.com/oaslananka/kicad-mcp-pro) | Hybrid |
 | [`eda-agent-tests/`](eda-agent-tests/) | [eda-agent](https://github.com/salitronic/eda-agent) | Hybrid |
+| [`kicad-ai-assistant-tests/`](kicad-ai-assistant-tests/) | [KiCad-AI-Assistant](https://github.com/paul356/KiCad-AI-Assistant) | Hybrid |
 
 Each generator's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.
@@ -70,8 +71,9 @@ slate.
 | [kicad-happy 2](kicad-happy-tests/dual-adc-usb-2/) | Reviewer; Claude built the design with SKiDL and scripts | Routed 4-layer board, 0 ERC/DRC errors | $29.37 |
 | [kicad-mcp-pro 2](kicad-mcp-pro-tests/dual-adc-usb-2/) | Design tool, gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $19.42 |
 | [eda-agent 2](eda-agent-tests/dual-adc-usb-2/) | Design tool (KiCad backend), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $18.47 |
+| [KiCad-AI-Assistant 2](kicad-ai-assistant-tests/dual-adc-usb-2/) | Design tool (kcaa MCP server), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $19.38 |
 
-These five runs used the prompt with an added line giving the KiCad 10 executable's path.
+These six runs used the prompt with an added line giving the KiCad 10 executable's path.
 The version without that line was used for SKiDL Skills runs 5–9, Konnect run 1 and
 Copperhead run 1.
 
@@ -83,6 +85,7 @@ Copperhead run 1.
 | [kicad-mcp-server 1](kicad-mcp-server-tests/dual-adc-usb-1/) | $2.05 |
 | [kicad-mcp-pro 1](kicad-mcp-pro-tests/dual-adc-usb-1/) | $2.24 |
 | [eda-agent 1](eda-agent-tests/dual-adc-usb-1/) | $3.43 |
+| [KiCad-AI-Assistant 1](kicad-ai-assistant-tests/dual-adc-usb-1/) | $3.71 |
 
 The prompts differed between these runs, so they did not ask for exactly the same things.
 Each tool's `README.md` lists its prompts and findings.

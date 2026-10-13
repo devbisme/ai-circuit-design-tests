@@ -1,0 +1,63 @@
+== Supply-rail pins: distance to nearest same-net capacitor pad (mm), ICs only
+U101  pins=  4 >5mm=  1 worst=  6.5 (pin 9 VEE -> C110)
+U102  pins=  2 >5mm=  2 worst=  8.3 (pin 7 +4V -> C111)
+U201  pins=  4 >5mm=  1 worst=  6.5 (pin 9 VEE -> C210)
+U202  pins=  2 >5mm=  2 worst=  8.3 (pin 7 +4V -> C211)
+U301  pins=  9 >5mm=  9 worst= 10.8 (pin 10 +3V0 -> C311)
+U401  pins=  3 >5mm=  1 worst=  9.4 (pin 6 +3V3 -> C402)
+U402  pins=  3 >5mm=  0 worst=  4.3 (pin 5 +1V2 -> C404)
+U403  pins=  2 >5mm=  0 worst=  3.7 (pin 1 +5V -> C410)
+U404  pins=  3 >5mm=  2 worst=  9.8 (pin 6 VEE -> C409)
+U502  pins= 11 >5mm=  7 worst= 16.2 (pin 12 /USB/V1V8_FT -> C508)
+U503  pins=  2 >5mm=  1 worst=  6.9 (pin 8 +3V3 -> C504)
+U601  pins= 16 >5mm= 14 worst= 22.2 (pin 6 +3V3 -> C610)
+U602  pins=  7 >5mm=  5 worst= 14.1 (pin 14 +3V3 -> C614)
+U603  pins=  3 >5mm=  1 worst=  5.4 (pin 3 +3V3 -> C623)
+X301  pins=  2 >5mm=  2 worst=  5.2 (pin 1 +3V0 -> C318)
+
+== Critical nets: copper length per layer (mm) and via count
+/ADC/AINA_P                21.4  B.Cu 15.7, F.Cu 5.8  vias=2  widths=[0.2]
+/ADC/AINA_N                22.2  B.Cu 15.5, F.Cu 6.7  vias=2  widths=[0.2]
+/ADC/AINB_P                19.2  B.Cu 14.5, F.Cu 4.6  vias=2  widths=[0.2]
+/ADC/AINB_N                23.0  B.Cu 14.6, F.Cu 8.4  vias=2  widths=[0.2]
+/AFE_A/FDA_OUTP            15.4  B.Cu 5.3, F.Cu 10.1  vias=2  widths=[0.2]
+/AFE_A/FDA_OUTN             8.6  F.Cu 8.6  vias=0  widths=[0.2]
+/AFE_B/FDA_OUTP            16.0  B.Cu 4.3, F.Cu 11.6  vias=2  widths=[0.2]
+/AFE_B/FDA_OUTN             8.6  F.Cu 8.6  vias=0  widths=[0.2]
+/AFE_A/DIV                 39.1  F.Cu 39.1  vias=0  widths=[0.2]
+/AFE_B/DIV                 36.3  B.Cu 10.8, F.Cu 25.5  vias=3  widths=[0.2]
+/AFE_A/IN                  12.4  F.Cu 12.4  vias=0  widths=[0.2]
+/AFE_B/IN                  12.4  F.Cu 12.4  vias=0  widths=[0.2]
+/ADC/VCMA                  40.3  B.Cu 31.6, F.Cu 8.7  vias=3  widths=[0.2]
+/ADC/VCMB                  42.7  B.Cu 36.6, F.Cu 6.1  vias=3  widths=[0.2]
+/USB/USB_DP                22.0  B.Cu 4.5, F.Cu 17.5  vias=1  widths=[0.2, 0.25, 0.28]
+/USB/USB_DM                19.5  F.Cu 19.5  vias=0  widths=[0.2, 0.25, 0.28]
+/USB/OSCI                  15.0  F.Cu 15.0  vias=0  widths=[0.15, 0.2]
+/USB/OSCO                  16.4  F.Cu 16.4  vias=0  widths=[0.2]
+/ADC/OSC_OUT               13.4  F.Cu 13.4  vias=0  widths=[0.15, 0.2]
+/ADC/ADC_CLK               10.9  B.Cu 8.6, F.Cu 2.3  vias=2  widths=[0.2]
+CLK_10M                    24.6  B.Cu 22.1, F.Cu 2.5  vias=2  widths=[0.2]
+FT_CLK                     25.2  B.Cu 22.3, F.Cu 2.9  vias=2  widths=[0.2]
+/FPGA_SDRAM/SD_CLK         20.4  B.Cu 15.6, F.Cu 4.7  vias=2  widths=[0.2]
+/FPGA_SDRAM/SD_CLK_SRC     34.0  B.Cu 8.1, F.Cu 25.9  vias=2  widths=[0.2]
+/Power/SW                   4.1  F.Cu 4.1  vias=0  widths=[0.3, 0.4]
+/Power/FB_3V3              11.1  F.Cu 11.1  vias=0  widths=[0.2]
+/Power/FB_POS              11.9  B.Cu 3.0, F.Cu 8.8  vias=2  widths=[0.2]
+/Power/FB_NEG               7.3  F.Cu 7.3  vias=0  widths=[0.2]
+
+== Track widths used (mm): count
+{0.15: 14, 0.2: 2111, 0.25: 11, 0.28: 16, 0.3: 32, 0.4: 317}
+vias (dia, drill): {(0.6, 0.3): 493}
+
+== Footprint attributes / sides
+{'unspecified': 174} {'F.Cu': 174}
+
+== Silkscreen stroke widths (footprint graphics), count
+{0.12: 463}
+ref text (height, thickness, visible): {(1.0, 0.0, True): 174}
+
+== U101/U201 +4V pads and tracks touching them
+  U201.7 at (92.475,111.365) track ends inside pad: 1
+  U201.8 at (92.475,110.095) track ends inside pad: 2
+  U101.7 at (92.475,69.365) track ends inside pad: 3
+  U101.8 at (92.475,68.095) track ends inside pad: 2

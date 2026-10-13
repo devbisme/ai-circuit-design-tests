@@ -1,0 +1,94 @@
+2026-10-11 15:17:09.763 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+2026-10-11 15:17:10.879 INFO   Opening 'dual_adc.dsn'...
+2026-10-11 15:17:11.268 INFO   [A6901B\68902C] Loading board file 'dual_adc.dsn'...
+2026-10-11 15:17:11.432 INFO   New version available: v2.5.0
+2026-10-11 15:17:11.432 WARN   Power-plane validation failed:
+- Dedicated power layer 'In1.Cu' has no conduction areas defined.
+- Dedicated power layer 'In2.Cu' has no conduction areas defined.
+
+Proper Definition and Best Practices for Power Planes:
+1. What Belongs on a Power Plane:
+   - Solid Copper Pours: A single, uninterrupted sheet of copper assigned to one voltage (e.g., +3.3V).
+   - Split Planes: Multiple distinct voltage zones divided by thin isolation gaps (puzzle pieces).
+   - Vias and Anti-Pads: Plated holes passing through the board, surrounded by circular voids (anti-pads) to prevent shorting.
+   - Thermal Reliefs: Spoked connections for vias or pins that connect to the plane, facilitating soldering.
+2. Why Signal Wires/Traces are Banned:
+   - Destroyed Return Paths: High-speed signals on adjacent layers couple to the solid plane below/above as return paths. Crossing a trace gap detours return currents, causing severe EMI and signal integrity issues.
+   - Compromised Power Delivery: Power planes should provide the lowest impedance path. Routing traces chops up the copper, creating bottleneck restrictions and voltage drops.
+
+2026-10-11 15:17:16.650 INFO   [A6901B\68902C] Starting routing of 'dual_adc' on 4 threads...
+2026-10-11 15:17:16.733 INFO   [A6901B\68902C] Fanout stage started on board 'f46d095b18b64259cc09b5e470121bc4' with 455 of 703 SMD pins needing fanout (31 already connected, 217 netless).
+2026-10-11 15:17:21.205 INFO   [A6901B\68902C] Fanout pass #1 on board '3c11e539b14cc0e1a3aca160c72fb2ac' completed in 4.39 seconds with 164 SMD pins fanouted, 277 not routed, 0 insert errors, +31 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-10-11 15:17:24.283 INFO   [A6901B\68902C] Fanout pass #2 on board 'c74de9e03810cc47bf67de6029d227b6' completed in 3.05 seconds with 19 SMD pins fanouted, 297 not routed, 0 insert errors, +5 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-10-11 15:17:27.151 INFO   [A6901B\68902C] Fanout pass #3 on board 'a6e0dfe2c651d259550836e282839ccf' completed in 2.85 seconds with 8 SMD pins fanouted, 292 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-10-11 15:17:29.980 INFO   [A6901B\68902C] Fanout pass #4 on board 'd2450301d76258f5f0db0260d21e5290' completed in 2.81 seconds with 2 SMD pins fanouted, 296 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-10-11 15:17:32.839 INFO   [A6901B\68902C] Fanout pass #5 on board '06aca7c0c35ef224c66fd05461c63ec4' completed in 2.84 seconds with 2 SMD pins fanouted, 297 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-10-11 15:17:35.547 INFO   [A6901B\68902C] Fanout pass #6 on board 'df55832049173c6283e30447965cc1ff' completed in 2.69 seconds with 1 SMD pin fanouted, 296 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-10-11 15:17:38.256 INFO   [A6901B\68902C] Fanout pass #7 on board 'df55832049173c6283e30447965cc1ff' completed in 2.69 seconds with 0 SMD pins fanouted, 296 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=700).
+2026-10-11 15:17:38.300 INFO   [A6901B\68902C] Fanout stage completed: started with 486 total SMD pins, completed in 21.51 seconds, escaped pins: 221/486 (45.5%), using 21.32 total CPU seconds, 81.93 GB total allocated, and 501.4 MB peak heap usage.
+2026-10-11 15:17:38.319 INFO   [A6901B\68902C] Auto-routing stage started on board 'df55832049173c6283e30447965cc1ff' for 171 unrouted items.
+2026-10-11 15:19:01.912 INFO   [A6901B\68902C] Auto-routing pass #1 on board 'df55832049173c6283e30447965cc1ff' was completed in 83.43 seconds with score 503.87 (102 unrouted and 254 violations), using 103.58 CPU seconds and the job allocated 485.30 GB of memory so far.
+2026-10-11 15:20:22.328 INFO   [A6901B\68902C] Auto-routing pass #2 on board '1d606abe419aeca64c02eeeba85d9870' was completed in 80.09 seconds with score 549.33 (88 unrouted and 254 violations), using 182.36 CPU seconds and the job allocated 841.29 GB of memory so far.
+2026-10-11 15:21:37.413 INFO   [A6901B\68902C] Auto-routing pass #3 on board 'c2e100f0f97c809511d49bc1d947e0d9' was completed in 74.72 seconds with score 627.25 (64 unrouted and 254 violations), using 256.33 CPU seconds and the job allocated 1175.67 GB of memory so far.
+2026-10-11 15:22:52.360 INFO   [A6901B\68902C] Auto-routing pass #4 on board '58f04c14e02a9aebc937d8b275dee54d' was completed in 74.56 seconds with score 653.22 (56 unrouted and 254 violations), using 330.16 CPU seconds and the job allocated 1485.04 GB of memory so far.
+2026-10-11 15:23:54.691 INFO   [A6901B\68902C] Auto-routing pass #5 on board 'dee797928593cb9856027ad64e55ddc6' was completed in 61.94 seconds with score 662.96 (53 unrouted and 254 violations), using 391.28 CPU seconds and the job allocated 1743.96 GB of memory so far.
+2026-10-11 15:25:02.307 WARN   BasicBoard.normalizeTraces: reached 2000 iterations for net 'GND' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-10-11 15:26:10.893 INFO   [A6901B\68902C] Auto-routing pass #6 on board '32e1fbd1149d686a7d2cee44e15b66db' was completed in 135.80 seconds with score 679.19 (48 unrouted and 254 violations), using 526.73 CPU seconds and the job allocated 2500.06 GB of memory so far.
+2026-10-11 15:27:19.920 INFO   [A6901B\68902C] Auto-routing pass #7 on board 'ab007f8b26029563a54a3c3d2ec383de' was completed in 68.61 seconds with score 705.17 (40 unrouted and 254 violations), using 594.42 CPU seconds and the job allocated 2766.89 GB of memory so far.
+2026-10-11 15:28:18.391 INFO   [A6901B\68902C] Auto-routing pass #8 on board 'd9c383227ed47e0e2561803b7d37fbe9' was completed in 58.02 seconds with score 705.17 (40 unrouted and 254 violations), using 651.40 CPU seconds and the job allocated 2992.58 GB of memory so far.
+2026-10-11 15:29:19.603 INFO   [A6901B\68902C] Auto-routing pass #9 on board 'e8f4da9a4c533a8468ca949e4098651f' was completed in 60.77 seconds with score 695.43 (43 unrouted and 254 violations), using 711.36 CPU seconds and the job allocated 3229.46 GB of memory so far.
+2026-10-11 15:30:18.032 INFO   [A6901B\68902C] Auto-routing pass #10 on board 'f4c18c5a17c2f552e1be93a07e3550c0' was completed in 58.00 seconds with score 705.17 (40 unrouted and 254 violations), using 769.36 CPU seconds and the job allocated 3464.52 GB of memory so far.
+2026-10-11 15:31:19.403 INFO   [A6901B\68902C] Auto-routing pass #11 on board 'ac31cff96cd1bc406889cb5f6d1d3945' was completed in 60.93 seconds with score 711.66 (38 unrouted and 254 violations), using 829.33 CPU seconds and the job allocated 3704.11 GB of memory so far.
+2026-10-11 15:32:31.333 INFO   [A6901B\68902C] Auto-routing pass #12 on board '92da332c5d0e14fd9d6bb3e8f40c4643' was completed in 71.49 seconds with score 740.88 (29 unrouted and 254 violations), using 899.92 CPU seconds and the job allocated 3979.31 GB of memory so far.
+2026-10-11 15:33:33.102 INFO   [A6901B\68902C] Auto-routing pass #13 on board 'caf7b48078b05524d5eeaee1643defe2' was completed in 61.31 seconds with score 744.13 (28 unrouted and 254 violations), using 960.63 CPU seconds and the job allocated 4212.54 GB of memory so far.
+2026-10-11 15:34:33.192 INFO   [A6901B\68902C] Auto-routing pass #14 on board '4063244f8dccf77f98f5695c846435e6' was completed in 59.63 seconds with score 763.60 (22 unrouted and 254 violations), using 1019.41 CPU seconds and the job allocated 4439.63 GB of memory so far.
+2026-10-11 15:35:27.100 INFO   [A6901B\68902C] Auto-routing pass #15 on board '10381fa4c0969eea676f5d47680dd08a' was completed in 53.43 seconds with score 760.36 (23 unrouted and 254 violations), using 1072.19 CPU seconds and the job allocated 4638.50 GB of memory so far.
+2026-10-11 15:36:23.678 INFO   [A6901B\68902C] Auto-routing pass #16 on board '25c8cd3163783641204230e74f45b050' was completed in 56.11 seconds with score 763.60 (22 unrouted and 254 violations), using 1127.21 CPU seconds and the job allocated 4845.04 GB of memory so far.
+2026-10-11 15:37:10.138 INFO   [A6901B\68902C] Auto-routing pass #17 on board 'f8cee1910d9b6d37826c1de88eaebc28' was completed in 45.99 seconds with score 757.11 (24 unrouted and 254 violations), using 1173.37 CPU seconds and the job allocated 5026.87 GB of memory so far.
+2026-10-11 15:38:04.462 INFO   [A6901B\68902C] Auto-routing pass #18 on board 'd428a45175a7e75853b1a853dd67ace2' was completed in 53.45 seconds with score 760.36 (23 unrouted and 254 violations), using 1226.42 CPU seconds and the job allocated 5235.88 GB of memory so far.
+2026-10-11 15:38:50.591 INFO   [A6901B\68902C] Auto-routing pass #19 on board '48dc16d0ae4bde523e39c4ec5748e562' was completed in 45.67 seconds with score 770.10 (20 unrouted and 254 violations), using 1271.64 CPU seconds and the job allocated 5411.16 GB of memory so far.
+2026-10-11 15:39:36.864 INFO   [A6901B\68902C] Auto-routing pass #20 on board '8ac8a19f0ea005f7c274f6c147431cc5' was completed in 45.80 seconds with score 776.59 (18 unrouted and 254 violations), using 1316.81 CPU seconds and the job allocated 5578.36 GB of memory so far.
+2026-10-11 15:40:21.330 INFO   [A6901B\68902C] Auto-routing pass #21 on board '79fb70e67347c0658f76be8154245a49' was completed in 43.99 seconds with score 779.84 (17 unrouted and 254 violations), using 1360.97 CPU seconds and the job allocated 5741.70 GB of memory so far.
+2026-10-11 15:41:03.383 INFO   [A6901B\68902C] Auto-routing pass #22 on board 'a3f482614b83212ce36983120fb5b1de' was completed in 41.57 seconds with score 783.08 (16 unrouted and 254 violations), using 1402.14 CPU seconds and the job allocated 5888.92 GB of memory so far.
+2026-10-11 15:41:42.997 INFO   [A6901B\68902C] Auto-routing pass #23 on board '07237f1e470a2ed5190b1d26a1c44ccd' was completed in 39.13 seconds with score 783.08 (16 unrouted and 254 violations), using 1440.19 CPU seconds and the job allocated 6028.39 GB of memory so far.
+2026-10-11 15:42:22.457 INFO   [A6901B\68902C] Auto-routing pass #24 on board '7364ea701cf1af66ac23c455a73e177c' was completed in 38.97 seconds with score 783.08 (16 unrouted and 254 violations), using 1479.28 CPU seconds and the job allocated 6173.84 GB of memory so far.
+2026-10-11 15:43:01.765 INFO   [A6901B\68902C] Auto-routing pass #25 on board '79bb1d2280a53baec3b83612464aecb8' was completed in 38.82 seconds with score 783.08 (16 unrouted and 254 violations), using 1517.55 CPU seconds and the job allocated 6314.60 GB of memory so far.
+2026-10-11 15:43:41.927 INFO   [A6901B\68902C] Auto-routing pass #26 on board 'ce5f88c61b999b35455c6df52e06dcf2' was completed in 39.67 seconds with score 783.08 (16 unrouted and 254 violations), using 1556.80 CPU seconds and the job allocated 6456.39 GB of memory so far.
+2026-10-11 15:44:21.353 INFO   [A6901B\68902C] Auto-routing pass #27 on board 'd69fd48ec693f8ec3a8355a08d5c8d4b' was completed in 38.94 seconds with score 783.08 (16 unrouted and 254 violations), using 1596.04 CPU seconds and the job allocated 6602.36 GB of memory so far.
+2026-10-11 15:45:01.001 INFO   [A6901B\68902C] Auto-routing pass #28 on board '45b43c661025b613e526dd215a7cfbe5' was completed in 39.16 seconds with score 783.08 (16 unrouted and 254 violations), using 1634.31 CPU seconds and the job allocated 6741.48 GB of memory so far.
+2026-10-11 15:45:40.675 INFO   [A6901B\68902C] Auto-routing pass #29 on board 'ecf1c215d11e6d73951107084ff81bd5' was completed in 39.17 seconds with score 783.08 (16 unrouted and 254 violations), using 1673.55 CPU seconds and the job allocated 6885.87 GB of memory so far.
+2026-10-11 15:46:19.788 INFO   [A6901B\68902C] Auto-routing pass #30 on board 'd44947ed995a0b6cf462cba510608dd1' was completed in 38.62 seconds with score 783.08 (16 unrouted and 254 violations), using 1711.81 CPU seconds and the job allocated 7027.93 GB of memory so far.
+2026-10-11 15:46:58.957 INFO   [A6901B\68902C] Auto-routing pass #31 on board 'cdff6409ea16da677746c42318a0f17c' was completed in 38.48 seconds with score 783.08 (16 unrouted and 254 violations), using 1750.08 CPU seconds and the job allocated 7170.90 GB of memory so far.
+2026-10-11 15:47:38.077 INFO   [A6901B\68902C] Auto-routing pass #32 on board 'ebdeda1601b88de1aa4bc461119efd40' was completed in 38.42 seconds with score 783.08 (16 unrouted and 254 violations), using 1788.35 CPU seconds and the job allocated 7314.51 GB of memory so far.
+2026-10-11 15:47:38.185 INFO   [A6901B\68902C] The router's score (783.08) has not improved by more than 0.5 points in the last 10 passes (16 items still unconnected). Stopping the auto-router.
+The following connections could not be routed -- please review your design (e.g. check pad clearances, trace width rules, and available routing space):
+  Net '+3V3' (1 unrouted connection):
+    - via  ->  via
+  Net 'GND' (15 unrouted connections):
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  via
+    - via  ->  R3-2
+    - via  ->  via
+    - via  ->  via
+2026-10-11 15:47:38.612 INFO   [A6901B\68902C] Auto-routing stage completed: started with 308 unrouted nets, completed in 1821.96 seconds, final score: 783.08 (16 unrouted and 254 violations), using 1789.32 total CPU seconds, 7319.94 GB total allocated, and 1969.3 MB peak heap usage.
+2026-10-11 15:47:38.718 INFO   [A6901B\68902C] Starting optimization on 4 threads...
+2026-10-11 15:47:38.718 WARN   [A6901B\68902C] Multi-threaded route optimization is broken and it is known to generate clearance violations. It is highly recommended to use the single-threaded route optimization instead by setting the number of threads to 1 with the '-mt 1' command line argument.
+2026-10-11 15:47:38.933 INFO   [A6901B\68902C] Optimization stage started on board '4ea42e7a02707aa11b9fb703a415007b' with score 783.08 (16 unrouted and 254 violations).
+2026-10-11 15:51:55.907 INFO   [A6901B\68902C] Optimizer pass #1 on board '9d373aedce8a7bbbad5a8b7c390c10c2' was completed in 256.36 seconds with the score of 815.55 (6 unrouted and 254 violations).
+2026-10-11 15:52:29.437 INFO   [A6901B\68902C] Stopping optimization pass #2 early after 50 consecutive items could not be improved.
+2026-10-11 15:52:29.630 INFO   [A6901B\68902C] Optimizer pass #2 on board '52a5d08255e51c73eaf7b1fc6a4dc2f2' was completed in 32.96 seconds with the score of 818.80 (5 unrouted and 254 violations).
+2026-10-11 15:52:29.818 INFO   [A6901B\68902C] Stopping optimizer because the improvement in this pass (0.3981%) is below the threshold (1.00%).
+2026-10-11 15:52:30.012 INFO   [A6901B\68902C] Optimization stage completed: started with score 783.08 (16 unrouted and 254 violations), completed in 290.89 seconds, final score: 818.80 (5 unrouted and 254 violations), using 289.03 total CPU seconds, 1888.89 GB total allocated, and 1611.4 MB peak heap usage.
+2026-10-11 15:52:30.202 INFO   [A6901B\68902C] Optimization was completed in 4 minutes 51.48 seconds with the score of 783.08 (5 unrouted and 254 violations) and an improvement of +4.56%.
+2026-10-11 15:52:30.236 WARN   [A6901B\68902C] Invalid traces after autoroute: 2 traces not 45 degree
+2026-10-11 15:52:30.636 INFO   Saving 'dual_adc.ses'...
