@@ -1,0 +1,114 @@
+{
+  "gate_version": "1.0",
+  "overall_status": "PASS",
+  "summary": {
+    "total_checks": 12,
+    "pass": 12,
+    "warn": 0,
+    "fail": 0,
+    "skip": 0
+  },
+  "checks": [
+    {
+      "category": "routing",
+      "check_id": "routing_completeness",
+      "status": "pass",
+      "message": "All nets routed (237/237)",
+      "details": null
+    },
+    {
+      "category": "bom",
+      "check_id": "mpn_coverage",
+      "status": "pass",
+      "message": "All components have MPNs (239/239)",
+      "details": null
+    },
+    {
+      "category": "bom",
+      "check_id": "footprint_assignment",
+      "status": "pass",
+      "message": "All components have footprints assigned",
+      "details": null
+    },
+    {
+      "category": "dfm",
+      "check_id": "fab_capability",
+      "status": "pass",
+      "message": "DFM tier: standard",
+      "details": null
+    },
+    {
+      "category": "documentation",
+      "check_id": "revision_marking",
+      "status": "pass",
+      "message": "Revision marking found",
+      "details": null
+    },
+    {
+      "category": "documentation",
+      "check_id": "board_name",
+      "status": "pass",
+      "message": "Board name found on silkscreen",
+      "details": null
+    },
+    {
+      "category": "consistency",
+      "check_id": "component_count",
+      "status": "pass",
+      "message": "Schematic (239 placeable) matches PCB (239 footprints)",
+      "details": null
+    },
+    {
+      "category": "consistency",
+      "check_id": "net_count",
+      "status": "pass",
+      "message": "Net counts match (237)",
+      "details": null
+    },
+    {
+      "category": "gerbers",
+      "check_id": "layer_completeness",
+      "status": "pass",
+      "message": "All expected layers present",
+      "details": null
+    },
+    {
+      "category": "gerbers",
+      "check_id": "layer_alignment",
+      "status": "pass",
+      "message": "Layer coordinate ranges consistent",
+      "details": null
+    },
+    {
+      "category": "thermal",
+      "check_id": "thermal_risk",
+      "status": "pass",
+      "message": "Thermal score 100/100 \u2014 no critical/high findings",
+      "details": null
+    },
+    {
+      "category": "emc",
+      "check_id": "emc_risk",
+      "status": "pass",
+      "message": "EMC score 0/100 \u2014 no critical findings",
+      "details": null
+    }
+  ],
+  "elapsed_s": 0.0,
+  "trust_posture": {
+    "trust_level": "mixed",
+    "total_findings": 378,
+    "by_confidence": {
+      "deterministic": 290,
+      "heuristic": 68,
+      "datasheet_backed": 20
+    },
+    "provenance_coverage_pct": 20.5,
+    "per_analyzer": {
+      "schematic": "mixed",
+      "pcb": "high",
+      "thermal": "mixed",
+      "emc": "mixed"
+    }
+  }
+}

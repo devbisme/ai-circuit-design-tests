@@ -1,0 +1,412 @@
+{
+ "stages": {
+  "c1": {
+   "status": "done",
+   "title": "schematic + netlist parity",
+   "summary": {
+    "components": 247,
+    "nets": 217,
+    "sheets": 11,
+    "skidl_erc": {
+     "errors": 0,
+     "warnings": 1
+    },
+    "parity": {
+     "ok": true,
+     "skidl_nets": 217,
+     "kicad_nets": 217,
+     "matched": 217,
+     "details": []
+    },
+    "netclasses": {},
+    "erc": {
+     "errors": 0,
+     "by_type": {
+      "warning:lib_symbol_mismatch": 258,
+      "warning:pin_to_pin": 1
+     },
+     "error_items": []
+    }
+   },
+   "warnings": [],
+   "seconds": 17.6,
+   "finished": "2026-10-17T00:36:20"
+  },
+  "c2": {
+   "status": "done",
+   "title": "board setup",
+   "summary": {
+    "footprints": 239,
+    "nets": 237,
+    "size": [
+     100,
+     80
+    ],
+    "size_estimated": false,
+    "layers": 4,
+    "fab": "jlcpcb/multilayer",
+    "min_track": 0.15,
+    "min_clearance": 0.15
+   },
+   "warnings": [],
+   "seconds": 6.0,
+   "finished": "2026-10-17T00:44:40"
+  },
+  "c3": {
+   "status": "warn",
+   "title": "placement",
+   "summary": {
+    "anchored": 15,
+    "placed": 239,
+    "bottom_side": 0,
+    "unplaced": [],
+    "anchor_overlaps": [],
+    "leftovers": 0,
+    "stretch": {
+     "n": 210,
+     "far": 9,
+     "moved_max": 11.0,
+     "moved_p90": 5.0,
+     "moved_mean": 1.99,
+     "moved_over": {
+      "1": 107,
+      "2": 75,
+      "3": 43,
+      "5": 21,
+      "8": 9
+     },
+     "reach_max": 10.19,
+     "reach_p90": 6.03,
+     "reach_over": {
+      "3": 97,
+      "5": 39,
+      "8": 11,
+      "12": 0
+     },
+     "worst": [
+      [
+       "C101",
+       11.0,
+       10.02,
+       "J101.1"
+      ],
+      [
+       "R703",
+       10.5,
+       9.52,
+       "R704.1"
+      ],
+      [
+       "R305",
+       9.25,
+       8.84,
+       "U301.41"
+      ],
+      [
+       "C102",
+       9.0,
+       9.24,
+       "C101.1"
+      ],
+      [
+       "C103",
+       9.0,
+       8.38,
+       "C101.2"
+      ],
+      [
+       "R307",
+       8.75,
+       10.19,
+       "U301.45"
+      ],
+      [
+       "D501",
+       8.5,
+       8.49,
+       "C501.1"
+      ],
+      [
+       "FB701",
+       8.25,
+       9.99,
+       "C702.1"
+      ]
+     ]
+    },
+    "congestion": {
+     "max": 1.06,
+     "p95": 0.52,
+     "over_1": 2,
+     "over_limit": 2,
+     "crossings": 1626,
+     "ratsnest_mm": 5703
+    }
+   },
+   "warnings": [
+    "J1002.1 (/fpga/TRIG_IN) reaches U1001 36.0 mm away through R1014: anchor that part (or its connector) closer",
+    "J1002.2 (/fpga/TRIG_OUT) reaches U1001 34.3 mm away through R1016: anchor that part (or its connector) closer",
+    "J1001.3 (/fpga/JTAG_TCK) reaches U1001 27.9 mm away: anchor that part (or its connector) closer",
+    "J1001.4 (/fpga/JTAG_TDO) reaches U1001 30.4 mm away: anchor that part (or its connector) closer",
+    "J1001.5 (/fpga/JTAG_TDI) reaches U1001 26.1 mm away: anchor that part (or its connector) closer",
+    "J1001.6 (/fpga/JTAG_TMS) reaches U1001 28.4 mm away: anchor that part (or its connector) closer",
+    "2 placement cells need more routing than they have (max 1.06x); see reports/congestion.json"
+   ],
+   "seconds": 5.8,
+   "finished": "2026-10-17T00:44:46"
+  },
+  "c4": {
+   "status": "warn",
+   "title": "routing",
+   "summary": {
+    "unrouted": 0,
+    "drc_errors": 0,
+    "fanout": {
+     "pads": 289,
+     "vias": 254,
+     "failed": 2
+    },
+    "chain": [
+     {
+      "router": "freerouting",
+      "ok": true,
+      "unrouted": 2,
+      "stats": {
+       "drc_errors": 64,
+       "seconds": 471.5,
+       "tracks": 3115,
+       "vias": 589,
+       "notes": [
+        "+3V3: 94 pins -> 1",
+        "GND: 210 pins -> 1"
+       ]
+      }
+     },
+     {
+      "router": "astar",
+      "ok": true,
+      "unrouted": 0,
+      "stats": {
+       "drc_errors": 0,
+       "history": [
+        "2+64err",
+        32,
+        1,
+        1,
+        0
+       ],
+       "ripups": 1,
+       "repair_removed": 64
+      }
+     }
+    ],
+    "finish": {
+     "dangling_removed": 0,
+     "widened": 0,
+     "pours_added": [
+      "GND@F.Cu",
+      "GND@B.Cu"
+     ],
+     "stitching_vias": 118
+    },
+    "fiducials": 3
+   },
+   "warnings": [
+    "fanout failed for 2 pads: ['U1001.130 (GND)', 'U1001.136 (GND)']",
+    "cleanup disconnected copper (0 -> 3 unconnected); kept the board without cleanup"
+   ],
+   "seconds": 685.5,
+   "finished": "2026-10-17T00:56:16"
+  },
+  "c5": {
+   "status": "warn",
+   "title": "checks",
+   "summary": {
+    "drc": {
+     "errors": 0,
+     "warnings": 50,
+     "unconnected": 0,
+     "parity": 0,
+     "error_items": []
+    },
+    "board": {
+     "board_mm": [
+      100.1,
+      80.1
+     ],
+     "copper_layers": 4,
+     "parts_top": 239,
+     "parts_bottom": 0,
+     "track_mm": 6190,
+     "vias": 714
+    },
+    "decaps": {
+     "checked": 81,
+     "far": [
+      {
+       "ref": "C709",
+       "value": "2.2u",
+       "net": "-4V0A",
+       "nearest": "U702.6",
+       "mm": 6.0
+      },
+      {
+       "ref": "C309",
+       "value": "100n",
+       "net": "/adc/+3V3_ADCIO",
+       "nearest": "U301.43",
+       "mm": 4.7
+      },
+      {
+       "ref": "C311",
+       "value": "100n",
+       "net": "/adc/+3V3_ADCIO",
+       "nearest": "U301.40",
+       "mm": 4.1
+      },
+      {
+       "ref": "C221",
+       "value": "2.2u",
+       "net": "-4V0A",
+       "nearest": "U201.4",
+       "mm": 3.6
+      },
+      {
+       "ref": "C121",
+       "value": "2.2u",
+       "net": "-4V0A",
+       "nearest": "U101.4",
+       "mm": 3.6
+      },
+      {
+       "ref": "C220",
+       "value": "2.2u",
+       "net": "+4V0A",
+       "nearest": "U201.8",
+       "mm": 3.6
+      },
+      {
+       "ref": "C1002",
+       "value": "100n",
+       "net": "+1V2",
+       "nearest": "U1001.19",
+       "mm": 3.4
+      },
+      {
+       "ref": "C1004",
+       "value": "100n",
+       "net": "+1V2",
+       "nearest": "U1001.128",
+       "mm": 3.1
+      }
+     ],
+     "far_bulk": 6
+    },
+    "net_lengths_mm": {},
+    "dfm": [],
+    "analysis": {
+     "schematic": {
+      "by_severity": {
+       "error": 4,
+       "warning": 22,
+       "info": 91
+      },
+      "errors": [
+       "PP-001: IC power pin U101.4 (VS-) has no DC path to a power rail (net '-4V0A')",
+       "PP-001: IC power pin U102.2 (V-) has no DC path to a power rail (net '-4V0A')",
+       "PP-001: IC power pin U201.4 (VS-) has no DC path to a power rail (net '-4V0A')",
+       "PP-001: IC power pin U202.2 (V-) has no DC path to a power rail (net '-4V0A')"
+      ]
+     },
+     "pcb": {
+      "by_severity": {
+       "error": 2,
+       "warning": 28,
+       "info": 144
+      },
+      "errors": [
+       "PM-002: J101 courtyard overhangs board edge by 0.45mm",
+       "PM-002: J201 courtyard overhangs board edge by 0.45mm"
+      ]
+     },
+     "thermal": {
+      "by_severity": {
+       "error": 0,
+       "warning": 0,
+       "info": 5
+      },
+      "errors": []
+     },
+     "emc": {
+      "by_severity": {
+       "error": 15,
+       "warning": 60,
+       "info": 7
+      },
+      "errors": [
+       "GP-001: Signal has significant reference plane gap",
+       "GP-001: Signal has significant reference plane gap",
+       "GP-001: Signal has significant reference plane gap",
+       "GP-001: Signal has significant reference plane gap",
+       "GP-001: Signal has partial reference plane gap"
+      ]
+     },
+     "cross_verify": {
+      "by_severity": null,
+      "errors": []
+     }
+    },
+    "rail_loads": {
+     "U601 +3V3": 0.36,
+     "U602 +1V2": 0.1,
+     "U701 +3V3A": 0.1
+    }
+   },
+   "warnings": [
+    "rail currents: no regulator outputs ['+4V0A', '-4V0A']",
+    "8 decaps farther than 3.0 mm from their IC pin (reports/geometry.json)"
+   ],
+   "seconds": 76.3,
+   "finished": "2026-10-17T00:57:33"
+  },
+  "c6": {
+   "status": "warn",
+   "title": "fab outputs",
+   "summary": {
+    "gerbers": 16,
+    "zip": "fab/dual_adc_10msps-gerbers.zip",
+    "bom": "fab/dual_adc_10msps-bom-jlcpcb.csv",
+    "bom_lines": 72,
+    "cpl": "fab/dual_adc_10msps-cpl-jlcpcb.csv",
+    "placements": 159,
+    "renders": [
+     "pcb_3d_top.png",
+     "pcb_3d_bottom.png"
+    ],
+    "analysis": {
+     "gerbers": {
+      "by_severity": {
+       "error": 0,
+       "warning": 0,
+       "info": 0
+      },
+      "errors": []
+     },
+     "release_gate": {
+      "status": "PASS",
+      "pass": 12,
+      "warn": 0,
+      "fail": 0,
+      "skip": 0,
+      "not_passed": []
+     }
+    }
+   },
+   "warnings": [
+    "rotation offsets applied to 12 parts from an unverified table; check the fab's placement preview"
+   ],
+   "seconds": 10.9,
+   "finished": "2026-10-17T00:57:43"
+  }
+ }
+}

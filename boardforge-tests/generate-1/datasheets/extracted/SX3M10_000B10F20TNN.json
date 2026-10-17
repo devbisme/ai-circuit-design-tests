@@ -1,0 +1,153 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {}
+ },
+ "source": {
+  "manufacturer": "SCTF",
+  "mpn": "SX3M10.000B10F20TNN",
+  "datasheet_revision": "Revision 05/12/2026",
+  "local_path": "SX3M10_000B10F20TNN.pdf",
+  "sha256": "sha256:66a8aa0b6c81314a9590ebdc9d8b4f3e4cff417ad9b23dfba328508b23c8903b",
+  "page_count": 9
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 56
+ },
+ "base": {
+  "family": "crystal oscillator",
+  "description": "10 MHz 3.3 V CMOS XO, 3.2x2.5 mm (3C series)",
+  "package": {
+   "code": "SMD3225-4P (3.2x2.5 mm)",
+   "pin_count": 4,
+   "pitch_mm": null,
+   "body_mm": null,
+   "thermal_pad": false,
+   "evidence": {
+    "page": 3,
+    "section": "3C Series dimensions (image)",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "OE",
+    "type": "input",
+    "description": "Tri-state: high or open = output enabled, low = disabled",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "3C pin function table (image)",
+     "confidence": "medium",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "3C pin function table (image)",
+     "confidence": "medium",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "OUT",
+    "type": "output",
+    "description": "CMOS output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "3C pin function table (image)",
+     "confidence": "medium",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "VDD",
+    "type": "power_in",
+    "description": "Supply",
+    "power_domain": "VDD",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "3C pin function table (image)",
+     "confidence": "medium",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {},
+  "recommended_operating": {
+   "VDD": [
+    {
+     "min": 2.97,
+     "typ": 3.3,
+     "max": 3.63,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Electrical Specifications (image)",
+      "confidence": "medium",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Electrical Specifications (image)",
+      "confidence": "medium",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": []
+}

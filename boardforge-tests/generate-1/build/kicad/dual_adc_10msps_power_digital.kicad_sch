@@ -1,0 +1,3249 @@
+(kicad_sch
+  (version 20250114)
+  (generator "schematizer")
+  (generator_version "0.2.0")
+  (uuid c58a7b7d-2874-5c32-8231-9afbbe4dbc13)
+  (paper "A4")
+  (title_block
+    (title "Dual-channel ±10 V 12-bit 10 MSPS USB ADC board - power_digital")
+    (date "2026-10-17")
+    (company "")
+    (comment 1 "Generated with SKiDL")
+    (comment 2 "")
+    (comment 3 "")
+    (comment 4 ""))
+  (lib_symbols
+    (symbol "Device:C"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "C"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "C"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Unpolarized capacitor"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "C_0_1"
+        (polyline
+          (pts
+            (xy -2.032 0.762)
+            (xy 2.032 0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -2.032 -0.762)
+            (xy 2.032 -0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "C_1_1"
+        (polyline
+          (pts
+            (xy -2.032 0.762)
+            (xy 2.032 0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -2.032 -0.762)
+            (xy 2.032 -0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at 0 3.81 270)
+          (length 2.794)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -3.81 90)
+          (length 2.794)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Device:L"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "L"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "L"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Inductor"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "L_0_1"
+        (arc
+          (start 0 2.54)
+          (mid 0.6323 1.905)
+          (end 0 1.27)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 1.27)
+          (mid 0.6323 0.635)
+          (end 0 0)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 0)
+          (mid 0.6323 -0.635)
+          (end 0 -1.27)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 -1.27)
+          (mid 0.6323 -1.905)
+          (end 0 -2.54)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "L_1_1"
+        (arc
+          (start 0 2.54)
+          (mid 0.6323 1.905)
+          (end 0 1.27)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 1.27)
+          (mid 0.6323 0.635)
+          (end 0 0)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 0)
+          (mid 0.6323 -0.635)
+          (end 0 -1.27)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 0 -1.27)
+          (mid 0.6323 -1.905)
+          (end 0 -2.54)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at 0 3.81 270)
+          (length 1.27)
+          (name "1"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -3.81 90)
+          (length 1.27)
+          (name "2"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Device:LED"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "D"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "LED"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Light emitting diode"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "LED_0_1"
+        (polyline
+          (pts
+            (xy -3.048 -0.762)
+            (xy -4.572 -2.286)
+            (xy -3.81 -2.286)
+            (xy -4.572 -2.286)
+            (xy -4.572 -1.524))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.778 -0.762)
+            (xy -3.302 -2.286)
+            (xy -2.54 -2.286)
+            (xy -3.302 -2.286)
+            (xy -3.302 -1.524))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.27 0)
+            (xy 1.27 0))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.27 -1.27)
+            (xy -1.27 1.27))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 1.27 -1.27)
+            (xy 1.27 1.27)
+            (xy -1.27 0)
+            (xy 1.27 -1.27))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "LED_1_1"
+        (polyline
+          (pts
+            (xy -3.048 -0.762)
+            (xy -4.572 -2.286)
+            (xy -3.81 -2.286)
+            (xy -4.572 -2.286)
+            (xy -4.572 -1.524))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.778 -0.762)
+            (xy -3.302 -2.286)
+            (xy -2.54 -2.286)
+            (xy -3.302 -2.286)
+            (xy -3.302 -1.524))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.27 0)
+            (xy 1.27 0))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -1.27 -1.27)
+            (xy -1.27 1.27))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 1.27 -1.27)
+            (xy 1.27 1.27)
+            (xy -1.27 0)
+            (xy 1.27 -1.27))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at -3.81 0 0)
+          (length 2.54)
+          (name "K"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 3.81 0 180)
+          (length 2.54)
+          (name "A"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Device:R"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "R"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "R"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Resistor"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "R_0_1"
+        (rectangle
+          (start -1.016 -2.54)
+          (end 1.016 2.54)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "R_1_1"
+        (rectangle
+          (start -1.016 -2.54)
+          (end 1.016 2.54)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at 0 3.81 270)
+          (length 1.27)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -3.81 90)
+          (length 1.27)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Regulator_Linear:TLV75712PDBV"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "U"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "TLV75712PDBV"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv757p.pdf"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "1A Low IQ Small Size Low Dropout Voltage Regulator, Fixed Output 1.2V, SOT-23-5"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "TLV75712PDBV_0_1"
+        (rectangle
+          (start -5.08 4.445)
+          (end 5.08 -5.08)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background))))
+      (symbol "TLV75712PDBV_1_1"
+        (rectangle
+          (start -5.08 4.445)
+          (end 5.08 -5.08)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background)))
+        (pin power_in line
+          (at -7.62 2.54 0)
+          (length 2.54)
+          (name "IN"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at 0 -7.62 90)
+          (length 2.54)
+          (name "GND"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin input line
+          (at -7.62 0 0)
+          (length 2.54)
+          (name "EN"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "3"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin no_connect line
+          (at 5.08 0 180)
+          (length 2.54)
+          (hide yes)
+          (name "NC"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "4"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_out line
+          (at 7.62 2.54 180)
+          (length 2.54)
+          (name "OUT"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "5"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Regulator_Switching:TLV62569DBV"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "U"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "TLV62569DBV"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "http://www.ti.com/lit/ds/symlink/tlv62569.pdf"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "High Efficiency Synchronous Buck Converter, Adjustable Output 0.6V-5.5V, 2A, SOT-23-5"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "TLV62569DBV_0_1"
+        (rectangle
+          (start -5.08 5.08)
+          (end 5.08 -5.08)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background))))
+      (symbol "TLV62569DBV_1_1"
+        (rectangle
+          (start -5.08 5.08)
+          (end 5.08 -5.08)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background)))
+        (pin input line
+          (at -7.62 0 0)
+          (length 2.54)
+          (name "EN"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at 0 -7.62 90)
+          (length 2.54)
+          (name "GND"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_out line
+          (at 7.62 2.54 180)
+          (length 2.54)
+          (name "SW"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "3"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at -7.62 2.54 0)
+          (length 2.54)
+          (name "VIN"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "4"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin input line
+          (at 7.62 0 180)
+          (length 2.54)
+          (name "FB"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "5"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:PWR_FLAG"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#FLG"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "PWR_FLAG"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Special symbol for telling ERC where power comes from"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "PWR_FLAG_0_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 1.27)
+            (xy -1.016 1.905)
+            (xy 0 2.54)
+            (xy 1.016 1.905)
+            (xy 0 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "PWR_FLAG_1_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 1.27)
+            (xy -1.016 1.905)
+            (xy 0 2.54)
+            (xy 1.016 1.905)
+            (xy 0 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (pin power_out line
+          (at 0 0 90)
+          (length 0)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:+1V2"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "+1V2"
+        (at 0 3.556 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"+1V2\""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "+1V2_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "+1V2_1_1"
+        (pin power_in line
+          (at 0 0 90)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:+3V3"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "+3V3"
+        (at 0 3.556 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"+3V3\""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "+3V3_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "+3V3_1_1"
+        (pin power_in line
+          (at 0 0 90)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:+5V"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "+5V"
+        (at 0 3.556 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"+5V\""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "+5V_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "+5V_1_1"
+        (pin power_in line
+          (at 0 0 90)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:GND"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -6.35 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "GND"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "GND_0_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 -1.27)
+            (xy 1.27 -1.27)
+            (xy 0 -2.54)
+            (xy -1.27 -1.27)
+            (xy 0 -1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "GND_1_1"
+        (pin power_in line
+          (at 0 0 270)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no)))
+  (symbol
+    (lib_id "Regulator_Switching:TLV62569DBV")
+    (at 35.56 35.56 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a3439c92-fdfe-5796-84f0-3e709e2286f7)
+    (property "Reference" "U601"
+      (at 35.56 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "TLV62569DBVR"
+      (at 35.56 38.1 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+      (at 35.56 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/tlv62569.pdf"
+      (at 35.56 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "High Efficiency Synchronous Buck Converter, Adjustable Output 0.6V-5.5V, 2A, SOT-23-5"
+      (at 35.56 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "TLV62569DBVR"
+      (at 35.56 40.64 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C141836"
+      (at 35.56 41.910000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid fdc8aa98-b83e-58f6-89e0-43fb69016d23))
+    (pin "2"
+      (uuid 3cf1adc3-05f1-58e3-b9fe-f31822b2236e))
+    (pin "3"
+      (uuid 848d9399-cab5-5463-a27c-ac74b2517414))
+    (pin "4"
+      (uuid 1ef13844-5f4d-5453-b3fd-917e71ae3a8f))
+    (pin "5"
+      (uuid ce855f41-9f40-54c1-8068-5cef9a032bee))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "U601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 27.94 35.56)
+      (xy 25.4 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 50189b61-9662-5c5a-bfe2-fe28df024e90))
+  (symbol
+    (lib_id "power:+5V")
+    (at 25.4 35.56 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid c82e0d8c-e46b-57a9-ab77-dea82063f2a7)
+    (property "Reference" "#PWR208"
+      (at 25.4 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+5V"
+      (at 25.4 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 25.4 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 25.4 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 57ce54b9-ad01-5774-b8c0-4776da6925b0))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR208")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 35.56 43.18)
+      (xy 35.56 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid a20f1a67-384b-5ad3-b65e-272914c0f3d0))
+  (symbol
+    (lib_id "power:GND")
+    (at 35.56 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 5097c9d3-3d01-5550-a4d1-e2acfe63fb35)
+    (property "Reference" "#PWR209"
+      (at 35.56 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 35.56 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 35.56 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 35.56 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 00ad5b6c-924f-557a-9946-2a41fc4eae66))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR209")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 43.18 33.02)
+      (xy 45.72 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid cb0c267c-0997-542c-a129-2cd0d7d097ab))
+  (label "SW_3V3"
+    (at 45.72 33.02 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom))
+    (uuid 0ef0eff1-ad4d-56f1-a70d-feaffe449507))
+  (wire
+    (pts
+      (xy 27.94 33.02)
+      (xy 25.4 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 19e736eb-d287-5804-9ccc-e80b13675c7d))
+  (symbol
+    (lib_id "power:+5V")
+    (at 25.4 33.02 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 13f5874b-46b3-599c-af8a-5e62e4c35a6b)
+    (property "Reference" "#PWR210"
+      (at 25.4 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+5V"
+      (at 25.4 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 25.4 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 25.4 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 698367bb-8a49-575f-984a-50fb1936bbd2))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR210")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 43.18 35.56)
+      (xy 45.72 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 9ad959e6-4429-53f7-b8f6-f7bb989321b1))
+  (label "FB_3V3"
+    (at 45.72 35.56 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom))
+    (uuid 3f6f4712-47d4-5a52-8f1c-db06f8513c3d))
+  (symbol
+    (lib_id "Regulator_Linear:TLV75712PDBV")
+    (at 69.85 34.29 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 1a10f8dd-3240-554d-b217-8d7c4bcdd747)
+    (property "Reference" "U602"
+      (at 69.85 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "TLV75712PDBVR"
+      (at 69.85 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+      (at 69.85 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv757p.pdf"
+      (at 69.85 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "1A Low IQ Small Size Low Dropout Voltage Regulator, Fixed Output 1.2V, SOT-23-5"
+      (at 69.85 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "TLV75712PDBVR"
+      (at 69.85 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C1509296"
+      (at 69.85 40.64 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid f6d6947e-7d55-5898-a8b8-b9f5cd07878b))
+    (pin "2"
+      (uuid 23b253ab-23bb-5750-8072-3e3f6fe3f5a6))
+    (pin "3"
+      (uuid 9109a601-ea82-58f8-89f6-8c2edb67495f))
+    (pin "4"
+      (uuid 18713080-e68a-58aa-a852-b95c4427b781))
+    (pin "5"
+      (uuid 446f095a-2660-5ad5-8b24-1d09f411f819))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "U602")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 62.23 31.75)
+      (xy 59.69 31.75))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 852dd2b4-c107-52ad-b9a7-6446f6c42aef))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 59.69 31.75 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid cd4580a1-75f8-506b-bb2b-df5b9ac53d07)
+    (property "Reference" "#PWR211"
+      (at 59.69 30.48 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 59.69 27.94 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 59.69 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 59.69 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 4fcc3c13-3e1d-506a-aee8-ccb849866619))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR211")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 69.85 41.91)
+      (xy 69.85 44.45))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 5c8ef698-f839-5602-8dd1-ab691d683350))
+  (symbol
+    (lib_id "power:GND")
+    (at 69.85 44.45 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 7a05f761-4b5d-5e9e-beeb-6bf2ded5f57f)
+    (property "Reference" "#PWR212"
+      (at 69.85 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 69.85 40.64 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 69.85 44.45 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 69.85 44.45 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid a8eb9f26-73ce-5564-8c84-ef509a410ac9))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR212")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 62.23 34.29)
+      (xy 59.69 34.29))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 844080d5-56a8-5012-9aad-e2c208549175))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 59.69 34.29 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 36408049-86c7-5564-b2f2-77343acd1cbe)
+    (property "Reference" "#PWR213"
+      (at 59.69 33.019999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 59.69 30.48 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 59.69 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 59.69 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid b476a1d9-91d5-5042-8afb-a6d50fd1de0e))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR213")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 77.47 31.75)
+      (xy 80.01 31.75))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 8d993736-418d-52d3-8ee6-28b42e141bed))
+  (symbol
+    (lib_id "power:+1V2")
+    (at 80.01 31.75 270.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 340ce245-0274-556b-b06c-9cd6a55d8cc5)
+    (property "Reference" "#PWR214"
+      (at 80.01 30.48 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+1V2"
+      (at 80.01 27.94 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 80.01 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 80.01 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7d20720d-2b8b-53b4-bf45-29ca701747fe))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR214")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 90.17 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid f56a904c-abed-5fb6-93a2-778cfe13cc6d)
+    (property "Reference" "C601"
+      (at 90.17 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "4.7u"
+      (at 90.17 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 90.17 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 90.17 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 90.17 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "CL10A475KO8NNNC"
+      (at 90.17 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C19666"
+      (at 90.17 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 867174af-ca53-505b-b1fe-7ae428405e92))
+    (pin "2"
+      (uuid 7fbba8ca-4de3-5fd3-9b9f-a4dd90bad817))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 90.17 35.56)
+      (xy 90.17 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid a709276d-eddc-5438-afe5-d05f6e982fc2))
+  (symbol
+    (lib_id "power:+5V")
+    (at 90.17 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid cbecd92e-4361-5081-b3b0-a96fb843aa18)
+    (property "Reference" "#PWR215"
+      (at 90.17 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+5V"
+      (at 90.17 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 90.17 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 90.17 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 8302893f-9418-51e6-b16f-3c41e80a88ad))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR215")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 90.17 43.18)
+      (xy 90.17 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 4ce34952-5ad1-5f90-adc1-382fdd8ef65b))
+  (symbol
+    (lib_id "power:GND")
+    (at 90.17 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 91c2d61e-462a-53a6-90b4-3d39d636ec0b)
+    (property "Reference" "#PWR216"
+      (at 90.17 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 90.17 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 90.17 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 90.17 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 4a0a5b88-2f97-5a19-b726-b6d39001b49c))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR216")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 99.06 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid cb6bbf19-ca56-566e-9756-d744a350069c)
+    (property "Reference" "C602"
+      (at 99.06 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "10u"
+      (at 99.06 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 99.06 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 99.06 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 99.06 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "CL10A106KP8NNNC"
+      (at 99.06 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C19702"
+      (at 99.06 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid a4621329-4889-5722-9f84-717b56c85fff))
+    (pin "2"
+      (uuid db9220df-9cb5-5afe-ba47-63676371abe5))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C602")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 99.06 35.56)
+      (xy 99.06 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid c93f7c17-a15b-5c07-8e56-8a4516fd5eef))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 99.06 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 34a24db4-c629-5e72-85c9-fc673229fe91)
+    (property "Reference" "#PWR217"
+      (at 99.06 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 99.06 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 99.06 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 99.06 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid a9ad94e6-7587-51ee-a8a2-3d27c54a2415))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR217")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 99.06 43.18)
+      (xy 99.06 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 5acc1a0e-60dd-539b-a582-cae4fe0e3a17))
+  (symbol
+    (lib_id "power:GND")
+    (at 99.06 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid d74986c6-841e-5bd8-86fd-a0f7563bf3b1)
+    (property "Reference" "#PWR218"
+      (at 99.06 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 99.06 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 99.06 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 99.06 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 73a27cc1-1933-5b88-941a-444d47369b43))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR218")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 109.22 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 9ea019be-3ecd-5020-8763-bb58651fa2a7)
+    (property "Reference" "C603"
+      (at 109.22 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "10u"
+      (at 109.22 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 109.22 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 109.22 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 109.22 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "CL10A106KP8NNNC"
+      (at 109.22 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C19702"
+      (at 109.22 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 9614374c-ceb0-57b8-ad52-6be4ee3e844e))
+    (pin "2"
+      (uuid e60ee3ab-54c3-543e-b2e6-a0c0420b8d70))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C603")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 109.22 35.56)
+      (xy 109.22 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 476e6b24-40fc-571f-9f88-5cfae3542af5))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 109.22 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid cea9d312-07d7-59a0-a64d-b0eb44359557)
+    (property "Reference" "#PWR219"
+      (at 109.22 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 109.22 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 109.22 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 109.22 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid c4c7aa39-13d4-5384-894c-cad85170e8fb))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR219")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 109.22 43.18)
+      (xy 109.22 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid d97c8c58-f5a0-5d54-a3ce-f79dd9d0785b))
+  (symbol
+    (lib_id "power:GND")
+    (at 109.22 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 0b59dbe4-c320-55bd-a2c8-9eb285e92bc0)
+    (property "Reference" "#PWR220"
+      (at 109.22 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 109.22 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 109.22 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 109.22 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 803e1245-49fe-5628-bb4b-bf8b47305abc))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR220")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 118.11 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid dccb7b3e-37e2-5b88-85fe-07f45426d4d0)
+    (property "Reference" "C604"
+      (at 118.11 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "6.8p"
+      (at 118.11 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 118.11 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 118.11 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 118.11 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "0402CG6R8C500NT"
+      (at 118.11 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C1576"
+      (at 118.11 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid d15ec466-570f-552c-9f42-4ebaa2d59508))
+    (pin "2"
+      (uuid c5716a3c-3e57-560d-869f-0028f65c531d))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C604")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 118.11 35.56)
+      (xy 118.11 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid e9ddae33-620a-5f8d-9817-08754ab4aef0))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 118.11 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 0b51daa7-f816-50a1-9a9d-a9c9a9f97893)
+    (property "Reference" "#PWR221"
+      (at 118.11 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 118.11 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 118.11 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 118.11 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7e93d7c6-a979-5b84-b194-a1d839fd3569))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR221")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 118.11 43.18)
+      (xy 118.11 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid e0a2cf04-cfcf-50be-b9c8-3bf5b044a553))
+  (label "FB_3V3"
+    (at 118.11 45.72 270)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right bottom))
+    (uuid 21ff211a-0b6f-55ff-94cf-0749fac94872))
+  (symbol
+    (lib_id "Device:C")
+    (at 127.0 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 2d3c7f8d-9e18-52e5-ae20-5fcc5f26fc5c)
+    (property "Reference" "C605"
+      (at 127.0 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1u"
+      (at 127.0 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 127.0 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 127.0 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 127.0 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "CL05A105KA5NQNC"
+      (at 127.0 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C52923"
+      (at 127.0 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 6677a270-8118-5d84-8020-457d519629f4))
+    (pin "2"
+      (uuid e8896bc4-677e-5074-981d-88d2c4230a34))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C605")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 127.0 35.56)
+      (xy 127.0 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid d2cebc80-5d58-5007-a93d-1690971188cd))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 127.0 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid e38852a8-306b-5146-9d27-cec4196b62ca)
+    (property "Reference" "#PWR222"
+      (at 127.0 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 127.0 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 127.0 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 127.0 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 80a78f83-4a3e-5c7b-9969-5b36ca5f8ce5))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR222")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 127.0 43.18)
+      (xy 127.0 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 5b4f20c3-df03-588a-96b2-0e3b01b9c5cf))
+  (symbol
+    (lib_id "power:GND")
+    (at 127.0 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid c4c9c017-3ff5-54e9-9935-a04cef60c848)
+    (property "Reference" "#PWR223"
+      (at 127.0 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 127.0 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 127.0 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 127.0 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 63fcad8b-1d76-565d-bac7-888b6a65be06))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR223")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 135.89 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid ba34212c-fcfb-57cb-9d90-c12fa4e5aa48)
+    (property "Reference" "C606"
+      (at 135.89 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1u"
+      (at 135.89 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 135.89 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 135.89 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 135.89 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "CL05A105KA5NQNC"
+      (at 135.89 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C52923"
+      (at 135.89 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid ba7ee0d9-7085-56d3-b0e9-564d65286e5c))
+    (pin "2"
+      (uuid 8451cc41-82ab-5f2e-b804-988427755958))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "C606")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 135.89 35.56)
+      (xy 135.89 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 48c4db94-b27d-55d7-90df-c08d0852d75a))
+  (symbol
+    (lib_id "power:+1V2")
+    (at 135.89 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 09bf3d5c-d9fd-5d09-9f86-096616467104)
+    (property "Reference" "#PWR224"
+      (at 135.89 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+1V2"
+      (at 135.89 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 135.89 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 135.89 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 41106c00-b2a9-5098-aac2-deef95b33d14))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR224")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 135.89 43.18)
+      (xy 135.89 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 5d70ee52-f3fe-5ecb-a7d1-b1c764afc572))
+  (symbol
+    (lib_id "power:GND")
+    (at 135.89 45.72 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 7a9f1577-6889-54bf-9306-b325b80d8b07)
+    (property "Reference" "#PWR225"
+      (at 135.89 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 135.89 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 135.89 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 135.89 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid c0930e25-8233-587f-97c8-85aaf2226488))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR225")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:LED")
+    (at 152.4 31.75 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 125f4a55-7882-5192-ad32-69c9c95a4376)
+    (property "Reference" "D601"
+      (at 152.4 29.21 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "LED_Green"
+      (at 152.4 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "LED_SMD:LED_0603_1608Metric"
+      (at 152.4 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 152.4 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Light emitting diode"
+      (at 152.4 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "PSC-1608U52GC-G4"
+      (at 152.4 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C22371297"
+      (at 152.4 38.1 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid dcb79de5-3df0-55a8-968e-5c17a1a7c2ec))
+    (pin "2"
+      (uuid f6611fe9-b86b-5326-ae67-c24c49069d1b))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "D601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 148.59 31.75)
+      (xy 146.05 31.75))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid cd695aab-e962-5d19-b52f-4d36111e0b5f))
+  (symbol
+    (lib_id "power:GND")
+    (at 146.05 31.75 270.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 48c1a839-d381-5723-a7ba-494e7ea673f4)
+    (property "Reference" "#PWR226"
+      (at 146.05 30.48 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 146.05 27.94 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 146.05 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 146.05 31.75 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid e1b0ab48-fdf7-53f2-ba14-be9a6bb8c3ab))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR226")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 156.21 31.75)
+      (xy 158.75 31.75))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 29cf9cbc-d12a-5bb4-b60b-6ea5f19582dd))
+  (label "LED_PWR"
+    (at 158.75 31.75 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom))
+    (uuid e35bf7d7-3187-59b9-a4ab-ae8c72bf0162))
+  (symbol
+    (lib_id "Device:L")
+    (at 171.45 41.91 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 0d4a1432-105a-5e94-b4c3-9f54fd85af44)
+    (property "Reference" "L601"
+      (at 171.45 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "2.2uH"
+      (at 171.45 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Inductor_SMD:L_1008_2520Metric"
+      (at 171.45 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 171.45 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Inductor"
+      (at 171.45 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "TMS252012ALM-2R2MTAA"
+      (at 171.45 46.989999999999995 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C1017131"
+      (at 171.45 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 36fa1628-a6a6-5ba9-83fa-a2855548ed51))
+    (pin "2"
+      (uuid c3c32549-4a9f-54c5-8ec8-d1554ff1e770))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "L601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 171.45 38.1)
+      (xy 171.45 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid f0e979cc-49ae-5c5e-bd85-a0a1d674a085))
+  (label "SW_3V3"
+    (at 171.45 35.56 90)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom))
+    (uuid 39fa8301-fb1e-5a03-9be0-10234f2b7a59))
+  (wire
+    (pts
+      (xy 171.45 45.72)
+      (xy 171.45 48.26))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 8f47eef6-dae4-5916-81a7-ccfac1808180))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 171.45 48.26 180.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid fa765664-02e3-5873-a37d-ea9e4730f676)
+    (property "Reference" "#PWR227"
+      (at 171.45 46.989999999999995 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 171.45 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 171.45 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 171.45 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 3c2b0a57-f8fb-5436-af5e-2e51bd0487df))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR227")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 177.8 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 057519ab-c47a-5bc7-b05f-1118c89e6b00)
+    (property "Reference" "R601"
+      (at 177.8 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "453k"
+      (at 177.8 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+      (at 177.8 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 177.8 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 177.8 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "0402WGF4533TCE"
+      (at 177.8 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C27009"
+      (at 177.8 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 3b1717da-4f67-570e-a605-77aeef9923ac))
+    (pin "2"
+      (uuid 92780428-4b33-5f91-90aa-de83099a2a56))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "R601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 177.8 35.56)
+      (xy 177.8 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid d17c5e00-cb80-5beb-b0ba-69fb6a60d856))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 177.8 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid ac7ab5b0-c5fc-5188-9db9-812f5b560a5d)
+    (property "Reference" "#PWR228"
+      (at 177.8 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 177.8 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 177.8 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 177.8 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 26e2b27f-b22d-5fd6-9c03-1004ea2a6a3e))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR228")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 177.8 43.18)
+      (xy 177.8 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid a031cbd7-3eb7-5d0c-9166-f2f0e8e5d393))
+  (label "FB_3V3"
+    (at 177.8 45.72 270)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right bottom))
+    (uuid 006fd4c5-45a3-5ff4-92a9-ffee50d1e62b))
+  (symbol
+    (lib_id "Device:R")
+    (at 184.15 41.91 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 50bd1e22-087b-5eaf-ad5e-1e6efbd394fa)
+    (property "Reference" "R602"
+      (at 184.15 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100k"
+      (at 184.15 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+      (at 184.15 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 184.15 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 184.15 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "0402WGF1003TCE"
+      (at 184.15 46.989999999999995 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C25741"
+      (at 184.15 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7df4caac-cc60-534e-a900-f961b3d699aa))
+    (pin "2"
+      (uuid b458fc27-1b9c-5127-98a8-190d6ddbd1a0))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "R602")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 184.15 38.1)
+      (xy 184.15 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 8a726540-a5b1-5e9f-ab40-e467cb6175db))
+  (label "FB_3V3"
+    (at 184.15 35.56 90)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom))
+    (uuid bc84a6b8-bd8a-5b61-9962-692dea0c1d9a))
+  (wire
+    (pts
+      (xy 184.15 45.72)
+      (xy 184.15 48.26))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 8578ce50-230e-5703-b981-48f2953b6a86))
+  (symbol
+    (lib_id "power:GND")
+    (at 184.15 48.26 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a4855a30-8207-5e89-bb70-b21fbb99950a)
+    (property "Reference" "#PWR229"
+      (at 184.15 46.989999999999995 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 184.15 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 184.15 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 184.15 48.26 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 79a6f080-38e2-5396-9497-841bc357c2b4))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR229")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 191.77 39.37 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 29b301a5-b23a-5ef5-956f-0cf72aecb7f3)
+    (property "Reference" "R604"
+      (at 191.77 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1k"
+      (at 191.77 41.91 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+      (at 191.77 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 191.77 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 191.77 39.37 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "MPN" "0402WGF1001TCE"
+      (at 191.77 44.449999999999996 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "LCSC" "C11702"
+      (at 191.77 45.72 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 8bc7bc75-5cc6-56cd-8df6-400f16766624))
+    (pin "2"
+      (uuid b37f581b-c017-5706-8b58-23923211d591))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "R604")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 191.77 35.56)
+      (xy 191.77 33.02))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid f23e3ad2-c08c-561e-a10b-6f92fb99177c))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 191.77 33.02 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 643b7a3b-3bf4-5f74-8c39-a257102def1b)
+    (property "Reference" "#PWR230"
+      (at 191.77 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 191.77 29.210000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 191.77 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 191.77 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 4c33bdcd-b629-53e7-b5c7-eec8fddccceb))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR230")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 191.77 43.18)
+      (xy 191.77 45.72))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 6049e0fc-4d6f-5903-923d-127e4f7b92c7))
+  (label "LED_PWR"
+    (at 191.77 45.72 270)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right bottom))
+    (uuid 26af84dc-8303-5d38-87cf-f144fbd5bbb0))
+  (symbol
+    (lib_id "power:PWR_FLAG")
+    (at 199.39 33.02 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 227c62ae-e59c-5b6d-b2d1-d5b3ca0e40bf)
+    (property "Reference" "#FLG601"
+      (at 199.39 30.480000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "PWR_FLAG"
+      (at 199.39 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" ""
+      (at 199.39 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 199.39 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Special symbol for telling ERC where power comes from"
+      (at 199.39 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid ce0b5a64-efcb-5e50-9561-3007dbf5291b))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#FLG601")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 199.39 33.02)
+      (xy 199.39 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid b2b4681c-a5c4-5532-b9db-7646643e3f92))
+  (symbol
+    (lib_id "power:+3V3")
+    (at 199.39 35.56 180.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid c11abd84-9c96-53b6-ad80-a1e86ad39381)
+    (property "Reference" "#PWR231"
+      (at 199.39 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "+3V3"
+      (at 199.39 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 199.39 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 199.39 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid a14455cd-cffb-578b-b656-8b3aac358453))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16/c58a7b7d-2874-5c32-8231-9afbbe4dbc13"
+          (reference "#PWR231")
+          (unit 1)))))
+  (embedded_fonts no))

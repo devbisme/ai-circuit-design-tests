@@ -1,0 +1,843 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {}
+ },
+ "source": {
+  "manufacturer": "FTDI",
+  "mpn": "FT232HL",
+  "datasheet_revision": "FT_000288 v1.9",
+  "local_path": "FT232HL.pdf",
+  "sha256": "sha256:bb449d1651a49c3e8c789ec7387eb1368bc6222e37fbe1e0b4cb05df1158ffe4",
+  "page_count": 57
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 55
+ },
+ "base": {
+  "family": "USB interface",
+  "description": "Hi-Speed USB to UART/FIFO (FT232H, LQFP-48)",
+  "package": {
+   "code": "LQFP-48 7x7 mm",
+   "pin_count": 48,
+   "pitch_mm": 0.5,
+   "body_mm": {
+    "length": 7.0,
+    "width": 7.0,
+    "height": 1.6
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 10,
+    "section": "3 Package",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "OSCI",
+    "type": "input",
+    "description": "Oscillator input (KiCad symbol: XCSI)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "OSCO",
+    "type": "output",
+    "description": "Oscillator output (KiCad symbol: XCSO)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "VPHY",
+    "type": "power_in",
+    "description": "+3.3 V USB PHY supply; must come from a 3.3 V regulator; LC filter recommended",
+    "power_domain": "VCCIO",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4",
+     "9",
+     "41"
+    ],
+    "name": "AGND",
+    "type": "power_in",
+    "description": "Analog ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "REF",
+    "type": "input",
+    "description": "Current reference: 12 kohm 1 % to GND",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "DM",
+    "type": "bidirectional",
+    "description": "USB D-",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "7"
+    ],
+    "name": "DP",
+    "type": "bidirectional",
+    "description": "USB D+",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "8"
+    ],
+    "name": "VPLL",
+    "type": "power_in",
+    "description": "+3.3 V PLL supply; LC filter recommended",
+    "power_domain": "VCCIO",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "10",
+     "11",
+     "22",
+     "23",
+     "35",
+     "36",
+     "47",
+     "48"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "12",
+     "24",
+     "46"
+    ],
+    "name": "VCCIO",
+    "type": "power_in",
+    "description": "+3.3 V I/O supply; all three must be connected",
+    "power_domain": "VCCIO",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "31"
+    ],
+    "name": "ACBUS7",
+    "type": "bidirectional",
+    "description": "ACBUS7 / PWRSAV# (EEPROM option \"suspend on ACBUS7 low\"); default GPIO with 75k pull-down",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "34"
+    ],
+    "name": "RESET#",
+    "type": "input",
+    "description": "Active-low reset (KiCad symbol: ~{RESET})",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "37"
+    ],
+    "name": "VCCA",
+    "type": "power_out",
+    "description": "+1.8 V internal regulator output; terminate with 0.1 uF to GND only",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "38"
+    ],
+    "name": "VCORE",
+    "type": "power_out",
+    "description": "+1.8 V core regulator output; terminate with 0.1 uF to GND only (KiCad symbol: VCCCORE)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "39"
+    ],
+    "name": "VCCD",
+    "type": "power_in",
+    "description": "+3.3 V: input when VREGIN = 3.3 V (output when VREGIN = 5 V)",
+    "power_domain": "VCCIO",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "40"
+    ],
+    "name": "VREGIN",
+    "type": "power_in",
+    "description": "Regulator input: +5 V or +3.3 V",
+    "power_domain": "VREGIN",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "42"
+    ],
+    "name": "TEST",
+    "type": "input",
+    "description": "Test pin: connect to GND",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 10,
+     "section": "Table 3.2",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "43"
+    ],
+    "name": "EEDATA",
+    "type": "bidirectional",
+    "description": "EEPROM data: to EEPROM DI directly, to DO via 2.2k; DO pulled to VCCD with 10k",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "Table 3.3",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "44"
+    ],
+    "name": "EECLK",
+    "type": "output",
+    "description": "EEPROM clock",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "Table 3.3",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "45"
+    ],
+    "name": "EECS",
+    "type": "bidirectional",
+    "description": "EEPROM chip select",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "Table 3.3",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "13"
+    ],
+    "name": "ADBUS0",
+    "type": "bidirectional",
+    "description": "ADBUS0; sync 245 FIFO D0",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "14"
+    ],
+    "name": "ADBUS1",
+    "type": "bidirectional",
+    "description": "ADBUS1; sync 245 FIFO D1",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "15"
+    ],
+    "name": "ADBUS2",
+    "type": "bidirectional",
+    "description": "ADBUS2; sync 245 FIFO D2",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "16"
+    ],
+    "name": "ADBUS3",
+    "type": "bidirectional",
+    "description": "ADBUS3; sync 245 FIFO D3",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "17"
+    ],
+    "name": "ADBUS4",
+    "type": "bidirectional",
+    "description": "ADBUS4; sync 245 FIFO D4",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "18"
+    ],
+    "name": "ADBUS5",
+    "type": "bidirectional",
+    "description": "ADBUS5; sync 245 FIFO D5",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "19"
+    ],
+    "name": "ADBUS6",
+    "type": "bidirectional",
+    "description": "ADBUS6; sync 245 FIFO D6",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "20"
+    ],
+    "name": "ADBUS7",
+    "type": "bidirectional",
+    "description": "ADBUS7; sync 245 FIFO D7",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "21"
+    ],
+    "name": "ACBUS0",
+    "type": "bidirectional",
+    "description": "ACBUS0; sync 245 FIFO: RXF#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "25"
+    ],
+    "name": "ACBUS1",
+    "type": "bidirectional",
+    "description": "ACBUS1; sync 245 FIFO: TXE#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "26"
+    ],
+    "name": "ACBUS2",
+    "type": "bidirectional",
+    "description": "ACBUS2; sync 245 FIFO: RD#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "27"
+    ],
+    "name": "ACBUS3",
+    "type": "bidirectional",
+    "description": "ACBUS3; sync 245 FIFO: WR#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "28"
+    ],
+    "name": "ACBUS4",
+    "type": "bidirectional",
+    "description": "ACBUS4; sync 245 FIFO: SIWU#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "29"
+    ],
+    "name": "ACBUS5",
+    "type": "bidirectional",
+    "description": "ACBUS5; sync 245 FIFO: CLKOUT",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "30"
+    ],
+    "name": "ACBUS6",
+    "type": "bidirectional",
+    "description": "ACBUS6; sync 245 FIFO: OE#",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "32"
+    ],
+    "name": "ACBUS8",
+    "type": "bidirectional",
+    "description": "ACBUS8; sync 245 FIFO: GPIO",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "33"
+    ],
+    "name": "ACBUS9",
+    "type": "bidirectional",
+    "description": "ACBUS9; sync 245 FIFO: GPIO",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 9,
+     "section": "3.2 Pin Descriptions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VCCIO_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 4.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "Table 5.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VCORE_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 2.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "Table 5.1",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VUSB_IO": [
+    {
+     "min": -0.5,
+     "typ": null,
+     "max": 3.63,
+     "unit": "V",
+     "condition": "USBDP/USBDM",
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "Table 5.1",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VIO_5V": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 5.8,
+     "unit": "V",
+     "condition": "ACBUS/ADBUS inputs",
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "Table 5.1",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VCCIO": [
+    {
+     "min": 2.97,
+     "typ": null,
+     "max": 3.63,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 40,
+      "section": "Table 5.2 Operating Voltage and Current",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VREGIN": [
+    {
+     "min": 3.3,
+     "typ": 3.3,
+     "max": 3.6,
+     "unit": "V",
+     "condition": "3.3 V input mode (5 V mode: 3.6-5.5 V)",
+     "notes": null,
+     "evidence": {
+      "page": 40,
+      "section": "Table 5.2",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "Table 5.1",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": []
+}

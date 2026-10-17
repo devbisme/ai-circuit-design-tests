@@ -1,0 +1,93 @@
+[design]
+file = "circuits/dual_adc_10msps"
+title = "Dual-channel ±10 V 12-bit 10 MSPS USB ADC board"
+
+[board]
+size = [100, 80]
+layers = 4
+planes = { "In1.Cu" = "GND", "In2.Cu" = "+3V3" }
+pours = ["GND"]
+
+[libraries.footprints]
+my_board = "footprints/my_board.pretty"
+
+# Floorplan (phase 7). Signal flow left→right: BNC → AFE → ADC → FPGA → FT232H → USB-C.
+# Analog on the left ~45 %, digital/power on the right (design_risks.md §19, §23).
+
+[[placement.anchor]]   # CH A BNC: origin = housing centre, front face 7.15 mm from origin
+ref = "J101"
+at = [7.2, 20.0]
+facing = "left"
+edge = "left"
+
+[[placement.anchor]]   # CH B BNC
+ref = "J201"
+at = [7.2, 60.0]
+facing = "left"
+edge = "left"
+
+[[placement.anchor]]   # USB-C: HRO body front face 3.65 mm from origin
+ref = "J501"
+at = [96.4, 15.0]
+facing = "right"
+edge = "right"
+
+[[placement.anchor]]   # JTAG header, top edge by the FPGA
+ref = "J1001"
+at = [62.0, 4.0]
+rot = 90
+
+[[placement.anchor]]   # TRIG header, bottom edge
+ref = "J1002"
+at = [62.0, 76.0]
+rot = 90
+
+[[placement.anchor]]   # CH A input buffer beside its BNC
+ref = "U101"
+at = [21.0, 20.0]
+rot = 0
+
+[[placement.anchor]]   # CH B input buffer beside its BNC
+ref = "U201"
+at = [21.0, 60.0]
+rot = 0
+
+[[placement.anchor]]   # CH A FDA at the ADC
+ref = "U103"
+at = [36.0, 32.0]
+rot = 0
+
+[[placement.anchor]]   # CH B FDA at the ADC
+ref = "U203"
+at = [36.0, 48.0]
+rot = 0
+
+[[placement.anchor]]   # ADC
+ref = "U301"
+at = [47.0, 40.0]
+rot = 0
+
+[[placement.anchor]]   # FPGA
+ref = "U1001"
+at = [70.0, 40.0]
+rot = 0
+
+[[placement.anchor]]   # SDRAM below the FPGA
+ref = "U801"
+at = [72.0, 66.0]
+rot = 90
+
+[[placement.anchor]]   # FT232H between FPGA and USB-C
+ref = "U901"
+at = [83.0, 16.0]
+rot = 0
+
+[[placement.anchor]]   # 3.3 V buck: far corner from the AFE
+ref = "U601"
+at = [92.0, 70.0]
+rot = 0
+
+[[placement.anchor]]   # USB ESD at the connector (design_risks.md §22)
+ref = "U501"
+at = [90.5, 24.0]
+rot = 0

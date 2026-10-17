@@ -1,0 +1,503 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "regulator": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "LM27762DSSR",
+  "datasheet_revision": "SNVSA35",
+  "local_path": "LM27762DSSR.pdf",
+  "sha256": "sha256:465db259d11b3b2fe202661b21e1e664065ff8873056a984aa9f967a9fbdc6e0",
+  "page_count": 30
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 91
+ },
+ "base": {
+  "family": "charge pump + LDOs",
+  "description": "Low-noise positive and negative output (+/-1.5..5 V, 250 mA) charge pump + LDOs",
+  "package": {
+   "code": "WSON-12 (DSS) 2x3 mm, EP 1.0x2.65 mm (pad 13)",
+   "pin_count": 13,
+   "pitch_mm": 0.5,
+   "body_mm": {
+    "length": 3.0,
+    "width": 2.0,
+    "height": 0.8
+   },
+   "thermal_pad": true,
+   "evidence": {
+    "page": 27,
+    "section": "DSS0012 package outline",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "PGOOD",
+    "type": "open_collector",
+    "description": "Power good, open drain; 0 = good; connect to GND if unused",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "FB+",
+    "type": "input",
+    "description": "Positive LDO feedback; divider OUT+ to GND; never leave open",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "VIN",
+    "type": "power_in",
+    "description": "Positive supply input",
+    "power_domain": "VIN",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "CP",
+    "type": "power_out",
+    "description": "Unregulated negative charge-pump output (needs CPOUT cap)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "OUT-",
+    "type": "power_out",
+    "description": "Regulated negative output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "7"
+    ],
+    "name": "FB-",
+    "type": "input",
+    "description": "Negative LDO feedback; divider OUT- to GND; never leave open",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "8"
+    ],
+    "name": "EN-",
+    "type": "input",
+    "description": "Enable charge pump + negative LDO, active high",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "9"
+    ],
+    "name": "C1-",
+    "type": "passive",
+    "description": "Flying cap negative terminal (KiCad symbol: C-)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "10"
+    ],
+    "name": "C1+",
+    "type": "passive",
+    "description": "Flying cap positive terminal (KiCad symbol: C+)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "11"
+    ],
+    "name": "OUT+",
+    "type": "power_out",
+    "description": "Regulated positive output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "12"
+    ],
+    "name": "EN+",
+    "type": "input",
+    "description": "Enable positive LDO, active high",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "13"
+    ],
+    "name": "EP",
+    "type": "power_in",
+    "description": "Thermal pad = ground; do not leave unconnected (KiCad symbol: PAD)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VIN_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 5.8,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "5.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "5.1",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VIN": [
+    {
+     "min": 2.7,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "5.1 Absolute Maximum Ratings (operating rows)",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "5.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 62.2,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "5.4 Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "regulator"
+ ],
+ "regulator": {
+  "topology": "charge_pump",
+  "vin_range": [
+   {
+    "min": 2.7,
+    "typ": null,
+    "max": 5.5,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "5.1",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vout_range": [
+   {
+    "min": 1.5,
+    "typ": null,
+    "max": 5.0,
+    "unit": "V",
+    "condition": "OUT+ adjustable",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "min": -5.0,
+    "typ": null,
+    "max": -1.5,
+    "unit": "V",
+    "condition": "OUT- adjustable",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "iout_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.25,
+    "unit": "A",
+    "condition": "each output",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "5.1 (operating output current)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "reference_voltage": [
+   {
+    "min": 1.182,
+    "typ": 1.2,
+    "max": 1.218,
+    "unit": "V",
+    "condition": "VFB+",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "min": -1.238,
+    "typ": -1.22,
+    "max": -1.202,
+    "unit": "V",
+    "condition": "VFB-",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "feedback_pin": "2",
+  "enable_pin": "12",
+  "power_good_pin": "1",
+  "switching_freq": [
+   {
+    "min": 1700000.0,
+    "typ": 2000000.0,
+    "max": 2300000.0,
+    "unit": "Hz",
+    "condition": "VIN = 3.6 V",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "cout_min": [
+   {
+    "min": null,
+    "typ": 2.2e-06,
+    "max": null,
+    "unit": "F",
+    "condition": "test condition CIN = COUT+ = COUT- = 2.2 uF, C1 = 1 uF, CPOUT = 4.7 uF",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "5.5 Electrical Characteristics",
+     "confidence": "medium",
+     "method": "table"
+    }
+   }
+  ]
+ }
+}

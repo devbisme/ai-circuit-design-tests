@@ -1,0 +1,331 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "opamp": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "OPA810IDBVR",
+  "datasheet_revision": null,
+  "local_path": "OPA810IDBVR.pdf",
+  "sha256": "sha256:74c61ac238989c94c1cf0d70da41bff6e167a590f86e06bae7cdd734d8fd26fa",
+  "page_count": 52
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 88
+ },
+ "base": {
+  "family": "operational amplifier",
+  "description": "Single 27 V RRIO FET-input op amp, GBW 70 MHz",
+  "package": {
+   "code": "SOT-23-5 (DBV)",
+   "pin_count": 5,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.6,
+    "height": 1.45
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 3,
+    "section": "Pin Configuration",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "VO",
+    "type": "output",
+    "description": "Output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "VS-",
+    "type": "power_in",
+    "description": "Negative power supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "VIN+",
+    "type": "input",
+    "description": "Noninverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "VIN-",
+    "type": "input",
+    "description": "Inverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "VS+",
+    "type": "power_in",
+    "description": "Positive power supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VS_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 28,
+     "unit": "V",
+     "condition": "Total bipolar supply (\u00b114 V)",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "6.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "6.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VS": [
+    {
+     "min": 4.75,
+     "typ": null,
+     "max": 27,
+     "unit": "V",
+     "condition": "Total supply",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "6.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": 25,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "6.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 174.3,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": "DBV (SOT-23)",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "6.4 Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "opamp"
+ ],
+ "opamp": {
+  "opamp_topology": "rail_to_rail_io",
+  "channels": 1,
+  "vsupply_range": [
+   {
+    "min": 4.75,
+    "typ": null,
+    "max": 27,
+    "unit": "V",
+    "condition": "Total supply VS+ - VS-",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vsupply_split_capable": true,
+  "iq_per_amp": [
+   {
+    "min": null,
+    "typ": 0.0037,
+    "max": null,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "gbw": [
+   {
+    "min": null,
+    "typ": 70000000.0,
+    "max": null,
+    "unit": "Hz",
+    "condition": "G = 11, Vo = 20 mVpp, VS = \u00b15 V",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Electrical Characteristics: 10 V (VS = \u00b15 V)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "slew_rate": [
+   {
+    "min": null,
+    "typ": 200000000.0,
+    "max": null,
+    "unit": "V/s",
+    "condition": "G = 2, -2 V to 2 V step",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Electrical Characteristics: 10 V (VS = \u00b15 V)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vos": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.0015,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "ib": [
+   {
+    "min": null,
+    "typ": 2e-12,
+    "max": null,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "unity_gain_stable": true
+ }
+}

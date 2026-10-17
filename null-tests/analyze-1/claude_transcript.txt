@@ -1,0 +1,752 @@
+ ▐▛███▛█   Claude Code v2.1.301
+▝▜██████▀  Opus 5.5 · Claude Pro
+ ▝▝   ▝▝   ~/projects/AI/ai-circuit-design-tests/null-tests/analyze-1
+
+
+❯ /memory 
+  ⎿  Opened ./CLAUDE.md
+
+     ▎ Using $EDITOR="nano". To change editor, set $EDITOR or $VISUAL environment variable.
+
+! ls                                                                            
+  ⎿  adc.kicad_sch
+     afe_a.kicad_sch
+     afe_b.kicad_sch
+     analysis_prompt.txt
+     CLAUDE.md
+     dual_adc_usb.kicad_dru
+     dual_adc_usb.kicad_pcb
+     dual_adc_usb.kicad_prl
+     dual_adc_usb.kicad_pro
+     dual_adc_usb.kicad_sch
+     fpga.kicad_sch
+     power.kicad_sch
+     session_cost.py
+     usb.kicad_sch
+
+● I see a KiCad project for dual_adc_usb. It has a top-level schematic with
+  sub-sheets (adc, afe_a, afe_b, fpga, power, usb), a PCB, a design-rules file,
+  analysis_prompt.txt and session_cost.py.
+
+  What would you like me to do? For example, I could run the analysis in
+  analysis_prompt.txt on this design.
+
+✻ Worked for 4s · done 2:07 PM
+
+❯ do what aanalysis_prompt.txt says to do.                                      
+
+  Listed 1 directory, ran 3 shell commands (ctrl+o to expand)
+
+● Bash(K="/home/devb/bin/kicad10 kicad-cli"; mkdir -p out; $K sch erc
+      --severity-all --format json -o out/erc.json dual_adc_usb.kicad_sch 2>&1 |
+      tail -5; $K pcb drc --…)
+  ⎿  Found 157 violations
+     Saved ERC Report to out/erc.json
+     Found 343 violations
+     … +3 lines (ctrl+o to expand)
+  ⎿  2 files changed (binary, mode only or too large to show)
+  ⎿  (timeout 10m)
+
+● ERC and DRC are done: 157 ERC violations, 343 DRC violations and 174
+  schematic-parity issues. Next I'll sort them by type.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1;
+      K="/home/devb/bin/kicad10 kicad-cli"; python3 -c "
+      import json,collections;d=json.load(o…)
+  ⎿  Counter({"Field 'Datasheet' differs ": 170})
+     Wrote bill of materials to 'out/bom_raw.csv'.
+     "Reference","Value","Footprint","QUANTITY","LCSC","MPN","Manufacturer"
+     … +62 lines (ctrl+o to expand)
+  ⎿  Created out/bom_raw.csv (+57 -0)
+       1 +"Reference","Value","Footprint","QUANTITY","LCSC","MPN","Manufa
+         +cturer","DNP"                                                  
+       2 +"C101,C201","2.2pF C0G","Capacitor_SMD:C_0603_1608Metric","2","
+         +","","",""                                                     
+       3 +"C102,C202","27pF C0G","Capacitor_SMD:C_0603_1608Metric","2",""
+         +,"","",""                                                      
+       4 +"C103,C203","4.5-20pF","Capacitor_SMD:C_Trimmer_Murata_TZB4-A",
+         +"2","","","",""                                                
+       5 +"C104,C105,C204,C205","22pF C0G","Capacitor_SMD:C_0603_1608Metr
+         +ic","4","","","",""                                            
+       6 +"C106,C206","220pF C0G","Capacitor_SMD:C_0603_1608Metric","2","
+         +","","",""                                                     
+       7 +"C107,C109,C111,C207,C209,C211,C304-C306,C308-C314,C316-C318,C5
+         +04,C506-C508,C510-C515,C601-C604,C606-C611,C613-C621,C623,C625,
+         +C627","100nF","Capacitor_SMD:C_0402_1005Metric","51","","","","
+         +"                                                              
+       8 +"C108,C110,C112,C208,C210,C212,C403,C404,C406,C410,C411","1uF",
+         +"Capacitor_SMD:C_0603_1608Metric","11","","","",""             
+       9 +"C301-C303,C307,C405,C408,C409","2.2uF","Capacitor_SMD:C_0603_1
+         +608Metric","7","","","",""                                     
+      10 +"C315,C605,C612,C622,C624,C626","10uF","Capacitor_SMD:C_0805_20
+         +12Metric","6","","","",""                                      
+      11 +"C401","4.7uF","Capacitor_SMD:C_0805_2012Metric","1","","","","
+         +"                                                              
+      12 +"C402","22uF","Capacitor_SMD:C_0805_2012Metric","1","","","",""
+      13 +"C407,C505,C509","4.7uF","Capacitor_SMD:C_0603_1608Metric","3",
+         +"","","",""                                                    
+      14 +"C501","4.7nF","Capacitor_SMD:C_0603_1608Metric","1","","","","
+         +"                                                              
+      15 +"C502,C503","18pF","Capacitor_SMD:C_0402_1005Metric","2","","",
+         +"",""                                                          
+      16 +"D101,D201","BAV199DW","Package_TO_SOT_SMD:SOT-363_SC-70-6","2"
+         +,"","","",""                                                   
+      17 +"D401,D601","GREEN","LED_SMD:LED_0603_1608Metric","2","","","",
+         +""                                                             
+      18 +"D602","RED","LED_SMD:LED_0603_1608Metric","1","","","",""     
+      19 +"FB501","600R@100MHz","Inductor_SMD:L_0805_2012Metric","1","","
+         +","",""                                                        
+      20 +"J101,J201","BNC","Connector_Coaxial:BNC_Amphenol_B6252HB-NPP3G
+         +-50_Horizontal","2","","","",""                                
+      21 +"J501","USB_B","Connector_USB:USB_B_OST_USB-B1HSxx_Horizontal",
+         +"1","","","",""                                                
+      22 +"J601","EXP","Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm
+         +_Vertical","1","","","",""                                     
+      23 +"L401","2.2uH","Inductor_SMD:L_Taiyo-Yuden_NR-30xx","1","","","
+         +",""                                                           
+      24 +"Q401","2N7002","Package_TO_SOT_SMD:SOT-23","1","","","",""    
+      25 +"R101,R201","953k 0.1%","Resistor_SMD:R_1206_3216Metric","2",""
+         +,"","",""                                                      
+      26 +"R102,R202","49.9k 0.1%","Resistor_SMD:R_0603_1608Metric","2","
+         +","","",""                                                     
+      27 +"R103,R203","200","Resistor_SMD:R_0603_1608Metric","2","","",""
+         +,""                                                            
+      28 +"R104,R105,R204,R205","499 0.1%","Resistor_SMD:R_0603_1608Metri
+         +c","4","","","",""                                             
+      29 +"R106,R107,R206,R207","953 0.1%","Resistor_SMD:R_0603_1608Metri
+         +c","4","","","",""                                             
+      30 +"R108,R109,R208,R209","49.9","Resistor_SMD:R_0603_1608Metric","
+         +4","","","",""                                                 
+      31 +"R301,R410,R503,R505-R507,R602-R604","10k","Resistor_SMD:R_0402
+         +_1005Metric","9","","","",""                                   
+      32 +"R302","20k","Resistor_SMD:R_0402_1005Metric","1","","","",""  
+      33 +"R303,R304,R601","33","Resistor_SMD:R_0402_1005Metric","3","","
+         +","",""                                                        
+      34 +"R401","316k","Resistor_SMD:R_0402_1005Metric","1","","","","" 
+      35 +"R402,R409","100k","Resistor_SMD:R_0402_1005Metric","2","","","
+         +",""                                                           
+      36 +"R405,R407","115k","Resistor_SMD:R_0402_1005Metric","2","","","
+         +",""                                                           
+      37 +"R406,R408","49.9k","Resistor_SMD:R_0402_1005Metric","2","","",
+         +"",""                                                          
+      38 +"R411,R607,R608","1k","Resistor_SMD:R_0402_1005Metric","3","","
+         +","",""                                                        
+      39 +"R501","1M","Resistor_SMD:R_0603_1608Metric","1","","","",""   
+      40 +"R502","12k 1%","Resistor_SMD:R_0402_1005Metric","1","","","","
+         +"                                                              
+     … 17 more lines (ctrl+o to expand)
+  ⎿  … 1 more file changed
+
+● Bash(cd
+      /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1/out;
+      python3 - <<'E' > pinmap.txt; wc -l pinmap.txt; grep -c . pinmap.txt
+      import xml.etre…)
+  ⎿  918 pinmap.txt
+     918
+  ⎿  1 file changed (binary, mode only or too large to show)
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● I've finished the schematic review. Now I'm checking the PCB: stackup, zones,
+  routing and placement.
+
+● Bash(mkdir -p /tmp/claude-1000/-home-devb-projects-AI-ai-circuit-design-tests-
+      null-tests-analyze-1/432721f3-b902-4311-8fb7-e3e19c18e529/scratchpad; cd
+      /home/devb/pro…)
+  ⎿  segments 2501 arcs 0 vias 493 zones 2 footprints 174
+     board bbox 50.0 50.0 190.0 140.0 size 140.0 90.0
+     track widths [('0.2', 2111), ('0.4', 317), ('0.3', 27), ('0.28', 16),
+     … +10 lines (ctrl+o to expand)
+  ⎿  Created out/pcbstat.txt (+183 -0)
+        1 +segments 2501 arcs 0 vias 493 zones 2 footprints 174          
+        2 +board bbox 50.0 50.0 190.0 140.0 size 140.0 90.0              
+        3 +track widths [('0.2', 2111), ('0.4', 317), ('0.3', 27), ('0.28
+          +', 16), ('0.15', 14), ('0.2502', 8), ('0.3004', 5), ('0.25', 3
+          +)]                                                            
+        4 +length per layer {'F.Cu': 2937, 'B.Cu': 2352}                 
+        5 +vias Counter({('0.6', '0.3'): 493})                           
+        6 +vias per net top [('GND', 147), ('+3V3', 70), ('+1V2', 9), ('/
+          +FPGA_SDRAM/SD_CAS_N', 8), ('+3V0', 5), ('+4V', 5), ('/FPGA_SDR
+          +AM/SD_DQ4', 4), ('/FPGA_SDRAM/SD_A1', 4), ('/FPGA_SDRAM/SD_DQ8
+          +', 4), ('/FPGA_SDRAM/SD_DQ10', 4), ('ADC_A10', 4), ('FT_D6', 4
+          +)]                                                            
+        7 +zone ['net', 'GND'] ['layer', 'In1.Cu'] fill True             
+        8 +zone ['net', '+3V3'] ['layer', 'In2.Cu'] fill True            
+        9 +fp sides Counter({'F.Cu': 174})                               
+       10 +FP C613 F.Cu ['150', '105.5'] Capacitor_SMD:C_0402_1005Metric 
+       11 +FP C514 F.Cu ['153.6', '58.4'] Capacitor_SMD:C_0402_1005Metric
+       12 +FP X301 F.Cu ['117', '101'] Oscillator:Oscillator_SMD_SiT_PQFN
+          +-4Pin_3.2x2.5mm                                               
+       13 +FP D101 F.Cu ['83', '65'] Package_TO_SOT_SMD:SOT-363_SC-70-6  
+       14 +FP C203 F.Cu ['79', '120'] Capacitor_SMD:C_Trimmer_Murata_TZB4
+          +-A                                                            
+       15 +FP C316 F.Cu ['120', '81'] Capacitor_SMD:C_0402_1005Metric    
+       16 +FP C620 F.Cu ['179', '94'] Capacitor_SMD:C_0402_1005Metric    
+       17 +FP C624 F.Cu ['139.2', '109', '90'] Capacitor_SMD:C_0805_2012M
+          +etric                                                         
+       18 +FP C503 F.Cu ['144.7', '56', '90'] Capacitor_SMD:C_0402_1005Me
+          +tric                                                          
+       19 +FP C623 F.Cu ['150', '117'] Capacitor_SMD:C_0402_1005Metric   
+       20 +FP C202 F.Cu ['79', '115', '90'] Capacitor_SMD:C_0603_1608Metr
+          +ic                                                            
+       21 +FP R106 F.Cu ['104', '66'] Resistor_SMD:R_0603_1608Metric     
+       22 +FP C608 F.Cu ['152', '108'] Capacitor_SMD:C_0402_1005Metric   
+       23 +FP R105 F.Cu ['97', '71.5'] Resistor_SMD:R_0603_1608Metric    
+       24 +FP C206 F.Cu ['112.5', '112', '90'] Capacitor_SMD:C_0603_1608M
+          +etric                                                         
+       25 +FP C501 F.Cu ['115', '59.5', '90'] Capacitor_SMD:C_0603_1608Me
+          +tric                                                          
+       26 +FP C622 F.Cu ['179', '99.5', '90'] Capacitor_SMD:C_0805_2012Me
+          +tric                                                          
+       27 +FP R601 F.Cu ['158.5', '100'] Resistor_SMD:R_0402_1005Metric  
+       28 +FP C611 F.Cu ['154', '76.5'] Capacitor_SMD:C_0402_1005Metric  
+       29 +FP C411 F.Cu ['102.5', '84.5'] Capacitor_SMD:C_0603_1608Metric
+       30 +FP R409 F.Cu ['164', '134', '90'] Resistor_SMD:R_0402_1005Metr
+          +ic                                                            
+       31 +FP R207 F.Cu ['104', '116'] Resistor_SMD:R_0603_1608Metric    
+       32 +FP C626 F.Cu ['139', '75.6', '90'] Capacitor_SMD:C_0805_2012Me
+          +tric                                                          
+       33 +FP C408 F.Cu ['93.5', '88', '90'] Capacitor_SMD:C_0603_1608Met
+          +ric                                                           
+       34 +FP C506 F.Cu ['163', '63.5'] Capacitor_SMD:C_0402_1005Metric  
+       35 +FP C401 F.Cu ['162', '122', '90'] Capacitor_SMD:C_0805_2012Met
+          +ric                                                           
+       36 +FP C105 F.Cu ['104', '76'] Capacitor_SMD:C_0603_1608Metric    
+       37 +FP C615 F.Cu ['179', '84'] Capacitor_SMD:C_0402_1005Metric    
+       38 +FP U404 F.Cu ['85', '92'] Package_SON:WSON-12-1EP_3x2mm_P0.5mm
+          +_EP1x2.65_ThermalVias                                         
+       39 +FP C311 F.Cu ['112', '81'] Capacitor_SMD:C_0402_1005Metric    
+       40 +FP C317 F.Cu ['122', '81'] Capacitor_SMD:C_0402_1005Metric    
+     … 143 more lines (ctrl+o to expand)
+  ⎿  Created out/netlen.json (+1 -0)
+      1 +{"netlen": {"+3V3": 194.91394417208215, "GND": 371.6707323839701
+        +, "+3V0": 115.03699511282298, "/ADC/OSC_OUT": 13.386747590854757
+        +, "VEE": 109.45112172107685, "+4V": 172.65114615608624, "/AFE_A/
+        +DIV": 39.08731907558055, "/AFE_B/DIV": 36.259174585399336, "/FPG
+        +A_SDRAM/VCCPLL0": 12.519298751990409, "/USB/OSCO": 16.4029378521
+        +32016, "/AFE_A/FDA_INN": 16.936001328068723, "/AFE_A/FDA_OUTP": 
+        +15.397350496135271, "/ADC/AINB_P": 19.15792847278439, "/ADC/AINB
+        +_N": 22.994508392797776, "/USB/SHIELD": 21.590097009120942, "/FP
+        +GA_SDRAM/SD_CLK_SRC": 33.996489001569785, "/FPGA_SDRAM/SD_CLK": 
+        +20.353768604078905, "/Power/AN_EN": 111.17917443325888, "/AFE_B/
+        +FDA_INP": 25.087895418098086, "/AFE_B/FDA_OUTN": 8.5514348801657
+        +66, "/FPGA_SDRAM/VCCPLL1": 13.878374452027913, "/USB/V1V8_FT": 3
+        +6.9075822904952, "+5V": 137.88877401506943, "/AFE_A/FDA_INP": 25
+        +.00310564191479, "/AFE_A/FDA_OUTN": 8.641510639674017, "/Power/F
+        +B_POS": 11.852575016562028, "/Power/CP_NEG": 6.176565604928154, 
+        +"/Power/FB_NEG": 7.256348134362787, "/Power/CFLY_N": 7.776998604
+        +807856, "/Power/CFLY_P": 10.295586271531551, "/ADC/REFHB": 11.81
+        +641011464116, "/ADC/REFLB": 14.36121245433097, "/AFE_B/IN": 12.3
+        +64912511250779, "/ADC/REFLA": 11.127416238480022, "/ADC/VCMA": 4
+        +0.29960034618304, "SPI_SS_N": 80.98369476920337, "/USB/VBUS": 24
+        +.34578542961334, "+1V2": 198.5900551554702, "/AFE_A/BUF_OUT": 4.
+        +584345955666567, "/Power/FB_3V3": 11.080100640985705, "/AFE_B/BU
+        +F_FB": 8.80750115115088, "/AFE_B/BUF_INN": 9.217797517791814, "/
+        +AFE_B/BUF_OUT": 4.584345955666567, "/ADC/VCMB": 42.6993012363117
+        +8, "/FPGA_SDRAM/SD_DQ0": 48.13125532586726, "/FPGA_SDRAM/SD_DQ1"
+        +: 35.19050913020459, "/FPGA_SDRAM/SD_DQ2": 25.395437504017025, "
+        +/FPGA_SDRAM/SD_DQ3": 26.09625136013613, "/FPGA_SDRAM/SD_DQ4": 18
+        +.34027990620234, "/FPGA_SDRAM/SD_DQ5": 22.90587739425881, "/FPGA
+        +_SDRAM/SD_DQ6": 22.98489356499649, "/FPGA_SDRAM/SD_DQ7": 14.9067
+        +7170879758, "/FPGA_SDRAM/SD_LDQM": 39.70935123864385, "/FPGA_SDR
+        +AM/SD_WE_N": 75.47443644586096, "/FPGA_SDRAM/SD_CAS_N": 57.34705
+        +220988832, "/FPG … [+11776 chars]                               
+      2   No newline at end of file
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+● Next: generating the fab outputs (Gerbers, drill, BOM, CPL) and the PCB image.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1;
+      K="/home/devb/bin/kicad10 kicad-cli"; G=fab/gerbers; mkdir -p $G
+      $K pcb export gerbers -…)
+  ⎿  Plotted to 'fab/gerbers/dual_adc_usb-F_Mask.gts'.
+     Plotted to 'fab/gerbers/dual_adc_usb-B_Mask.gbs'.
+     Plotted to 'fab/gerbers/dual_adc_usb-Edge_Cuts.gm1'.
+     … +24 lines (ctrl+o to expand)
+  ⎿  Created fab/gerbers/dual_adc_usb-B_Paste.gbp (+15 -0)
+       1 +G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,10.0.4*             
+       2 +G04 #@! TF.CreationDate,2026-10-16T14:12:27-04:00*             
+       3 +G04 #@! TF.ProjectId,dual_adc_usb,6475616c-5f61-4646-935f-75736
+         +22e6b69,rev?*                                                  
+       4 +G04 #@! TF.SameCoordinates,Original*                           
+       5 +G04 #@! TF.FileFunction,Paste,Bot*                             
+       6 +G04 #@! TF.FilePolarity,Positive*                              
+       7 +%FSLAX46Y46*%                                                  
+       8 +G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+       9 +G04 Created by KiCad (PCBNEW 10.0.4) date 2026-10-16 14:12:27* 
+      10 +%MOMM*%                                                        
+      11 +%LPD*%                                                         
+      12 +G01*                                                           
+      13 +G04 APERTURE LIST*                                             
+      14 +G04 APERTURE END LIST*                                         
+      15 +M02*                                                           
+  ⎿  Created fab/gerbers/dual_adc_usb-B_Silkscreen.gbo (+101 -0)
+        1 +G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,10.0.4*            
+        2 +G04 #@! TF.CreationDate,2026-10-16T14:12:27-04:00*            
+        3 +G04 #@! TF.ProjectId,dual_adc_usb,6475616c-5f61-4646-935f-7573
+          +622e6b69,rev?*                                                
+        4 +G04 #@! TF.SameCoordinates,Original*                          
+        5 +G04 #@! TF.FileFunction,Legend,Bot*                           
+        6 +G04 #@! TF.FilePolarity,Positive*                             
+        7 +%FSLAX46Y46*%                                                 
+        8 +G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)
+          +*                                                             
+        9 +G04 Created by KiCad (PCBNEW 10.0.4) date 2026-10-16 14:12:27*
+       10 +%MOMM*%                                                       
+       11 +%LPD*%                                                        
+       12 +G01*                                                          
+       13 +G04 APERTURE LIST*                                            
+       14 +G04 Aperture macros list*                                     
+       15 +%AMRoundRect*                                                 
+       16 +0 Rectangle with rounded corners*                             
+       17 +0 $1 Rounding radius*                                         
+       18 +0 $2 $3 $4 $5 $6 $7 $8 $9 X,Y pos of 4 corners*               
+       19 +0 Add a 4 corners polygon primitive as box body*              
+       20 +4,1,4,$2,$3,$4,$5,$6,$7,$8,$9,$2,$3,0*                        
+       21 +0 Add four circle primitives for the rounded corners*         
+       22 +1,1,$1+$1,$2,$3*                                              
+       23 +1,1,$1+$1,$4,$5*                                              
+       24 +1,1,$1+$1,$6,$7*                                              
+       25 +1,1,$1+$1,$8,$9*                                              
+       26 +0 Add four rect primitives between the rounded corners*       
+       27 +20,1,$1+$1,$2,$3,$4,$5,0*                                     
+       28 +20,1,$1+$1,$4,$5,$6,$7,0*                                     
+       29 +20,1,$1+$1,$6,$7,$8,$9,0*                                     
+       30 +20,1,$1+$1,$8,$9,$2,$3,0*%                                    
+       31 +G04 Aperture macros list end*                                 
+       32 +%ADD10C,3.300000*%                                            
+       33 +%ADD11RoundRect,0.050000X0.850000X-0.850000X0.850000X0.850000X
+          +-0.850000X0.850000X-0.850000X-0.850000X0*%                    
+       34 +%ADD12C,1.800000*%                                            
+       35 +%ADD13C,3.600000*%                                            
+       36 +%ADD14O,2.600000X1.700000*%                                   
+       37 +%ADD15O,7.100000X3.600000*%                                   
+       38 +G04 APERTURE END LIST*                                        
+       39 +%LPC*%                                                        
+       40 +D10*                                                          
+     … 61 more lines (ctrl+o to expand)
+  ⎿  Created fab/gerbers/dual_adc_usb-B_Mask.gbs (+99 -0)
+       1 +G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,10.0.4*             
+       2 +G04 #@! TF.CreationDate,2026-10-16T14:12:27-04:00*             
+       3 +G04 #@! TF.ProjectId,dual_adc_usb,6475616c-5f61-4646-935f-75736
+         +22e6b69,rev?*                                                  
+       4 +G04 #@! TF.SameCoordinates,Original*                           
+       5 +G04 #@! TF.FileFunction,Soldermask,Bot*                        
+       6 +G04 #@! TF.FilePolarity,Negative*                              
+       7 +%FSLAX46Y46*%                                                  
+       8 +G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+       9 +G04 Created by KiCad (PCBNEW 10.0.4) date 2026-10-16 14:12:27* 
+      10 +%MOMM*%                                                        
+      11 +%LPD*%                                                         
+      12 +G01*                                                           
+      13 +G04 APERTURE LIST*                                             
+      14 +G04 Aperture macros list*                                      
+      15 +%AMRoundRect*                                                  
+      16 +0 Rectangle with rounded corners*                              
+      17 +0 $1 Rounding radius*                                          
+      18 +0 $2 $3 $4 $5 $6 $7 $8 $9 X,Y pos of 4 corners*                
+      19 +0 Add a 4 corners polygon primitive as box body*               
+      20 +4,1,4,$2,$3,$4,$5,$6,$7,$8,$9,$2,$3,0*                         
+      21 +0 Add four circle primitives for the rounded corners*          
+      22 +1,1,$1+$1,$2,$3*                                               
+      23 +1,1,$1+$1,$4,$5*                                               
+      24 +1,1,$1+$1,$6,$7*                                               
+      25 +1,1,$1+$1,$8,$9*                                               
+      26 +0 Add four rect primitives between the rounded corners*        
+      27 +20,1,$1+$1,$2,$3,$4,$5,0*                                      
+      28 +20,1,$1+$1,$4,$5,$6,$7,0*                                      
+      29 +20,1,$1+$1,$6,$7,$8,$9,0*                                      
+      30 +20,1,$1+$1,$8,$9,$2,$3,0*%                                     
+      31 +G04 Aperture macros list end*                                  
+      32 +%ADD10C,3.300000*%                                             
+      33 +%ADD11RoundRect,0.050000X0.850000X-0.850000X0.850000X0.850000X-
+         +0.850000X0.850000X-0.850000X-0.850000X0*%                      
+      34 +%ADD12C,1.800000*%                                             
+      35 +%ADD13C,3.600000*%                                             
+      36 +%ADD14O,2.600000X1.700000*%                                    
+      37 +%ADD15O,7.100000X3.600000*%                                    
+      38 +G04 APERTURE END LIST*                                         
+      39 +D10*                                                           
+      40 +G04 #@! TO.C,H4*                                               
+     … 59 more lines (ctrl+o to expand)
+  ⎿  Created fab/gerbers/dual_adc_usb-Edge_Cuts.gm1 (+46 -0)
+       1 +G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,10.0.4*             
+       2 +G04 #@! TF.CreationDate,2026-10-16T14:12:27-04:00*             
+       3 +G04 #@! TF.ProjectId,dual_adc_usb,6475616c-5f61-4646-935f-75736
+         +22e6b69,rev?*                                                  
+       4 +G04 #@! TF.SameCoordinates,Original*                           
+       5 +G04 #@! TF.FileFunction,Profile,NP*                            
+       6 +%FSLAX46Y46*%                                                  
+       7 +G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+       8 +G04 Created by KiCad (PCBNEW 10.0.4) date 2026-10-16 14:12:27* 
+       9 +%MOMM*%                                                        
+      10 +%LPD*%                                                         
+      11 +G01*                                                           
+      12 +G04 APERTURE LIST*                                             
+      13 +G04 #@! TA.AperFunction,Profile*                               
+      14 +%ADD10C,0.050000*%                                             
+      15 +G04 #@! TD*                                                    
+      16 +G04 APERTURE END LIST*                                         
+      17 +D10*                                                           
+      18 +X50000000Y-52000000D02*                                        
+      19 +G75*                                                           
+      20 +G02*                                                           
+      21 +X52000000Y-50000000I2000000J0D01*                              
+      22 +G01*                                                           
+      23 +X50000000Y-138000000D02*                                       
+      24 +X50000000Y-52000000D01*                                        
+      25 +X52000000Y-50000000D02*                                        
+      26 +X188000000Y-50000000D01*                                       
+      27 +X52000000Y-140000000D02*                                       
+      28 +G75*                                                           
+      29 +G02*                                                           
+      30 +X50000000Y-138000000I0J2000000D01*                             
+      31 +G01*                                                           
+      32 +X188000000Y-50000000D02*                                       
+      33 +G75*                                                           
+      34 +G02*                                                           
+      35 +X190000000Y-52000000I0J-2000000D01*                            
+      36 +G01*                                                           
+      37 +X188000000Y-140000000D02*                                      
+      38 +X52000000Y-140000000D01*                                       
+      39 +X190000000Y-52000000D02*                                       
+      40 +X190000000Y-138000000D01*                                      
+     … 6 more lines (ctrl+o to expand)
+  ⎿  Created fab/gerbers/dual_adc_usb-job.gbrjob (+167 -0)
+        1 +{                                                             
+        2 +  "Header": {                                                 
+        3 +    "GenerationSoftware": {                                   
+        4 +      "Vendor": "KiCad",                                      
+        5 +      "Application": "Pcbnew",                                
+        6 +      "Version": "10.0.4"                                     
+        7 +    },                                                        
+        8 +    "CreationDate": "2026-10-16T14:12:27-04:00"               
+        9 +  },                                                          
+       10 +  "GeneralSpecs": {                                           
+       11 +    "ProjectId": {                                            
+       12 +      "Name": "dual_adc_usb",                                 
+       13 +      "GUID": "6475616c-5f61-4646-935f-7573622e6b69",         
+       14 +      "Revision": "rev?"                                      
+       15 +    },                                                        
+       16 +    "Size": {                                                 
+       17 +      "X": 140.05,                                            
+       18 +      "Y": 90.05                                              
+       19 +    },                                                        
+       20 +    "LayerNumber": 4,                                         
+       21 +    "BoardThickness": 1.6,                                    
+       22 +    "Finish": "None"                                          
+       23 +  },                                                          
+       24 +  "DesignRules": [                                            
+       25 +    {                                                         
+       26 +      "Layers": "Outer",                                      
+       27 +      "PadToPad": 0.15,                                       
+       28 +      "PadToTrack": 0.15,                                     
+       29 +      "TrackToTrack": 0.2,                                    
+       30 +      "MinLineWidth": 0.15                                    
+       31 +    },                                                        
+       32 +    {                                                         
+       33 +      "Layers": "Inner",                                      
+       34 +      "PadToPad": 0.0,                                        
+       35 +      "PadToTrack": 0.0,                                      
+       36 +      "TrackToTrack": 0.2,                                    
+       37 +      "TrackToRegion": 0.15,                                  
+       38 +      "RegionToRegion": 0.15                                  
+       39 +    }                                                         
+       40 +  ],                                                          
+     … 127 more lines (ctrl+o to expand)
+  ⎿  … 10 more files changed
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1;
+      K="/home/devb/bin/kicad10 kicad-cli"
+      $K pcb export pos --format csv --units mm --side bo…)
+  ⎿  Wrote position data to 'out/pos_raw.csv'.
+     Ref,Val,Package,PosX,PosY,Rot,Side
+     "C101","2.2pF C0G","C_0603_1608Metric",72.000000,-64.000000,0.000000,t
+     … +17 lines (ctrl+o to expand)
+  ⎿  Created out/pos_raw.csv (+175 -0)
+        1 +Ref,Val,Package,PosX,PosY,Rot,Side                            
+        2 +"C101","2.2pF C0G","C_0603_1608Metric",72.000000,-64.000000,0.
+          +000000,top                                                    
+        3 +"C102","27pF C0G","C_0603_1608Metric",79.000000,-73.000000,90.
+          +000000,top                                                    
+        4 +"C103","4.5-20pF","C_Trimmer_Murata_TZB4-A",79.000000,-78.0000
+          +00,0.000000,top                                               
+        5 +"C104","22pF C0G","C_0603_1608Metric",104.000000,-64.000000,0.
+          +000000,top                                                    
+        6 +"C105","22pF C0G","C_0603_1608Metric",104.000000,-76.000000,0.
+          +000000,top                                                    
+        7 +"C106","220pF C0G","C_0603_1608Metric",112.500000,-70.000000,9
+          +0.000000,top                                                  
+        8 +"C107","100nF","C_0402_1005Metric",88.500000,-65.500000,0.0000
+          +00,top                                                        
+        9 +"C108","1uF","C_0603_1608Metric",91.500000,-65.500000,0.000000
+          +,top                                                          
+       10 +"C109","100nF","C_0402_1005Metric",87.500000,-76.500000,0.0000
+          +00,top                                                        
+       11 +"C110","1uF","C_0603_1608Metric",91.500000,-76.500000,0.000000
+          +,top                                                          
+       12 +"C111","100nF","C_0402_1005Metric",100.500000,-64.000000,0.000
+          +000,top                                                       
+       13 +"C112","1uF","C_0603_1608Metric",100.000000,-76.500000,0.00000
+          +0,top                                                         
+       14 +"C201","2.2pF C0G","C_0603_1608Metric",72.000000,-106.000000,0
+          +.000000,top                                                   
+       15 +"C202","27pF C0G","C_0603_1608Metric",79.000000,-115.000000,90
+          +.000000,top                                                   
+       16 +"C203","4.5-20pF","C_Trimmer_Murata_TZB4-A",79.000000,-120.000
+          +000,0.000000,top                                              
+       17 +"C204","22pF C0G","C_0603_1608Metric",104.000000,-106.000000,0
+          +.000000,top                                                   
+       18 +"C205","22pF C0G","C_0603_1608Metric",104.000000,-118.000000,0
+          +.000000,top                                                   
+       19 +"C206","220pF C0G","C_0603_1608Metric",112.500000,-112.000000,
+          +90.000000,top                                                 
+       20 +"C207","100nF","C_0402_1005Metric",88.500000,-107.500000,0.000
+          +000,top                                                       
+       21 +"C208","1uF","C_0603_1608Metric",91.500000,-107.500000,0.00000
+          +0,top                                                         
+       22 +"C209","100nF","C_0402_1005Metric",87.500000,-118.500000,0.000
+          +000,top                                                       
+       23 +"C210","1uF","C_0603_1608Metric",91.500000,-118.500000,0.00000
+          +0,top                                                         
+       24 +"C211","100nF","C_0402_1005Metric",100.500000,-106.000000,0.00
+          +0000,top                                                      
+       25 +"C212","1uF","C_0603_1608Metric",100.000000,-118.500000,0.0000
+          +00,top                                                        
+       26 +"C301","2.2uF","C_0603_1608Metric",108.300000,-86.500000,0.000
+          +000,top                                                       
+       27 +"C302","2.2uF","C_0603_1608Metric",104.800000,-99.100000,0.000
+          +000,top                                                       
+       28 +"C303","2.2uF","C_0603_1608Metric",108.300000,-88.300000,0.000
+          +000,top                                                       
+       29 +"C304","100nF","C_0402_1005Metric",108.300000,-90.100000,0.000
+          +000,top                                                       
+       30 +"C305","100nF","C_0402_1005Metric",108.300000,-91.900000,0.000
+          +000,top                                                       
+       31 +"C306","100nF","C_0402_1005Metric",108.300000,-93.700000,0.000
+          +000,top                                                       
+       32 +"C307","2.2uF","C_0603_1608Metric",108.300000,-95.500000,0.000
+          +000,top                                                       
+       33 +"C308","100nF","C_0402_1005Metric",108.300000,-97.300000,0.000
+          +000,top                                                       
+       34 +"C309","100nF","C_0402_1005Metric",110.300000,-99.100000,0.000
+          +000,top                                                       
+       35 +"C310","100nF","C_0402_1005Metric",108.300000,-99.100000,0.000
+          +000,top                                                       
+       36 +"C311","100nF","C_0402_1005Metric",112.000000,-81.000000,0.000
+          +000,top                                                       
+       37 +"C312","100nF","C_0402_1005Metric",114.000000,-81.000000,0.000
+          +000,top                                                       
+       38 +"C313","100nF","C_0402_1005Metric",116.000000,-81.000000,0.000
+          +000,top                                                       
+       39 +"C314","100nF","C_0402_1005Metric",118.000000,-81.000000,0.000
+          +000,top                                                       
+       40 +"C315","10uF","C_0805_2012Metric",124.800000,-81.000000,0.0000
+          +00,top                                                        
+     … 135 more lines (ctrl+o to expand)
+  ⎿  Created fab/dual_adc_usb_cpl_jlcpcb.csv (+171 -0)
+        1 +Designator,Mid X,Mid Y,Layer,Rotation                         
+        2 +C101,72.000000mm,-64.000000mm,Top,0.000000                    
+        3 +C102,79.000000mm,-73.000000mm,Top,90.000000                   
+        4 +C103,79.000000mm,-78.000000mm,Top,0.000000                    
+        5 +C104,104.000000mm,-64.000000mm,Top,0.000000                   
+        6 +C105,104.000000mm,-76.000000mm,Top,0.000000                   
+        7 +C106,112.500000mm,-70.000000mm,Top,90.000000                  
+        8 +C107,88.500000mm,-65.500000mm,Top,0.000000                    
+        9 +C108,91.500000mm,-65.500000mm,Top,0.000000                    
+       10 +C109,87.500000mm,-76.500000mm,Top,0.000000                    
+       11 +C110,91.500000mm,-76.500000mm,Top,0.000000                    
+       12 +C111,100.500000mm,-64.000000mm,Top,0.000000                   
+       13 +C112,100.000000mm,-76.500000mm,Top,0.000000                   
+       14 +C201,72.000000mm,-106.000000mm,Top,0.000000                   
+       15 +C202,79.000000mm,-115.000000mm,Top,90.000000                  
+       16 +C203,79.000000mm,-120.000000mm,Top,0.000000                   
+       17 +C204,104.000000mm,-106.000000mm,Top,0.000000                  
+       18 +C205,104.000000mm,-118.000000mm,Top,0.000000                  
+       19 +C206,112.500000mm,-112.000000mm,Top,90.000000                 
+       20 +C207,88.500000mm,-107.500000mm,Top,0.000000                   
+       21 +C208,91.500000mm,-107.500000mm,Top,0.000000                   
+       22 +C209,87.500000mm,-118.500000mm,Top,0.000000                   
+       23 +C210,91.500000mm,-118.500000mm,Top,0.000000                   
+       24 +C211,100.500000mm,-106.000000mm,Top,0.000000                  
+       25 +C212,100.000000mm,-118.500000mm,Top,0.000000                  
+       26 +C301,108.300000mm,-86.500000mm,Top,0.000000                   
+       27 +C302,104.800000mm,-99.100000mm,Top,0.000000                   
+       28 +C303,108.300000mm,-88.300000mm,Top,0.000000                   
+       29 +C304,108.300000mm,-90.100000mm,Top,0.000000                   
+       30 +C305,108.300000mm,-91.900000mm,Top,0.000000                   
+       31 +C306,108.300000mm,-93.700000mm,Top,0.000000                   
+       32 +C307,108.300000mm,-95.500000mm,Top,0.000000                   
+       33 +C308,108.300000mm,-97.300000mm,Top,0.000000                   
+       34 +C309,110.300000mm,-99.100000mm,Top,0.000000                   
+       35 +C310,108.300000mm,-99.100000mm,Top,0.000000                   
+       36 +C311,112.000000mm,-81.000000mm,Top,0.000000                   
+       37 +C312,114.000000mm,-81.000000mm,Top,0.000000                   
+       38 +C313,116.000000mm,-81.000000mm,Top,0.000000                   
+       39 +C314,118.000000mm,-81.000000mm,Top,0.000000                   
+       40 +C315,124.800000mm,-81.000000mm,Top,0.000000                   
+     … 131 more lines (ctrl+o to expand)
+  ⎿  Created fab/dual_adc_usb_bom_jlcpcb.csv (+57 -0)
+       1 +Comment,Designator,Footprint,LCSC Part #,Quantity              
+       2 +2.2pF C0G,"C101,C201",C_0603_1608Metric,,2                     
+       3 +27pF C0G,"C102,C202",C_0603_1608Metric,,2                      
+       4 +4.5-20pF,"C103,C203",C_Trimmer_Murata_TZB4-A,,2                
+       5 +22pF C0G,"C104,C105,C204,C205",C_0603_1608Metric,,4            
+       6 +220pF C0G,"C106,C206",C_0603_1608Metric,,2                     
+       7 +100nF,"C107,C109,C111,C207,C209,C211,C304-C306,C308-C314,C316-C
+         +318,C504,C506-C508,C510-C515,C601-C604,C606-C611,C613-C621,C623
+         +,C625,C627",C_0402_1005Metric,,51                              
+       8 +1uF,"C108,C110,C112,C208,C210,C212,C403,C404,C406,C410,C411",C_
+         +0603_1608Metric,,11                                            
+       9 +2.2uF,"C301-C303,C307,C405,C408,C409",C_0603_1608Metric,,7     
+      10 +10uF,"C315,C605,C612,C622,C624,C626",C_0805_2012Metric,,6      
+      11 +4.7uF,C401,C_0805_2012Metric,,1                                
+      12 +22uF,C402,C_0805_2012Metric,,1                                 
+      13 +4.7uF,"C407,C505,C509",C_0603_1608Metric,,3                    
+      14 +4.7nF,C501,C_0603_1608Metric,,1                                
+      15 +18pF,"C502,C503",C_0402_1005Metric,,2                          
+      16 +BAV199DW,"D101,D201",SOT-363_SC-70-6,,2                        
+      17 +GREEN,"D401,D601",LED_0603_1608Metric,,2                       
+      18 +RED,D602,LED_0603_1608Metric,,1                                
+      19 +600R@100MHz,FB501,L_0805_2012Metric,,1                         
+      20 +BNC,"J101,J201",BNC_Amphenol_B6252HB-NPP3G-50_Horizontal,,2    
+      21 +USB_B,J501,USB_B_OST_USB-B1HSxx_Horizontal,,1                  
+      22 +EXP,J601,PinHeader_2x05_P2.54mm_Vertical,,1                    
+      23 +2.2uH,L401,L_Taiyo-Yuden_NR-30xx,,1                            
+      24 +2N7002,Q401,SOT-23,,1                                          
+      25 +953k 0.1%,"R101,R201",R_1206_3216Metric,,2                     
+      26 +49.9k 0.1%,"R102,R202",R_0603_1608Metric,,2                    
+      27 +200,"R103,R203",R_0603_1608Metric,,2                           
+      28 +499 0.1%,"R104,R105,R204,R205",R_0603_1608Metric,,4            
+      29 +953 0.1%,"R106,R107,R206,R207",R_0603_1608Metric,,4            
+      30 +49.9,"R108,R109,R208,R209",R_0603_1608Metric,,4                
+      31 +10k,"R301,R410,R503,R505-R507,R602-R604",R_0402_1005Metric,,9  
+      32 +20k,R302,R_0402_1005Metric,,1                                  
+      33 +33,"R303,R304,R601",R_0402_1005Metric,,3                       
+      34 +316k,R401,R_0402_1005Metric,,1                                 
+      35 +100k,"R402,R409",R_0402_1005Metric,,2                          
+      36 +115k,"R405,R407",R_0402_1005Metric,,2                          
+      37 +49.9k,"R406,R408",R_0402_1005Metric,,2                         
+      38 +1k,"R411,R607,R608",R_0402_1005Metric,,3                       
+      39 +1M,R501,R_0603_1608Metric,,1                                   
+      40 +12k 1%,R502,R_0402_1005Metric,,1                               
+     … 17 more lines (ctrl+o to expand)
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1;
+      python3 - <<'E'
+      import csv,re…)
+  ⎿  parts 170
+     57
+     100nF,"C107,C109,C111,C207,C209,C211,C304,C305,C306,C308,C309,C310,C31
+     1,C312,C313,C314,C316,C317,C318,C504,C506,C507,C50
+  ⎿  Updated fab/dual_adc_usb_bom_jlcpcb.csv (+3 -3)
+       4  4.5-20pF,"C103,C203",C_Trimmer_Murata_TZB4-A,,2
+       5  22pF C0G,"C104,C105,C204,C205",C_0603_1608Metric,,4
+       6  220pF C0G,"C106,C206",C_0603_1608Metric,,2
+       7 -100nF,"C107,C109,C111,C207,C209,C211,C304-C306,C308-C314,C316-C
+         -318,C504,C506-C508,C510-C515,C601-C604,C606-C611,C613-C621,C623
+         -,C625,C627",C_0402_1005Metric,,51                              
+       7 +100nF,"C107,C109,C111,C207,C209,C211,C304,C305,C306,C308,C309,C
+         +310,C311,C312,C313,C314,C316,C317,C318,C504,C506,C507,C508,C510
+         +,C511,C512,C513,C514,C515,C601,C602,C603,C604,C606,C607,C608,C6
+         +09,C610,C611,C613,C614,C615,C616,C617,C618,C619,C620,C621,C623,
+         +C625,C627",C_0402_1005Metric,,51                               
+       8  1uF,"C108,C110,C112,C208,C210,C212,C403,C404,C406,C410,C411",C_
+          0603_1608Metric,,11
+       9 -2.2uF,"C301-C303,C307,C405,C408,C409",C_0603_1608Metric,,7     
+       9 +2.2uF,"C301,C302,C303,C307,C405,C408,C409",C_0603_1608Metric,,7
+      10  10uF,"C315,C605,C612,C622,C624,C626",C_0805_2012Metric,,6
+      11  4.7uF,C401,C_0805_2012Metric,,1
+      12  22uF,C402,C_0805_2012Metric,,1
+     ...
+      28  499 0.1%,"R104,R105,R204,R205",R_0603_1608Metric,,4
+      29  953 0.1%,"R106,R107,R206,R207",R_0603_1608Metric,,4
+      30  49.9,"R108,R109,R208,R209",R_0603_1608Metric,,4
+      31 -10k,"R301,R410,R503,R505-R507,R602-R604",R_0402_1005Metric,,9  
+      31 +10k,"R301,R410,R503,R505,R506,R507,R602,R603,R604",R_0402_1005M
+         +etric,,9                                                       
+      32  20k,R302,R_0402_1005Metric,,1
+      33  33,"R303,R304,R601",R_0402_1005Metric,,3
+      34  316k,R401,R_0402_1005Metric,,1
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Fab outputs are done. Now I'm rendering the PCB image.
+
+● Bash(cd /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1;
+      K="/home/devb/bin/kicad10 kicad-cli"
+      $K pcb export svg --mode-single --page-size-mode 2…)
+  ⎿  Plotted to 'out/board.svg'.
+     Done.
+     dual_adc_usb_pcb.png: PNG image data, 2204 x 1417, 8-bit/color RGBA, n
+     on-interlaced
+  ⎿  2 files changed (binary, mode only or too large to show)
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(executive_summary.md)
+  ⎿  Wrote 115 lines to executive_summary.md
+       1 # dual_adc_usb — Design Review & Fab Output Summary
+       2 
+         icad-cli`)
+       4 
+       5 ## What the board is
+       7 A 2-channel, 12-bit, 10 Msps USB data-acquisition board (140 × 9
+         0 mm, 4 layers, 170 parts, all on the top side):
+       8 
+      10 BNC ─► 1MΩ/20:1 compensated divider ─► ADA4817 buffer ─► THS4521
+          FDA (×1.91) ─► LTC2290 dual ADC ─┐
+     … +204 lines (ctrl+o to expand)
+
+● I did everything in analysis_prompt.txt, and the review found real problems
+  even though ERC and DRC report no errors (only warnings). I didn't change any
+  design files. Statements about how parts behave come from what I remember of
+  the datasheets, not from documents I checked during this review; the summary
+  marks them (datasheet recall).
+
+  Top findings:
+  1. Input clamp diodes do nothing (D101/D201). The divider node goes to the
+     midpoint of one diode pair whose ends aren't connected, while the other
+     pair's ends go to the rails with its midpoint floating. That's certain from
+     the netlist as drawn; it's still worth checking the symbol's pin numbering
+     against the real part.
+  2. Decoupling capacitors are far from their pins. Distances are 5.6–11 mm on
+     the ADC, up to 22 mm on the FPGA, 8–14 mm on the SDRAM and 14–16 mm on the
+     FT2232H core pins. On the LM27762 (the ±4 V supply) the 8–10 mm distance
+     may also hurt its stability, not just add noise.
+  3. The FPGA has no clock until USB enumerates. The 10 MHz oscillator is
+     powered from the same 3.0 V regulator that the FT2232H's PWREN# signal
+     switches on.
+  4. Medium-level issues:
+     - The FT2232H mode plan may conflict: channel A is wired for sync FIFO and
+       channel B for flash programming, and I believe channel B is unavailable
+       in sync-FIFO mode.
+     - The USB pair isn't routed as a controlled-impedance differential pair.
+     - The unpowered ADC can be back-powered through the FPGA's pins.
+     - The ±4 V charge pump sits between the two analog channels.
+
+  Fab outputs:
+  - No LCSC part numbers: the design has none, so every BOM line must be matched
+    in JLC's tool. I haven't checked stock for the specialty chips.
+  - Through-hole parts: the connectors are in the placement file, so either
+    order through-hole assembly or remove them.
+  - Rotations: check every part in JLC's placement preview before ordering,
+    because KiCad and JLC define zero rotation differently for many packages.
+
+  Files are in
+  /home/devb/projects/AI/ai-circuit-design-tests/null-tests/analyze-1/:
+  - executive_summary.md — full write-up with severity, certainty, what checked
+    out OK, and next steps
+  - fab/dual_adc_usb_jlcpcb_gerbers.zip
+  - fab/dual_adc_usb_bom_jlcpcb.csv
+  - fab/dual_adc_usb_cpl_jlcpcb.csv
+  - dual_adc_usb_pcb.png
+  - out/ — ERC/DRC reports, netlist and per-chip pin-to-net map
+✻ Brewed for 6m 8s · done 2:14 PM

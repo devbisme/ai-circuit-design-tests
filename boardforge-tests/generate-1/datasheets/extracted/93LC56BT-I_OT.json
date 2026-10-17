@@ -1,0 +1,210 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {}
+ },
+ "source": {
+  "manufacturer": "Microchip",
+  "mpn": "93LC56BT-I/OT",
+  "datasheet_revision": "DS20001960",
+  "local_path": "93LC56BT-I_OT.pdf",
+  "sha256": "sha256:7df346598452af5a980abaf9c2931d871e29439595bac427a442fe55f61711a1",
+  "page_count": 42
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 55
+ },
+ "base": {
+  "family": "Microwire EEPROM",
+  "description": "2 Kbit Microwire EEPROM, 128 x 16 (B version, no ORG)",
+  "package": {
+   "code": "SOT-23-6 (OT)",
+   "pin_count": 6,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.6,
+    "height": 1.45
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 2,
+    "section": "Package Types (SOT-23)",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "DO",
+    "type": "tri_state",
+    "description": "Serial data output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "VSS",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "DI",
+    "type": "input",
+    "description": "Serial data input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "CLK",
+    "type": "input",
+    "description": "Serial clock",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "CS",
+    "type": "input",
+    "description": "Chip select",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "VCC",
+    "type": "power_in",
+    "description": "Supply",
+    "power_domain": "VCC",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Package Types (SOT-23)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VCC_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 7.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VCC": [
+    {
+     "min": 2.5,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": "93LC56B",
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Device Selection Table",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": "Industrial (I)",
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Features",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": []
+}

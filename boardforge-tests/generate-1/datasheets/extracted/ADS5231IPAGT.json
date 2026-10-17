@@ -1,0 +1,1158 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {}
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "ADS5231IPAGT",
+  "datasheet_revision": "SBAS295A",
+  "local_path": "ADS5231IPAGT.pdf",
+  "sha256": "sha256:9e8605025b6d3662b289c0123d81ac936af24f219515ec03042cad0f9d13c41f",
+  "page_count": 32
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 61
+ },
+ "base": {
+  "family": "pipelined ADC",
+  "description": "Dual 12-bit 40 MSPS 3.3 V ADC",
+  "package": {
+   "code": "TQFP-64 (PAG)",
+   "pin_count": 64,
+   "pitch_mm": 0.5,
+   "body_mm": {
+    "length": 10.0,
+    "width": 10.0,
+    "height": 1.2
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 11,
+    "section": "PIN CONFIGURATION / Ordering",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "3",
+     "46",
+     "57"
+    ],
+    "name": "AVDD",
+    "type": "power_in",
+    "description": "Analog supply",
+    "power_domain": "AVDD",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5",
+     "8",
+     "40",
+     "43"
+    ],
+    "name": "VDRV",
+    "type": "power_in",
+    "description": "Output buffer supply",
+    "power_domain": "VDRV",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2",
+     "47",
+     "48",
+     "49",
+     "55",
+     "58",
+     "59",
+     "61",
+     "64"
+    ],
+    "name": "AGND",
+    "type": "power_in",
+    "description": "Analog ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4",
+     "7",
+     "23",
+     "25",
+     "44"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Output buffer ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "50"
+    ],
+    "name": "INA+",
+    "type": "input",
+    "description": "Analog input channel A (datasheet: INA)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "51"
+    ],
+    "name": "INA-",
+    "type": "input",
+    "description": "Complementary analog input channel A (datasheet: INA overbar)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "63"
+    ],
+    "name": "INB+",
+    "type": "input",
+    "description": "Analog input channel B (datasheet: INB)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "62"
+    ],
+    "name": "INB-",
+    "type": "input",
+    "description": "Complementary analog input channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "52"
+    ],
+    "name": "CM",
+    "type": "output",
+    "description": "Common-mode voltage output (1.5 V typ)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "53"
+    ],
+    "name": "REFT",
+    "type": "bidirectional",
+    "description": "Top reference/bypass: 2 ohm in series with 0.1 uF to ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "54"
+    ],
+    "name": "REFB",
+    "type": "bidirectional",
+    "description": "Bottom reference/bypass: 2 ohm in series with 0.1 uF to ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "60"
+    ],
+    "name": "ISET",
+    "type": "passive",
+    "description": "Bias current setting resistor 56.2 kohm to ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "56"
+    ],
+    "name": "INT/EXT",
+    "type": "input",
+    "description": "Reference select: 0 = external (default), 1 = internal",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "24"
+    ],
+    "name": "CLK",
+    "type": "input",
+    "description": "Clock input (CMOS, single-ended)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "SEL",
+    "type": "input",
+    "description": "Serial interface select; 1 = serial enabled; low-going pulse after power-up resets registers",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "41"
+    ],
+    "name": "MSBI/SEN",
+    "type": "input",
+    "description": "SEL=0: MSB invert; SEL=1: serial write enable",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "42"
+    ],
+    "name": "OEA/SCLK",
+    "type": "input",
+    "description": "SEL=0: output enable A (0=enabled); SEL=1: serial clock",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "45"
+    ],
+    "name": "STPD/SDATA",
+    "type": "input",
+    "description": "SEL=0: power-down (1=PD); SEL=1: serial data",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "OEB",
+    "type": "input",
+    "description": "Output enable channel B (0 = enabled, default)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "39"
+    ],
+    "name": "OVRA",
+    "type": "output",
+    "description": "Over-range channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "9"
+    ],
+    "name": "OVRB",
+    "type": "output",
+    "description": "Over-range channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "26"
+    ],
+    "name": "DVA",
+    "type": "output",
+    "description": "Data valid channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "22"
+    ],
+    "name": "DVB",
+    "type": "output",
+    "description": "Data valid channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "27"
+    ],
+    "name": "D0_A",
+    "type": "tri_state",
+    "description": "Data bit D0 channel A (LSB)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "28"
+    ],
+    "name": "D1_A",
+    "type": "tri_state",
+    "description": "Data bit D1 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "29"
+    ],
+    "name": "D2_A",
+    "type": "tri_state",
+    "description": "Data bit D2 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "30"
+    ],
+    "name": "D3_A",
+    "type": "tri_state",
+    "description": "Data bit D3 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "31"
+    ],
+    "name": "D4_A",
+    "type": "tri_state",
+    "description": "Data bit D4 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "32"
+    ],
+    "name": "D5_A",
+    "type": "tri_state",
+    "description": "Data bit D5 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "33"
+    ],
+    "name": "D6_A",
+    "type": "tri_state",
+    "description": "Data bit D6 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "34"
+    ],
+    "name": "D7_A",
+    "type": "tri_state",
+    "description": "Data bit D7 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "35"
+    ],
+    "name": "D8_A",
+    "type": "tri_state",
+    "description": "Data bit D8 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "36"
+    ],
+    "name": "D9_A",
+    "type": "tri_state",
+    "description": "Data bit D9 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "37"
+    ],
+    "name": "D10_A",
+    "type": "tri_state",
+    "description": "Data bit D10 channel A",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "38"
+    ],
+    "name": "D11_A",
+    "type": "tri_state",
+    "description": "Data bit D11 channel A (MSB)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "10"
+    ],
+    "name": "D0_B",
+    "type": "tri_state",
+    "description": "Data bit D0 channel B (LSB)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "11"
+    ],
+    "name": "D1_B",
+    "type": "tri_state",
+    "description": "Data bit D1 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "12"
+    ],
+    "name": "D2_B",
+    "type": "tri_state",
+    "description": "Data bit D2 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "13"
+    ],
+    "name": "D3_B",
+    "type": "tri_state",
+    "description": "Data bit D3 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "14"
+    ],
+    "name": "D4_B",
+    "type": "tri_state",
+    "description": "Data bit D4 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "15"
+    ],
+    "name": "D5_B",
+    "type": "tri_state",
+    "description": "Data bit D5 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "16"
+    ],
+    "name": "D6_B",
+    "type": "tri_state",
+    "description": "Data bit D6 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 11,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "17"
+    ],
+    "name": "D7_B",
+    "type": "tri_state",
+    "description": "Data bit D7 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "18"
+    ],
+    "name": "D8_B",
+    "type": "tri_state",
+    "description": "Data bit D8 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "19"
+    ],
+    "name": "D9_B",
+    "type": "tri_state",
+    "description": "Data bit D9 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "20"
+    ],
+    "name": "D10_B",
+    "type": "tri_state",
+    "description": "Data bit D10 channel B",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "21"
+    ],
+    "name": "D11_B",
+    "type": "tri_state",
+    "description": "Data bit D11 channel B (MSB)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 12,
+     "section": "PIN DESCRIPTIONS",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "AVDD_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 3.8,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VDRV_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 3.8,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "AVDD_VDRV_diff": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 0.3,
+     "unit": "V",
+     "condition": "Voltage between AVDD and VDRV",
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VAIN": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 3.3,
+     "unit": "V",
+     "condition": "Analog input pins; lower of 3.3 V or AVDD+0.3 V",
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 105,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "Tstg": [
+    {
+     "min": -65,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "ABSOLUTE MAXIMUM RATINGS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "AVDD": [
+    {
+     "min": 3.0,
+     "typ": 3.3,
+     "max": 3.6,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VDRV": [
+    {
+     "min": 3.0,
+     "typ": 3.3,
+     "max": 3.6,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "fs_pll_disabled": [
+    {
+     "min": 2000000.0,
+     "typ": null,
+     "max": 30000000.0,
+     "unit": "Hz",
+     "condition": "ADCLK sample rate, PLL disabled",
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "fs_pll_enabled": [
+    {
+     "min": 20000000.0,
+     "typ": null,
+     "max": 40000000.0,
+     "unit": "Hz",
+     "condition": "ADCLK sample rate, PLL enabled (default)",
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VIL_CLK": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 0.6,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VIH_CLK": [
+    {
+     "min": 2.2,
+     "typ": null,
+     "max": null,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 42.8,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "theta_jc": [
+    {
+     "min": null,
+     "typ": 18.7,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "RECOMMENDED OPERATING CONDITIONS",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": []
+}

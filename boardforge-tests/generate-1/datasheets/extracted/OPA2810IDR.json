@@ -1,0 +1,450 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "opamp": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "OPA2810IDR",
+  "datasheet_revision": "SBOS789C",
+  "local_path": "OPA2810IDR.pdf",
+  "sha256": "sha256:6ee8a464a8f0bd03c16fc91e594a017d3c3956e6bf53c80e01611fb34876506d",
+  "page_count": 52
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 90
+ },
+ "base": {
+  "family": "operational amplifier",
+  "description": "Dual 27 V RRIO FET-input op amp, GBW 70 MHz",
+  "package": {
+   "code": "SOIC-8 (D)",
+   "pin_count": 8,
+   "pitch_mm": 1.27,
+   "body_mm": {
+    "length": 4.9,
+    "width": 3.91,
+    "height": 1.75
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 1,
+    "section": "Device Information",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "VO1",
+    "type": "output",
+    "description": "Amplifier 1 output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "VIN1-",
+    "type": "input",
+    "description": "Amplifier 1 inverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "VIN1+",
+    "type": "input",
+    "description": "Amplifier 1 noninverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "VS-",
+    "type": "power_in",
+    "description": "Negative power supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "VIN2+",
+    "type": "input",
+    "description": "Amplifier 2 noninverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "VIN2-",
+    "type": "input",
+    "description": "Amplifier 2 inverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "7"
+    ],
+    "name": "VO2",
+    "type": "output",
+    "description": "Amplifier 2 output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "8"
+    ],
+    "name": "VS+",
+    "type": "power_in",
+    "description": "Positive power supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VS_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 28,
+     "unit": "V",
+     "condition": "Total bipolar supply (\u00b114 V)",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VIN_diff": [
+    {
+     "min": -7,
+     "typ": null,
+     "max": 7,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "Tstg": [
+    {
+     "min": -65,
+     "typ": null,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VS": [
+    {
+     "min": 4.75,
+     "typ": null,
+     "max": 27,
+     "unit": "V",
+     "condition": "Total supply",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": 25,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 123.9,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": "D (SOIC)",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.4 Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {
+   "HBM": [
+    {
+     "min": null,
+     "typ": 2500,
+     "max": null,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.2 ESD Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "CDM": [
+    {
+     "min": null,
+     "typ": 1500,
+     "max": null,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "7.2 ESD Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "opamp"
+ ],
+ "opamp": {
+  "opamp_topology": "rail_to_rail_io",
+  "channels": 2,
+  "vsupply_range": [
+   {
+    "min": 4.75,
+    "typ": null,
+    "max": 27,
+    "unit": "V",
+    "condition": "Total supply VS+ - VS-",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vsupply_split_capable": true,
+  "iq_per_amp": [
+   {
+    "min": null,
+    "typ": 0.0036,
+    "max": null,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "gbw": [
+   {
+    "min": null,
+    "typ": 70000000.0,
+    "max": null,
+    "unit": "Hz",
+    "condition": "G = 11, Vo = 20 mVpp, VS = \u00b15 V",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Electrical Characteristics: 10 V (VS = \u00b15 V)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "slew_rate": [
+   {
+    "min": null,
+    "typ": 192000000.0,
+    "max": null,
+    "unit": "V/s",
+    "condition": "G = 2, -2 V to 2 V step",
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Electrical Characteristics: 10 V (VS = \u00b15 V)",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vos": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.0015,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "ib": [
+   {
+    "min": null,
+    "typ": 2e-12,
+    "max": null,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Features",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "unity_gain_stable": true
+ }
+}

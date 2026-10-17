@@ -1,0 +1,77 @@
+* dual_adc_10msps AFE channel A - nominal testbench (boardforge-equivalent models: op-amp 1-pole GBW 70 MHz, FDA 135 MHz). Run: ngspice -b afe_nominal.cir
+.option rshunt=1e9
+.subckt opa inp inn out vcc vee
+Rin inp inn 1T
+E1 int 0 inp inn 100000
+R1 int out_int 1
+C1 out_int 0 227.4u
+Dhigh out_int vcc_int DLIMIT
+Dlow vee_int out_int DLIMIT
+Vswh vcc vcc_int DC 0
+Vswl vee_int vee DC 0
+.model DLIMIT D(IS=1e-14 N=0.01)
+Eout out 0 out_int 0 1
+.ends opa
+.subckt fda inp inn outp outn vocm vcc vee
+Rin inp inn 1e9
+E1 d 0 inp inn 100000
+R1 d dp 1
+C1 dp 0 0.000117893
+Bp outp 0 V=V(vocm)+V(dp)/2
+Bn outn 0 V=V(vocm)-V(dp)/2
+.ends fda
+
+VSIG vin 0 DC 0 AC 1
+R101 vin att 953000.0
+C101 vin att 8.2e-12
+C102 vin att 3.3e-12
+R102 att 0 49900.0
+C103 att 0 2.2e-10
+R103 att bufin 1000
+XUA bufin buf buf vp vn opa
+Ra1 buf a1 887
+Ra2 a1 a2 453
+Ca1 a1 ska 2.7e-10
+Ca2 a2 0 1e-10
+XUB a2 ska ska vp vn opa
+Rb1 ska b1 374
+Rb2 b1 b2 232
+Cb1 b1 skb 1.8e-09
+Cb2 b2 0 8.2e-11
+XUC b2 skb skb vp vn opa
+Rm1a skb xa 698
+Cm1a xa 0 3.3e-10
+Rm2a xa outn 1270
+Rm3a xa inp 576
+Cm2a inp outn 8.2e-11
+Rm1b 0 xb 698
+Cm1b xb 0 3.3e-10
+Rm2b xb outp 1270
+Rm3b xb inn 576
+Cm2b inn outp 8.2e-11
+XF inp inn outp outn cm v33 0 fda
+Ccm cm 0 100n
+Rka outp ainp 46.4
+Rkb outn ainn 46.4
+Ck ainp ainn 1.2e-09
+Vp vp 0 4
+Vn vn 0 -4
+V33 v33 0 3.3
+.control
+ac dec 400 10 100e6
+let g = db(v(ainp)-v(ainn))
+meas ac g1k find g at=1e3
+meas ac g100k find g at=100e3
+meas ac g500k find g at=500e3
+meas ac g1m find g at=1e6
+meas ac g5m find g at=5e6
+meas ac g10m find g at=10e6
+meas ac g40m find g at=40e6
+meas ac gmax max g from=1e3 to=1.5e6
+meas ac gmin min g from=1e3 to=1e6
+meas ac gska max db(v(ska)/v(att)) from=1e3 to=10e6
+meas ac gskb max db(v(skb)/v(att)) from=1e3 to=10e6
+meas ac gx max db(v(xa)/v(att)) from=1e3 to=10e6
+meas ac f3 when g=-23.92 
+.endc
+.end

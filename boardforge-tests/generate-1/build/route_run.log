@@ -1,0 +1,11 @@
+[c4] routing: warn (685.5 s)
+  {"unrouted": 0, "drc_errors": 0, "fanout": {"pads": 289, "vias": 254, "failed": 2}, "chain": [{"router": "freerouting", "ok": true, "unrouted": 2, "stats": {"drc_errors": 64, "seconds": 471.5, "tracks": 3115, "vias": 589, "notes": ["+3V3: 94 pins -> 1", "GND: 210 pins -> 1"]}}, {"router": "astar", "ok": true, "unrouted": 0, "stats": {"drc_errors": 0, "history": ["2+64err", 32, 1, 1, 0], "ripups": 1, "repair_removed": 64}}], "finish": {"dangling_removed": 0, "widened": 0, "pours_added": ["GND@F.Cu", "GND@B.Cu"], "stitching_vias": 118}, "fiducials": 3}
+  ! fanout failed for 2 pads: ['U1001.130 (GND)', 'U1001.136 (GND)']
+  ! cleanup disconnected copper (0 -> 3 unconnected); kept the board without cleanup
+[c5] checks: warn (76.3 s)
+  {"drc": {"errors": 0, "warnings": 50, "unconnected": 0, "parity": 0, "error_items": []}, "board": {"board_mm": [100.1, 80.1], "copper_layers": 4, "parts_top": 239, "parts_bottom": 0, "track_mm": 6190, "vias": 714}, "decaps": {"checked": 81, "far": [{"ref": "C709", "value": "2.2u", "net": "-4V0A", "nearest": "U702.6", "mm": 6.0}, {"ref": "C309", "value": "100n", "net": "/adc/+3V3_ADCIO", "nearest": "U301.43", "mm": 4.7}, {"ref": "C311", "value": "100n", "net": "/adc/+3V3_ADCIO", "nearest": "U301.40", "mm": 4.1}, {"ref": "C221", "value": "2.2u", "net": "-4V0A", "nearest": "U201.4", "mm": 3.6}, {...
+  ! rail currents: no regulator outputs ['+4V0A', '-4V0A']
+  ! 8 decaps farther than 3.0 mm from their IC pin (reports/geometry.json)
+[c6] fab outputs: warn (10.9 s)
+  {"gerbers": 16, "zip": "fab/dual_adc_10msps-gerbers.zip", "bom": "fab/dual_adc_10msps-bom-jlcpcb.csv", "bom_lines": 72, "cpl": "fab/dual_adc_10msps-cpl-jlcpcb.csv", "placements": 159, "renders": ["pcb_3d_top.png", "pcb_3d_bottom.png"], "analysis": {"gerbers": {"by_severity": {"error": 0, "warning": 0, "info": 0}, "errors": []}, "release_gate": {"status": "PASS", "pass": 12, "warn": 0, "fail": 0, "skip": 0, "not_passed": []}}}
+  ! rotation offsets applied to 12 parts from an unverified table; check the fab's placement preview

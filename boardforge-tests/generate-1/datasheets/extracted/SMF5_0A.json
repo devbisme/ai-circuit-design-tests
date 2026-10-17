@@ -1,0 +1,156 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "diode": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "hongjiacheng (LCSC C19077497)",
+  "mpn": "SMF5.0A",
+  "datasheet_revision": null,
+  "local_path": "SMF5_0A.pdf",
+  "sha256": "sha256:c8f137df222c1c36b0356096e10d601434b420c2f65407c222229dbd725df74a",
+  "page_count": 5
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 79
+ },
+ "base": {
+  "family": "TVS diode",
+  "description": "200 W unidirectional TVS, VRWM 5 V, SOD-123FL",
+  "package": {
+   "code": "SOD-123FL",
+   "pin_count": 2,
+   "pitch_mm": null,
+   "body_mm": null,
+   "thermal_pad": false,
+   "evidence": {
+    "page": 1,
+    "section": "Features",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "K",
+    "type": "passive",
+    "description": "Cathode (band) - to protected rail",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": "KiCad Device:D_TVS pin 1 = K",
+    "evidence": {
+     "page": 1,
+     "section": "Package outline",
+     "confidence": "medium",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "A",
+    "type": "passive",
+    "description": "Anode - to GND",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Package outline",
+     "confidence": "medium",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {},
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "diode"
+ ],
+ "diode": {
+  "diode_type": "tvs",
+  "vr_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 5.0,
+    "unit": "V",
+    "condition": "VRWM",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical Characteristics table",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "breakdown_voltage": [
+   {
+    "min": 6.4,
+    "typ": null,
+    "max": 7.0,
+    "unit": "V",
+    "condition": "IT = 10 mA",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical Characteristics table",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "ir": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.0004,
+    "unit": "A",
+    "condition": "at VRWM = 5 V",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical Characteristics table",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ]
+ }
+}

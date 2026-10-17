@@ -1,0 +1,430 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "opamp": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "THS4551IRGTR",
+  "datasheet_revision": "SBOS778",
+  "local_path": "THS4551IRGTR.pdf",
+  "sha256": "sha256:ee0fb24b601564720314990b57044c38904ddcd01961b5adda61658fa887d871",
+  "page_count": 80
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 90
+ },
+ "base": {
+  "family": "fully differential amplifier",
+  "description": "Low-noise precision 150 MHz FDA",
+  "package": {
+   "code": "VQFN-16 (RGT) 3x3 mm, EP 1.68x1.68 mm (pad 17)",
+   "pin_count": 17,
+   "pitch_mm": 0.5,
+   "body_mm": {
+    "length": 3.0,
+    "width": 3.0,
+    "height": 1.0
+   },
+   "thermal_pad": true,
+   "evidence": {
+    "page": 77,
+    "section": "RGT0016C package outline",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "FB-",
+    "type": "output",
+    "description": "Inverting output feedback",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "IN+",
+    "type": "input",
+    "description": "Noninverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "IN-",
+    "type": "input",
+    "description": "Inverting input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "FB+",
+    "type": "output",
+    "description": "Noninverting output feedback",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5",
+     "6",
+     "7",
+     "8"
+    ],
+    "name": "VS+",
+    "type": "power_in",
+    "description": "Positive supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "9"
+    ],
+    "name": "VOCM",
+    "type": "input",
+    "description": "Common-mode voltage input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "10"
+    ],
+    "name": "OUT+",
+    "type": "output",
+    "description": "Noninverting output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "11"
+    ],
+    "name": "OUT-",
+    "type": "output",
+    "description": "Inverting output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "12"
+    ],
+    "name": "PD",
+    "type": "input",
+    "description": "Power down: low = off, high = normal (do not float)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "13",
+     "14",
+     "15",
+     "16"
+    ],
+    "name": "VS-",
+    "type": "power_in",
+    "description": "Negative supply",
+    "power_domain": "VS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "17"
+    ],
+    "name": "EP",
+    "type": "passive",
+    "description": "Exposed thermal pad; isolated from die; connect to power or ground plane, never float",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 5,
+     "section": "Table 6-1. Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VS_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": "(VS+) - (VS-)",
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VIN_diff": [
+    {
+     "min": -1,
+     "typ": null,
+     "max": 1,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.1 Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VS": [
+    {
+     "min": 2.7,
+     "typ": 5,
+     "max": 5.4,
+     "unit": "V",
+     "condition": "Total supply (VS+ - VS-)",
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": 25,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.3 Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 54,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": "RGT",
+     "notes": null,
+     "evidence": {
+      "page": 6,
+      "section": "7.4 Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {
+   "HBM": [
+    {
+     "min": null,
+     "typ": 1000,
+     "max": null,
+     "unit": "V",
+     "condition": null,
+     "notes": "RGT any pin to thermal pad",
+     "evidence": {
+      "page": 6,
+      "section": "7.2 ESD Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "opamp"
+ ],
+ "opamp": {
+  "opamp_topology": "rail_to_rail_output",
+  "channels": 1,
+  "vsupply_range": [
+   {
+    "min": 2.7,
+    "typ": 5,
+    "max": 5.4,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "7.3 Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vsupply_split_capable": true,
+  "gbw": [
+   {
+    "min": null,
+    "typ": 135000000.0,
+    "max": null,
+    "unit": "Hz",
+    "condition": "G = 100, Vout = 20 mVpp",
+    "notes": null,
+    "evidence": {
+     "page": 7,
+     "section": "7.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "slew_rate": [
+   {
+    "min": null,
+    "typ": 220000000.0,
+    "max": null,
+    "unit": "V/s",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 7,
+     "section": "7.5 Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "unity_gain_stable": true
+ }
+}

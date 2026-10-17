@@ -1,0 +1,562 @@
+(kicad_sch
+  (version 20250114)
+  (generator "schematizer")
+  (generator_version "0.2.0")
+  (uuid 5fb19599-51ca-5eca-be66-10479b256f16)
+  (paper "A4")
+  (title_block
+    (title "Dual-channel ±10 V 12-bit 10 MSPS USB ADC board")
+    (date "2026-10-17")
+    (company "")
+    (comment 1 "Generated with SKiDL")
+    (comment 2 "")
+    (comment 3 "")
+    (comment 4 ""))
+  (lib_symbols
+    (symbol "power:PWR_FLAG"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#FLG"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "PWR_FLAG"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Special symbol for telling ERC where power comes from"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "PWR_FLAG_0_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 1.27)
+            (xy -1.016 1.905)
+            (xy 0 2.54)
+            (xy 1.016 1.905)
+            (xy 0 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "PWR_FLAG_1_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 1.27)
+            (xy -1.016 1.905)
+            (xy 0 2.54)
+            (xy 1.016 1.905)
+            (xy 0 1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (pin power_out line
+          (at 0 0 90)
+          (length 0)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "power:GND"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -6.35 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "GND"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "GND_0_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 -1.27)
+            (xy 1.27 -1.27)
+            (xy 0 -2.54)
+            (xy -1.27 -1.27)
+            (xy 0 -1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "GND_1_1"
+        (pin power_in line
+          (at 0 0 270)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no)))
+  (symbol
+    (lib_id "power:PWR_FLAG")
+    (at 24.13 33.02 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a7723194-35c6-500e-afe3-6b10a87ac3e7)
+    (property "Reference" "#FLG001"
+      (at 24.13 30.480000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "PWR_FLAG"
+      (at 24.13 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" ""
+      (at 24.13 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 24.13 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Special symbol for telling ERC where power comes from"
+      (at 24.13 33.02 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 31ae3e8f-15bf-51fa-b33e-6f578680b0f4))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (reference "#FLG001")
+          (unit 1)))))
+  (wire
+    (pts
+      (xy 24.13 33.02)
+      (xy 24.13 35.56))
+    (stroke
+      (width 0)
+      (type default))
+    (uuid 6aa970f0-b219-5870-9699-9b1acf6ed2b5))
+  (symbol
+    (lib_id "power:GND")
+    (at 24.13 35.56 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 128146f4-4fb0-5986-8b73-aa4e302709a3)
+    (property "Reference" "#PWR336"
+      (at 24.13 34.29 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 24.13 31.750000000000004 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 24.13 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 24.13 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 77e38067-03e0-569e-9928-14292f1b4989))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (reference "#PWR336")
+          (unit 1)))))
+  (sheet
+    (at 25.4 38.1)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid 108d5c2a-1480-536d-9fda-d728bb0c281a)
+    (property "Sheetname" "adc"
+      (at 25.4 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_adc.kicad_sch"
+      (at 25.4 64.77 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "2")))))
+  (sheet
+    (at 88.9 38.1)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid ac61f991-a893-5134-83d7-71661469e1b1)
+    (property "Sheetname" "afe_ch_a"
+      (at 88.9 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_afe_ch_a.kicad_sch"
+      (at 88.9 64.77 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "3")))))
+  (sheet
+    (at 152.4 38.1)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid 7f9fad68-3744-5b62-af7f-c316f3463ee9)
+    (property "Sheetname" "afe_ch_b"
+      (at 152.4 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_afe_ch_b.kicad_sch"
+      (at 152.4 64.77 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "4")))))
+  (sheet
+    (at 215.9 38.1)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid 8005750c-7ed6-5f8b-9236-d6391a882098)
+    (property "Sheetname" "clock"
+      (at 215.9 36.83 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_clock.kicad_sch"
+      (at 215.9 64.77 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "5")))))
+  (sheet
+    (at 25.4 76.2)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid 1bd30823-5d3a-534a-86c7-f51a92d21965)
+    (property "Sheetname" "fpga"
+      (at 25.4 74.93 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_fpga.kicad_sch"
+      (at 25.4 102.87 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "6")))))
+  (sheet
+    (at 88.9 76.2)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid c6743172-938a-5c97-8776-9e4747501c8d)
+    (property "Sheetname" "power_analog"
+      (at 88.9 74.93 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_power_analog.kicad_sch"
+      (at 88.9 102.87 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "7")))))
+  (sheet
+    (at 152.4 76.2)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid c58a7b7d-2874-5c32-8231-9afbbe4dbc13)
+    (property "Sheetname" "power_digital"
+      (at 152.4 74.93 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_power_digital.kicad_sch"
+      (at 152.4 102.87 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "8")))))
+  (sheet
+    (at 215.9 76.2)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid ebc42436-8367-5378-a2c5-6a7842eb86b9)
+    (property "Sheetname" "sdram"
+      (at 215.9 74.93 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_sdram.kicad_sch"
+      (at 215.9 102.87 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "9")))))
+  (sheet
+    (at 25.4 114.3)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid a2891fd0-bbb1-516e-a7b6-664cf4c2256c)
+    (property "Sheetname" "usb_c_input"
+      (at 25.4 113.03 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_usb_c_input.kicad_sch"
+      (at 25.4 140.97 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "10")))))
+  (sheet
+    (at 88.9 114.3)
+    (size 50.8 25.4)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke
+      (width 0.1524)
+      (type solid))
+    (fill
+      (color 0 0 0 0.0))
+    (uuid 60d1e86c-509f-515f-94c2-78de27672b0c)
+    (property "Sheetname" "usb_fifo"
+      (at 88.9 113.03 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left bottom)))
+    (property "Sheetfile" "dual_adc_10msps_usb_fifo.kicad_sch"
+      (at 88.9 140.97 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left top)))
+    (instances
+      (project "dual_adc_10msps"
+        (path "/5fb19599-51ca-5eca-be66-10479b256f16"
+          (page "11")))))
+  (sheet_instances
+    (path "/"
+      (page "1")))
+  (embedded_fonts no))

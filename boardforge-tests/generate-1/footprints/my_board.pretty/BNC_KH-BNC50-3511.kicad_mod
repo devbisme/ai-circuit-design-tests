@@ -1,0 +1,73 @@
+(footprint "BNC_KH-BNC50-3511"
+  (version 20241229)
+  (generator "pcbnew")
+  (generator_version "9.0")
+  (layer "F.Cu")
+  (descr "Kinghelm KH-BNC50-3511 right-angle THT BNC jack, 50 ohm. Origin = housing centre. Pad1 centre contact, pad2 ground lead + 2x mounting legs (shield). Housing front face at y=-7.15; 21 mm barrel overhangs beyond it. Drawing KH-801-0038 rev B p1.")
+  (tags "BNC coax right-angle THT")
+  (property "Reference" "REF**"
+    (at 0 -6.225)
+    (layer "F.SilkS")
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (property "Value" "BNC_KH-BNC50-3511"
+    (at 0 11.075)
+    (layer "F.Fab")
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_rect
+    (start -7.35 -4.725) (end 7.35 9.575)
+    (layer "F.Fab")
+    (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start -0.4 5.35)
+    (end 0.4 5.35)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start -0.4 5.35)
+    (end 0 4.55)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_line
+    (start 0.4 5.35)
+    (end 0 4.55)
+    (layer "F.Fab") (stroke (width 0.1) (type solid))
+  )
+  (fp_rect
+    (start -7.35 -4.725) (end 7.35 9.575)
+    (layer "F.SilkS")
+    (stroke (width 0.12) (type solid))
+  )
+  (fp_rect
+    (start -7.6 -4.975) (end 7.6 9.825)
+    (layer "F.CrtYd")
+    (stroke (width 0.05) (type solid))
+  )
+  (pad "1" thru_hole rect
+    (at 0 4.95)
+    (size 1.7 1.7)
+    (drill 0.9)
+    (layers "*.Cu" "*.Mask")
+  )
+  (pad "2" thru_hole circle
+    (at -2.5 4.95)
+    (size 1.7 1.7)
+    (drill 0.9)
+    (layers "*.Cu" "*.Mask")
+  )
+  (pad "2" thru_hole circle
+    (at -5.05 -0.1)
+    (size 3.2 3.2)
+    (drill 2)
+    (layers "*.Cu" "*.Mask")
+  )
+  (pad "2" thru_hole circle
+    (at 5.05 -0.1)
+    (size 3.2 3.2)
+    (drill 2)
+    (layers "*.Cu" "*.Mask")
+  )
+  (embedded_fonts no)
+)

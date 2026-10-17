@@ -50,6 +50,8 @@ For a quick look at what a run produced, start with its `executive_summary.md`.
 | [`eda-agent-tests/`](eda-agent-tests/) | [eda-agent](https://github.com/salitronic/eda-agent) | Hybrid |
 | [`kicad-ai-assistant-tests/`](kicad-ai-assistant-tests/) | [KiCad-AI-Assistant](https://github.com/paul356/KiCad-AI-Assistant) | Hybrid |
 | [`kicad-harness-tests/`](kicad-harness-tests/) | [kicad-harness](https://github.com/zxkmm/kicad-harness) | Hybrid |
+| [`boardforge-tests/`](boardforge-tests/) | [boardforge](https://github.com/devbisme/boardforge) | Generator |
+| [`null-tests/`](null-tests/) | None: Claude Code (Opus 5.5) with no KiCad-specific MCP servers, skills or plugins; a baseline | Hybrid |
 
 Each generator's `README.md` describes the tool, why it was chosen, the prompt(s) it was given,
 a cross-run comparison, and an evaluation of cost, runtime and quality of results.
@@ -74,8 +76,10 @@ slate.
 | [eda-agent 2](eda-agent-tests/dual-adc-usb-2/) | Design tool (KiCad backend), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $18.47 |
 | [KiCad-AI-Assistant 2](kicad-ai-assistant-tests/dual-adc-usb-2/) | Design tool (kcaa MCP server), gaps filled by scripts | Routed 4-layer board, 0 ERC/DRC errors | $19.38 |
 | [kicad-harness 2](kicad-harness-tests/generate-1/) | Checks, lookups and renders (`kh` CLI); Claude's scripts wrote the schematic, placed and finished routing | Routed 4-layer board, 0 ERC/DRC errors | $10.87 |
+| [null test 2](null-tests/generate-1/) | No tool (baseline): Claude used SKiDL and schematizer for the schematic, its own `pcbnew` scripts and Freerouting for the board | Routed 4-layer board, 0 ERC/DRC errors; signals routed through the In1 GND plane | $11.16 |
+| [boardforge 1](boardforge-tests/generate-1/) | Design pipeline: `/new-circuit` agents wrote the SKiDL design, the `boardforge` CLI made the schematic, placed, routed and wrote fab files | Routed 4-layer board, 0 ERC/DRC errors, review and release gates PASS; CPL dropped 80 parts (tool bug, fixed by hand) | $23.89 |
 
-These seven runs used the prompt with an added line giving the KiCad 10 executable's path.
+These nine runs used the prompt with an added line giving the KiCad 10 executable's path.
 The version without that line was used for SKiDL Skills runs 5–9, Konnect run 1 and
 Copperhead run 1.
 
@@ -89,6 +93,7 @@ Copperhead run 1.
 | [eda-agent 1](eda-agent-tests/dual-adc-usb-1/) | $3.43 |
 | [KiCad-AI-Assistant 1](kicad-ai-assistant-tests/dual-adc-usb-1/) | $3.71 |
 | [kicad-harness 1](kicad-harness-tests/analyze-1/) | $3.02 |
+| [null test 1](null-tests/analyze-1/) | $1.91 |
 
 The prompts differed between these runs, so they did not ask for exactly the same things.
 Each tool's `README.md` lists its prompts and findings.

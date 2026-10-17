@@ -1,0 +1,358 @@
+{
+  "analyzer_type": "thermal",
+  "schema_version": "1.4.0",
+  "inputs": {
+    "source_files": [
+      "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/schematic_loads.json",
+      "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/pcb.json"
+    ],
+    "source_hashes": {
+      "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/schematic_loads.json": "674b14f136567d1d99b7b82094408274f4a3ca082f195cbb0fe4a42776a2ff40",
+      "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/pcb.json": "f2d12d6b75eda44dc3430a707913006c36e729dc3a72e0be692b622dc51cebf6"
+    },
+    "run_id": "20261017T045622Z-403ea2",
+    "config_hash": null,
+    "upstream_artifacts": {
+      "schematic": {
+        "path": "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/schematic_loads.json",
+        "sha256": "674b14f136567d1d99b7b82094408274f4a3ca082f195cbb0fe4a42776a2ff40",
+        "schema_version": "1.4.0",
+        "run_id": "20261017T045622Z-403ea2"
+      },
+      "pcb": {
+        "path": "/home/devb/projects/AI/ai-circuit-design-tests/boardforge-tests/generate-1/build/reports/analysis/pcb.json",
+        "sha256": "f2d12d6b75eda44dc3430a707913006c36e729dc3a72e0be692b622dc51cebf6",
+        "schema_version": "1.4.0",
+        "run_id": "20261017T045622Z-403ea2"
+      }
+    }
+  },
+  "compat": {
+    "minimum_consumer_version": "1.4.0",
+    "deprecated_fields": [],
+    "experimental_fields": []
+  },
+  "summary": {
+    "total_findings": 5,
+    "components_assessed": 2,
+    "components_skipped": 1,
+    "active": 5,
+    "suppressed": 0,
+    "by_severity": {
+      "error": 0,
+      "warning": 0,
+      "info": 5
+    },
+    "thermal_score": 100,
+    "total_board_dissipation_w": 0.381,
+    "hottest_component": {
+      "ref": "U601",
+      "tj_estimated_c": 77.7
+    },
+    "components_analyzed": 2,
+    "components_above_85c": 0,
+    "components_above_tjmax": 0,
+    "ambient_c": 25.0
+  },
+  "findings": [
+    {
+      "category": "thermal_safety",
+      "severity": "info",
+      "rule_id": "TS-005",
+      "confidence": "heuristic",
+      "title": "U601 (TLV62569DBVR) Tj 78\u00b0C, margin 47\u00b0C",
+      "description": "switching_reg dissipates 0.211W in SOT-23 \u2014 within safe thermal limits.",
+      "components": [
+        "U601"
+      ],
+      "recommendation": "",
+      "detector": "analyze_thermal",
+      "summary": "U601 (TLV62569DBVR) Tj 78\u00b0C, margin 47\u00b0C",
+      "nets": [],
+      "pins": [],
+      "evidence_source": "heuristic_rule",
+      "report_context": {
+        "section": "Thermal Safety",
+        "impact": "Component reliability",
+        "standard_ref": ""
+      },
+      "suppressed": false,
+      "suppression_reason": "",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "thermal:TS-005:u601"
+    },
+    {
+      "category": "thermal_safety",
+      "severity": "info",
+      "rule_id": "TS-005",
+      "confidence": "heuristic",
+      "title": "U701 (LP5907MFX-3.3) Tj 68\u00b0C, margin 58\u00b0C",
+      "description": "ldo dissipates 0.170W in SOT-23 \u2014 within safe thermal limits.",
+      "components": [
+        "U701"
+      ],
+      "recommendation": "",
+      "detector": "analyze_thermal",
+      "summary": "U701 (LP5907MFX-3.3) Tj 68\u00b0C, margin 58\u00b0C",
+      "nets": [],
+      "pins": [],
+      "evidence_source": "heuristic_rule",
+      "report_context": {
+        "section": "Thermal Safety",
+        "impact": "Component reliability",
+        "standard_ref": ""
+      },
+      "suppressed": false,
+      "suppression_reason": "",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "thermal:TS-005:u701"
+    },
+    {
+      "category": "thermal_proximity",
+      "severity": "info",
+      "rule_id": "TP-001",
+      "confidence": "deterministic",
+      "title": "MLCC C604 is 4.1mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "description": "Ceramic capacitors lose effective capacitance at elevated temperatures. X7R loses ~15% at 85\u00b0C, X5R loses ~30%.",
+      "components": [
+        "C604",
+        "U601"
+      ],
+      "recommendation": "Verify capacitor maintains adequate capacitance at the elevated temperature, or use C0G/NP0 dielectric for temperature-critical applications.",
+      "detector": "analyze_thermal",
+      "summary": "MLCC C604 is 4.1mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "nets": [],
+      "pins": [],
+      "evidence_source": "geometry",
+      "report_context": {
+        "section": "Thermal Proximity",
+        "impact": "Component reliability",
+        "standard_ref": ""
+      },
+      "suppressed": false,
+      "suppression_reason": "",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "thermal:TP-001:c604"
+    },
+    {
+      "category": "thermal_proximity",
+      "severity": "info",
+      "rule_id": "TP-001",
+      "confidence": "deterministic",
+      "title": "MLCC C805 is 7.9mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "description": "Ceramic capacitors lose effective capacitance at elevated temperatures. X7R loses ~15% at 85\u00b0C, X5R loses ~30%.",
+      "components": [
+        "C805",
+        "U601"
+      ],
+      "recommendation": "Verify capacitor maintains adequate capacitance at the elevated temperature, or use C0G/NP0 dielectric for temperature-critical applications.",
+      "detector": "analyze_thermal",
+      "summary": "MLCC C805 is 7.9mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "nets": [],
+      "pins": [],
+      "evidence_source": "geometry",
+      "report_context": {
+        "section": "Thermal Proximity",
+        "impact": "Component reliability",
+        "standard_ref": ""
+      },
+      "suppressed": false,
+      "suppression_reason": "",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "thermal:TP-001:c805"
+    },
+    {
+      "category": "thermal_proximity",
+      "severity": "info",
+      "rule_id": "TP-001",
+      "confidence": "deterministic",
+      "title": "MLCC C601 is 4.3mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "description": "Ceramic capacitors lose effective capacitance at elevated temperatures. X7R loses ~15% at 85\u00b0C, X5R loses ~30%.",
+      "components": [
+        "C601",
+        "U601"
+      ],
+      "recommendation": "Verify capacitor maintains adequate capacitance at the elevated temperature, or use C0G/NP0 dielectric for temperature-critical applications.",
+      "detector": "analyze_thermal",
+      "summary": "MLCC C601 is 4.3mm from U601 (TLV62569DBVR) (Tj=78\u00b0C)",
+      "nets": [],
+      "pins": [],
+      "evidence_source": "geometry",
+      "report_context": {
+        "section": "Thermal Proximity",
+        "impact": "Component reliability",
+        "standard_ref": ""
+      },
+      "suppressed": false,
+      "suppression_reason": "",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "thermal:TP-001:c601"
+    }
+  ],
+  "assessments": [
+    {
+      "ref": "U601",
+      "value": "TLV62569DBVR",
+      "component_type": "switching_reg",
+      "pdiss_w": 0.2108,
+      "pdiss_source": "3.318V \u00d7 0.360A \u00d7 (1/85% - 1)",
+      "pdiss_confidence": "heuristic",
+      "package": "SOT-23",
+      "rtheta_ja_raw": 250.0,
+      "rtheta_ja_source": "package_table",
+      "pcb_correction": 1.0,
+      "pcb_correction_notes": [],
+      "rtheta_ja_effective": 250.0,
+      "ambient_c": 25.0,
+      "tj_estimated_c": 77.7,
+      "tj_max_c": 125.0,
+      "tj_max_source": "default_125",
+      "margin_c": 47.3,
+      "position": {
+        "x": 142.042,
+        "y": 120.0375
+      },
+      "detector": "analyze_thermal",
+      "rule_id": "TH-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "heuristic",
+      "evidence_source": "heuristic_rule",
+      "summary": "Thermal: U601 Tj=77.7C (margin 47.3C)",
+      "description": "Component U601 in SOT-23 package: Tj=77.7C, margin 47.3C to Tj_max (125.0C).",
+      "components": [
+        "U601"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "",
+        "standard_ref": ""
+      }
+    },
+    {
+      "ref": "U701",
+      "value": "LP5907MFX-3.3",
+      "component_type": "ldo",
+      "pdiss_w": 0.17,
+      "pdiss_source": "(5.0V - 3.3V) \u00d7 0.1A",
+      "pdiss_confidence": "heuristic",
+      "package": "SOT-23",
+      "rtheta_ja_raw": 250.0,
+      "rtheta_ja_source": "package_table",
+      "pcb_correction": 1.0,
+      "pcb_correction_notes": [],
+      "rtheta_ja_effective": 250.0,
+      "ambient_c": 25.0,
+      "tj_estimated_c": 67.5,
+      "tj_max_c": 125.0,
+      "tj_max_source": "default_125",
+      "margin_c": 57.5,
+      "position": {
+        "x": 67.535,
+        "y": 58.195
+      },
+      "detector": "analyze_thermal",
+      "rule_id": "TH-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "heuristic",
+      "evidence_source": "heuristic_rule",
+      "summary": "Thermal: U701 Tj=67.5C (margin 57.5C)",
+      "description": "Component U701 in SOT-23 package: Tj=67.5C, margin 57.5C to Tj_max (125.0C).",
+      "components": [
+        "U701"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "",
+        "standard_ref": ""
+      }
+    }
+  ],
+  "elapsed_s": 0.002,
+  "missing_info": {
+    "default_rtheta_ja": [],
+    "default_tj_max": [
+      "U601",
+      "U701"
+    ]
+  },
+  "skipped_components": [
+    {
+      "ref": "U602",
+      "value": "TLV75712PDBVR",
+      "reason": "no_pdiss_estimate"
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 5,
+    "trust_level": "mixed",
+    "by_confidence": {
+      "deterministic": 3,
+      "heuristic": 2,
+      "datasheet_backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 0,
+      "heuristic_rule": 2,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 3,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 5,
+      "by_severity": {
+        "error": 0,
+        "warning": 0,
+        "info": 5
+      },
+      "by_category": {
+        "thermal_safety": 2,
+        "thermal_proximity": 3
+      },
+      "top_issues": []
+    },
+    "reviewer": {
+      "total_findings": 0,
+      "by_category": {},
+      "top_issues": []
+    },
+    "manager": {
+      "risk_level": "none",
+      "blocker_count": 0,
+      "warning_count": 0,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "pass",
+        "pre_fab": "pass",
+        "bring_up": "pass"
+      },
+      "one_liner": "No errors or warnings \u2014 all stages ready."
+    }
+  },
+  "capability_mode_ref": {
+    "source": "analysis/capability_mode.json",
+    "run_id": "20261017T045622Z-403ea2"
+  }
+}

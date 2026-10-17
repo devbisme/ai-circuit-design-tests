@@ -1,0 +1,297 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "regulator": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "LP5907MFX-3.3/NOPB",
+  "datasheet_revision": "SNVS798",
+  "local_path": "LP5907MFX-3_3_NOPB.pdf",
+  "sha256": "sha256:f5deda2f0cd6f251622fa0fbb57fd0ddff831b797f96b9a0a53ed35059e1c4ba",
+  "page_count": 52
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 85
+ },
+ "base": {
+  "family": "LDO",
+  "description": "250 mA ultra-low-noise LDO, 3.3 V fixed",
+  "package": {
+   "code": "SOT-23-5 (DBV)",
+   "pin_count": 5,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.6,
+    "height": 1.45
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 3,
+    "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "IN",
+    "type": "power_in",
+    "description": "Input; 1 uF",
+    "power_domain": "VIN",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "EN",
+    "type": "input",
+    "description": "Enable; internal 1 Mohm pulldown; low = off + 230 ohm output discharge",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "N/C",
+    "type": "not_connected",
+    "description": "No internal connection",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "OUT",
+    "type": "power_out",
+    "description": "Output; min 1 uF low-ESR",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Table 4-2. Pin Functions: X2SON, SOT-23",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VIN_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 6.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "VEN_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 6.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VIN": [
+    {
+     "min": 2.2,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TA": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 85,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 193.4,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": "DBV",
+     "notes": null,
+     "evidence": {
+      "page": 5,
+      "section": "Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "regulator"
+ ],
+ "regulator": {
+  "topology": "ldo",
+  "vin_range": [
+   {
+    "min": 2.2,
+    "typ": null,
+    "max": 5.5,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vout_range": [
+   {
+    "min": null,
+    "typ": 3.3,
+    "max": null,
+    "unit": "V",
+    "condition": "fixed",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Device Information",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ],
+  "iout_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.25,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "enable_pin": "3",
+  "cout_min": [
+   {
+    "min": 7e-07,
+    "typ": 1e-06,
+    "max": 1e-05,
+    "unit": "F",
+    "condition": "effective output capacitance; ESR 5-500 mohm",
+    "notes": "Maximum 10 uF total on OUT",
+    "evidence": {
+     "page": 6,
+     "section": "Output and Input Capacitors",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ]
+ }
+}

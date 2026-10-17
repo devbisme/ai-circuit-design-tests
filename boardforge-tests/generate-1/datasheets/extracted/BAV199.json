@@ -1,0 +1,304 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "diode": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Jiangsu Changjing Electronics (JSCJ)",
+  "mpn": "BAV199",
+  "datasheet_revision": "Rev 2.0",
+  "local_path": "BAV199.pdf",
+  "sha256": "sha256:0c201d0557d3141c7847dd5b1b7033f35585dac7bf48c385b6c003b5f061a0ed",
+  "page_count": 4
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 79
+ },
+ "base": {
+  "family": "switching diode",
+  "description": "Low-leakage series diode pair, SOT-23",
+  "package": {
+   "code": "SOT-23",
+   "pin_count": 3,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.3,
+    "height": 1.1
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 1,
+    "section": "Package figure",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "A1",
+    "type": "passive",
+    "description": "Anode of diode 1 (cathode of D1 is pin 3)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Pinout figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "K2",
+    "type": "passive",
+    "description": "Cathode of diode 2 (anode of D2 is pin 3)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Pinout figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "K1/A2",
+    "type": "passive",
+    "description": "Common node: cathode D1 = anode D2 (series pair)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Pinout figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VR_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 70,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 1,
+      "section": "Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {},
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "diode"
+ ],
+ "diode": {
+  "diode_type": "signal",
+  "vf": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.9,
+    "unit": "V",
+    "condition": "IF = 1 mA",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "min": null,
+    "typ": null,
+    "max": 1.25,
+    "unit": "V",
+    "condition": "IF = 150 mA",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "if_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.215,
+    "unit": "A",
+    "condition": "Average rectified output current IO",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Maximum Ratings",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "ifsm": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 1.0,
+    "unit": "A",
+    "condition": "t = 8.3 ms",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Maximum Ratings",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vr_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 70,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Maximum Ratings",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "breakdown_voltage": [
+   {
+    "min": 70,
+    "typ": null,
+    "max": null,
+    "unit": "V",
+    "condition": "IR = 100 uA",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "ir": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 5e-09,
+    "unit": "A",
+    "condition": "VR = 70 V, 25 \u00b0C",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "trr": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 3e-06,
+    "unit": "s",
+    "condition": "IF = IR = 10 mA",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "cd": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 2e-12,
+    "unit": "F",
+    "condition": "VR = 0, f = 1 MHz",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "power_dissipation": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 0.2,
+    "unit": "W",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Maximum Ratings",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ]
+ }
+}

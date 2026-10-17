@@ -1,0 +1,1109 @@
+{
+ "status": "WARN",
+ "constraints_file": "constraints.json",
+ "counts": {
+  "PASS": 43,
+  "FAIL": 0,
+  "NOT CHECKED": 13
+ },
+ "hard_fail": [],
+ "soft_fail": [],
+ "not_checked": [
+  "GAIN-A",
+  "FLAT-A-1M",
+  "FLAT-A-500K",
+  "ALIAS-A",
+  "ALIAS-A-10M",
+  "ALIAS-A-40M",
+  "GAIN-B",
+  "FLAT-B-1M",
+  "FLAT-B-500K",
+  "ALIAS-B",
+  "ALIAS-B-10M",
+  "ALIAS-B-40M",
+  "DS:coverage"
+ ],
+ "problems": [],
+ "results": [
+  {
+   "id": "GAIN-A",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.01,
+   "requirement": "+-10 V must fit ADS5231 2.02 Vpp: |G|<=0.101 (-19.9 dB), 3% margin -> max -20.2; min -21.6 keeps >=83% FS. Nominal 0.049756 x 1.8195 = 0.0905 (-20.87 dB)"
+  },
+  {
+   "id": "FLAT-A-1M",
+   "kind": "ac_gain",
+   "tag": "SOFT",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "passband DC-1 MHz within +-0.5 dB (req 5 SOFT); nominal -0.01 dB, MC p99 0.61 dB with 2% C0G"
+  },
+  {
+   "id": "FLAT-A-500K",
+   "kind": "ac_gain",
+   "tag": "SOFT",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "mid-band ripple check of the same +-0.5 dB passband requirement; nominal +0.01 dB"
+  },
+  {
+   "id": "ALIAS-A",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": ">=72 dB (6.02 x 12 bit) at fs/2 = 5 MHz (req 5 HARD); 7-pole Butterworth fc~1.35 MHz, nominal -80.9 dB, MC worst -78.7 dB"
+  },
+  {
+   "id": "ALIAS-A-10M",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "req 5 says f >= 5 MHz; 10 MHz = fs folds to DC; nominal -123 dB"
+  },
+  {
+   "id": "ALIAS-A-40M",
+   "kind": "ac_gain",
+   "tag": "ASSUMED",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_A to ['AIN_AP', 'AIN_AN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "deep-stopband sanity point (models have ideal op-amp Zout; real floor is layout feedthrough)"
+  },
+  {
+   "id": "GAIN-B",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "+-10 V must fit ADS5231 2.02 Vpp: |G|<=0.101 (-19.9 dB), 3% margin -> max -20.2; min -21.6 keeps >=83% FS. Nominal 0.049756 x 1.8195 = 0.0905 (-20.87 dB)"
+  },
+  {
+   "id": "FLAT-B-1M",
+   "kind": "ac_gain",
+   "tag": "SOFT",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "passband DC-1 MHz within +-0.5 dB (req 5 SOFT); nominal -0.01 dB, MC p99 0.61 dB with 2% C0G"
+  },
+  {
+   "id": "FLAT-B-500K",
+   "kind": "ac_gain",
+   "tag": "SOFT",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "mid-band ripple check of the same +-0.5 dB passband requirement; nominal +0.01 dB"
+  },
+  {
+   "id": "ALIAS-B",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": ">=72 dB (6.02 x 12 bit) at fs/2 = 5 MHz (req 5 HARD); 7-pole Butterworth fc~1.35 MHz, nominal -80.9 dB, MC worst -78.7 dB"
+  },
+  {
+   "id": "ALIAS-B-10M",
+   "kind": "ac_gain",
+   "tag": "HARD",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "req 5 says f >= 5 MHz; 10 MHz = fs folds to DC; nominal -123 dB"
+  },
+  {
+   "id": "ALIAS-B-40M",
+   "kind": "ac_gain",
+   "tag": "ASSUMED",
+   "notes": [
+    "U101: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U101: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U102: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U103: GBW 135 MHz from THS4551IRGTR datasheet p7",
+    "U201: GBW 70 MHz from OPA2810IDR datasheet p5",
+    "U201: no pin for ['inp', 'inn', 'out'] (set [review.models] pins); left open",
+    "U202: GBW 70 MHz from OPA810IDBVR datasheet p5",
+    "U203: GBW 135 MHz from THS4551IRGTR datasheet p7"
+   ],
+   "status": "NOT CHECKED",
+   "why": "no path from VIN_B to ['AIN_BP', 'AIN_BN'] through modelled parts; unmodelled ICs: ['D101', 'D201', 'J1001', 'J1002', 'J501', 'RN301', 'RN302', 'RN303', 'RN304', 'RN305', 'RN306', 'U1001', 'U1002', 'U101', 'U201', 'U301', 'U401', 'U501', 'U601', 'U702', 'U801', 'U901', 'U902', 'Y401', 'Y901']",
+   "seconds": 0.0,
+   "requirement": "deep-stopband sanity point (models have ideal op-amp Zout; real floor is layout feedthrough)"
+  },
+  {
+   "id": "RAIL-3V3",
+   "kind": "rail_current",
+   "tag": "ASSUMED",
+   "status": "PASS",
+   "refs": [
+    "U601"
+   ],
+   "findings": [
+    {
+     "severity": "info",
+     "check": "budget",
+     "detail": "+3V3 load 0.36 A, source U601 TLV62569DBVR via L601 rated 2 A (max): 18 %"
+    }
+   ],
+   "seconds": 0.0,
+   "requirement": "budget mA: LDO->+1V2 100, FT232H 70, SDRAM 60, FPGA VCCO 35 + VCCAUX 13, ADS5231 VDRV 33, flash 15, XO 10, LEDs 8, clk buf 3, EEPROM 2, misc 2 = 351"
+  },
+  {
+   "id": "RAIL-1V2",
+   "kind": "rail_current",
+   "tag": "ASSUMED",
+   "status": "PASS",
+   "refs": [
+    "U602"
+   ],
+   "findings": [
+    {
+     "severity": "info",
+     "check": "budget",
+     "detail": "+1V2 load 0.1 A, source U602 TLV75712PDBVR rated 1 A (max): 10 %"
+    }
+   ],
+   "seconds": 0.0,
+   "requirement": "XC6SLX9 VCCINT: ~4 mA static + <=60 mA dynamic (~2k LUT design at 80 MHz), rounded up"
+  },
+  {
+   "id": "RAIL-3V3A",
+   "kind": "rail_current",
+   "tag": "ASSUMED",
+   "status": "PASS",
+   "refs": [
+    "U701"
+   ],
+   "findings": [
+    {
+     "severity": "info",
+     "check": "budget",
+     "detail": "+3V3A load 0.1 A, source U701 LP5907MFX-3.3/NOPB rated 0.25 A (max): 40 %"
+    }
+   ],
+   "seconds": 0.0,
+   "requirement": "ADS5231 AVDD max 271 mW/3.3 V = 82 mA + 2x THS4551 (1.37 mA + 0.76 mA x2 feedback DC) = 88 mA"
+  },
+  {
+   "id": "RAIL-P4V0A",
+   "kind": "rail_current",
+   "tag": "ASSUMED",
+   "status": "PASS",
+   "refs": [
+    "U702"
+   ],
+   "findings": [
+    {
+     "severity": "info",
+     "check": "budget",
+     "detail": "+4V0A load 0.04 A, source U702 LM27762DSSR rated 0.25 A (max): 16 %"
+    }
+   ],
+   "seconds": 0.0,
+   "requirement": "2x OPA2810 (2x3.65 mA) + 2x OPA810 (3.7 mA) = 22 mA quiescent + ~3 mA/ch signal load = 28 mA"
+  },
+  {
+   "id": "RAIL-N4V0A",
+   "kind": "rail_current",
+   "tag": "ASSUMED",
+   "status": "PASS",
+   "refs": [
+    "U702"
+   ],
+   "findings": [
+    {
+     "severity": "info",
+     "check": "budget",
+     "detail": "-4V0A load 0.04 A, source U702 LM27762DSSR rated 0.25 A (max): 16 %"
+    }
+   ],
+   "seconds": 0.0,
+   "requirement": "mirror of +4V0A: same op-amps, 28 mA"
+  },
+  {
+   "id": "DS:93LC56BT-I/OT",
+   "kind": "datasheet",
+   "refs": [
+    "U902"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U902 VCC = 3.3 V within 2.5..5.5 V (abs max 7.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:ADS5231IPAGT",
+   "kind": "datasheet",
+   "refs": [
+    "U301"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U301 AVDD = 3.3 V within 3..3.6 V (abs max 3.8)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U301 VDRV = 3.3 V within 3..3.6 V (abs max 3.8)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:BAV199",
+   "kind": "datasheet",
+   "refs": [
+    "D101",
+    "D201"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:FT232HL",
+   "kind": "datasheet",
+   "refs": [
+    "U901"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U901 VCCIO = 3.3 V within 2.97..3.63 V (abs max 4.0)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U901 VREGIN = 3.3 V within 3.3..3.6 V (abs max -)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:LM27762DSSR",
+   "kind": "datasheet",
+   "refs": [
+    "U702"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U702 VIN = 5 V within 2.7..5.5 V (abs max 5.8)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:LP5907MFX-3.3/NOPB",
+   "kind": "datasheet",
+   "refs": [
+    "U701"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U701 VIN = 5 V within 2.2..5.5 V (abs max 6.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:OPA2810IDR",
+   "kind": "datasheet",
+   "refs": [
+    "U101",
+    "U201"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U101 VS = 8 V within 4.75..27 V (abs max 28.0)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U201 VS = 8 V within 4.75..27 V (abs max 28.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:OPA810IDBVR",
+   "kind": "datasheet",
+   "refs": [
+    "U102",
+    "U202"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U102 VS = 8 V within 4.75..27 V (abs max 28.0)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U202 VS = 8 V within 4.75..27 V (abs max 28.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:SMF5.0A",
+   "kind": "datasheet",
+   "refs": [
+    "D501"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:SN74LVC2G34DBVR",
+   "kind": "datasheet",
+   "refs": [
+    "U401"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U401 VCC = 3.3 V within 1.65..5.5 V (abs max 6.5)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:SX3M10.000B10F20TNN",
+   "kind": "datasheet",
+   "refs": [
+    "Y401"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "Y401 VDD = 3.3 V within 2.97..3.63 V (abs max -)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:THS4551IRGTR",
+   "kind": "datasheet",
+   "refs": [
+    "U103",
+    "U203"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U103 VS = 3.3 V within 2.7..5.4 V (abs max 5.5)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U203 VS = 3.3 V within 2.7..5.4 V (abs max 5.5)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:TLV62569DBVR",
+   "kind": "datasheet",
+   "refs": [
+    "U601"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U601 VIN = 5 V within 2.5..5.5 V (abs max 6.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:TLV75712PDBVR",
+   "kind": "datasheet",
+   "refs": [
+    "U602"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U602 VIN = 3.3 V within 1.45..5.5 V (abs max 6.0)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:USBLC6-2SC6",
+   "kind": "datasheet",
+   "refs": [
+    "U501"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U501 VBUS = 5 V within -..5.25 V (abs max -)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:W25Q32JVSSIQ",
+   "kind": "datasheet",
+   "refs": [
+    "U1002"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U1002 VCC = 3.3 V within 2.7..3.6 V (abs max 4.6)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:W9812G6KH-6",
+   "kind": "datasheet",
+   "refs": [
+    "U801"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U801 VDD = 3.3 V within 3..3.6 V (abs max 4.6)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:XC6SLX9-2TQG144C",
+   "kind": "datasheet",
+   "refs": [
+    "U1001"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U1001 VCCO = 3.3 V within 1.1..3.45 V (abs max 3.75)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U1001 VCCINT = 1.2 V within 1.14..1.26 V (abs max 1.32)"
+    },
+    {
+     "severity": "info",
+     "check": "supply",
+     "detail": "U1001 VCCAUX = 3.3 V within 3.15..3.45 V (abs max 3.75)"
+    }
+   ],
+   "seconds": 0.04
+  },
+  {
+   "id": "DS:coverage",
+   "kind": "datasheet",
+   "tag": "SOFT",
+   "status": "NOT CHECKED",
+   "why": "2 parts have no extraction: PSC-1608U52GC-G4, TXM12M0004252FBCEO00T",
+   "seconds": 0.04
+  },
+  {
+   "id": "BOM",
+   "kind": "bom",
+   "refs": [],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "C102: package 'SMD-4.5x3.2mm-trimmer' not evident in footprint 'C_Trimmer_SEHWA_STC3MA06' \u2014 confirm by hand (row 3)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "C202: package 'SMD-4.5x3.2mm-trimmer' not evident in footprint 'C_Trimmer_SEHWA_STC3MA06' \u2014 confirm by hand (row 3)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "J101: package 'BNC-THT-elbow' not evident in footprint 'BNC_KH-BNC50-3511' \u2014 confirm by hand (row 27)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "J201: package 'BNC-THT-elbow' not evident in footprint 'BNC_KH-BNC50-3511' \u2014 confirm by hand (row 27)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "J501: package 'USB-C-16P-SMD' not evident in footprint 'USB_C_Receptacle_HRO_TYPE-C-31-M-12' \u2014 confirm by hand (row 28)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "J1001: package 'PinHeader-1x6-2.54mm' not evident in footprint 'PinHeader_1x06_P2.54mm_Vertical' \u2014 confirm by hand (row 29)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "J1002: package 'PinHeader-1x3-2.54mm' not evident in footprint 'PinHeader_1x03_P2.54mm_Vertical' \u2014 confirm by hand (row 30)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN301: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN302: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN303: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN304: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN305: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "RN306: package '0402x4' not evident in footprint 'R_Array_Convex_4x0402' \u2014 confirm by hand (row 59)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "U103: package 'VQFN-16-3x3mm' not evident in footprint 'VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm' \u2014 confirm by hand (row 62)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "U203: package 'VQFN-16-3x3mm' not evident in footprint 'VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm' \u2014 confirm by hand (row 62)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "U702: package 'WSON-12-2x3mm' not evident in footprint 'WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65' \u2014 confirm by hand (row 69)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "U801: package 'TSOP-II-54-10.16mm' not evident in footprint 'TSOP-II-54_22.2x10.16mm_P0.8mm' \u2014 confirm by hand (row 70)"
+    },
+    {
+     "severity": "info",
+     "check": "bom",
+     "detail": "Y401: package 'SMD3225-4P' not evident in footprint 'Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm' \u2014 confirm by hand (row 75)"
+    }
+   ],
+   "why": "239 parts, 75 BOM rows",
+   "seconds": 0.0
+  },
+  {
+   "id": "PKG:pins",
+   "kind": "package",
+   "refs": [],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [],
+   "why": "29 of 29 footprints found",
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:93LC56BT-I/OT",
+   "kind": "package",
+   "refs": [
+    "U902"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U902 Package_TO_SOT_SMD:SOT-23-6: 6 pads, pitch 0.95 mm match SOT-23-6 (OT)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:ADS5231IPAGT",
+   "kind": "package",
+   "refs": [
+    "U301"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U301 Package_QFP:TQFP-64_10x10mm_P0.5mm: 64 pads, pitch 0.5 mm match TQFP-64 (PAG)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:BAV199",
+   "kind": "package",
+   "refs": [
+    "D101",
+    "D201"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "D101 Package_TO_SOT_SMD:SOT-23: 3 pads, pitch 1.9 mm match SOT-23"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:FT232HL",
+   "kind": "package",
+   "refs": [
+    "U901"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U901 Package_QFP:LQFP-48_7x7mm_P0.5mm: 48 pads, pitch 0.5 mm match LQFP-48 7x7 mm"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:LM27762DSSR",
+   "kind": "package",
+   "refs": [
+    "U702"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U702 Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65: 13 pads, pitch 0.5 mm match WSON-12 (DSS) 2x3 mm, EP 1.0x2.65 mm (pad 13)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:LP5907MFX-3.3/NOPB",
+   "kind": "package",
+   "refs": [
+    "U701"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U701 Package_TO_SOT_SMD:SOT-23-5: 5 pads, pitch 0.95 mm match SOT-23-5 (DBV)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:OPA2810IDR",
+   "kind": "package",
+   "refs": [
+    "U101",
+    "U201"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U101 Package_SO:SOIC-8_3.9x4.9mm_P1.27mm: 8 pads, pitch 1.27 mm match SOIC-8 (D)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:OPA810IDBVR",
+   "kind": "package",
+   "refs": [
+    "U102",
+    "U202"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U102 Package_TO_SOT_SMD:SOT-23-5: 5 pads, pitch 0.95 mm match SOT-23-5 (DBV)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:SMF5.0A",
+   "kind": "package",
+   "refs": [
+    "D501"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "D501 Diode_SMD:D_SOD-123F: 2 pads, pitch 2.8 mm match SOD-123FL"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:SN74LVC2G34DBVR",
+   "kind": "package",
+   "refs": [
+    "U401"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U401 Package_TO_SOT_SMD:SOT-23-6: 6 pads, pitch 0.95 mm match SOT-23-6 (DBV)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:SX3M10.000B10F20TNN",
+   "kind": "package",
+   "refs": [
+    "Y401"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "Y401 Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm: 4 pads, pitch 1.65 mm match SMD3225-4P (3.2x2.5 mm)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:THS4551IRGTR",
+   "kind": "package",
+   "refs": [
+    "U103",
+    "U203"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U103 Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm: 17 pads, pitch 0.5 mm match VQFN-16 (RGT) 3x3 mm, EP 1.68x1.68 mm (pad 17)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:TLV62569DBVR",
+   "kind": "package",
+   "refs": [
+    "U601"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U601 Package_TO_SOT_SMD:SOT-23-5: 5 pads, pitch 0.95 mm match SOT-23-5 (DBV)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:TLV75712PDBVR",
+   "kind": "package",
+   "refs": [
+    "U602"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U602 Package_TO_SOT_SMD:SOT-23-5: 5 pads, pitch 0.95 mm match SOT-23-5 (DBV)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:USBLC6-2SC6",
+   "kind": "package",
+   "refs": [
+    "U501"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U501 Package_TO_SOT_SMD:SOT-23-6: 6 pads, pitch 0.95 mm match SOT23-6L"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:W25Q32JVSSIQ",
+   "kind": "package",
+   "refs": [
+    "U1002"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U1002 Package_SO:SOIC-8_5.3x5.3mm_P1.27mm: 8 pads, pitch 1.27 mm match SOIC-8 208-mil (SS)"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:W9812G6KH-6",
+   "kind": "package",
+   "refs": [
+    "U801"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U801 Package_SO:TSOP-II-54_22.2x10.16mm_P0.8mm: 54 pads, pitch 0.8 mm match TSOP-II-54 400 mil"
+    }
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "PKG:XC6SLX9-2TQG144C",
+   "kind": "package",
+   "refs": [
+    "U1001"
+   ],
+   "tag": "SOFT",
+   "status": "PASS",
+   "findings": [
+    {
+     "severity": "info",
+     "check": "package",
+     "detail": "U1001 Package_QFP:TQFP-144_20x20mm_P0.5mm: 144 pads, pitch 0.5 mm match TQFP-144 (TQG144) 20x20 mm"
+    }
+   ],
+   "seconds": 0.03
+  }
+ ]
+}

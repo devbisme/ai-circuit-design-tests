@@ -1,0 +1,346 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "regulator": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "Texas Instruments",
+  "mpn": "TLV62569DBVR",
+  "datasheet_revision": "SLVSDT3",
+  "local_path": "TLV62569DBVR.pdf",
+  "sha256": "sha256:1ba6f55dfe678d06d563acd6632f1f950a497d812270806021097b55cd81d3c4",
+  "page_count": 30
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 87
+ },
+ "base": {
+  "family": "buck converter",
+  "description": "2 A 1.5 MHz synchronous step-down converter, adjustable",
+  "package": {
+   "code": "SOT-23-5 (DBV)",
+   "pin_count": 5,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.6,
+    "height": 1.45
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 3,
+    "section": "Pin Functions",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "EN",
+    "type": "input",
+    "description": "Enable, high = on (do not float)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "SW",
+    "type": "power_out",
+    "description": "Switch node to inductor",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "VIN",
+    "type": "power_in",
+    "description": "Input supply",
+    "power_domain": "VIN",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "FB",
+    "type": "input",
+    "description": "Feedback; divider from VOUT",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 3,
+     "section": "Pin Functions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VIN_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 6.0,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "FB_max": [
+    {
+     "min": -0.3,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 150,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 3,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VIN": [
+    {
+     "min": 2.5,
+     "typ": null,
+     "max": 5.5,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ],
+   "TJ": [
+    {
+     "min": -40,
+     "typ": null,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Recommended Operating Conditions",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {
+   "theta_ja": [
+    {
+     "min": null,
+     "typ": 188.2,
+     "max": null,
+     "unit": "\u00b0C/W",
+     "condition": "DBV",
+     "notes": null,
+     "evidence": {
+      "page": 4,
+      "section": "Thermal Information",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "regulator"
+ ],
+ "regulator": {
+  "topology": "buck",
+  "vin_range": [
+   {
+    "min": 2.5,
+    "typ": null,
+    "max": 5.5,
+    "unit": "V",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "vout_range": [
+   {
+    "min": 0.6,
+    "typ": null,
+    "max": null,
+    "unit": "V",
+    "condition": "up to VIN",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "iout_max": [
+   {
+    "min": null,
+    "typ": null,
+    "max": 2.0,
+    "unit": "A",
+    "condition": null,
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Recommended Operating Conditions",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "reference_voltage": [
+   {
+    "min": 0.588,
+    "typ": 0.6,
+    "max": 0.612,
+    "unit": "V",
+    "condition": "VFB",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "feedback_pin": "5",
+  "enable_pin": "1",
+  "switching_freq": [
+   {
+    "min": null,
+    "typ": 1500000.0,
+    "max": null,
+    "unit": "Hz",
+    "condition": "VOUT = 2.5 V",
+    "notes": null,
+    "evidence": {
+     "page": 4,
+     "section": "Electrical Characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "inductor_range": [
+   {
+    "min": null,
+    "typ": 2.2e-06,
+    "max": null,
+    "unit": "H",
+    "condition": "typical application",
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Simplified Schematic / typical application",
+     "confidence": "medium",
+     "method": "prose"
+    }
+   }
+  ]
+ }
+}

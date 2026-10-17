@@ -43,3 +43,6 @@ Here I'll record various thoughts about the tools I'm testing.
 * Installing some of these tools is the most onerous part in many respects.
   So I tried installing `kicad-mcp-server` just by asking Claude to do it based on the instructions
   included in its repo. It worked; big time saver! So obvious in retrospect.
+  
+* Tools that used few/none Claude Code plugins/skills/MCPs had much lower costs to generate a design.
+  Look at vanilla_low_cost.md for an explanation of why.

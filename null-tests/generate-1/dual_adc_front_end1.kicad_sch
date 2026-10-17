@@ -1,0 +1,2567 @@
+(kicad_sch
+  (version 20250114)
+  (generator "skidl")
+  (generator_version "0.2.0")
+  (uuid 7bdf99e9-cc48-51ef-9abe-69f5b277e390)
+  (paper "A4")
+  (title_block
+    (title "Dual 12-bit 10 MS/s USB ADC")
+    (date "2026-10-16")
+    (company "")
+    (comment 1 "Generated with SKiDL")
+    (comment 2 "")
+    (comment 3 "")
+    (comment 4 ""))
+  (lib_symbols
+    (symbol "Device:C"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "C"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "C"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Unpolarized capacitor"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "C_0_1"
+        (polyline
+          (pts
+            (xy -2.032 0.762)
+            (xy 2.032 0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -2.032 -0.762)
+            (xy 2.032 -0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "C_1_1"
+        (polyline
+          (pts
+            (xy -2.032 0.762)
+            (xy 2.032 0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy -2.032 -0.762)
+            (xy 2.032 -0.762))
+          (stroke
+            (width 0.508)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at 0 3.81 270)
+          (length 2.794)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -3.81 90)
+          (length 2.794)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Connector:Conn_Coaxial"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "J"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "Conn_Coaxial"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "Conn_Coaxial_0_1"
+        (polyline
+          (pts
+            (xy -2.54 0)
+            (xy -0.508 0))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 1.778 0)
+          (mid 0.222 -1.8079)
+          (end -1.778 -0.508)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start -1.778 0.508)
+          (mid 0.2221 1.8084)
+          (end 1.778 0)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (circle
+          (center 0 0)
+          (radius 0.508)
+          (stroke
+            (width 0.2032)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 -2.54)
+            (xy 0 -1.778))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "Conn_Coaxial_1_1"
+        (polyline
+          (pts
+            (xy -2.54 0)
+            (xy -0.508 0))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start 1.778 0)
+          (mid 0.222 -1.8079)
+          (end -1.778 -0.508)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (arc
+          (start -1.778 0.508)
+          (mid 0.2221 1.8084)
+          (end 1.778 0)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (circle
+          (center 0 0)
+          (radius 0.508)
+          (stroke
+            (width 0.2032)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 0 -2.54)
+            (xy 0 -1.778))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at -5.08 0 0)
+          (length 2.54)
+          (name "In"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -5.08 90)
+          (length 2.54)
+          (name "Ext"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Device:R"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "R"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "R"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Resistor"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "R_0_1"
+        (rectangle
+          (start -1.016 -2.54)
+          (end 1.016 2.54)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "R_1_1"
+        (rectangle
+          (start -1.016 -2.54)
+          (end 1.016 2.54)
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type none)))
+        (pin passive line
+          (at 0 3.81 270)
+          (length 1.27)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin passive line
+          (at 0 -3.81 90)
+          (length 1.27)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Amplifier_Operational:OPA356xxDBV"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "U"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "OPA356xxDBV"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa356.pdf"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Single High Speed CMOS Operational Amplifier, SOT-23-5"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "OPA356xxDBV_0_1"
+        (polyline
+          (pts
+            (xy -5.08 5.08)
+            (xy 5.08 0)
+            (xy -5.08 -5.08)
+            (xy -5.08 5.08))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background))))
+      (symbol "OPA356xxDBV_1_1"
+        (polyline
+          (pts
+            (xy -5.08 5.08)
+            (xy 5.08 0)
+            (xy -5.08 -5.08)
+            (xy -5.08 5.08))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background)))
+        (pin output line
+          (at 7.62 0 180)
+          (length 2.54)
+          (name ""
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin input line
+          (at -7.62 2.54 0)
+          (length 2.54)
+          (name "+"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "3"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin input line
+          (at -7.62 -2.54 0)
+          (length 2.54)
+          (name "-"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "4"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at -2.54 -7.62 90)
+          (length 3.81)
+          (name "V-"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at -2.54 7.62 270)
+          (length 3.81)
+          (name "V+"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "5"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no))
+    (symbol "Amplifier_Difference:THS4521ID"
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "U"
+        (at 2.032 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Value" "THS4521ID"
+        (at 0 0 90)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/ths4521.pdf"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Very Low Power, Negative Rail Input, Rail to Rail Output, Fully Differential Amplifier, SOIC-8"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "THS4521ID_0_1"
+        (polyline
+          (pts
+            (xy 4.4704 -2.54)
+            (xy 2.54 -2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "THS4521ID_1_1"
+        (polyline
+          (pts
+            (xy -7.62 7.62)
+            (xy -7.62 -7.62)
+            (xy 7.62 0)
+            (xy -7.62 7.62))
+          (stroke
+            (width 0.254)
+            (type default))
+          (fill
+            (type background)))
+        (circle
+          (center 3.937 2.54)
+          (radius 0.4064)
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (polyline
+          (pts
+            (xy 4.4704 -2.54)
+            (xy 2.54 -2.54))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none)))
+        (pin input line
+          (at -10.16 -5.08 0)
+          (length 2.54)
+          (name "-"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "1"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin input line
+          (at -10.16 -2.54 0)
+          (length 2.54)
+          (name "V_{OCM}"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "2"
+            (effects
+              (font
+                (size 1.27 1.27)))))
+        (pin power_in line
+          (at -2.54 7.62 270)
+          (length 2.54)
+          (name "V_{S+}"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "3"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin output line
+          (at 7.62 -2.54 180)
+          (length 3.175)
+          (name ""
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "4"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin output line
+          (at 7.62 2.54 180)
+          (length 3.175)
+          (name ""
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "5"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin power_in line
+          (at -2.54 -7.62 90)
+          (length 2.54)
+          (name "V_{S-}"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "6"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin input line
+          (at -10.16 2.54 0)
+          (length 2.54)
+          (name "~{PD}"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "7"
+            (effects
+              (font
+                (size 1.016 1.016)))))
+        (pin input line
+          (at -10.16 5.08 0)
+          (length 2.54)
+          (name "+"
+            (effects
+              (font
+                (size 1.016 1.016))))
+          (number "8"
+            (effects
+              (font
+                (size 1.016 1.016))))))
+      (embedded_fonts no))
+    (symbol "power:GND"
+      (power)
+      (pin_numbers
+        (hide yes))
+      (pin_names
+        (offset 0)
+        (hide yes))
+      (exclude_from_sim no)
+      (in_bom yes)
+      (on_board yes)
+      (property "Reference" "#PWR"
+        (at 0 -6.35 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Value" "GND"
+        (at 0 -3.81 0)
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Datasheet" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (property "ki_keywords" "global power"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27))
+          (hide yes)))
+      (symbol "GND_0_1"
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 -1.27)
+            (xy 1.27 -1.27)
+            (xy 0 -2.54)
+            (xy -1.27 -1.27)
+            (xy 0 -1.27))
+          (stroke
+            (width 0)
+            (type default))
+          (fill
+            (type none))))
+      (symbol "GND_1_1"
+        (pin power_in line
+          (at 0 0 270)
+          (length 0)
+          (name "~"
+            (effects
+              (font
+                (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font
+                (size 1.27 1.27))))))
+      (embedded_fonts no)))
+  (symbol
+    (lib_id "Device:C")
+    (at 175.77 139.7 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid fd1de95e-7b27-5f02-8c4e-684e205a1d62)
+    (property "Reference" "C15"
+      (at 175.77 137.16 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "15pF"
+      (at 175.77 142.23999999999998 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+      (at 175.77 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 175.77 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 175.77 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G 100V"
+      (at 175.77 144.78 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 225b0ccf-973f-5708-9e2a-617ca4da44c6))
+    (pin "2"
+      (uuid 70ffac9e-f8a5-5691-b17b-19122f6f061f))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C15")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 183.39 139.7 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 12da85ac-d7f7-59e1-a86c-982c25704634)
+    (property "Reference" "C16"
+      (at 183.39 137.16 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "2.4pF"
+      (at 183.39 142.23999999999998 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G 100V"
+      (at 183.39 144.78 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 59b3c237-ed83-5c76-baef-36e578ce2ac1))
+    (pin "2"
+      (uuid 7a43f39a-27e2-5918-887f-b35bbf443db4))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C16")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 191.01 139.7 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 4e6797c1-ab1f-5958-a307-66fa904ba8e4)
+    (property "Reference" "C17"
+      (at 191.01 137.16 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "18pF"
+      (at 191.01 142.23999999999998 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 191.01 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 191.01 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 191.01 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G"
+      (at 191.01 144.78 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 79d11e51-a68f-5bb3-bdf7-4280e3b5285a))
+    (pin "2"
+      (uuid 3ebeec75-a20f-5b0b-8850-48a8168f0c79))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C17")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 96.52 103.12 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 4aa7a739-d289-564c-a36a-ea1a7be2b22a)
+    (property "Reference" "C18"
+      (at 96.52 100.58 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100nF"
+      (at 96.52 105.66000000000001 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 96.52 103.12 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 96.52 103.12 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 96.52 103.12 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid af440419-efde-5531-bc0e-d90f8acad0bf))
+    (pin "2"
+      (uuid 551ecb5a-c468-590f-8c27-143e9d5ec428))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C18")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 104.14 103.12 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a0f90c5d-1a15-5ebd-ade2-29e52dba86ca)
+    (property "Reference" "C19"
+      (at 104.14 100.58 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100nF"
+      (at 104.14 105.66000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid e8c533ea-0b94-5bf7-969e-c19994c05f28))
+    (pin "2"
+      (uuid 31390fef-6e3c-51d5-91ad-bb8a2ad0d168))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C19")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 88.9 103.12 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 75d59ab7-9e65-598e-b5b2-b814d6614ba4)
+    (property "Reference" "C20"
+      (at 88.9 100.58 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100nF"
+      (at 88.9 105.66000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 88.9 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 88.9 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 88.9 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid c28c3a54-8def-5bc7-8d28-5734939fe023))
+    (pin "2"
+      (uuid c04cfb00-f579-5012-80b7-6a09f9199600))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C20")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 168.15 139.7 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid b447f342-cc8a-5e7b-b341-de6d6f689692)
+    (property "Reference" "C21"
+      (at 168.15 137.16 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100nF"
+      (at 168.15 142.23999999999998 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+      (at 168.15 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 168.15 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 168.15 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 179a8e6d-6e44-5f9a-a3d1-84161adfa2e4))
+    (pin "2"
+      (uuid 7d985f32-8e42-5886-a26c-9cf92b95df77))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C21")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 198.63 139.7 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 5a9f3027-563f-58da-88ae-af057377b690)
+    (property "Reference" "C22"
+      (at 198.63 137.16 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "2.2uF"
+      (at 198.63 142.23999999999998 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 198.63 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 198.63 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 198.63 139.7 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 3c4834dc-8a8c-5d73-bcdc-d7bb82356d5b))
+    (pin "2"
+      (uuid 5aad33e7-a9de-505f-a132-873ec46ec7da))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C22")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 101.6 64.01 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 8198aaa5-328d-5759-bc72-40d516a8616d)
+    (property "Reference" "C23"
+      (at 101.6 61.470000000000006 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "33pF"
+      (at 101.6 66.55000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 101.6 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 101.6 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 101.6 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G"
+      (at 101.6 69.09 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 4ce23d74-47f5-5e70-871e-6999ded61c93))
+    (pin "2"
+      (uuid 3d6a7144-7bf2-521a-a74b-9a36352caf0a))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C23")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 101.6 74.17 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid e3c9c0e2-b739-5788-acb2-0976da267194)
+    (property "Reference" "C24"
+      (at 101.6 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "33pF"
+      (at 101.6 76.71000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 101.6 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 101.6 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 101.6 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G"
+      (at 101.6 79.25 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 2c94c50b-9c06-53bb-b0a5-f1e2b941c723))
+    (pin "2"
+      (uuid 290cc142-3e6f-5cf2-94cb-d29ec91a1425))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C24")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:C")
+    (at 86.36 74.17 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid b6f8c31f-7413-5766-ac64-fb8c372e21ed)
+    (property "Reference" "C25"
+      (at 86.36 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "150pF"
+      (at 86.36 76.71000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 86.36 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 86.36 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Unpolarized capacitor"
+      (at 86.36 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "C0G"
+      (at 86.36 79.25 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid a1cfd01d-81cb-5567-a182-cc5ac3ee1890))
+    (pin "2"
+      (uuid 9302b5c9-e0b4-53aa-ace1-812c83fc2ddf))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "C25")
+          (unit 1)))))
+  (symbol
+    (lib_id "Connector:Conn_Coaxial")
+    (at 184.66 139.7 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a51f21e2-c339-5a20-9094-d13b18016f29)
+    (property "Reference" "J1"
+      (at 184.66 137.16 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "BNC CHA"
+      (at 184.66 142.23999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Connector_Coaxial:BNC_Amphenol_B6252HB-NPP3G-50_Horizontal"
+      (at 184.66 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 184.66 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
+      (at 184.66 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7da484f9-9a49-548f-ba2d-371619ee5149))
+    (pin "2"
+      (uuid 4b4c8971-88a4-5726-abed-7dd8ff75db50))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "J1")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 127.0 66.55 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 965ca669-375c-5bc1-a96d-35f9bd8e5caa)
+    (property "Reference" "R10"
+      (at 127.0 64.00999999999999 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1k"
+      (at 127.0 69.09 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 127.0 66.55 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 127.0 66.55 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 127.0 66.55 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 127.0 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 51029150-3a18-5aea-8c85-ef7b8d4a326b))
+    (pin "2"
+      (uuid 32308c82-6346-5b83-b737-5cfa389d2e0d))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R10")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 127.0 105.66 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 22619ae2-62e4-5d71-86f5-27c0180cacd4)
+    (property "Reference" "R11"
+      (at 127.0 103.11999999999999 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1k"
+      (at 127.0 108.2 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 127.0 105.66 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 127.0 105.66 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 127.0 105.66 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 127.0 110.74 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 48e032bb-7b62-5b50-971f-66d73d21ff0d))
+    (pin "2"
+      (uuid 86536b1e-776c-5bb7-b9b1-4aed5ddd8869))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R11")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 127.0 71.63 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid c5801e86-8dee-5fec-a51d-e7464dd292fb)
+    (property "Reference" "R12"
+      (at 127.0 69.08999999999999 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1k"
+      (at 127.0 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 127.0 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 127.0 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 127.0 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 127.0 76.71 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 596bd15c-ea37-5e22-926d-286d14e3939b))
+    (pin "2"
+      (uuid e3b18792-e722-5640-ba89-a0f90fe5ed91))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R12")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 93.98 74.17 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 8458952e-130f-5907-8b4f-572ba813f7ab)
+    (property "Reference" "R13"
+      (at 93.98 71.63 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "49.9"
+      (at 93.98 76.71000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 93.98 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 93.98 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 93.98 74.17 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 3a75d505-5c34-5aee-af76-8da0025b1171))
+    (pin "2"
+      (uuid b22495a1-fb42-55c4-b489-f84f68e64125))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R13")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 93.98 64.01 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 20842192-8f76-5ff2-9579-3f5af6d537d9)
+    (property "Reference" "R14"
+      (at 93.98 61.470000000000006 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "49.9"
+      (at 93.98 66.55000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 93.98 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 93.98 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 93.98 64.01 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid cacd838e-54bb-5b0b-a6df-93fb53848746))
+    (pin "2"
+      (uuid 18851347-5eef-5b2b-91eb-60db05f03268))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R14")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 183.39 139.7 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid ece4370a-dd8f-5145-9c9a-84be5c451c8d)
+    (property "Reference" "R5"
+      (at 183.39 137.16 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "909k"
+      (at 183.39 142.23999999999998 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 183.39 139.7 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%, 200V"
+      (at 183.39 144.78 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 9df994ab-a67d-5833-834d-6f2adfcf157a))
+    (pin "2"
+      (uuid 1c5982b3-4f23-55ae-8e3a-9bff872f7ae7))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R5")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 119.38 103.12 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 1a8a6feb-e0d9-5cd6-a7b6-dbb0ab25b560)
+    (property "Reference" "R6"
+      (at 119.38 100.58 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "100k"
+      (at 119.38 105.66000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 119.38 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 119.38 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 119.38 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 119.38 108.2 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7609de04-0e0e-5d0e-bbf0-a65e4dc2f9e6))
+    (pin "2"
+      (uuid 4b40593f-70c7-55bf-8600-83e643814522))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R6")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 111.76 103.12 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 68a35455-91a0-56f8-907a-5e9f8ef7e683)
+    (property "Reference" "R7"
+      (at 111.76 100.58 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "10k"
+      (at 111.76 105.66000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 111.76 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 111.76 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 111.76 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 111.76 108.2 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 46ae085e-e4e5-52db-ad77-f1fe4eaff898))
+    (pin "2"
+      (uuid 2d7ac468-3547-5ecd-9c50-5753755314b8))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R7")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 104.14 103.12 270)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 5b38c165-69a8-5bb6-a51a-3d474a57ca46)
+    (property "Reference" "R8"
+      (at 104.14 100.58 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "90.9k"
+      (at 104.14 105.66000000000001 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 104.14 103.12 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 104.14 108.2 270)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 7962da19-bf69-5277-8d2c-ad6c25026d89))
+    (pin "2"
+      (uuid 6d734c9b-1e32-529b-9faa-d6d2004f71e6))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R8")
+          (unit 1)))))
+  (symbol
+    (lib_id "Device:R")
+    (at 206.25 142.24 90)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid f0d642ab-84e7-579f-a1a5-c6c63f669cbc)
+    (property "Reference" "R9"
+      (at 206.25 139.70000000000002 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "1k"
+      (at 206.25 144.78 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+      (at 206.25 142.24 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "~"
+      (at 206.25 142.24 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Resistor"
+      (at 206.25 142.24 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Spec" "0.1%"
+      (at 206.25 147.32000000000002 90)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 39601a3d-9912-5e81-b93f-734d12d44be0))
+    (pin "2"
+      (uuid 36fb06fb-c887-5af1-aa22-1279d9638725))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "R9")
+          (unit 1)))))
+  (symbol
+    (lib_id "Amplifier_Operational:OPA356xxDBV")
+    (at 194.82 142.24 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 0fb57b00-acf9-507a-9615-4d8cde9b47e0)
+    (property "Reference" "U7"
+      (at 194.82 139.70000000000002 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "OPA356xxDBV"
+      (at 194.82 144.78 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+      (at 194.82 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa356.pdf"
+      (at 194.82 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Single High Speed CMOS Operational Amplifier, SOT-23-5"
+      (at 194.82 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "2"
+      (uuid c8b52be5-1637-5d90-ac0d-73d6e73d05f9))
+    (pin "5"
+      (uuid 3fd7d551-0252-5d2d-916b-0ed24b35e277))
+    (pin "1"
+      (uuid 0b67ea12-70e3-57db-a180-e63c54cba58d))
+    (pin "3"
+      (uuid dfb30930-8c0c-5d0a-858e-c1bf803aeda8))
+    (pin "4"
+      (uuid 90c194a3-2d12-5954-b404-646e84023d5e))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "U7")
+          (unit 1)))))
+  (symbol
+    (lib_id "Amplifier_Operational:OPA356xxDBV")
+    (at 115.57 105.66 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 69945a63-81b8-5008-86f9-8d6f42fa9f4c)
+    (property "Reference" "U8"
+      (at 115.57 103.11999999999999 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "OPA356xxDBV"
+      (at 115.57 108.2 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+      (at 115.57 105.66 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/opa356.pdf"
+      (at 115.57 105.66 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Single High Speed CMOS Operational Amplifier, SOT-23-5"
+      (at 115.57 105.66 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "2"
+      (uuid ed940322-071d-5846-99a8-7003e6526e51))
+    (pin "5"
+      (uuid fb578f93-2ede-5212-8495-c0cc148e9034))
+    (pin "1"
+      (uuid 9c44f717-cd2f-5848-b3ea-07b451c4beaf))
+    (pin "3"
+      (uuid 9bbbd6ef-c3e0-59e6-aed7-999a504b72a9))
+    (pin "4"
+      (uuid d9c36d67-0286-5aeb-a786-380f57bf06cc))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "U8")
+          (unit 1)))))
+  (symbol
+    (lib_id "Amplifier_Difference:THS4521ID")
+    (at 115.57 69.09 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid bf5e8e51-32d3-53a8-9aa7-6482024c059a)
+    (property "Reference" "U9"
+      (at 115.57 66.55 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Value" "THS4521ID"
+      (at 115.57 71.63000000000001 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (justify left)))
+    (property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+      (at 115.57 69.09 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" "https://www.ti.com/lit/ds/symlink/ths4521.pdf"
+      (at 115.57 69.09 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Description" "Very Low Power, Negative Rail Input, Rail to Rail Output, Fully Differential Amplifier, SOIC-8"
+      (at 115.57 69.09 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 3370a4d9-14e4-5d3a-8ffc-5392e3c7739f))
+    (pin "2"
+      (uuid 309c7eb1-712a-5949-aa7c-5a8b3df87f93))
+    (pin "3"
+      (uuid d584a133-b22e-5a5a-92b5-06aa26fc6c51))
+    (pin "4"
+      (uuid 1ae5baeb-52a2-5d39-971a-c62026d2abca))
+    (pin "5"
+      (uuid 250ac05b-0373-5769-94be-13a82a38a854))
+    (pin "6"
+      (uuid 435f1cfa-96f2-5533-ba50-c980ecc3e728))
+    (pin "7"
+      (uuid 56549298-c0f4-501d-ac93-c4be32971439))
+    (pin "8"
+      (uuid 4260c78d-9b53-56f2-b447-fa80a2aa3aa4))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "U9")
+          (unit 1)))))
+  (symbol
+    (lib_id "power:GND")
+    (at 171.96 139.7 270.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 70016a71-f611-559f-a5ff-06c295e102ba)
+    (property "Reference" "#PWR080"
+      (at 171.96 138.42999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 171.96 135.89 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 171.96 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 171.96 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid c11b1f0a-55fa-550d-8415-cf47c1208696))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR080")
+          (unit 1)))))
+  (global_label "ATT_A"
+    (shape bidirectional)
+    (at 187.2 139.7 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid d6868281-4404-584a-a11f-bb0ff740f14b))
+  (symbol
+    (lib_id "power:GND")
+    (at 194.82 139.7 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 7e69ff0c-75bb-5b60-a5a8-f381e1a8dd5a)
+    (property "Reference" "#PWR081"
+      (at 194.82 138.42999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 194.82 135.89 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 194.82 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 194.82 139.7 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 8a178047-2f65-57cc-820e-166ef0a94c80))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR081")
+          (unit 1)))))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 92.71 103.12 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid ae34c58f-d59f-5dec-abda-090d42cd577c))
+  (symbol
+    (lib_id "power:GND")
+    (at 100.33 103.12 90.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid a4cbc28a-26d2-529d-bfa8-f643a7de9670)
+    (property "Reference" "#PWR082"
+      (at 100.33 101.85000000000001 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 100.33 99.31 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 100.33 103.12 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 100.33 103.12 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 523167d7-87e3-5ddb-a2d0-385960c9d0fc))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR082")
+          (unit 1)))))
+  (symbol
+    (lib_id "power:GND")
+    (at 85.09 103.12 270.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid aff90ff1-39c4-5ae6-9a3f-e42c173afa93)
+    (property "Reference" "#PWR083"
+      (at 85.09 101.85000000000001 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 85.09 99.31 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 85.09 103.12 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 85.09 103.12 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 8dd68e72-cdf3-5fcd-b9a8-f26c9b3b7a0f))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR083")
+          (unit 1)))))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 164.34 139.7 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid df6ab247-e640-5853-8690-4507eca2a974))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 202.44 139.7 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 93432f68-104c-5e4b-b5ce-c55ad309c3de))
+  (global_label "FDA_INP_A"
+    (shape bidirectional)
+    (at 105.41 64.01 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 406ae223-eafe-5cb8-839b-5f3439defdf8))
+  (global_label "FDA_OUTN_A"
+    (shape bidirectional)
+    (at 97.79 64.01 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 046c757c-ae1e-571d-904f-31900f63e10c))
+  (global_label "FDA_INN_A"
+    (shape bidirectional)
+    (at 105.41 74.17 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid cd982226-e38d-5e3e-9f58-c9262191f319))
+  (global_label "FDA_OUTP_A"
+    (shape bidirectional)
+    (at 97.79 74.17 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid f0018f96-8103-567e-b39f-3972e84609dc))
+  (global_label "AINA_P"
+    (shape bidirectional)
+    (at 90.17 74.17 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 5c3be9af-3a9a-5476-920e-47d1eb853224))
+  (global_label "AINA_N"
+    (shape bidirectional)
+    (at 82.55 74.17 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid fa4c44b6-3d13-5731-86d3-8da01d9678f6))
+  (symbol
+    (lib_id "power:GND")
+    (at 184.66 144.78 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid aad47278-ff78-5657-ac16-12cece522d0d)
+    (property "Reference" "#PWR084"
+      (at 184.66 143.51 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 184.66 140.97 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 184.66 144.78 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 184.66 144.78 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid d3dbc487-34bd-502d-a71b-8bb0d1678581))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR084")
+          (unit 1)))))
+  (global_label "FDA_INP_A"
+    (shape bidirectional)
+    (at 130.81 66.55 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 86fa0805-a4a6-5802-b626-58802c801e75))
+  (global_label "FDA_OUTN_A"
+    (shape bidirectional)
+    (at 123.19 66.55 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid ba9b3209-3b31-5b8f-ad0b-7ad309895e15))
+  (global_label "REST_A"
+    (shape bidirectional)
+    (at 123.19 105.66 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 8ea01029-8771-5017-b131-707253a36cf3))
+  (global_label "FDA_INN_A"
+    (shape bidirectional)
+    (at 130.81 105.66 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid a4d0324e-172b-5543-878a-8385089ca9ca))
+  (global_label "FDA_INN_A"
+    (shape bidirectional)
+    (at 130.81 71.63 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 7f7589a2-c59d-50ef-90fb-680695b2220f))
+  (global_label "FDA_OUTP_A"
+    (shape bidirectional)
+    (at 123.19 71.63 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 98cf03dc-95a2-5d3f-a201-9e0f62472ce0))
+  (global_label "AINA_N"
+    (shape bidirectional)
+    (at 90.17 64.01 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 106da7e5-c052-5e1e-94e4-c9012968069e))
+  (global_label "ATT_A"
+    (shape bidirectional)
+    (at 123.19 103.12 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 8bfe41f3-bf14-514d-9713-89678ffb200b))
+  (global_label "VBIAS"
+    (shape bidirectional)
+    (at 115.57 103.12 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid f49c81bb-37e2-56dc-83fc-ac193342eeed))
+  (global_label "BUF_A"
+    (shape bidirectional)
+    (at 202.44 142.24 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 0fa1cbcd-1fc7-5485-b0c7-990b4b8bfb5a))
+  (global_label "FDA_INP_A"
+    (shape bidirectional)
+    (at 210.06 142.24 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 07ffdd86-5c31-5d91-8f20-c6237185b628))
+  (symbol
+    (lib_id "power:GND")
+    (at 192.28 149.86 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid b75793ee-7c57-510e-83cc-08b2478b694e)
+    (property "Reference" "#PWR085"
+      (at 192.28 148.59 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 192.28 146.05 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 192.28 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 192.28 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 5bb47915-a9bd-5105-a987-a0c63500754c))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR085")
+          (unit 1)))))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 192.28 134.62 90)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 0c271c79-5cef-5c9e-9b03-15b0f2ca2140))
+  (global_label "BUF_A"
+    (shape bidirectional)
+    (at 187.2 144.78 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 4479a4cd-6be8-5bc4-b958-77e7ae281288))
+  (symbol
+    (lib_id "power:GND")
+    (at 113.03 113.28 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid e641b3bd-7751-5103-8774-4967b8a22df8)
+    (property "Reference" "#PWR086"
+      (at 113.03 112.01 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 113.03 109.47 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 113.03 113.28 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 113.03 113.28 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 0f2edf9d-f46c-535d-b55e-90d518a399e9))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR086")
+          (unit 1)))))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 113.03 98.04 90)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid f5021251-185f-52f4-9ba8-faa513b5d007))
+  (global_label "REST_A"
+    (shape bidirectional)
+    (at 107.95 108.2 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 2d89702c-9111-5f96-b021-427a19d6789a))
+  (global_label "VCMA"
+    (shape bidirectional)
+    (at 105.41 71.63 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 7d755065-6228-5535-a977-ece94ca38354))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 113.03 61.47 90)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid 7192b83c-4127-5b66-af49-30497c3a093a))
+  (symbol
+    (lib_id "power:GND")
+    (at 113.03 76.71 0.0)
+    (unit 1)
+    (exclude_from_sim yes)
+    (in_bom no)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (uuid 93feb579-41fc-57a3-b359-40949046cccc)
+    (property "Reference" "#PWR087"
+      (at 113.03 75.44 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Value" "GND"
+      (at 113.03 72.89999999999999 0)
+      (effects
+        (font
+          (size 1.27 1.27))))
+    (property "Footprint" ""
+      (at 113.03 76.71 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (property "Datasheet" ""
+      (at 113.03 76.71 0)
+      (effects
+        (font
+          (size 1.27 1.27))
+        (hide yes)))
+    (pin "1"
+      (uuid 07470edd-f99e-505e-9a43-896d343a5705))
+    (instances
+      (project "dual_adc"
+        (path "/54626792-a7f1-44c0-82a7-cf942f840d5b/7bdf99e9-cc48-51ef-9abe-69f5b277e390"
+          (reference "#PWR087")
+          (unit 1)))))
+  (global_label "+4V5A"
+    (shape bidirectional)
+    (at 105.41 66.55 180)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify right))
+    (uuid 54498570-f457-5fe9-8ac3-79144d0f9731)))

@@ -1,0 +1,641 @@
+{
+  "cross_verify_version": 1,
+  "schematic_file": "",
+  "pcb_file": "",
+  "component_matching": {
+    "schematic_count": 239,
+    "pcb_count": 246,
+    "matched": 239,
+    "orphans": [
+      {
+        "ref": "FID1",
+        "pcb_value": "Fiducial",
+        "status": "fail",
+        "message": "FID1 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "FID2",
+        "pcb_value": "Fiducial",
+        "status": "fail",
+        "message": "FID2 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "FID3",
+        "pcb_value": "Fiducial",
+        "status": "fail",
+        "message": "FID3 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "H1",
+        "pcb_value": "MountingHole",
+        "status": "fail",
+        "message": "H1 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "H2",
+        "pcb_value": "MountingHole",
+        "status": "fail",
+        "message": "H2 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "H3",
+        "pcb_value": "MountingHole",
+        "status": "fail",
+        "message": "H3 in PCB but not in schematic (stale placement?)"
+      },
+      {
+        "ref": "H4",
+        "pcb_value": "MountingHole",
+        "status": "fail",
+        "message": "H4 in PCB but not in schematic (stale placement?)"
+      }
+    ],
+    "missing": [],
+    "value_mismatches": [],
+    "dnp_conflicts": []
+  },
+  "diff_pair_routing": [
+    {
+      "type": "USB",
+      "positive": "USB_DP",
+      "negative": "USB_DM",
+      "tolerance_mm": 2.0,
+      "pos_length_mm": 28.05,
+      "neg_length_mm": 37.07,
+      "delta_mm": 9.01,
+      "status": "fail",
+      "message": "USB pair USB_DP/USB_DM: 9.0mm length mismatch (tolerance 2.0mm)",
+      "intra_pair_skew": {
+        "skew_mm": 9.01,
+        "tolerance_mm": 1.0,
+        "severity": "HIGH",
+        "detail": "Differential pair USB_DP/USB_DM intra-pair skew 9.0mm exceeds USB tolerance (1.0mm)"
+      }
+    }
+  ],
+  "power_trace_analysis": [
+    {
+      "regulator_ref": "U601",
+      "output_rail": "+3V3",
+      "topology": "switching",
+      "estimated_vout": 3.318,
+      "min_trace_width_mm": 0.2,
+      "max_trace_width_mm": 0.2,
+      "total_length_mm": 81.0,
+      "track_count": 93,
+      "status": "warning",
+      "message": "+3V3: minimum trace width 0.20mm is narrow for a power rail (switching \u2014 higher current demand)"
+    },
+    {
+      "regulator_ref": "U602",
+      "output_rail": "+1V2",
+      "topology": "LDO",
+      "estimated_vout": null,
+      "min_trace_width_mm": 0.15,
+      "max_trace_width_mm": 0.15,
+      "total_length_mm": 156.5,
+      "track_count": 71,
+      "status": "warning",
+      "message": "+1V2: minimum trace width 0.15mm is narrow for a power rail"
+    },
+    {
+      "regulator_ref": "U701",
+      "output_rail": "+3V3A",
+      "topology": "LDO",
+      "estimated_vout": 3.3,
+      "min_trace_width_mm": 0.15,
+      "max_trace_width_mm": 0.15,
+      "total_length_mm": 113.7,
+      "track_count": 67,
+      "status": "warning",
+      "message": "+3V3A: minimum trace width 0.15mm is narrow for a power rail"
+    }
+  ],
+  "decoupling_placement": [
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1001",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1001 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1002",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1002 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1003",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1003 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1004",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1004 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1005",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1005 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C1023",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C1023 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+1V2",
+      "cap_ref": "C606",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C606 or +1V2 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1006",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1006 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1007",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1007 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1008",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1008 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1009",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1009 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1010",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1010 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1011",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1011 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1012",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1012 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1013",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1013 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1014",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1014 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1015",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1015 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1016",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1016 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1017",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1017 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1018",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1018 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1019",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1019 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1020",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1020 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1021",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1021 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1022",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C1022 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1024",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C1024 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C1025",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C1025 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C602",
+      "cap_value": "10u",
+      "status": "info",
+      "message": "C602 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C603",
+      "cap_value": "10u",
+      "status": "info",
+      "message": "C603 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C605",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C605 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C801",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C801 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C802",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C802 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C803",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C803 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C804",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C804 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C805",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C805 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C806",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C806 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C807",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C807 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C808",
+      "cap_value": "10u",
+      "status": "info",
+      "message": "C808 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C906",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C906 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C907",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C907 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C908",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C908 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C909",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C909 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C910",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C910 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3",
+      "cap_ref": "C913",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C913 or +3V3 not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C113",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C113 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C115",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C115 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C120",
+      "cap_value": "2.2u",
+      "status": "info",
+      "message": "C120 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C213",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C213 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C215",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C215 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C220",
+      "cap_value": "2.2u",
+      "status": "info",
+      "message": "C220 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+4V0A",
+      "cap_ref": "C708",
+      "cap_value": "2.2u",
+      "status": "info",
+      "message": "C708 or +4V0A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C305",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C305 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C306",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C306 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C307",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C307 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C308",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C308 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C117",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C117 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C118",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C118 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C217",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C217 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C218",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C218 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3A",
+      "cap_ref": "C703",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C703 or +3V3A not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_ADCIO",
+      "cap_ref": "C309",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C309 or +3V3_ADCIO not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_ADCIO",
+      "cap_ref": "C310",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C310 or +3V3_ADCIO not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_ADCIO",
+      "cap_ref": "C311",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C311 or +3V3_ADCIO not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_ADCIO",
+      "cap_ref": "C312",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C312 or +3V3_ADCIO not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_ADCIO",
+      "cap_ref": "C313",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C313 or +3V3_ADCIO not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_CLK",
+      "cap_ref": "C401",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C401 or +3V3_CLK not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_CLK",
+      "cap_ref": "C402",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C402 or +3V3_CLK not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_CLK",
+      "cap_ref": "C403",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C403 or +3V3_CLK not found in PCB placement"
+    },
+    {
+      "ic_ref": "VBUS",
+      "cap_ref": "C501",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C501 or VBUS not found in PCB placement"
+    },
+    {
+      "ic_ref": "+5V",
+      "cap_ref": "C601",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C601 or +5V not found in PCB placement"
+    },
+    {
+      "ic_ref": "+5VA",
+      "cap_ref": "C702",
+      "cap_value": "1u",
+      "status": "info",
+      "message": "C702 or +5VA not found in PCB placement"
+    },
+    {
+      "ic_ref": "+5VA",
+      "cap_ref": "C705",
+      "cap_value": "2.2u",
+      "status": "info",
+      "message": "C705 or +5VA not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_PHY",
+      "cap_ref": "C903",
+      "cap_value": "4.7u",
+      "status": "info",
+      "message": "C903 or +3V3_PHY not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_PHY",
+      "cap_ref": "C904",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C904 or +3V3_PHY not found in PCB placement"
+    },
+    {
+      "ic_ref": "+3V3_PHY",
+      "cap_ref": "C905",
+      "cap_value": "100n",
+      "status": "info",
+      "message": "C905 or +3V3_PHY not found in PCB placement"
+    }
+  ],
+  "summary": {
+    "total_checks": 4,
+    "pass": 0,
+    "warning": 3,
+    "fail": 8,
+    "info": 74
+  }
+}

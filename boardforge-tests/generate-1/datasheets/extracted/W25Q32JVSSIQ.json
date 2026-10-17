@@ -1,0 +1,230 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {}
+ },
+ "source": {
+  "manufacturer": "Winbond",
+  "mpn": "W25Q32JVSSIQ",
+  "datasheet_revision": "Rev H",
+  "local_path": "W25Q32JVSSIQ.pdf",
+  "sha256": "sha256:b2585095ac503e7cee7916ab3f025a51699b49e2cad7f6782e92b828c1cc09d8",
+  "page_count": 80
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 52
+ },
+ "base": {
+  "family": "SPI NOR flash",
+  "description": "32 Mbit 3 V quad-SPI flash, SOIC-8 208 mil",
+  "package": {
+   "code": "SOIC-8 208-mil (SS)",
+   "pin_count": 8,
+   "pitch_mm": 1.27,
+   "body_mm": {
+    "length": 5.28,
+    "width": 5.28,
+    "height": 2.16
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 6,
+    "section": "3.3 Pin Description SOIC 208-mil",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1"
+    ],
+    "name": "/CS",
+    "type": "input",
+    "description": "Chip select",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "DO (IO1)",
+    "type": "bidirectional",
+    "description": "Data output",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3"
+    ],
+    "name": "/WP (IO2)",
+    "type": "bidirectional",
+    "description": "Write protect",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "4"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "DI (IO0)",
+    "type": "bidirectional",
+    "description": "Data input",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "6"
+    ],
+    "name": "CLK",
+    "type": "input",
+    "description": "Serial clock",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "7"
+    ],
+    "name": "/HOLD or /RESET (IO3)",
+    "type": "bidirectional",
+    "description": "Hold or reset",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "8"
+    ],
+    "name": "VCC",
+    "type": "power_in",
+    "description": "Supply",
+    "power_domain": "VCC",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 6,
+     "section": "3.3 Pin Description SOIC 208-mil",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "VCC_max": [
+    {
+     "min": -0.6,
+     "typ": null,
+     "max": 4.6,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 60,
+      "section": "Absolute Maximum Ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VCC": [
+    {
+     "min": 2.7,
+     "typ": null,
+     "max": 3.6,
+     "unit": "V",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 60,
+      "section": "Operating Ranges",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": []
+}

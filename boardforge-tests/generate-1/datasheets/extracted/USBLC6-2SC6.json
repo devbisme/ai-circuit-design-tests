@@ -1,0 +1,215 @@
+{
+ "schema_version": {
+  "base": "1.0",
+  "categories": {
+   "diode": "1.0"
+  }
+ },
+ "source": {
+  "manufacturer": "STMicroelectronics",
+  "mpn": "USBLC6-2SC6",
+  "datasheet_revision": "Rev 14",
+  "local_path": "USBLC6-2SC6.pdf",
+  "sha256": "sha256:8ba7ab4ec1781b7f6052f5999a2304bd611c0ed2b5e8f36ffa5092552932a42e",
+  "page_count": 14
+ },
+ "extraction": {
+  "extracted_at": "2026-10-17T03:50:31Z",
+  "extractor_schema_version": "1.0",
+  "extractor_scout": null,
+  "plan_ref": null,
+  "quality_score": 78
+ },
+ "base": {
+  "family": "ESD protection array",
+  "description": "Very-low-capacitance ESD protection for USB 2.0 (2 lines + VBUS)",
+  "package": {
+   "code": "SOT23-6L",
+   "pin_count": 6,
+   "pitch_mm": 0.95,
+   "body_mm": {
+    "length": 2.9,
+    "width": 1.6,
+    "height": 1.45
+   },
+   "thermal_pad": false,
+   "evidence": {
+    "page": 1,
+    "section": "Pin configuration figure",
+    "confidence": "high",
+    "method": "table"
+   }
+  },
+  "pinout": [
+   {
+    "numbers": [
+     "1",
+     "6"
+    ],
+    "name": "I/O1",
+    "type": "passive",
+    "description": "Protected line 1 (pins 1 and 6 internally connected, flow-through)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "2"
+    ],
+    "name": "GND",
+    "type": "power_in",
+    "description": "Ground",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "3",
+     "4"
+    ],
+    "name": "I/O2",
+    "type": "passive",
+    "description": "Protected line 2 (pins 3 and 4 internally connected)",
+    "power_domain": null,
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   },
+   {
+    "numbers": [
+     "5"
+    ],
+    "name": "VBUS",
+    "type": "power_in",
+    "description": "VBUS rail (TVS reference)",
+    "power_domain": "VBUS",
+    "alt_functions": [],
+    "is_5v_tolerant": null,
+    "notes": null,
+    "evidence": {
+     "page": 1,
+     "section": "Figure p1",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "absolute_max": {
+   "Tj_max": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 125,
+     "unit": "\u00b0C",
+     "condition": null,
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "Absolute ratings",
+      "confidence": "high",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "recommended_operating": {
+   "VBUS": [
+    {
+     "min": null,
+     "typ": null,
+     "max": 5.25,
+     "unit": "V",
+     "condition": "VRM, leakage specified",
+     "notes": null,
+     "evidence": {
+      "page": 2,
+      "section": "Electrical characteristics (leakage test condition VRM)",
+      "confidence": "medium",
+      "method": "table"
+     }
+    }
+   ]
+  },
+  "thermal": {},
+  "esd": {},
+  "moisture_sensitivity": null,
+  "compliance": [],
+  "pin_relationships": []
+ },
+ "categories": [
+  "diode"
+ ],
+ "diode": {
+  "diode_type": "tvs",
+  "breakdown_voltage": [
+   {
+    "min": 6,
+    "typ": null,
+    "max": null,
+    "unit": "V",
+    "condition": "VBUS-GND, IR = 1 mA",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "ir": [
+   {
+    "min": null,
+    "typ": 1e-08,
+    "max": 1.5e-07,
+    "unit": "A",
+    "condition": "VRM = 5.25 V",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ],
+  "cd": [
+   {
+    "min": null,
+    "typ": 2.5e-12,
+    "max": 3.5e-12,
+    "unit": "F",
+    "condition": "I/O to GND, VR = 1.65 V",
+    "notes": null,
+    "evidence": {
+     "page": 2,
+     "section": "Electrical characteristics",
+     "confidence": "high",
+     "method": "table"
+    }
+   }
+  ]
+ }
+}
